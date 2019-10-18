@@ -1,0 +1,127 @@
+Importer
+1. POST : Http://IP:Port/CreatePO/IMP
+Body :
+{
+
+   "TO":"Exporter"
+   "PONo": "101",
+   "Date": "08-24-2019",
+   "Name": "USCompany_1",
+   "Product": "Petrol",
+   "Quantity": "100",
+   "Price": "200"
+}
+
+2. POST : Http://IP:Port/CreatePO/IMP
+Body :
+{
+
+   "TO":"Exporter"
+   "PONo": "101",
+   "Date": "08-24-2019",
+   "Name": "USCompany_2",
+   "Product": "Petrol",
+   "Quantity": "200",
+   "Price": "500"
+}
+
+Exporter
+3. GET : GetAllOpenPO/IMP
+
+Data Expected:
+[
+   {
+      "PO": "101",
+	  "NAME":"USCompany_1",
+      "Date": "08-24-2019",
+      "Product": "Petrol",
+      "Quantity": "100",
+      IMPRrice:"200",
+
+   },
+   {
+      "PO": "102",
+	  "NAME":"USCompany_2",
+      "Date": "08-25-2019",
+      "Product": "Petrol",
+      "Quantity": "200",
+      "Price": "400"
+   }
+]
+
+Exporter
+4. POST : CreatePO/EXP
+ {
+   "PONo": "201",
+   "TO":"Refinery"
+   "RefPO":"101",
+   "Date": "08-24-2019",
+   "Name": "Exxon",
+   "Product": "Petrol",
+   "Quantity": "100",
+   "Price": "200"
+ }
+
+
+
+Refinery
+6. GET : GETAllOpenPO/EXP
+{
+      "EXPPO":"201",
+      "Date": "08-24-2019",
+      "Refinery": "Exxcon",
+      "Product": "Petrol",
+      "Quantity": "100",
+      "Price": "500"
+}
+
+Refinery
+ 7.POST : DispatchOrderTo/EXP
+ {
+      "DispatchNo":"301",
+	  "EXPPO":"202",
+      "Date": "08-24-2019",
+      "Refinery": "Exxcon",
+      "Product": "Petrol",
+      "Quantity": "100",
+      "TruckNo":"LH2898"
+}
+
+Exporter
+8.GETAllDispatchedOrder/REF
+{
+      "DispatchNo":"301",
+	  "EXPPO":"202",
+      "Date": "08-24-2019",
+      "Refinery": "Exxcon",
+      "Product": "Petrol",
+      "Quantity": "100",
+      "TruckNo":"LH2898"
+}
+
+9. POST : DisptachOrderTo/IMP
+{
+      "DispatchNo":"301",
+	  "EXPPO":"202",
+	  "IMPPO":"101"
+      "Date": "08-24-2019",
+      "Refinery": "Exxcon",
+      "Product": "Petrol",
+      "Quantity": "100",
+      "TruckNo":"DM5678"
+}
+
+Importer
+10. GET : GETAllDispatchedOrder/IMP
+{
+      "DispatchNo":"301",
+	  "IMPPO":"101"
+      "Date": "08-24-2019",
+      "Refinery": "Exxcon",
+      "Product": "Petrol",
+      "Quantity": "100",
+      "TruckNo":"DM5678"
+}
+
+
+

@@ -1,0 +1,26 @@
+[
+   {
+      "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1Y2U5ODZjNWQzMDZkZTI3NThhMzY1NDAiLCJpYXQiOjE1NjYxNTAzMjV9.T27BOurrozV6kwQuRU36htqaVcduxmekNPU1nNKLNGg",
+      "Id" :1,
+      "Username" : "importer",
+      "FirstName" : "Importer",
+      "LastName" : "User",
+      "Role": "importer"
+   },
+   {
+      "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1Y2U5ODZjNWQzMDZkZTI3NThhMzY1NDAiLCJpYXQiOjE1NjYxNTAzMjV9.T27BOurrozV6kwQuRU36htqaVcduxmekNPU1nNKLNGg",
+      "Id" :1,
+      "Username" : "exporter",
+      "FirstName" : "Exporter",
+      "LastName" : "User",
+      "Role": "exporter"
+   },
+   {
+      "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1Y2U5ODZjNWQzMDZkZTI3NThhMzY1NDAiLCJpYXQiOjE1NjYxNTAzMjV9.T27BOurrozV6kwQuRU36htqaVcduxmekNPU1nNKLNGg",
+      "Id" :1,
+      "Username" : "refinery",
+      "FirstName" : "Refinery",
+      "LastName" : "User",
+      "Role": "refinery"
+   }
+]

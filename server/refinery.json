@@ -1,0 +1,36 @@
+[
+   {
+      "DispatchNo":"301",
+      "EXPNO":"202",
+      "Exporter": "Exxcon",
+      "Date": "08-24-2019",
+      "Product": "Petrol",
+      "Quantity": "100"
+   },
+   {
+      "DispatchNo":"302",
+      "EXPNO":"101",
+      "Exporter": "Exxcon",
+      "Date": "08-24-2019",
+      "Product": "Petrol",
+      "Quantity": "100"
+   },
+   {
+      "DispatchNo":"303",
+      "EXPNO":"101",
+      "Date": "08-24-2019",
+      "Exporter": "Exxcon",
+      "Product": "Petrol",
+      "Quantity": "99",
+      "TruckNo":"DM5679"
+   },
+   {
+      "DispatchNo":"304",
+      "EXPNO":"101",
+      "Exporter": "Exxcon",
+      "Date": "08-24-2019",
+      "Product": "Petrol",
+      "Quantity": "103",
+      "TruckNo":"DM5688"
+   }
+]

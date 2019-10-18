@@ -1,0 +1,64 @@
+{
+   "pendingPo": [
+      {
+         "User_ID": "Importer 1",
+         "Date": "08-24-2019",
+         "PONumber":"101",
+         "Product": "Petrol",
+         "Quantity": "89"
+      },
+      {
+         "User_ID": "Importer 2",
+         "Date": "08-23-2019",
+         "PONumber":"102",
+         "Product": "Petrol",
+         "Quantity": "50"
+      }
+     
+   ],
+   "pendingDispatch": [
+      {
+         "EXPPO":"201",
+         "Date": "08-24-2019",
+         "Refinery": "Exxcon",
+         "Product": "Petrol",
+         "Quantity": "100",
+         "Price": "500"
+      },
+      {
+         "EXPPO":"202",
+         "Date": "08-25-2019",
+         "Refinery": "Petronas",
+         "Product": "Petrol",
+         "Quantity": "120",
+         "Price": "480"
+      },
+      {
+         "EXPPO":"203",
+         "Date": "08-24-2019",
+         "Refinery": "Dubai",
+         "Product": "Diesel",
+         "Quantity": "90",
+         "Price": "300"
+      }
+   ],
+   "_pendingDispatch_": [
+      {
+         "PO": "101",
+         "Name":"USCompany_1",
+         "Date": "08-24-2019",
+         "Product": "Petrol",
+         "Quantity": "100",
+         "Price":"200"
+
+      },
+      {
+         "PO": "102",
+         "Name":"USCompany_2",
+         "Date": "08-25-2019",
+         "Product": "Petrol",
+         "Quantity": "200",
+         "Price": "400"
+      }
+   ]
+}

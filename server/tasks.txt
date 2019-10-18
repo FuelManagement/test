@@ -1,0 +1,5 @@
+1. Move the image as per the GUI towards left.
+2. add one more step 5 page upload.
+3. replace 1- 5 with Icons.
+4. Add fonts family as  fonts_custom.css
+5. Work on Text boxes.

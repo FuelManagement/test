@@ -1,0 +1,46 @@
+.jumbotron, .sidebar-wrapper {
+    padding-top: 80px;
+}
+
+.header-background{
+    background: #dbdddd !important;
+}
+
+.signout-button{
+    border-radius: 25px;
+    border: 1px solid #333;
+}
+
+.link-style{
+    color: #333;
+    display: block;
+    padding: 2px 15px 2px 15px;
+}
+/*Manoj CHanges*/
+.gray-bg{
+    background: rgba(168, 169, 169, 0.99);
+}
+.shadow-btn{
+    border: 1px solid #ddd;
+    border-radius: 19px;
+    padding: 5px 17px !important;
+    background: #d4d4d4;
+    box-shadow: -1px 2px 2px #5f5858;
+}
+
+.font-big{
+    font-size:24px;
+    padding-right:28px !important
+}
+
+.fixed-header{
+    position: fixed;
+    width: -webkit-fill-available;
+    top: 0;
+    z-index: 99;
+    height: 60px;
+}
+
+.text-black{
+    color: black !important;
+}
