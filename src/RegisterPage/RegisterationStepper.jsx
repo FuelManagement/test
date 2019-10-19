@@ -19,7 +19,7 @@ import { OrganizationDetailForm } from './OrganizationDetailForm';
 import { ContactDetailForm } from './ContactDetailForm';
 import { AccountDetailForm } from './AccountDetailForm';
 import { TaxDetailForm } from './TaxDetailForm'; 
-import Upload from './Upload';
+import {Upload} from './Upload';
 
 //import the Stepper icons 
 // import Org from '../../assets/img/org.png';
@@ -247,11 +247,19 @@ function CustomizedSteppers(props) {
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
-  const handleNext = () => {
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
+  const handleNext = (event) => {
+    
     if(activeStep===steps.length-1)
     {
-      props.dispatch(onboardActions.createParticipant(props.participant));
+      if (props.documentslist===undefined || props.documentslist.length<1) {
+        alert("File not selected");
+        return false;
+    }
+      props.dispatch(onboardActions.createParticipant(props.participant,props.documentslist));
+    }
+    else
+    {
+      setActiveStep(prevActiveStep => prevActiveStep + 1);
     }
   };
 
@@ -300,7 +308,7 @@ function CustomizedSteppers(props) {
             }    
               <Button 
                 variant="contained" 
-                onClick={handleNext}
+                onClick={(e)=>handleNext(e)}
                 className={[classes.button,classes.nextbutton,"next-button"].join(" ")}
               >
                 {activeStep === steps.length - 1  ? "Submit" : "Next"}
@@ -316,8 +324,8 @@ const mapStateToProps=function(state) {
   const { onboard } = state;
    
     return {
+      documentslist: onboard.documentslist,
        participant: onboard.participant
-      
     };
 }
 

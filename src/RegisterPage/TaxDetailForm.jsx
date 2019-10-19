@@ -23,15 +23,15 @@ const ddlVendorAccountGroup = [
     },
     {
         value: "10",
-        label: "Ten"
+        label: "Exporter"
     },
     {
         value: "20",
-        label: "Twenty"
+        label: "Importer"
     },
     {
         value: "30",
-        label: "Thirty"
+        label: "Refinery"
     }
 ];
 
@@ -453,7 +453,7 @@ class TaxDetailForm extends React.Component {
                     <div className="col-md-4 mb-3">
                        
                         <FormControlLabel
-                            control={<Checkbox icon={<CircleUnchecked className="checkboxIcon"/>} checkedIcon={<CircleCheckedFilled className="checkboxIcon"/>} value="checkedH" />}
+                            control={<Checkbox  icon={<CircleUnchecked className="checkboxIcon"/>} checkedIcon={<CircleCheckedFilled className="checkboxIcon"/>} value="checkedH" />}
                             label="GST/HST # Verification"
                             className="form-checkbox"  
                         />

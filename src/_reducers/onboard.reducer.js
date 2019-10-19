@@ -75,6 +75,23 @@ export function onboard(state = {}, action) {
                  action.collection.value
                 }
               };
+              case onboardConstants.ONBRD_CREATE_PARTICIPANT_REQUEST:
+                return {
+                  ...state,
+                  loading: true
+                };
+                case onboardConstants.ONBRD_CREATE_PARTICIPANT_SUCCESS:
+                return {
+                  ...state,
+                  loading: false,
+                  participant:action.participant
+                };
+                case onboardConstants.ONBRD_CREATE_PARTICIPANT_FAILURE:
+                return {
+                  ...state,
+                  loading: false,
+                  error: action.error
+                };
       default:
           return {
               ...state

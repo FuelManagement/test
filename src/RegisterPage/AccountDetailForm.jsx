@@ -34,17 +34,33 @@ const ddlPartnerBankType = [
       label: "None"
   },
   {
-      value: "10",
-      label: "Ten"
+      value: "IMF",
+      label: "IMF"
   },
   {
-      value: "20",
-      label: "Twenty"
+      value: "WB",
+      label: "WB"
+  },
+ 
+];
+const ddlCurr = [
+  {
+      value: "",
+      label: "None"
   },
   {
-      value: "30",
-      label: "Thirty"
-  }
+      value: "USD",
+      label: "USD"
+  },
+  {
+    value: "CAN$",
+    label: "CAN $"
+},
+  {
+      value: "MEX$",
+      label: "MEX $"
+  },
+  
 ];
 
 class AccountDetailForm extends React.Component {
@@ -340,7 +356,7 @@ class AccountDetailForm extends React.Component {
                 onChange={this.handleChange}
                 margin="dense"
               >
-                {ddlPurchaseordercurrency.map(option => (
+                {ddlCurr.map(option => (
                   <MenuItem key={option.value} value={option.value}>
                     {option.label}
                   </MenuItem>

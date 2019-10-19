@@ -50,7 +50,7 @@ function createOnBoarder(collection) {
 
 }
 
-function createParticipant(collection)
+function createParticipant(collection,Documentslist)
 {
    let formData={"registerId": collection.txtFullLegalName!==undefined?collection.txtFullLegalName:"",
     "dateOfIncorporation": collection.dateIncorporation!==undefined?collection.dateIncorporation:"",
@@ -84,16 +84,16 @@ function createParticipant(collection)
     "bankReferencedetail": collection.txtReferencespecificationsforbankdetails!==undefined?collection.txtReferencespecificationsforbankdetails:"",
     "poCurrency": collection.ddlPurchaseordercurrency!==undefined?collection.ddlPurchaseordercurrency:"",
     
-    "taxWithholdType": collection.radioTaxType!==undefined?collection.radioTaxType:"",
-    "taxWithholdingSubject": collection.radioSubjectTax!==undefined?collection.radioSubjectTax:"",
+    "taxWithholdType": collection.radioTaxType!==undefined?collection.radioTaxType:"No",
+    "taxWithholdingSubject": collection.radioSubjectTax!==undefined?collection.radioSubjectTax:"No",
     "taxWithholdCode": collection.txtWithholdingTaxCode!==undefined?collection.txtWithholdingTaxCode:"",
     "confirmationControlkey": collection.txtConfirmationControlKey!==undefined?collection.txtConfirmationControlKey:"",
-    "deleteFlagForVendor": collection.txtDeleteKey!==undefined?collection.txtDeleteKey:"",
+    "deleteFlagForVendor": collection.txtDeleteKey!==undefined?collection.txtDeleteKey:"No",
     "shippingConditions": collection.txtShippingConditions!==undefined?collection.txtShippingConditions:"",
-    "gstHstReminder": collection.radioGSTHSTVerification!==undefined?collection.radioGSTHSTVerification:"",
-    "salesTaxExemption": collection.radioSalesTaxExemption!==undefined?collection.radioSalesTaxExemption:"",
-    "qstVerificationReminder": collection.radioQSTVerification!==undefined?collection.radioQSTVerification:"",
-    "w8-9VerificationReminder": collection.radioFormW9Verification!==undefined?collection.radioFormW9Verification:"",
+    "gstHstReminder": collection.radioGSTHSTVerification!==undefined?collection.radioGSTHSTVerification:"No",
+    "salesTaxExemption": collection.radioSalesTaxExemption!==undefined?collection.radioSalesTaxExemption:"No",
+    "qstVerificationReminder": collection.radioQSTVerification!==undefined?collection.radioQSTVerification:"No",
+    "w8-9VerificationReminder": collection.radioFormW9Verification!==undefined?collection.radioFormW9Verification:"No",
     "taxNumber1": collection.txtTaxNum1!==undefined?collection.txtTaxNum1:"",
     "taxNumber2": collection.txtTaxNum2!==undefined?collection.txtTaxNum2:"",
     "vatNumber": collection.txtVatRegistration!==undefined?collection.txtVatRegistration:"",
@@ -111,77 +111,29 @@ function createParticipant(collection)
     "Documentslist":[],
    
 };
+
+return uploadFile(Documentslist)
+    .then(uploadResponse => {
+        formData.Documentslist=uploadResponse;
     const requestOptions = {
         method: 'POST',
-        headers: authHeader(),
+       headers: { 'cache-control': 'no-cache',
+       Connection: 'keep-alive',
+       
+       'Content-Length': '1315',
+       'Accept-Encoding': 'gzip, deflate',
+       Host: 'localhost:3009',
+       
+       'Cache-Control': 'no-cache',
+       Accept: '*/*',
+       'User-Agent': '*',
+       'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
     };
-    console.log(formData);
+
     return fetch(config.apiUrl + '/product/createParticipant', requestOptions).then(handleResponse, handleError);
 
-    
-    // let tmpDate = new Date();
-    // let month = tmpDate.getMonth()+1 > 9 ? tmpDate.getMonth()+1 : "0"+(tmpDate.getMonth()+1);
-    // return uploadFiles(collection.input_Document)
-    // .then(uploadResponse => {
-    //     let requestData = {
-    //             "registerId": "OneCompany7",
-    //             "dateOfIncorporation": "10-01-2018",
-    //             "stateOfIncorporation": "Mexico",
-    //             "countryOfIncorporation": "Mexico",
-    //             "BuisnessType": "Public",
-    //             "entityType": "Exporter",
-    //             "entityTypeOther": collection.txtStateIncorporation!==undefined?collection.txtStateIncorporation:"",
-    //             "numberOfYearsinBuisness": "4",
-    //             "emailAddress": "test@OneCompany7.com",
-    //             "defaultEmailaddress": "yes",
-    //             "streetAddress": "#234,Main Street",
-    //             "postalCode": "67898",
-    //             "city": "mexico city",
-    //             "faxNumber": "9879087659",
-    //             "firstContactNumber": "3021989087",
-    //             "firstContactNumberType": "mobile",
-    //             "state": "MexcioState",
-    //             "secondContactNumber": "5018908765",
-    //             "SecondContactNumberType": "landline",
-    //             "taxNumber1": "76547890",
-    //             "taxNumber2": "67834567",
-    //             "vatNumber": "345678654",
-    //             "vendorAcctGrp": "Vendorgrp1",
-    //             "vendorImporterRecord": "AU8990987",
-    //             "poCurrency": collection.txtStateIncorporation!==undefined?collection.txtStateIncorporation:"",
-    //             "companyCode": "ONC",
-    //             "clearingBetCustAndVend": "Yes",
-    //             "bankName": "Bank Of America",
-    //             "bankAccountName": "Richard lewis",
-    //             "bankAccountNumber": "9099876545",
-    //             "bankControlKey": "67876564",
-    //             "bankCountryKey": "678987654",
-    //             "bankKeys": "JH908765",
-    //             "bankPartnerType": "samplePartnerType",
-    //             "bankReferencedetail": "This is reference",
-    //             "taxWithholdType": "Yes",
-    //             "taxWithholdingSubject": "Yes",
-    //             "taxWithholdCode": "Forc67c",
-    //             "confirmationControlkey": "898877",
-    //             "deleteFlagForVendor": "No",
-    //             "shippingConditions": "this is for Shipping details",
-    //             "gstHstReminder": "Yes",
-    //             "salesTaxExemption": "No",
-    //             "qstVerificationReminder": "Yes",
-    //             "w8-9VerificationReminder": "No",
-    //             "hash": "$2a$10$Vl7Qk6VNTUQLSCBVQR77oOSGDZ9g86RkvMmesDWWIJOV/h5Ybd0pm",
-    //             "status": 0,
-    //             "cert_id": collection.txtStateIncorporation!==undefined?collection.txtStateIncorporation:"",
-    //             "isIdentityCreated": false,
-    //             "pubKey": collection.txtStateIncorporation!==undefined?collection.txtStateIncorporation:"",
-    //             "priKey": collection.txtStateIncorporation!==undefined?collection.txtStateIncorporation:"",
-    //             "Documentslist":uploadResponse,
-               
-    //     };
-           
-    //     debugger;
-    //     })
+})
     
 }
 function updateParticipant()
@@ -201,8 +153,8 @@ function uploadFile(collection)
 {
     return new Promise((resolve, reject) => {
         var form = new FormData();
-        for(let i=0; i<data.length; i++){
-            form.append("file", data[i]);
+        for(let i=0; i<collection.length; i++){
+            form.append("file", collection[i]);
         }
        // let tokenObj = JSON.parse(localStorage.getItem('token'));
         var settings = {

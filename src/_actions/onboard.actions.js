@@ -1,6 +1,7 @@
 import { onboardConstants } from '../_constants';
 import { onboardService } from '../_services';
-import {alertActions} from './';
+import { alertActions } from './';
+import { history } from '../_helpers';
 import { create } from 'filepond';
 const _participant={
     "registerId": "",
@@ -113,14 +114,18 @@ function createOnBoarder(formData) {
     function success(onboarder) { return { type: onboardConstants.ONBRD_CREATE_ONBOARD_SUCCESS, onboarder } }
     function failure(error) { return { type: onboardConstants.ONBRD_CREATE_ONBOARD_FAILURE, error } }
 }
-function createParticipant(collection)
+function createParticipant(collection,Documentslist)
 {
-    console.log(collection);
+    
     return dispatch => {
         dispatch(request());
-        onboardService.createParticipant(collection)
-            .then(collection => dispatch(success({})))
-            .then(()=>dispatch(alertActions.success(`Participant Added Successfully !`)))
+        onboardService.createParticipant(collection,Documentslist)
+            .then((collection)=>
+            {
+                dispatch(success({}));
+                dispatch(alertActions.success(`Participant Added Successfully !`));
+            history.push('/');
+        })
             .catch(error => {
                 dispatch(failure(error))
                 dispatch(alertActions.error(`Failed to add participant!`));
@@ -185,17 +190,10 @@ function changeModeParticipant(mode){
 function uploadParticipantFile(collection)
 {
     return dispatch => {
-        dispatch(request());
-        onboardService.uploadFile(collection)
-            .then(collection => dispatch(success(collection)))
-            .then(()=>dispatch(alertActions.success(`Uploaded Sucessfully !`)))
-            .catch(error => {
-                dispatch(failure(error))
-                dispatch(alertActions.error(`Failed to upload file(s) !`));
-            });
+        dispatch(success(collection));
+        
     };
 
-    function request() { return { type: onboardConstants.ONBRD_UPLOAD_PARTICIPANT_FILE_REQUEST} }
     function success(files) { return { type: onboardConstants.ONBRD_UPLOAD_PARTICIPANT_FILE_SUCCESS, files } }
-    function failure(error) { return { type: onboardConstants.ONBRD_UPLOAD_PARTICIPANT_FILE_FAILURE, error } }
+
 }
