@@ -8,7 +8,7 @@ import { refinerys } from './refinery.reducer';
 import { alert } from './alert.reducer';
 import { admin } from './admin.reducer';
 import { onboard } from './onboard.reducer';
-
+import { product } from './product.reducer';
 const rootReducer = combineReducers({
   authentication,
   registration,
@@ -17,7 +17,8 @@ const rootReducer = combineReducers({
   exporters,
   refinerys,
   admin,
-  onboard
+  onboard,
+  product
 });
 
 export default rootReducer;

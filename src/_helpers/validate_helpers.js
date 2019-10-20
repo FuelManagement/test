@@ -23,6 +23,12 @@ export const validate = (val, rules, connectedValue) => {
         case "minLength":
           isValid = isValid && minLengthValidator(val, connectedValue[rule]);
           break;
+          case "maxLength":
+          isValid = isValid && maxLengthValidator(val, connectedValue[rule]);
+          break;
+          case "isNumber":
+              isValid = isValid && numberValidator(val);
+              break;
         case "equalTo":
           isValid = isValid && equalToValidator(val, connectedValue[rule]);
           break;
@@ -48,7 +54,6 @@ export const validate = (val, rules, connectedValue) => {
           isValid = true;
       }
     }
-  
     return isValid;
   };
   
@@ -57,12 +62,17 @@ export const validate = (val, rules, connectedValue) => {
       val
     );
   };
+
   const phoneValidator = val => {
     return val.match(/^\(?([0-9]{2,3})\)?[-. ]?([0-9]{3,4})[-. ]?([0-9]{4})$/);
   };
   const nameValidator = val => {
     if (val.trim() === "") return true;
     return /^[0-9a-zA-Z\ .-]+$/.test(val);
+  };
+  const numberValidator = val => {
+    if (val.trim() === "") return true;
+    return !isNaN(val);
   };
   const roleValidator = val => {
     if (val.trim() === "") return true;
@@ -81,7 +91,9 @@ export const validate = (val, rules, connectedValue) => {
   const minLengthValidator = (val, minLength) => {
     return val.length >= minLength;
   };
-  
+  const maxLengthValidator = (val, maxLength) => {
+    return val.length <= maxLength;
+  };
   const equalToValidator = (val, checkValue) => {
     return val === checkValue;
   };

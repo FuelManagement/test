@@ -471,7 +471,55 @@ let Table_Config = {
 				Cell: row => <span title={row.original.status===0?'Active':'Inactive'}>{row.original.status===0?'Active':'Inactive'}</span>
 			}]
 		}
+	},
+	Product:{
+		products:{
+			options:{...globalOptions},
+			columns:(props)=>[{
+				Header: 'Product Category',
+				accessor: 'productCategory',
+				Cell: row => <span title={row.original.productCategory}>{row.original.productCategory}</span>
+			},{
+				Header: 'Sub Category',
+				accessor: 'subCategory',
+				Cell: row => <span title={row.original.subCategory}>{row.original.subCategory}</span>
+			},
+			{
+				Header: 'Product Name',
+				accessor: 'productName',
+				Cell: row => <span title={row.original.productName}>{row.original.productName}</span>
+			},
+			{
+				Header: 'Price',
+				accessor: 'price',
+				style:{textAlign:'right'},
+				Cell: row => <span title={formatMoney(row.original.price)}>{formatMoney(row.original.price)}</span>
+			},{
+				Header: 'Measuring Unit',
+				accessor: 'measuringUnit',
+				Cell: row => <span title={row.original.measuringUnit}>{row.original.measuringUnit}</span>
+			},{
+				Header: 'Currency',
+				accessor: 'currency',
+				Cell: row => <span title={row.original.currency}>{row.original.currency}</span>
+			},{
+				Header: 'Product Status',
+				accessor: 'productStatus',
+				Cell: row => <span title={row.original.productStatus=='true'?'Active':'Inactive'}>{row.original.productStatus=='true'?'Active':'Inactive'}</span>
+			},
+			{
+				Header: '',
+				accessor: 'productName',
+				Cell: row => <button 
+								className="btn btn-info btn-sm button-style"
+								style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
+								onClick={e=>{props.toggleProductModal(e, row.original)}}>
+									Edit
+							</button>
+			}]
+		}
 	}
+
 }
 
 module.exports = { Table_Config };

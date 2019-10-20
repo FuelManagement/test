@@ -4,3 +4,4 @@ export * from './exporter.constants';
 export * from './refinery.constants';
 export * from './admin.constants';
 export * from './onboard.constants';
+export * from './product.constants';

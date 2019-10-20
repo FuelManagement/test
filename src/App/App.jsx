@@ -82,6 +82,7 @@ class App extends React.Component {
                                         component_ref={Dashboard.HomePage_Refinery} 
                                         />
                                 <Route path="/onboard" component={Dashboard.OnBoard_Admin} />      
+                                <Route path="/product" component={Dashboard.Product} />  
                                 <Route path="/login" render={(props) => <LoginPage {...props} role={"importer"}/>} />
                                 <Route path="/register" component={RegisterPage} />
                                 <Route path="/home" component={LandingPage} />
