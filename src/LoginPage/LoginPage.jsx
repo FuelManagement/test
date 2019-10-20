@@ -47,28 +47,9 @@ class LoginPage extends React.Component {
                 <LandingPageHeader />
                 <div className="row">
                     <CarouselComponent></CarouselComponent>
-                    {/* <div className="info-section">
-                        <div className="w-100">
-                            <h2>Fuel Tracking Management</h2>
-                            
-                            <p>Blockchain Powered Application</p>
-                        </div>
-                    </div> */}
                     <div className="login-section">                      
-                        <div className="col-12 col-md-9 form-wrapper">
-                            <div className="row">
-                                {/* <h2>
-                                    <span className="sign-in"> 
-                                        <Link to="/login" className="link">Sign In </Link>
-                                    </span> 
-                                    <span className="or"> Or </span> 
-                                    <span className="sign-up">
-                                        <Link to="/register" className="link">Sign Up</Link>
-                                    </span>
-                                </h2> */}
-                                <br/>
-                                <br/>
-                                <br/>
+                        <div className="offset-5 col-3 col-md-3">
+                            <div style={{marginTop:"55px"}}>
                                 <form name="form" onSubmit={this.handleSubmit}>
                                     <div className={'form-group' + (submitted && !email ? ' has-error' : '')}>
                                         <i className="fas fa-user input-icon"></i>
