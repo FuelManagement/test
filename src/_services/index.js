@@ -4,3 +4,4 @@ export * from './refinery.service';
 export * from './admin.service';
 export * from './onboard.service';
 export * from './product.service';
+export * from './rfq.service';

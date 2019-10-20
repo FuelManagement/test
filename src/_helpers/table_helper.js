@@ -518,6 +518,65 @@ let Table_Config = {
 							</button>
 			}]
 		}
+	},
+	RFQ:{
+		rfqs:{
+			options:{...globalOptions},
+			columns:(props)=>[{
+				Header: 'Project ID',
+				accessor: 'projectId',
+				Cell: row => <span title={row.original.projectId}>{row.original.projectId}</span>
+			},{
+				Header: 'Entity Type',
+				accessor: 'entityType',
+				Cell: row => <span title={row.original.entityType}>{row.original.entityType}</span>
+			},{
+				Header: 'Project Details',
+				accessor: 'projectDetails',
+				Cell: row => <span title={row.original.projectDetails}>{row.original.projectDetails}</span>
+			},{
+				Header: 'Start Time',
+				accessor: 'startTime',
+				Cell: row => <span title={row.original.startTime}>{row.original.startTime}</span>
+			},{
+				Header: 'End Time',
+				accessor: 'endTime',
+				Cell: row => <span title={row.original.endTime}>{row.original.endTime}</span>
+			},{
+				Header: 'Status',
+				accessor: 'status',
+				Cell: row => <span title={row.original.status=='true'?'Active':'Inactive'}>{row.original.status=='true'?'Active':'Inactive'}</span>
+			},{
+				Header: 'Activation Time',
+				accessor: 'activationTime',
+				Cell: row => <span title={row.original.activationTime}>{row.original.activationTime}</span>
+			},{
+				Header: 'Closer Time',
+				accessor: 'closerTime',
+				Cell: row => <span title={row.original.closerTime}>{row.original.closerTime}</span>
+			},{
+				Header: 'Currency',
+				accessor: 'currency',
+				Cell: row => <span title={row.original.currency}>{row.original.currency}</span>
+			},{
+				Header: 'Actions',
+				accessor: 'productName',
+				Cell: row => <div>
+								<button 
+									className="btn btn-outline-info btn-xs"
+									style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
+									onClick={e=>{props.toggleRfqViewModal(e, row.original)}}>
+										<span className="glyphicon glyphicon-eye"></span>
+								</button>
+								<button 
+									className="btn btn-outline-primary btn-xs"
+									style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
+									onClick={e=>{props.toggleRfqEditModal(e, row.original)}}>
+										<span className="glyphicon glyphicon-pencil"></span>
+								</button>
+							</div>
+			}]
+		}
 	}
 
 }
