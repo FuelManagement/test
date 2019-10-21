@@ -11,6 +11,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { rfqActions } from '../../_actions';
 
 library.add(faAngleLeft);
 
@@ -20,14 +21,15 @@ class AddRFQ extends React.Component {
         this.state = this.initialState(null, this.props);
         this.handleChange = this.handleChange.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
+        this.newRFQSubmit=this.newRFQSubmit.bind(this);
     }
     initialState(mode, props) {
         let state = {};
         state = {
             controls: {
-                rfqStartTime: {
-                    value: props !== undefined && props.rfqStartTime !== undefined ? props.rfqStartTime : new Date(),
-                    value: new Date(),
+                startTime: {
+                    value: props !== undefined && props.startTime !== undefined ? props.startTime : new Date().toLocaleDateString(),
+                    value: new Date().toLocaleDateString(),
                     valid: false,
                     validationRules: {
                         notEmpty: true,
@@ -38,9 +40,9 @@ class AddRFQ extends React.Component {
                     visible: true,
                     disable: false
                 },
-                rfqEndTime: {
-                    value: props !== undefined && props.rfqEndTime !== undefined ? props.rfqEndTime : new Date(),
-                    value: new Date(),
+                endTime: {
+                    value: props !== undefined && props.endTime !== undefined ? props.endTime : new Date().toLocaleDateString(),
+                    value: new Date().toLocaleDateString(),
                     valid: false,
                     validationRules: {
                         notEmpty: true,
@@ -51,9 +53,9 @@ class AddRFQ extends React.Component {
                     visible: true,
                     disable: false
                 },
-                rfqActivationTime: {
-                    value: props !== undefined && props.rfqActivationTime !== undefined ? props.rfqActivationTime : new Date(),
-                    value: new Date(),
+                activationTime: {
+                    value: props !== undefined && props.activationTime !== undefined ? props.activationTime : new Date().toLocaleDateString(),
+                    value: new Date().toLocaleDateString(),
                     valid: false,
                     validationRules: {
                         notEmpty: true,
@@ -64,9 +66,9 @@ class AddRFQ extends React.Component {
                     visible: true,
                     disable: false
                 },
-                rfqCloserTime: {
-                    value: props !== undefined && props.rfqCloserTime !== undefined ? props.rfqCloserTime : new Date(),
-                    value: new Date(),
+                closerTime: {
+                    value: props !== undefined && props.closerTime !== undefined ? props.closerTime : new Date().toLocaleDateString(),
+                    value: new Date().toLocaleDateString(),
                     valid: false,
                     validationRules: {
                         notEmpty: true,
@@ -79,8 +81,8 @@ class AddRFQ extends React.Component {
                 },
 
 
-                rfqProjectId: {
-                    value: props !== undefined && props.rfqProjectId !== undefined ? props.rfqProjectId : '',
+                projectid: {
+                    value: props !== undefined && props.projectid !== undefined ? props.projectid : '',
 
                     valid: false,
                     validationRules: {
@@ -92,8 +94,8 @@ class AddRFQ extends React.Component {
                     visible: true,
                     disable: false
                 },
-                rfqEntityType: {
-                    value: props !== undefined && props.rfqEntityType !== undefined ? props.rfqEntityType : '',
+                entityType: {
+                    value: props !== undefined && props.entityType !== undefined ? props.entityType : '',
 
                     valid: false,
                     validationRules: {
@@ -105,8 +107,8 @@ class AddRFQ extends React.Component {
                     visible: true,
                     disable: false
                 },
-                rfqProductDetails: {
-                    value: props !== undefined && props.rfqProductDetails !== undefined ? props.rfqProductDetails : '',
+                projectDetails: {
+                    value: props !== undefined && props.projectDetails !== undefined ? props.projectDetails : '',
 
                     valid: false,
                     validationRules: {
@@ -118,8 +120,8 @@ class AddRFQ extends React.Component {
                     visible: true,
                     disable: false
                 },
-                rfqStatus: {
-                    value: props !== undefined && props.rfqStatus !== undefined ? props.rfqStatus : '',
+                status: {
+                    value: props !== undefined && props.status !== undefined ? props.status : '',
 
                     valid: false,
                     validationRules: {
@@ -131,8 +133,8 @@ class AddRFQ extends React.Component {
                     visible: true,
                     disable: false
                 },
-                rfqCategory: {
-                    value: props !== undefined && props.rfqCategory !== undefined ? props.rfqCategory : '',
+                category: {
+                    value: props !== undefined && props.category !== undefined ? props.category : '',
 
                     valid: false,
                     validationRules: {
@@ -144,8 +146,8 @@ class AddRFQ extends React.Component {
                     visible: true,
                     disable: false
                 },
-                rfqSubCategory: {
-                    value: props !== undefined && props.rfqSubCategory !== undefined ? props.rfqSubCategory : '',
+                subCategory: {
+                    value: props !== undefined && props.subCategory !== undefined ? props.subCategory : '',
 
                     valid: false,
                     validationRules: {
@@ -157,8 +159,8 @@ class AddRFQ extends React.Component {
                     visible: true,
                     disable: false
                 },
-                rfqProduct: {
-                    value: props !== undefined && props.rfqProduct !== undefined ? props.rfqProduct : '',
+                product: {
+                    value: props !== undefined && props.product !== undefined ? props.product : '',
 
                     valid: false,
                     validationRules: {
@@ -170,8 +172,8 @@ class AddRFQ extends React.Component {
                     visible: true,
                     disable: false
                 },
-                rfqQuantity: {
-                    value: props !== undefined && props.rfqQuantity !== undefined ? props.rfqQuantity : '',
+                quantity: {
+                    value: props !== undefined && props.quantity !== undefined ? props.quantity : '',
 
                     valid: false,
                     validationRules: {
@@ -183,8 +185,8 @@ class AddRFQ extends React.Component {
                     visible: true,
                     disable: false
                 },
-                rfqPrice: {
-                    value: props !== undefined && props.rfqPrice !== undefined ? props.rfqPrice : '',
+                price: {
+                    value: props !== undefined && props.price !== undefined ? props.price : '',
 
                     valid: false,
                     validationRules: {
@@ -196,8 +198,8 @@ class AddRFQ extends React.Component {
                     visible: true,
                     disable: false
                 },
-                rfqPriceAdjustment: {
-                    value: props !== undefined && props.rfqPriceAdjustment !== undefined ? props.rfqPriceAdjustment : '',
+                priceAdjustment: {
+                    value: props !== undefined && props.priceAdjustment !== undefined ? props.priceAdjustment : '',
 
                     valid: false,
                     validationRules: {
@@ -209,8 +211,8 @@ class AddRFQ extends React.Component {
                     visible: true,
                     disable: false
                 },
-                rfqCurrency: {
-                    value: props !== undefined && props.rfqCurrency !== undefined ? props.rfqCurrency : '',
+                currency: {
+                    value: props !== undefined && props.currency !== undefined ? props.currency : '',
 
                     valid: false,
                     validationRules: {
@@ -222,8 +224,8 @@ class AddRFQ extends React.Component {
                     visible: true,
                     disable: false
                 },
-                rfqQuantityUnit: {
-                    value: props !== undefined && props.rfqQuantityUnit !== undefined ? props.rfqQuantityUnit : '',
+                quantityUnit: {
+                    value: props !== undefined && props.quantityUnit !== undefined ? props.quantityUnit : '',
 
                     valid: false,
                     validationRules: {
@@ -239,6 +241,14 @@ class AddRFQ extends React.Component {
             }
         }
         return state;
+    }
+    newRFQSubmit(){
+        let reqData={};
+        Object.keys(this.state.controls).map(contr=>{
+            reqData[contr]=this.state.controls[contr].value;
+        });
+      this.props.history.push('/rfq');
+        
     }
     handleDateChange(date, key) {
         let connectedValue = {};
@@ -256,7 +266,6 @@ class AddRFQ extends React.Component {
         });
     }
     handleChange(event) {
-        console.log(event.target);
         let key = event.target.name,
             value = event.target.value;
         let connectedValue = {};
@@ -330,11 +339,11 @@ class AddRFQ extends React.Component {
                                 <div className="form-row">
                                     <div className="col-md-3 mb-3 m25">
                                         <TextField
-                                            id="rfqProjectId"
+                                            id="projectid"
                                             label="Projet ID"
-                                            value={this.state.controls.rfqProjectId.value}
+                                            value={this.state.controls.projectid.value}
                                             onChange={this.handleChange}
-                                            name="rfqProjectId"
+                                            name="projectid"
                                             variant="outlined"
                                             className="form-control"
                                             autoComplete="off"
@@ -344,11 +353,11 @@ class AddRFQ extends React.Component {
                                     <div className="col-md-3 mb-3 m25">
                                         <TextField
                                             select
-                                            id="rfqEntityType"
+                                            id="entityType"
                                             label="Entity Type"
-                                            value={this.state.controls.rfqEntityType.value}
+                                            value={this.state.controls.entityType.value}
                                             onChange={this.handleChange}
-                                            name="rfqEntityType"
+                                            name="entityType"
                                             variant="outlined"
                                             className="form-control"
                                             autoComplete="off"
@@ -363,11 +372,11 @@ class AddRFQ extends React.Component {
                                     </div>
                                     <div className="col-md-3 mb-3 m25">
                                         <TextField
-                                            id="rfqProductDetails"
+                                            id="projectDetails"
                                             label="Project Details"
-                                            value={this.state.controls.rfqProductDetails.value}
+                                            value={this.state.controls.projectDetails.value}
                                             onChange={this.handleChange}
-                                            name="rfqProductDetails"
+                                            name="projectDetails"
                                             variant="outlined"
                                             className="form-control"
                                             autoComplete="off"
@@ -379,12 +388,12 @@ class AddRFQ extends React.Component {
                                             <KeyboardDatePicker style={{ width: '100%' }}
                                                 clearable
                                                 inputProps={{
-                                                    name: 'rfqStartTime',
-                                                    id: 'rfqStartTime',
+                                                    name: 'startTime',
+                                                    id: 'startTime',
                                                 }}
                                                 inputVariant="outlined"
-                                                value={this.state.controls.rfqStartTime.value}
-                                                onChange={(date) => { this.handleDateChange(date, 'rfqStartTime') }}
+                                                value={this.state.controls.startTime.value}
+                                                onChange={(date) => { this.handleDateChange(date, 'startTime') }}
                                                 margin="dense"
                                                 label="Start Time"
                                                 format="MM/dd/yyyy"
@@ -396,11 +405,11 @@ class AddRFQ extends React.Component {
                                             <KeyboardDatePicker style={{ width: '100%' }}
                                                 clearable
                                                 inputProps={{
-                                                    name: 'rfqEndTime',
-                                                    id: 'rfqEndTime',
+                                                    name: 'endTime',
+                                                    id: 'endTime',
                                                 }}
-                                                value={this.state.controls.rfqEndTime.value}
-                                                onChange={(date) => { this.handleDateChange(date, 'rfqEndTime') }}
+                                                value={this.state.controls.endTime.value}
+                                                onChange={(date) => { this.handleDateChange(date, 'endTime') }}
                                                 inputVariant="outlined"
                                                 margin="dense"
                                                 label="End Time"
@@ -410,11 +419,11 @@ class AddRFQ extends React.Component {
                                     </div>
                                     <div className="col-md-3 mb-3 m25">
                                         <TextField
-                                            id="rfqStatus"
+                                            id="status"
                                             label="Status"
-                                            value={this.state.controls.rfqStatus.value}
+                                            value={this.state.controls.status.value}
                                             onChange={this.handleChange}
-                                            name="rfqStatus"
+                                            name="status"
                                             variant="outlined"
                                             className="form-control"
                                             autoComplete="off"
@@ -426,11 +435,11 @@ class AddRFQ extends React.Component {
                                             <KeyboardDatePicker style={{ width: '100%' }}
                                                 clearable
                                                 inputProps={{
-                                                    name: 'rfqActivationTime',
-                                                    id: 'rfqActivationTime',
+                                                    name: 'activationTime',
+                                                    id: 'activationTime',
                                                 }}
-                                                value={this.state.controls.rfqActivationTime.value}
-                                                onChange={(date) => { this.handleDateChange(date, 'rfqActivationTime') }}
+                                                value={this.state.controls.activationTime.value}
+                                                onChange={(date) => { this.handleDateChange(date, 'activationTime') }}
                                                 inputVariant="outlined"
                                                 margin="dense"
                                                 label="Activation Time"
@@ -443,11 +452,11 @@ class AddRFQ extends React.Component {
                                             <KeyboardDatePicker style={{ width: '100%' }}
                                                 clearable
                                                 inputProps={{
-                                                    name: 'rfqCloserTime',
-                                                    id: 'rfqCloserTime',
+                                                    name: 'closerTime',
+                                                    id: 'closerTime',
                                                 }}
-                                                value={this.state.controls.rfqCloserTime.value}
-                                                onChange={(date) => { this.handleDateChange(date, 'rfqCloserTime') }}
+                                                value={this.state.controls.closerTime.value}
+                                                onChange={(date) => { this.handleDateChange(date, 'closerTime') }}
                                                 inputVariant="outlined"
                                                 margin="dense"
                                                 label="Closer Time"
@@ -458,11 +467,11 @@ class AddRFQ extends React.Component {
                                     <div className="col-md-3 mb-3 m25">
                                         <TextField
                                             select
-                                            id="rfqCategory"
+                                            id="category"
                                             label="Category"
-                                            value={this.state.controls.rfqCategory.value}
+                                            value={this.state.controls.category.value}
                                             onChange={this.handleChange}
-                                            name="rfqCategory"
+                                            name="category"
                                             variant="outlined"
                                             className="form-control"
                                             autoComplete="off"
@@ -478,11 +487,11 @@ class AddRFQ extends React.Component {
                                     <div className="col-md-3 mb-3 m25">
                                         <TextField
                                             select
-                                            id="rfqSubCategory"
+                                            id="subCategory"
                                             label="Sub Category"
-                                            value={this.state.controls.rfqSubCategory.value}
+                                            value={this.state.controls.subCategory.value}
                                             onChange={this.handleChange}
-                                            name="rfqSubCategory"
+                                            name="subCategory"
                                             variant="outlined"
                                             className="form-control"
                                             autoComplete="off"
@@ -498,11 +507,11 @@ class AddRFQ extends React.Component {
                                     <div className="col-md-3 mb-3 m25">
                                         <TextField
                                             select
-                                            id="rfqProduct"
+                                            id="product"
                                             label="Product"
-                                            value={this.state.controls.rfqProduct.value}
+                                            value={this.state.controls.product.value}
                                             onChange={this.handleChange}
-                                            name="rfqProduct"
+                                            name="product"
                                             variant="outlined"
                                             className="form-control"
                                             autoComplete="off"
@@ -517,11 +526,11 @@ class AddRFQ extends React.Component {
                                     </div>
                                     <div className="col-md-3 mb-3 m25">
                                         <TextField
-                                            id="rfqQuantity"
+                                            id="quantity"
                                             label="Quantity"
-                                            value={this.state.controls.rfqQuantity.value}
+                                            value={this.state.controls.quantity.value}
                                             onChange={this.handleChange}
-                                            name="rfqQuantity"
+                                            name="quantity"
                                             variant="outlined"
                                             className="form-control"
                                             autoComplete="off"
@@ -530,11 +539,11 @@ class AddRFQ extends React.Component {
                                     </div>
                                     <div className="col-md-3 mb-3 m25">
                                         <TextField
-                                            id="rfqPrice"
+                                            id="price"
                                             label="Price"
-                                            value={this.state.controls.rfqPrice.value}
+                                            value={this.state.controls.price.value}
                                             onChange={this.handleChange}
-                                            name="rfqPrice"
+                                            name="price"
                                             variant="outlined"
                                             className="form-control"
                                             autoComplete="off"
@@ -543,11 +552,11 @@ class AddRFQ extends React.Component {
                                     </div>
                                     <div className="col-md-3 mb-3 m25">
                                         <TextField
-                                            id="rfqPriceAdjustment"
+                                            id="priceAdjustment"
                                             label="Price Adjustment"
-                                            value={this.state.controls.rfqPriceAdjustment.value}
+                                            value={this.state.controls.priceAdjustment.value}
                                             onChange={this.handleChange}
-                                            name="rfqPriceAdjustment"
+                                            name="priceAdjustment"
                                             variant="outlined"
                                             className="form-control"
                                             autoComplete="off"
@@ -557,11 +566,11 @@ class AddRFQ extends React.Component {
                                     <div className="col-md-3 mb-3 m25">
                                         <TextField
                                             select
-                                            id="rfqCurrency"
+                                            id="currency"
                                             label="Currency"
-                                            value={this.state.controls.rfqCurrency.value}
+                                            value={this.state.controls.currency.value}
                                             onChange={this.handleChange}
-                                            name="rfqCurrency"
+                                            name="currency"
                                             variant="outlined"
                                             className="form-control"
                                             autoComplete="off"
@@ -577,11 +586,11 @@ class AddRFQ extends React.Component {
                                     <div className="col-md-3 mb-3 m25">
                                         <TextField
                                             select
-                                            id="rfqQuantityUnit"
+                                            id="quantityUnit"
                                             label="Quantity Unit"
-                                            value={this.state.controls.rfqQuantityUnit.value}
+                                            value={this.state.controls.quantityUnit.value}
                                             onChange={this.handleChange}
-                                            name="rfqQuantityUnit"
+                                            name="quantityUnit"
                                             variant="outlined"
                                             className="form-control"
                                             autoComplete="off"
@@ -596,14 +605,15 @@ class AddRFQ extends React.Component {
                                     </div>
                                 </div>
                                 <div className="col-md-12 mb-3 mb25">
-                                    <button className="btn btn-success rfq-submit-btn float-right">Submit</button>
+                                    <button className="btn btn-success rfq-submit-btn float-right" onClick={this.newRFQSubmit}>Submit</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+             </div>
         )
     }
 }
-export { AddRFQ };
+
+export {AddRFQ};

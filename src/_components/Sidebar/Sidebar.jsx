@@ -14,7 +14,7 @@ class Sidebar extends React.Component {
     componentDidMount() {
         jQuery(function ($) {
             $(".sidebar-dropdown > a").click(function () {
-                $(".sidebar-submenu").slideUp(200);
+               $(".sidebar-submenu").slideUp(200);
                 if ($(this).parent().hasClass("active")) {
                     $(".sidebar-dropdown").removeClass("active");
                     $(this).parent().removeClass("active");
@@ -129,7 +129,7 @@ class Sidebar extends React.Component {
                                         <i className="fa fa-shopping-cart"></i>
                                         <span>Management</span>
                                     </Link>
-                                    <div className="">
+                                    <div className="sidebar-submenu">
                                         <ul>
                                             <li className="sidebar-dropdown">
                                                 <Link to="/">
@@ -140,7 +140,7 @@ class Sidebar extends React.Component {
                                                 <Link to="/">
                                                     <span>Proposal Management</span>
                                                 </Link>
-                                                <div className="sidebar-submenu">
+                                                <div className="sidebar-dropdown">
                                                     <ul>
                                                         <li>
                                                             <Link to="/rfq">
