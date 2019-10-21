@@ -86,8 +86,8 @@ class App extends React.Component {
                                 <Route path="/login" render={(props) => <LoginPage {...props} role={"importer"}/>} />
                                 <Route path="/register" component={RegisterPage} />
                                 <Route path="/home" component={LandingPage} />
-                                <Route path="/rfq" component={Dashboard.RFQ} />
-							    <Route path="/rfq/add" component={Dashboard.AddRFQ} />
+                                <Route path="/rfq" exact component={Dashboard.RFQ} />
+							    <Route path="/rfq/add" exact component={Dashboard.AddRFQ} />
                             </React.Fragment>
                         </ Router>
                     </div>

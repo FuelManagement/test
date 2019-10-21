@@ -317,7 +317,7 @@ class AddRFQ extends React.Component {
             <div className="mx-auto">
                 <div className="row brd-tp1px">
                     <div className='col-lg-9 login-section add-rfq-main'>
-                        <h3>RFQ</h3>
+                        <h3><Link to="/rfq"> <button className="btn btn-link">{ "<" }</button></Link> RFQ</h3>
                         <hr />
                         <div className="col-12 col-md-12 form-wrapper">
                             <div className="row">

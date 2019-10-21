@@ -49,9 +49,9 @@ class RFQ extends React.Component {
                 <div className="clearDiv"></div>
                 <br />
                 <ReactTable
-                    data={this.props.rfq.rfqs}
-                    columns={Table_Config.Rfq.rfqs.columns({toggleRfqtModal: this.toggleModal.bind(this)})}
-                    {...Table_Config.Rfq.rfqs.options}
+                    data={this.props.rfq}
+                    columns={Table_Config.RFQ.rfqs.columns({toggleRfqtModal: this.toggleModal.bind(this)})}
+                    {...Table_Config.RFQ.rfqs.options}
                 />
                 <hr />
                 <div className="modal" id="rfqModal" tabIndex="-1" role="dialog">
