@@ -8,6 +8,12 @@ import {
     KeyboardDatePicker
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faAngleLeft);
+
 class AddRFQ extends React.Component {
     constructor(props) {
         super(props);
@@ -317,7 +323,7 @@ class AddRFQ extends React.Component {
             <div className="mx-auto">
                 <div className="row brd-tp1px">
                     <div className='col-lg-9 login-section add-rfq-main'>
-                        <h3><Link to="/rfq"> <button className="btn btn-link">{ "<" }</button></Link> RFQ</h3>
+                        <h3><Link to="/rfq"> <FontAwesomeIcon icon="angle-left"/></Link> &nbsp;&nbsp;&nbsp;Add RFQ</h3>
                         <hr />
                         <div className="col-12 col-md-12 form-wrapper">
                             <div className="row">

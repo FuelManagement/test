@@ -2,6 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { API_Helpers, Utils, Table_Config } from '../../_helpers';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faPlus);
+
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import $ from 'jquery';
@@ -43,7 +49,9 @@ class RFQ extends React.Component {
                 <h2 style={{ display: "inline-block" }}>RFQs</h2>
                 <hr />
                 <Link to="/rfq/add">
-                    <button className="btn btn-outline">Add RFQ</button>
+                    <button className="btn btn-outline btn-info">
+                        <FontAwesomeIcon icon="plus"/> Add RFQ
+                    </button>
                 </Link>
                 <div className="clearDiv"></div>
                 <br />
