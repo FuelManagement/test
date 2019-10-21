@@ -8,6 +8,7 @@ import * as Dashboard from '../Dashboard';
 import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';
 import { LandingPage } from '../LandingPage';
+import {AddRFQ}  from '../_components/AddRFQ';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../scss/style.css';
@@ -86,6 +87,7 @@ class App extends React.Component {
                                 <Route path="/login" render={(props) => <LoginPage {...props} role={"importer"}/>} />
                                 <Route path="/register" component={RegisterPage} />
                                 <Route path="/home" component={LandingPage} />
+							    <Route path="/add-rfq" component={AddRFQ} />
                             </React.Fragment>
                         </ Router>
                     </div>

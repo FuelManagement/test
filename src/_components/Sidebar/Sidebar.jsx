@@ -124,6 +124,42 @@ class Sidebar extends React.Component {
                                 
                                 </Link>                               
                             </li>
+							 <li className="sidebar-dropdown">
+                  <Link to="/">
+                  <i className="fa fa-shopping-cart"></i>
+                  <span>Management</span>
+                  </Link>
+                  <div className="">
+                     <ul>
+                        <li  className="sidebar-dropdown">
+                           <Link to="/">
+                           <span>Project Management</span>
+                           </Link>
+                        </li>
+                        <li className="sidebar-dropdown">
+                           <Link to="/">
+                           <span>Proposal Management</span>
+                           </Link>
+                           <div className="sidebar-submenu">
+                              <ul>
+                                 <li>
+                                    <Link to="/add-rfq">
+                                    RFQ</Link>
+                                 </li>
+                                 <li>
+                                    <Link to="/Indicative-order">
+                                    Indicative Order</Link>
+                                 </li>
+                                 <li>
+                                    <Link to="/contract">
+                                    Contract</Link>
+                                 </li>
+                              </ul>
+                           </div>
+                        </li>
+                     </ul>
+                  </div>
+               </li>
                             <li className="sidebar-dropdown">
                                 <Link to="#">
                                     <i className="fa fa-shopping-cart"></i>
