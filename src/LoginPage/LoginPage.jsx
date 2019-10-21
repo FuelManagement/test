@@ -45,7 +45,7 @@ class LoginPage extends React.Component {
         return (
             <div className="mx-auto">
                 <LandingPageHeader />
-                <div className="row">
+                <div className="row login-form">
                     <CarouselComponent></CarouselComponent>
                     <div className="login-section">                      
                         <div className="offset-5 col-3 col-md-3">

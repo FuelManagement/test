@@ -253,7 +253,7 @@ class ProductForm extends React.Component {
  
   render() { 
     return (
-      <div className="mx-auto">
+      <div className="mx-auto product-form">
         <div className="form-row">
           <div className="col-md-6 mb-3">
           <FormControl style={{ width: "100%" }}>
