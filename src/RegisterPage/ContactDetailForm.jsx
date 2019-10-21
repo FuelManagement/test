@@ -9,9 +9,9 @@ import {
   DatePicker,
   KeyboardDatePicker
 } from '@material-ui/pickers';
-import { green } from '@material-ui/core/colors'; 
+import { green } from '@material-ui/core/colors';
 import { withStyles } from '@material-ui/core/styles';
-import {onboardActions} from '../_actions';
+import { onboardActions } from '../_actions';
 const GreenRadio = withStyles({
   root: {
     color: green[400],
@@ -33,8 +33,8 @@ class ContactDetailForm extends React.Component {
     state = {
       controls: {
         txtStreetAddress: {
-          value: props!==undefined && props.txtStreetAddress!==undefined?props.txtStreetAddress:'',
-          
+          value: props !== undefined && props.txtStreetAddress !== undefined ? props.txtStreetAddress : '',
+
           valid: false,
           validationRules: {
             notEmpty: true,
@@ -47,8 +47,8 @@ class ContactDetailForm extends React.Component {
           disable: false
         },
         txtNeighborhoodCity: {
-          value: props!==undefined && props.txtNeighborhoodCity!==undefined?props.txtNeighborhoodCity:'',
-          
+          value: props !== undefined && props.txtNeighborhoodCity !== undefined ? props.txtNeighborhoodCity : '',
+
           valid: false,
           validationRules: {
             notEmpty: true,
@@ -60,8 +60,8 @@ class ContactDetailForm extends React.Component {
           disable: false
         },
         txtPostalCode: {
-          value: props!==undefined && props.txtPostalCode!==undefined?props.txtPostalCode:'',
-          
+          value: props !== undefined && props.txtPostalCode !== undefined ? props.txtPostalCode : '',
+
           valid: false,
           validationRules: {
             notEmpty: true,
@@ -74,8 +74,8 @@ class ContactDetailForm extends React.Component {
         },
 
         txtRegion: {
-          value: props!==undefined && props.txtRegion!==undefined?props.txtRegion:'',
-          
+          value: props !== undefined && props.txtRegion !== undefined ? props.txtRegion : '',
+
           valid: false,
           validationRules: {
             notEmpty: true,
@@ -87,8 +87,8 @@ class ContactDetailForm extends React.Component {
           disable: false
         },
         txtCountry: {
-          value: props!==undefined && props.txtCountry!==undefined?props.txtCountry:'',
-          
+          value: props !== undefined && props.txtCountry !== undefined ? props.txtCountry : '',
+
           valid: false,
           validationRules: {
             notEmpty: true,
@@ -100,8 +100,8 @@ class ContactDetailForm extends React.Component {
           disable: false
         },
         txtFaxNumber: {
-          value: props!==undefined && props.txtFaxNumber!==undefined?props.txtFaxNumber:'',
-          
+          value: props !== undefined && props.txtFaxNumber !== undefined ? props.txtFaxNumber : '',
+
           valid: false,
           validationRules: {
             notEmpty: true,
@@ -113,8 +113,8 @@ class ContactDetailForm extends React.Component {
           disable: false
         },
         txtFirstTelephoneNumber: {
-          value: props!==undefined && props.txtFirstTelephoneNumber!==undefined?props.txtFirstTelephoneNumber:'',
-          
+          value: props !== undefined && props.txtFirstTelephoneNumber !== undefined ? props.txtFirstTelephoneNumber : '',
+
           valid: false,
           validationRules: {
             notEmpty: true,
@@ -127,8 +127,8 @@ class ContactDetailForm extends React.Component {
           disable: false
         },
         radioFirstTelephoneNumber: {
-          value: props!==undefined && props.radioFirstTelephoneNumber!==undefined?props.radioFirstTelephoneNumber:'mobile',
-          
+          value: props !== undefined && props.radioFirstTelephoneNumber !== undefined ? props.radioFirstTelephoneNumber : 'mobile',
+
           valid: false,
           validationRules: {
             notEmpty: true,
@@ -141,8 +141,8 @@ class ContactDetailForm extends React.Component {
           disable: false
         },
         txtSecondTelephoneNumber: {
-          value: props!==undefined && props.txtSecondTelephoneNumber!==undefined?props.txtSecondTelephoneNumber:'',
-          
+          value: props !== undefined && props.txtSecondTelephoneNumber !== undefined ? props.txtSecondTelephoneNumber : '',
+
           valid: false,
           validationRules: {
             notEmpty: true,
@@ -155,8 +155,8 @@ class ContactDetailForm extends React.Component {
           disable: true
         },
         radioSecondTelephoneNumber: {
-          value: props!==undefined && props.radioSecondTelephoneNumber!==undefined?props.radioSecondTelephoneNumber:'telephone',
-          
+          value: props !== undefined && props.radioSecondTelephoneNumber !== undefined ? props.radioSecondTelephoneNumber : 'telephone',
+
           valid: false,
           validationRules: {
             notEmpty: true,
@@ -192,12 +192,12 @@ class ContactDetailForm extends React.Component {
         }
       };
     });
-    this.props.dispatch(onboardActions.changeParticipant(key,value));   
+    this.props.dispatch(onboardActions.changeParticipant(key, value));
   }
   handleOnChange(value) {
     this.setState({ phone: value })
   }
-  render() { 
+  render() {
     return (
       <div className="mx-auto">
         <h2 className="reg-heading">Contact Information</h2>
@@ -213,6 +213,7 @@ class ContactDetailForm extends React.Component {
               className="form-control"
               autoComplete="off"
               margin="dense"
+              inputProps={{ maxLength: 100 }}
             />
           </div>
         </div>
@@ -335,13 +336,13 @@ class ContactDetailForm extends React.Component {
               <RadioGroup aria-label="radioFirstTelephoneNumber" name="radioSecondTelephoneNumber" value={this.state.controls.radioSecondTelephoneNumber.value} onChange={this.handleChange} row>
                 <FormControlLabel
                   value="mobile"
-                  control={<GreenRadio  />}
+                  control={<GreenRadio />}
                   label="Mobile"
                   labelPlacement="end"
                 />
                 <FormControlLabel
                   value="telephone"
-                  control={<GreenRadio  />}
+                  control={<GreenRadio />}
                   label="Telephone"
                   labelPlacement="end"
                 />
@@ -356,11 +357,11 @@ class ContactDetailForm extends React.Component {
 
 function mapStateToProps(state) {
   const { onboard } = state;
-   
-    return {
-        onboard
-      
-    };
+
+  return {
+    onboard
+
+  };
 }
 
 const connectedContactDetailForm = connect(mapStateToProps)(ContactDetailForm);
