@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { API_Helpers, Utils, Table_Config } from '../../_helpers';
-import ReactTable from 'react-table'
-import 'react-table/react-table.css'
+import ReactTable from 'react-table';
+import 'react-table/react-table.css';
 import $ from 'jquery';
 window.jQuery = $; // hack
 window.$ = $;      // hack 
@@ -49,7 +49,7 @@ class RFQ extends React.Component {
                 <br />
                 <ReactTable
                     data={this.props.rfq.rfqs}
-                    columns={Table_Config.RFQ.rfqs.columns({toggleRfqtModal: this.toggleModal.bind(this)})}
+                    columns={Table_Config.RFQ.rfqs.columns({toggleRfqModal: this.toggleModal.bind(this)})}
                     {...Table_Config.RFQ.rfqs.options}
                 />
                 <hr />

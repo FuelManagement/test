@@ -1,4 +1,9 @@
 import React from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faEye, faEdit } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faEye, faEdit);
 
 let globalOptions = {
     showPagination: true,
@@ -561,18 +566,18 @@ let Table_Config = {
 			},{
 				Header: 'Actions',
 				accessor: 'productName',
-				Cell: row => <div>
+				Cell: row => <div className="row">
 								<button 
-									className="btn btn-outline-info btn-xs"
+									className="btn btn-outline-info btn-sm"
 									style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
 									onClick={e=>{props.toggleRfqModal(e, row.original, "view")}}>
-										<span className="glyphicon glyphicon-eye"></span>
+										<FontAwesomeIcon icon="eye" size="xs"/>
 								</button>
 								<button 
-									className="btn btn-outline-primary btn-xs"
+									className="btn btn-outline-primary btn-sm"
 									style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
 									onClick={e=>{props.toggleRfqModal(e, row.original, "edit")}}>
-										<span className="glyphicon glyphicon-pencil"></span>
+										<FontAwesomeIcon icon="edit" size="xs"/>
 								</button>
 							</div>
 			}]
