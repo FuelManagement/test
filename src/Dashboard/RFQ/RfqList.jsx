@@ -10,7 +10,6 @@ window.$ = $;      // hack
 import 'bootstrap';
 import { rfqActions } from '../../_actions';
 class RFQ extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -49,7 +48,7 @@ class RFQ extends React.Component {
                 <div className="clearDiv"></div>
                 <br />
                 <ReactTable
-                    data={this.props.rfq}
+                    data={this.props.rfq.rfqs}
                     columns={Table_Config.RFQ.rfqs.columns({toggleRfqtModal: this.toggleModal.bind(this)})}
                     {...Table_Config.RFQ.rfqs.options}
                 />

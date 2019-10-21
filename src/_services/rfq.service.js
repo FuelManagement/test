@@ -46,6 +46,7 @@ function getAllRfq() {
     };
     return fetch(config.apiUrl + '/product/getProductList?userID='+user.email, requestOptions)
     .then(handleResponse)
+    .then(()=> dummyData)
     .catch(err => {
         // handleError(err)
         return dummyData;
