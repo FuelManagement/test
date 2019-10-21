@@ -267,7 +267,6 @@ header .pad-50{
 .filepond--root :not(text) {  
   display: block;
   float: right;
-  
 }
 .filepond--label-action{
   color: #fff;
@@ -284,6 +283,21 @@ header .pad-50{
 .product-form .MuiFormLabel-root{
   background: #fff;
   padding: 0px 5px;
+}
+.login-section{
+  display: flex;
+  align-items: center;
+}
+
+/* React table css   */
+.rt-resizable-header-content{
+  font-weight: bold;
+}
+.xyx{
+  color: red;
+}
+.xyx:active,.xyx:hover,.xyx:focus,.xyx:focus-within,.MuiTreeView-root:active,.MuiTreeView-root:focus-within,.MuiTreeView-root:focus{
+  background: green !important;
 }
 /*Add RFQ Styles*/
 .add-rfq-main{

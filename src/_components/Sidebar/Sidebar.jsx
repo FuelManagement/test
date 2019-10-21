@@ -4,8 +4,7 @@ import $ from 'jquery';
 window.jQuery = $; // hack
 window.$ = $;      // hack 
 
-import './sidebar.css';
-
+import './sidebar.css'; 
 class Sidebar extends React.Component {
     constructor(props) {
         super(props);
@@ -69,7 +68,7 @@ class Sidebar extends React.Component {
                                         <span>Dashboard</span>
                                         {/* <span className="badge badge-pill badge-warning">New</span> */}
                                     </Link>
-                                    {/*
+                                    
                                 <div className="sidebar-submenu">
                                     <ul>
                                         <li>
@@ -85,15 +84,15 @@ class Sidebar extends React.Component {
                                         </li>
                                     </ul>
                                 </div>
-                                */}
+                               
                                 </li>
-                                <li className="sidebar-dropdown">
+                                {/* <li className="sidebar-dropdown">
                                     <Link to="/orders">
                                         <i className="fa fa-shopping-cart"></i>
                                         <span>Order Management</span>
-                                        {/*   <span className="badge badge-pill badge-danger">3</span> */}
+                                          <span className="badge badge-pill badge-danger">3</span>  
                                     </Link>
-                                    {/*
+                                    
                                 <div className="sidebar-submenu">
                                     <ul>
                                         <li><Link to="/">Products</Link></li>
@@ -101,21 +100,50 @@ class Sidebar extends React.Component {
                                         <li><Link to="/">Credit cart</Link></li>
                                     </ul>
                                 </div>
-                                */}
-                                </li>
+                               
+                                </li> */}
 
                                 <li className="sidebar-dropdown">
                                     <Link to="/onboard">
                                         <i className="fa fa-shopping-cart"></i>
                                         <span>On Board</span>
                                     </Link>
+                                    <div className="sidebar-submenu">
+                                        <ul>
+                                            <li><Link to="/">Registration</Link></li>
+                                            <li><Link to="/profile">Profile</Link></li>
+                                        </ul>
+                                    </div>
                                 </li>
                                 <li className="sidebar-dropdown">
+                                    <Link to="/">
+                                        <i className="fa fa-shopping-cart"></i>
+                                        <span>User Creation</span>
+                                    </Link>
+                                    <div className="sidebar-submenu">
+                                        <ul>
+                                            <li><Link to="/">Profile Setup for User</Link></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li className="sidebar-dropdown">
+                                    <Link to="/">
+                                        <i className="fa fa-shopping-cart"></i>
+                                        <span>Management</span>
+                                    </Link>
+                                    <div className="sidebar-submenu">
+                                        <ul>
+                                            <li><Link to="/product">Product Management</Link></li>
+                                            
+                                        </ul>
+                                    </div>
+                                </li>
+                                {/* <li className="sidebar-dropdown">
                                     <Link to="/product">
                                         <i className="fa fa-shopping-cart"></i>
                                         <span>Product Management</span>
                                     </Link>
-                                </li>
+                                </li> */}
 
                                 <li className="sidebar-dropdown">
                                     <Link to="#">

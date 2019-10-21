@@ -476,7 +476,7 @@ let Table_Config = {
 		products:{
 			options:{...globalOptions},
 			columns:(props)=>[{
-				Header: 'Product Category',
+				Header: 'Category',
 				accessor: 'productCategory',
 				Cell: row => <span title={row.original.productCategory}>{row.original.productCategory}</span>
 			},{
@@ -485,7 +485,7 @@ let Table_Config = {
 				Cell: row => <span title={row.original.subCategory}>{row.original.subCategory}</span>
 			},
 			{
-				Header: 'Product Name',
+				Header: 'Name',
 				accessor: 'productName',
 				Cell: row => <span title={row.original.productName}>{row.original.productName}</span>
 			},
@@ -503,7 +503,7 @@ let Table_Config = {
 				accessor: 'currency',
 				Cell: row => <span title={row.original.currency}>{row.original.currency}</span>
 			},{
-				Header: 'Product Status',
+				Header: 'Status',
 				accessor: 'productStatus',
 				Cell: row => <span title={row.original.productStatus=='true'?'Active':'Inactive'}>{row.original.productStatus=='true'?'Active':'Inactive'}</span>
 			},

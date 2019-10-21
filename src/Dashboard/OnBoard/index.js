@@ -1,1 +1,2 @@
-export * from './Boarder';
+export * from './Boarder'; 
+export * from './OnBoardProfile';
