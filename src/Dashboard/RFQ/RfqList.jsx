@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { API_Helpers, Utils, Table_Config } from '../../_helpers';
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
@@ -42,6 +43,9 @@ class RFQ extends React.Component {
             <div className="col-md-8 offset-md-3 contentDiv">
                 <h2 style={{ display: "inline-block" }}>RFQs</h2>
                 <hr />
+                <Link to="/rfq/add">
+                    <button className="btn btn-outline">Add RFQ</button>
+                </Link>
                 <div className="clearDiv"></div>
                 <br />
                 <ReactTable
