@@ -281,11 +281,10 @@ header .pad-50{
 .filepond--root .filepond--drop-label {
   min-height: 3.25em;
 }
-<<<<<<< HEAD
 .product-form .MuiFormLabel-root{
   background: #fff;
   padding: 0px 5px;
-=======
+}
 /*Add RFQ Styles*/
 .add-rfq-main{
 	border-top:none;
@@ -308,5 +307,4 @@ header .pad-50{
 .rfq-submit-btn{
 	width:16rem;
 	margin-right:57px;
->>>>>>> 4e658287e838c7a6ba02ad3678cc11285f8029b0
 }
