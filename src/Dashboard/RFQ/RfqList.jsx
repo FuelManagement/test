@@ -14,86 +14,43 @@ class RFQ extends React.Component {
         super(props);
         this.state = {
             search: "",
-            createRFQModal: false,
-            domain: '',
-            mode: this.props.product.mode !== undefined ? this.props.product.mode : 'create'
+            rfqModal: false,
+            mode: 'view',
+            selectedRfq: {}
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
     }
-    componentWillReceiveProps(nextprops) {
-        if (JSON.stringify(this.props.product.mode) !== JSON.stringify(nextprops.product.mode)) {
-            this.setState({ mode: nextprops.product.mode })
-        }
-    }
     componentDidMount() {
-
-        this.props.dispatch(productActions.getAllProduct());
-    }
-
-    shouldComponentUpdate() {
-        return true;
+        this.props.dispatch(rfqActions.getAllRfq());
     }
     handleSubmit(event) {
         event.preventDefault();
         const data = event.target;
-        return this.props.dispatch(productActions.createProduct(data, this.props.onboard.participants));
+        return this.props.dispatch(rfqActions.updateRfq(data));
     }
-    toggleModal(event) {
-        if (this.state.createPoModal) {
-            $('#createProductModal input[type="text"]').val("");
-        }
-        this.setState({ createProductModal: !this.state.createProductModal })
-    }
-    toggleProductModal(e, data) {
-        if (this.state.createPoModal) {
-            $('#createProductModal input[type="text"]').val("");
-        }
-        this.props.dispatch(productActions.changeModeProduct('update'));
-        this.props.dispatch(productActions.getProduct(data));
-        this.setState({ createProductModal: !this.state.createProductModal });
+    toggleModal(event, data={}, mode="view") {
+        this.setState({ rfqModal: !this.state.rfqModal, mode, selectedRfq: data })
     }
     render() {
-        //const { loading,product,products,mode} = this.props.product;
-        if (this.state.createProductModal) {
-            $('#createProductModal').modal('show');
+        if (this.state.rfqModal) {
+            $('#rfqModal').modal('show');
         } else {
-            $('#createProductModal').modal('hide');
+            $('#rfqModal').modal('hide');
         }
         return (
             <div className="col-md-8 offset-md-3 contentDiv">
-                <h2 style={{ display: "inline-block" }}>
-                    Product
-                </h2>
-
+                <h2 style={{ display: "inline-block" }}>RFQs</h2>
                 <hr />
-                <div>
-                    <button name="btnAddProduct" className="btn btn-primary btn-sm col-md-offset-4 center link-bg button-style"
-                        onClick={e => { this.toggleModal(e); this.props.dispatch(productActions.changeModeProduct('create')); }} >
-                        Add Product
-                </button>
-                    {/* <input className="searchBox"
-                        type="text" name="search" 
-                        value={this.state.search} 
-                        onChange={e => this.setState({search:e.target.value})} 
-                        placeholder="Search By Name" /> */}
-                </div>
                 <div className="clearDiv"></div>
                 <br />
                 <ReactTable
-                    data={this.props.rfq.products}
-                    columns={Table_Config.RFQ.rfqs.columns({ 
-                                    toggleRfqViewtModal: this.toggleRfqViewModal.bind(this),
-                                    toggleRfqEdittModal: this.toggleRfqEditModal.bind(this) 
-                                }
-                            )}
-                    {...Table_Config.Product.products.options}
+                    data={this.props.rfq.rfqs}
+                    columns={Table_Config.Rfq.rfqs.columns({toggleRfqtModal: this.toggleModal.bind(this)})}
+                    {...Table_Config.Rfq.rfqs.options}
                 />
-
                 <hr />
-                <br />
-
-                <div className="modal" id="createProductModal" tabIndex="-1" role="dialog">
+                <div className="modal" id="rfqModal" tabIndex="-1" role="dialog">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -103,7 +60,7 @@ class RFQ extends React.Component {
                                 </button>
                             </div>
                             <div className="modal-body">
-                                <ProductForm mode={this.state.mode} closeModal={this.toggleModal} />
+                                {this.state.mode=="edit"?"Form Component":"View Component"}
                             </div>
                         </div>
                     </div>
@@ -114,13 +71,9 @@ class RFQ extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { product } = state;
-
-    return {
-        product
-
-    };
+    const { rfq } = state;
+    return { rfq };
 }
 
-const connectedProduct = connect(mapStateToProps)(Product);
-export { connectedProduct as Product };
+const connectedRfq = connect(mapStateToProps)(RFQ);
+export { connectedRfq as RFQ };

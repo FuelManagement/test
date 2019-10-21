@@ -565,13 +565,13 @@ let Table_Config = {
 								<button 
 									className="btn btn-outline-info btn-xs"
 									style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
-									onClick={e=>{props.toggleRfqViewModal(e, row.original)}}>
+									onClick={e=>{props.toggleRfqModal(e, row.original, "view")}}>
 										<span className="glyphicon glyphicon-eye"></span>
 								</button>
 								<button 
 									className="btn btn-outline-primary btn-xs"
 									style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
-									onClick={e=>{props.toggleRfqEditModal(e, row.original)}}>
+									onClick={e=>{props.toggleRfqModal(e, row.original, "edit")}}>
 										<span className="glyphicon glyphicon-pencil"></span>
 								</button>
 							</div>
