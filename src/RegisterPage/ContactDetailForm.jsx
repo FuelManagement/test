@@ -12,6 +12,7 @@ import {
 import { green } from '@material-ui/core/colors';
 import { withStyles } from '@material-ui/core/styles';
 import { onboardActions } from '../_actions';
+import MuiPhoneInput from 'material-ui-phone-number';
 const GreenRadio = withStyles({
   root: {
     color: green[400],
@@ -28,27 +29,26 @@ class ContactDetailForm extends React.Component {
     this.state = this.initialState(null, this.props.onboard.participant);
     this.handleChange = this.handleChange.bind(this);
   }
-  componentWillReceiveProps(nextprops)
-  {
-  if(JSON.stringify(this.props.onboard.participant)!==JSON.stringify(nextprops.onboard.participant))
-  {
-    ["streetAddress","postalCode","city","faxNumber","firstContactNumber","firstContactNumberType","state"
-    ,"secondContactNumber","SecondContactNumberType"].forEach(name => {
-      this.setState(prevState => {
-        return {
-          controls: {
-            ...prevState.controls,
-            [name]: {
-              ...prevState.controls[name],
-              value: name ==='productStatus'?!(nextprops.onboard.participant[name]=='true'?true:false):(nextprops.onboard.participant[name]!==undefined?nextprops.onboard.participant[name]:''), 
-            
+  componentWillReceiveProps(nextprops) {
+    if (JSON.stringify(this.props.onboard.participant) !== JSON.stringify(nextprops.onboard.participant)) {
+      ["streetAddress", "postalCode", "city", "faxNumber", "firstContactNumber", "firstContactNumberType", "state"
+        , "secondContactNumber", "SecondContactNumberType"].forEach(name => {
+          this.setState(prevState => {
+            return {
+              controls: {
+                ...prevState.controls,
+                [name]: {
+                  ...prevState.controls[name],
+                  value: name === 'productStatus' ? !(nextprops.onboard.participant[name] == 'true' ? true : false) : (nextprops.onboard.participant[name] !== undefined ? nextprops.onboard.participant[name] : ''),
+
+                }
+              }
             }
-          }
-        }
-      });
-    });
-  
-  }}
+          });
+        });
+
+    }
+  }
   initialState(mode, props) {
     let state = {};
     state = {
@@ -314,7 +314,7 @@ class ContactDetailForm extends React.Component {
             />
           </div>
           <div className="col-md-4 md-3">
-            <TextField
+            {/* <TextField
               id="firstContactNumber"
               label="First Telephone Number"
               name="firstContactNumber"
@@ -324,7 +324,15 @@ class ContactDetailForm extends React.Component {
               className="form-control"
               autoComplete="off"
               margin="dense"
-            />
+            /> */} 
+            <MuiPhoneInput
+               defaultCountry='us'
+              //  regions={['north-america']}
+              margin="dense"
+              variant="outlined"
+              label="First Telephone Number"
+              name="firstContactNumber" 
+            /> 
             <FormControl component="fieldset" >
               <RadioGroup aria-label="firstContactNumberType" name="firstContactNumberType" value={this.state.controls.firstContactNumberType.value} onChange={this.handleChange} row>
                 <FormControlLabel
@@ -342,7 +350,7 @@ class ContactDetailForm extends React.Component {
               </RadioGroup></FormControl>
           </div>
           <div className="col-md-4 md-3">
-            <TextField
+            {/* <TextField
               id="secondContactNumber"
               margin="dense"
               name="secondContactNumber"
@@ -352,7 +360,15 @@ class ContactDetailForm extends React.Component {
               className="form-control"
               variant="outlined"
               autoComplete="off"
-            />
+            /> */}
+            <MuiPhoneInput
+               defaultCountry='us'
+              //  regions={['north-america']}
+              margin="dense"
+              variant="outlined"
+              label="Second Telephone Number"
+              name="secondContactNumber" 
+            /> 
             <FormControl component="fieldset" >
               <RadioGroup aria-label="SecondContactNumberType" name="SecondContactNumberType" value={this.state.controls.SecondContactNumberType.value} onChange={this.handleChange} row>
                 <FormControlLabel

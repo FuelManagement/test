@@ -264,7 +264,7 @@ class OrganizationDetailForm extends React.Component {
     render() {
 
         return (
-            <div className="mx-auto">
+            <div className="mx-auto organization">
                 <h2 className="reg-heading">Organization Information</h2>
                 <div className="form-row">
                     <div className="col-md-4 mb-3">
