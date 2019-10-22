@@ -1,6 +1,6 @@
 import { rfqConstants } from '../_constants';
 
-export function product(state = {}, action) {
+export function rfq(state = {}, action) {
   switch (action.type) {
     case rfqConstants.GETALL_REQUEST:
       return {
