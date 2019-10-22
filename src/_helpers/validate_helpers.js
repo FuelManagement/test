@@ -1,4 +1,4 @@
-export const validate = (val, rules, connectedValue) => {
+export const validate = (val, rules, connectedValue,source) => {
     let isValid = true;
     for (let rule in rules) {
       switch (rule) {
@@ -21,22 +21,22 @@ export const validate = (val, rules, connectedValue) => {
           isValid = isValid && passwordValidator(val);
           break;
         case "minLength":
-          isValid = isValid && minLengthValidator(val, connectedValue[rule]);
+          isValid = isValid && minLengthValidator(val, connectedValue[source][rule]);
           break;
           case "maxLength":
-          isValid = isValid && maxLengthValidator(val, connectedValue[rule]);
+          isValid = isValid && maxLengthValidator(val, connectedValue[source][rule]);
           break;
           case "isNumber":
               isValid = isValid && numberValidator(val);
               break;
         case "equalTo":
-          isValid = isValid && equalToValidator(val, connectedValue[rule]);
+          isValid = isValid && equalToValidator(val, connectedValue[source][rule]);
           break;
         case "notEmpty":
           isValid = isValid && notEmptyValidator(val);
           break;
         case "isGreaterThan":
-          isValid = isValid && greaterThan(val, connectedValue[rule]);
+          isValid = isValid && greaterThan(val, connectedValue[source][rule]);
           break;
         case "requiredSelectValidator":
           isValid = isValid && requiredSelectValidator(val);
@@ -48,7 +48,7 @@ export const validate = (val, rules, connectedValue) => {
           isValid = isValid && notEmptyArray(val);
           break;
         case "minArrayLength":
-          isValid = isValid && minArrayLengthValidator(val, connectedValue[rule]);
+          isValid = isValid && minArrayLengthValidator(val, connectedValue[source][rule]);
           break;
         default:
           isValid = true;

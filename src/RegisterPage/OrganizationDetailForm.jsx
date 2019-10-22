@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { TextField, Select, InputLabel, MenuItem, FormControl } from '@material-ui/core';
-import { validate } from '../_helpers';
+import { validate,dateutility,formatutility } from '../_helpers';
 import DateFnsUtils from '@date-io/date-fns';
 import {
     MuiPickersUtilsProvider,
@@ -62,7 +62,7 @@ class OrganizationDetailForm extends React.Component {
             ...prevState.controls,
             [name]: {
               ...prevState.controls[name],
-              value: name ==='productStatus'?!(nextprops.onboard.participant[name]=='true'?true:false):(nextprops.onboard.participant[name]!==undefined?nextprops.onboard.participant[name]:''), 
+              value: (nextprops.onboard.participant[name]!==undefined?nextprops.onboard.participant[name]:''), 
             
             }
           }
@@ -86,7 +86,9 @@ class OrganizationDetailForm extends React.Component {
                     valid: false,
                     validationRules: {
                         notEmpty: true,
-                        isName: true
+                        isName: true,
+                        minLength:true,
+                        maxLength:true
                     },
                     error: "Please enter full legal name",
                     placeholder: "Full Legal Name",
@@ -176,11 +178,10 @@ class OrganizationDetailForm extends React.Component {
                 entityTypeOther: {
                     value: props!==undefined && props.entityTypeOther!==undefined?props.entityTypeOther:'',
                    
-                    valid: false,
+                    valid: true,
                     validationRules: {
-                        notEmpty: true,
-                        minLength: true,
-                        isName: true
+                        notEmpty: false,
+         
                     },
                     error: "Please enter entity type- other",
                     placeholder: "Entity Type- Other",
@@ -194,8 +195,7 @@ class OrganizationDetailForm extends React.Component {
                     valid: false,
                     validationRules: {
                         notEmpty: true,
-                        minLength: true,
-                        isName: true
+                        isEmail: true
                     },
                     error: "Please enter email address",
                     placeholder: "E-Mail Address",
@@ -223,7 +223,7 @@ class OrganizationDetailForm extends React.Component {
     }
     handleChange(event) {
         let key = event.target.name, value = event.target.value;
-        let connectedValue = {};
+        let connectedValue = {registerId:{minLength:3,maxLength:15}};
         this.setState(prevState => {
             return {
                 controls: {
@@ -231,11 +231,12 @@ class OrganizationDetailForm extends React.Component {
                     [key]: {
                         ...prevState.controls[key],
                         value: value,
-                        // valid: validate(
-                        //   value,
-                        //   prevState.controls[key].validationRules,
-                        //   connectedValue
-                        // ),
+                        valid: validate(
+                          value,
+                          prevState.controls[key].validationRules,
+                          connectedValue,
+                          key
+                        ),
                         touched: true
                     }
                 }
@@ -253,6 +254,12 @@ class OrganizationDetailForm extends React.Component {
                     [key]: {
                         ...prevState.controls[key],
                         value: date,
+                        valid: validate(
+                           dateutility.datefunction(date,formatutility.MMDDYYYY),
+                            prevState.controls[key].validationRules,
+                            connectedValue,
+                            key
+                          ),
                         touched: true
                     }
                 }
@@ -278,6 +285,8 @@ class OrganizationDetailForm extends React.Component {
                             className="form-control"
                             autoComplete="off"
                             margin="dense"
+                            error={!this.state.controls.registerId.valid && this.state.controls.registerId.touched}
+                                
                         />
                     </div>
                     <div className="col-md-4 mb-3">
@@ -292,7 +301,8 @@ class OrganizationDetailForm extends React.Component {
                                 className="form-control"
                                 onChange={this.handleChange}
                                 margin="dense"
-
+                                error={!this.state.controls.BuisnessType.valid && this.state.controls.BuisnessType.touched}
+                            
                             >
                                 {businessRange.map(option => (
                                     <MenuItem key={option.value} value={option.value}>
@@ -313,7 +323,8 @@ class OrganizationDetailForm extends React.Component {
                             className="form-control"
                             autoComplete="off"
                             margin="dense"
-
+                            error={!this.state.controls.numberOfYearsinBuisness.valid && this.state.controls.numberOfYearsinBuisness.touched}
+                            
                         />
                     </div>
                 </div>
@@ -345,7 +356,8 @@ class OrganizationDetailForm extends React.Component {
                             className="form-control"
                             autoComplete="off"
                             margin="dense"
-
+                            error={!this.state.controls.stateOfIncorporation.valid && this.state.controls.stateOfIncorporation.touched}
+                            
                         />
                     </div>
                     <div className="col-md-4 mb-3">
@@ -359,7 +371,8 @@ class OrganizationDetailForm extends React.Component {
                             className="form-control"
                             autoComplete="off"
                             margin="dense"
-
+                            error={!this.state.controls.countryOfIncorporation.valid && this.state.controls.countryOfIncorporation.touched}
+                            
                         />
                     </div>
                 </div>
@@ -376,6 +389,8 @@ class OrganizationDetailForm extends React.Component {
                                 onChange={this.handleChange}
                                 className="form-control"
                                 margin="dense"
+                                error={!this.state.controls.entityType.valid && this.state.controls.entityType.touched}
+                           
                             >
                                 {entitryType.map(option => (
                                     <MenuItem key={option.value} value={option.value}>
@@ -396,7 +411,8 @@ class OrganizationDetailForm extends React.Component {
                             className="form-control"
                             autoComplete="off"
                             margin="dense"
-
+                            error={!this.state.controls.entityTypeOther.valid && this.state.controls.entityTypeOther.touched}
+                           
                         />
                     </div>
                     <div className="col-md-4 mb-3">
@@ -410,7 +426,7 @@ class OrganizationDetailForm extends React.Component {
                             className="form-control"
                             autoComplete="off"
                             margin="dense"
-
+                            error={!this.state.controls.emailAddress.valid && this.state.controls.emailAddress.touched}
                         />
                     </div>
                 </div>
@@ -427,6 +443,7 @@ class OrganizationDetailForm extends React.Component {
                             autoComplete="off"
                             // margin="normal"
                             margin="dense"
+                            error={!this.state.controls.companyCode.valid && this.state.controls.companyCode.touched}
                         />
                     </div>
                 </div>

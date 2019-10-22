@@ -9,6 +9,11 @@ window.$ = $;      // hack
 import 'bootstrap';
 import { productActions } from '../../_actions';
 import {ProductForm} from './ProductForm';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faPlus);
 class Product extends React.Component {
 
     constructor(props) {
@@ -47,15 +52,17 @@ class Product extends React.Component {
         }
         this.setState({createProductModal:!this.state.createProductModal})
     }
-    toggleProductModal(e,data)
+    toggleProductModal(e,data,mode)
     {
+        console.log(mode);
         if(this.state.createPoModal){
             $('#createProductModal input[type="text"]').val("");
         }
-        this.props.dispatch(productActions.changeModeProduct('update'));
+        this.props.dispatch(productActions.changeModeProduct(mode));
         this.props.dispatch(productActions.getProduct(data));
         this.setState({createProductModal:!this.state.createProductModal});
     }
+    
     render() {
         //const { loading,product,products,mode} = this.props.product;
         if(this.state.createProductModal){
@@ -71,10 +78,10 @@ class Product extends React.Component {
                 
                 <hr/>
                 <div>
-                <button name="btnAddProduct" className="btn btn-primary btn-sm col-md-offset-4 center link-bg button-style"
-                        onClick={e => {this.toggleModal(e);this.props.dispatch(productActions.changeModeProduct('create'));}} >
-                        Add Product
-                </button>
+                <button name="btnAddProduct" className="btn btn-outline btn-info"   onClick={e => {this.toggleModal(e);this.props.dispatch(productActions.changeModeProduct('create'));}}>
+                        <FontAwesomeIcon icon="plus"/>  Add Product
+                    </button>
+                
                     {/* <input className="searchBox"
                         type="text" name="search" 
                         value={this.state.search} 
@@ -96,7 +103,7 @@ class Product extends React.Component {
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="">{this.state.mode==='create'?'Add':'Edit'} Product</h5>
+                                <h5 className="">{this.state.mode==='create'?'Add':(this.state.mode==='view'?'View':'Edit')} Product</h5>
                                 <button type="button" className="close" onClick={(e)=>this.toggleModal(e)} aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>

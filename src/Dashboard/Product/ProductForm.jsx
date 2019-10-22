@@ -95,7 +95,7 @@ class ProductForm extends React.Component {
             [name]: {
               ...prevState.controls[name],
               value: name ==='productStatus'?!(nextprops.product.product[name]=='true'?true:false):(nextprops.product.product[name]!==undefined?nextprops.product.product[name]:''), 
-            
+              disable: nextprops.mode==='view'?true:false
             }
           }
         }
@@ -120,7 +120,7 @@ class ProductForm extends React.Component {
           placeholder: "Product Category",
           touched: false,
           visible: true,
-          disable: false
+          disable: mode==='view'?true:false
         },
         subCategory: {
           value: props!==undefined && props.subCategory !==undefined?props.subCategory:'',
@@ -132,7 +132,7 @@ class ProductForm extends React.Component {
           placeholder: "Sub Category ",
           touched: false,
           visible: true,
-          disable: false
+          disable: mode==='view'?true:false
         },
         productName: {
           value: props!==undefined && props.productName!==undefined?props.productName:'',
@@ -146,7 +146,7 @@ class ProductForm extends React.Component {
           placeholder: "Product Name",
           touched: false,
           visible: true,
-          disable: false
+          disable: mode==='view'?true:false
         },
         price: {
           value: props!==undefined && props.price!==undefined?props.price:'',
@@ -159,7 +159,7 @@ class ProductForm extends React.Component {
           placeholder: "Price",
           touched: false,
           visible: true,
-          disable: false
+          disable: mode==='view'?true:false
         },
         measuringUnit: {
           value: props!==undefined && props.measuringUnit!==undefined?props.measuringUnit:'',
@@ -171,7 +171,7 @@ class ProductForm extends React.Component {
           placeholder: "Measuring Unit",
           touched: false,
           visible: true,
-          disable: false
+          disable: mode==='view'?true:false
         },
         currency: {
           value: props!==undefined && props.currency!==undefined?props.currency:'',
@@ -183,7 +183,7 @@ class ProductForm extends React.Component {
           placeholder: "Currency",
           touched: false,
           visible: true,
-          disable: false
+          disable: mode==='view'?true:false
         },
         productStatus: {
           value: props!==undefined && props.productStatus!==undefined?props.productStatus:true,
@@ -194,7 +194,7 @@ class ProductForm extends React.Component {
           placeholder: "Product Status",
           touched: false,
           visible: true,
-          disable: false
+          disable: mode==='view'?true:false
         },
       },
       errors: {}
@@ -203,7 +203,7 @@ class ProductForm extends React.Component {
   }
   handleChange(event) {
     let key = event.target.name, value = event.target.name==='productStatus'?!(event.target.value=='true'?true:false):event.target.value;
-    let connectedValue = {maxLength:50};
+    let connectedValue = {productName:{maxLength:50}};
     this.setState(prevState => {
       return {
         controls: {
@@ -214,7 +214,7 @@ class ProductForm extends React.Component {
              valid: validate(
                value,
               prevState.controls[key].validationRules,
-              connectedValue
+              connectedValue,key
              ),
             touched: true
           }
@@ -268,7 +268,7 @@ class ProductForm extends React.Component {
                                 className="form-control"
                                 onChange={this.handleChange}
                                 margin="dense"
-
+                               disabled={this.state.controls.productCategory.disable}
                             >
                                 {dropdownData.productCategory.map(option => (
                                     <MenuItem key={option.value} value={option.value}>
@@ -291,7 +291,7 @@ class ProductForm extends React.Component {
                                 className="form-control"
                                 onChange={this.handleChange}
                                 margin="dense"
-
+                                disabled={this.state.controls.subCategory.disable}
                             >
                                 {dropdownData.subCategory.filter(f=>f.productCategory===this.state.controls.productCategory.value).map(option => (
                                     <MenuItem key={option.value} value={option.value}>
@@ -317,6 +317,7 @@ class ProductForm extends React.Component {
               variant="outlined"
               autoComplete="off"
               margin="dense"
+              disabled={this.state.controls.productName.disable}
             />
           </div>
           <div className="col-md-6 mb-3">
@@ -332,6 +333,7 @@ class ProductForm extends React.Component {
               variant="outlined"
               autoComplete="off"
               margin="dense"
+              disabled={this.state.controls.price.disable}
             />
           </div>
           </div>
@@ -350,7 +352,7 @@ class ProductForm extends React.Component {
                                 className="form-control"
                                 onChange={this.handleChange}
                                 margin="dense"
-
+                                disabled={this.state.controls.measuringUnit.disable}
                             >
                                 {dropdownData.measuringUnit.map(option => (
                                     <MenuItem key={option.value} value={option.value}>
@@ -373,7 +375,7 @@ class ProductForm extends React.Component {
                                 className="form-control"
                                 onChange={this.handleChange}
                                 margin="dense"
-
+                                disabled={this.state.controls.currency.disable}
                             >
                                 {dropdownData.currency.map(option => (
                                     <MenuItem key={option.value} value={option.value}>
@@ -391,6 +393,7 @@ class ProductForm extends React.Component {
                              onChange={this.handleChange} name="productStatus" 
                              checked={this.state.controls.productStatus.value}
                              value={this.state.controls.productStatus.value}
+                             disabled={this.state.controls.productStatus.disable}
                               />}
                             label={this.state.controls.productStatus.placeholder}
                             className="form-checkbox"  
@@ -406,10 +409,10 @@ class ProductForm extends React.Component {
                                             type="reset" onClick={()=>{this.props.closeModal();this.props.dispatch(productActions.resetProduct());}}>
                                             Cancel
                                         </button>
-                                        <button className="btn btn-primary link-bg button-style" 
+                                      {this.props.mode!=='view'? <button className="btn btn-primary link-bg button-style" 
                                             type="button" onClick={this.handleSubmit} disabled={this.props.product.loading} >
                                             {this.props.product.mode==='create'?'Create':'Update'}
-                                        </button>
+                                        </button>:null}
                                     </div>
          </div>
     );

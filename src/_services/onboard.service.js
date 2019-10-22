@@ -128,7 +128,7 @@ function getParticipant(collection){
         method: 'GET',
         headers: authHeader()
     };
-    return fetch(config.apiUrl + '/admin/getAllParticipants', requestOptions)
+    return fetch(config.apiUrl + '/product/getParticipants', requestOptions)
     .then(handleResponse)
 }
 function uploadFile(collection)

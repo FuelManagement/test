@@ -513,14 +513,22 @@ let Table_Config = {
 				Cell: row => <span title={row.original.productStatus=='true'?'Active':'Inactive'}>{row.original.productStatus=='true'?'Active':'Inactive'}</span>
 			},
 			{
-				Header: '',
+				Header: 'Action',
 				accessor: 'productName',
-				Cell: row => <button 
-								className="btn btn-info btn-sm button-style"
-								style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
-								onClick={e=>{props.toggleProductModal(e, row.original)}}>
-									Edit
-							</button>
+				Cell: row =><div className="row">
+				<button 
+					className="btn btn-outline-info btn-sm"
+					style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
+					onClick={e=>{props.toggleProductModal(e, row.original,'view')}}>
+						<FontAwesomeIcon icon="eye" size="xs"/>
+				</button>
+				<button 
+					className="btn btn-outline-primary btn-sm"
+					style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
+					onClick={e=>{props.toggleProductModal(e, row.original,'update')}}>
+						<FontAwesomeIcon icon="edit" size="xs"/>
+				</button>
+			</div>  
 			}]
 		}
 	},
@@ -589,13 +597,13 @@ let Table_Config = {
 			columns:(props)=>[
 				{
 					Header: 'Organization Name',
-					accessor: 'participantname',
-					Cell: row => <span title={row.original.participantname}>{row.original.participantname}</span>
+					accessor: 'registerId',
+					Cell: row => <span title={row.original.registerId}>{row.original.registerId}</span>
 				},
 				{
 				Header: 'Email Id',
-				accessor: 'registerId',
-				Cell: row => <span title={row.original.registerId}>{row.original.registerId}</span>
+				accessor: 'emailAddress',
+				Cell: row => <span title={row.original.emailAddress}>{row.original.emailAddress}</span>
 			},
 			{
 				Header: 'Business type ',
@@ -605,8 +613,8 @@ let Table_Config = {
 			
 			{
 				Header: 'Entity Type',
-				accessor: 'participantType',
-				Cell: row => <span title={row.original.participantType}>{row.original.participantType}</span>
+				accessor: 'entityType',
+				Cell: row => <span title={row.original.entityType}>{row.original.entityType}</span>
 			},{
 				Header: 'Status',
 				accessor: 'status',
@@ -615,12 +623,20 @@ let Table_Config = {
 			{
 				Header: 'Action',
 				accessor: 'participantName',
-				Cell: row => <button 
-								className="btn btn-info btn-sm button-style"
-								style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
-								onClick={e=>{props.toggleParticipantModal(e, row.original)}}>
-									Edit
-							</button>
+				Cell: row =><div className="row">
+				<button 
+					className="btn btn-outline-info btn-sm"
+					style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
+					onClick={e=>{props.toggleParticipantModal(e, row.original._id,'view')}}>
+						<FontAwesomeIcon icon="eye" size="xs"/>
+				</button>
+				<button 
+					className="btn btn-outline-primary btn-sm"
+					style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
+					onClick={e=>{props.toggleParticipantModal(e, row.original._id,'update')}}>
+						<FontAwesomeIcon icon="edit" size="xs"/>
+				</button>
+			</div> 
 			}]
 		}
 	},

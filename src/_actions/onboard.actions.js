@@ -92,7 +92,7 @@ function getParticipant(collection)
             .then(
                 participant => { 
                    
-                    dispatch(success(participant));
+                    dispatch(success(participant.find(f=>f.Documentslist!==undefined && f.Documentslist.length>0 && f._id==collection)));
                    
                     dispatch(alertActions.clearLoading());
                 },
@@ -104,7 +104,7 @@ function getParticipant(collection)
     };
 
     function request() { return { type: onboardConstants.ONBRD_GET_PARTICIPANT_REQUEST } }
-    function success(participant) { return { type: onboardConstants.ONBRD_GET_ALL_PARTICIPANT_SUCCESS, participant } }
+    function success(participant) { return { type: onboardConstants.ONBRD_GET_PARTICIPANT_SUCCESS, participant } }
     function failure(error) { return { type: onboardConstants.ONBRD_GET_PARTICIPANT_FAILURE, error } }
 
 }
@@ -117,7 +117,7 @@ function updateParticipant(collection)
             {
                 dispatch(success({}));
                 dispatch(alertActions.success(`Participant Added Successfully !`));
-            history.push('/');
+           // history.push('/');
         })
             .catch(error => {
                 dispatch(failure(error))
@@ -160,14 +160,13 @@ function resetParticipant()
 }
 function changeModeParticipant(mode){
     return dispatch => {
-        if(mode==='create'){
-            let collection={
-                mode:'create',
-                participant:{}
-            }
+      
+                let collection={
+                    mode:mode,
+                    participant:{}
+                }
             dispatch(success(collection));
-        }
-        
+     
        
     };
     function success(collection) { return { type: onboardConstants.ONBRD_MODE_PARTICIPANT, collection } }
@@ -182,7 +181,7 @@ function getAllParticipant(){
             .then(
                 participant => { 
                    
-                    dispatch(success(participant));
+                    dispatch(success(participant.filter(f=>f.Documentslist!==undefined && f.Documentslist.length>0)));
                    
                     dispatch(alertActions.clearLoading());
                 },

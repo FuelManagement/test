@@ -9,7 +9,11 @@ window.$ = $;      // hack
 import 'bootstrap';
 import { onboardActions } from '../../_actions';
 import RegisterationStepper from '../../RegisterPage/RegisterationStepper';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
+library.add(faPlus);
 class OnBoard_Profile extends React.Component {
 
     constructor(props) {
@@ -44,12 +48,12 @@ class OnBoard_Profile extends React.Component {
         }
         this.setState({createParticipantModal:!this.state.createParticipantModal})
     }
-    toggleParticipantModal(e,data)
+    toggleParticipantModal(e,data,mode)
     {
         if(this.state.createParticipantModal){
             $('#createParticipantModal input[type="text"]').val("");
         }
-        this.props.dispatch(onboardActions.changeModeParticipant('update'));
+        this.props.dispatch(onboardActions.changeModeParticipant(mode));
         this.props.dispatch(onboardActions.getParticipant(data));
         this.setState({createParticipantModal:!this.state.createParticipantModal});
     }
@@ -68,15 +72,10 @@ class OnBoard_Profile extends React.Component {
                 
                 <hr/>
                 <div>
-                <button name="btnAddProduct" className="btn btn-primary btn-sm col-md-offset-4 center link-bg button-style"
-                        onClick={e => {this.toggleModal(e);this.props.dispatch(onboardActions.changeModeParticipant('create'));}} >
-                        Add OnBoarding Profile
-                </button>
-                    {/* <input className="searchBox"
-                        type="text" name="search" 
-                        value={this.state.search} 
-                        onChange={e => this.setState({search:e.target.value})} 
-                        placeholder="Search By Name" /> */}
+               
+                <button name="btnAddParticipant" className="btn btn-outline btn-info"    onClick={e => {this.toggleModal(e);this.props.dispatch(onboardActions.changeModeParticipant('create'));}}>
+                        <FontAwesomeIcon icon="plus"/>  Add OnBoarding Profile
+                    </button>
                 </div>
                 <div className="clearDiv"></div>
                 <br/>
@@ -90,7 +89,7 @@ class OnBoard_Profile extends React.Component {
                 <br/>
 
                 <div className="modal onboard-profile" id="createParticipantModal" tabIndex="-1" role="dialog">
-                    <div className="modal-dialog " role="document">
+                  {this.state.createParticipantModal?  <div className="modal-dialog " role="document">
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="">{this.state.mode==='create'?'Add':'Edit'} Participant</h5>
@@ -103,7 +102,7 @@ class OnBoard_Profile extends React.Component {
                                 <RegisterationStepper />
                                  </div>
                         </div>
-                    </div>
+                    </div>:null}
                 </div>
             </div>
         );

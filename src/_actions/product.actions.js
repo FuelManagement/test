@@ -133,21 +133,13 @@ function resetProduct()
 }
 function changeModeProduct(mode){
     return dispatch => {
-        if(mode==='create'){
+
             let collection={
-                mode:'create',
+                mode:mode,
                 product:{}
             }
             dispatch(success(collection));
-        }
-        else{
-            let collection={
-                mode:'update',
-                product:{}
-            }
-            dispatch(success(collection));
-        }
-        
+       
        
     };
     function success(collection) { return { type: productConstants.PRODUCT_MODE, collection } }
