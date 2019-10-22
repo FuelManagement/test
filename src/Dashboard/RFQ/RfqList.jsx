@@ -66,18 +66,10 @@ class RFQ extends React.Component {
                 <div className="modal" id="rfqModal" tabIndex="-1" role="dialog">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="">{this.state.mode === 'create' ? 'Add' : 'Edit'} Product</h5>
-                                <button type="button" className="close" onClick={(e) => this.toggleModal(e)} aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div className="modal-body">
-                                <AddRFQ 
-                                    row={this.state.selectedRfq}
-                                    mode={this.state.mode}
-                                />
-                            </div>
+                            <AddRFQ 
+                                row={this.state.selectedRfq}
+                                mode={this.state.mode}
+                            />
                         </div>
                     </div>
                 </div>

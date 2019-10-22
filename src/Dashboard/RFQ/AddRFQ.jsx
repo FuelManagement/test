@@ -24,7 +24,7 @@ class AddRFQ extends React.Component {
         this.removeLineItem = this.removeLineItem.bind(this);
         this.handleLineItemChange = this.handleLineItemChange.bind(this);
         this.state = {
-            formData : { 
+            formData : props.row && Object.keys(props.row).length ? props.row : { 
                 products: [
                     {
                         "productCategory": "",
@@ -36,7 +36,7 @@ class AddRFQ extends React.Component {
                         "quantityUnit": ""
                     }
                 ] 
-            },
+            }
         }
     }
     
@@ -82,7 +82,7 @@ class AddRFQ extends React.Component {
 
     }
     render() {
-        const { row=[], mode="edit", products=[] } = this.props;
+        const { row=[], mode="edit" } = this.props;
         const entitryType = [{
             value: "",
             label: "None"
@@ -101,7 +101,7 @@ class AddRFQ extends React.Component {
 
         let lineItems = () => {
             let items = [];
-            this.state.formData.products.map((data, idx) => {
+            this.state.formData.products && this.state.formData.products.map((data, idx) => {
                 items.push(
                     <LineItem 
                         handleLineItemChange={this.handleLineItemChange} 
@@ -124,16 +124,16 @@ class AddRFQ extends React.Component {
                                 <div className="form-row">
                                     <div className="col-md-3 mb-3 m25">
                                         <TextField
-                                            id="projectid"
+                                            id="projectId"
                                             label="Projet ID"
-                                            value={this.state.formData.projectid || ""}
+                                            value={this.state.formData.projectId || ""}
                                             onChange={this.handleChange}
-                                            name="projectid"
+                                            name="projectId"
                                             variant="outlined"
                                             className="form-control"
                                             autoComplete="off"
                                             margin="dense"
-                                            disabled={mode=="edit"?false:true}
+                                            disabled={false}
                                         />
                                     </div>
                                     <div className="col-md-3 mb-3 m25">
