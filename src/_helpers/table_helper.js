@@ -586,32 +586,35 @@ let Table_Config = {
 	Participant:{
 		participants:{
 			options:{...globalOptions},
-			columns:(props)=>[{
-				Header: 'Participant Name',
+			columns:(props)=>[
+				{
+					Header: 'Organization Name',
+					accessor: 'participantname',
+					Cell: row => <span title={row.original.participantname}>{row.original.participantname}</span>
+				},
+				{
+				Header: 'Email Id',
 				accessor: 'registerId',
 				Cell: row => <span title={row.original.registerId}>{row.original.registerId}</span>
-			},{
-				Header: 'Participant Id',
-				accessor: 'subCategory',
-				Cell: row => <span title={row.original.subCategory}>{row.original.subCategory}</span>
 			},
 			{
-				Header: 'Organization Name',
-				accessor: 'productName',
-				Cell: row => <span title={row.original.productName}>{row.original.productName}</span>
+				Header: 'Business type ',
+				accessor: 'BuisnessType',
+				Cell: row => <span title={row.original.BuisnessType}>{row.original.BuisnessType}</span>
 			},
+			
 			{
-				Header: 'Participant Type',
-				accessor: 'price',
-				Cell: row => <span title={row.original.productName}>{row.original.productName}</span>
+				Header: 'Entity Type',
+				accessor: 'participantType',
+				Cell: row => <span title={row.original.participantType}>{row.original.participantType}</span>
 			},{
 				Header: 'Status',
-				accessor: 'productStatus',
-				Cell: row => <span title={row.original.productStatus=='true'?'Active':'Inactive'}>{row.original.productStatus=='true'?'Active':'Inactive'}</span>
+				accessor: 'status',
+				Cell: row => <span title={row.original.status!==0?'approved':'pending'}>{row.original.status!==0?'approved':'pending'}</span>
 			},
 			{
 				Header: 'Action',
-				accessor: 'productName',
+				accessor: 'participantName',
 				Cell: row => <button 
 								className="btn btn-info btn-sm button-style"
 								style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}

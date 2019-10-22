@@ -92,7 +92,7 @@ function getParticipant(collection)
             .then(
                 participant => { 
                    
-                    dispatch(success(participant.participant));
+                    dispatch(success(participant));
                    
                     dispatch(alertActions.clearLoading());
                 },
@@ -182,7 +182,7 @@ function getAllParticipant(){
             .then(
                 participant => { 
                    
-                    dispatch(success(participant.participants));
+                    dispatch(success(participant));
                    
                     dispatch(alertActions.clearLoading());
                 },
