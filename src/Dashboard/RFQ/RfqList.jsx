@@ -15,6 +15,7 @@ window.jQuery = $; // hack
 window.$ = $;      // hack 
 import 'bootstrap';
 import { rfqActions } from '../../_actions';
+import { AddRFQ } from './AddRFQ';
 class RFQ extends React.Component {
     constructor(props) {
         super(props);
@@ -29,6 +30,7 @@ class RFQ extends React.Component {
     }
     componentDidMount() {
         this.props.dispatch(rfqActions.getAllRfq());
+        this.props.dispatch(rfqActions.getAllProducts());
     }
     handleSubmit(event) {
         event.preventDefault();
@@ -71,7 +73,10 @@ class RFQ extends React.Component {
                                 </button>
                             </div>
                             <div className="modal-body">
-                                {this.state.mode=="edit"?"Form Component":"View Component"}
+                                <AddRFQ 
+                                    row={this.state.selectedRfq}
+                                    mode={this.state.mode}
+                                />
                             </div>
                         </div>
                     </div>

@@ -19,6 +19,24 @@ export function rfq(state = {}, action) {
         loading: false,
         rfqs: action.rfqs
       };
+
+    case rfqConstants.GETALL_PRODUCTS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case rfqConstants.GETALL_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        products: action.products
+      };
+    case rfqConstants.GETALL_PRODUCTS_FAILURE:
+    return {
+      ...state,
+      loading: false,
+      error: action.error
+    };
     default:
       return {
         ...state

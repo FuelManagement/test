@@ -544,10 +544,6 @@ let Table_Config = {
 				accessor: 'entityType',
 				Cell: row => <span title={row.original.entityType}>{row.original.entityType}</span>
 			},{
-				Header: 'Project Details',
-				accessor: 'projectDetails',
-				Cell: row => <span title={row.original.projectDetails}>{row.original.projectDetails}</span>
-			},{
 				Header: 'Start Time',
 				accessor: 'startTime',
 				Cell: row => <span title={row.original.startTime}>{row.original.startTime}</span>
