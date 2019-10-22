@@ -246,7 +246,6 @@ function CustomizedSteppers(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
-
   const handleNext = (event) => {
     
     if(activeStep===steps.length-1)

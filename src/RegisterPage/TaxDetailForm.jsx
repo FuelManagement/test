@@ -16,7 +16,7 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import {onboardActions} from '../_actions';
 
-const ddlVendorAccountGroup = [
+const vendorAcctGrp = [
     {
         value: "",
         label: "None"
@@ -41,12 +41,33 @@ class TaxDetailForm extends React.Component {
         this.state = this.initialState(null, this.props.onboard.participant);
         this.handleChange = this.handleChange.bind(this);
     }
+    componentWillReceiveProps(nextprops)
+    {
+    if(JSON.stringify(this.props.onboard.participant)!==JSON.stringify(nextprops.onboard.participant))
+    {
+      ["taxWithholdType","taxWithholdingSubject","taxWithholdCode","confirmationControlkey","deleteFlagForVendor","shippingConditions","gstHstReminder"
+      ,"salesTaxExemption","qstVerificationReminder","w8-9VerificationReminder","taxNumber1","taxNumber2","vatNumber","vendorAcctGrp","vendorImporterRecord"].forEach(name => {
+        this.setState(prevState => {
+          return {
+            controls: {
+              ...prevState.controls,
+              [name]: {
+                ...prevState.controls[name],
+                value: name ==='productStatus'?!(nextprops.onboard.participant[name]=='true'?true:false):(nextprops.onboard.participant[name]!==undefined?nextprops.onboard.participant[name]:''), 
+              
+              }
+            }
+          }
+        });
+      });
+    
+    }}
     initialState(mode, props) {
         let state = {};
         state = { 
             controls: {
-                txtTaxNum1: {
-                    value: props!==undefined && props.txtTaxNum1!==undefined?props.txtTaxNum1:'',
+                taxNumber1: {
+                    value: props!==undefined && props.taxNumber1!==undefined?props.taxNumber1:'',
           
                     valid: false,
                     validationRules: {
@@ -59,8 +80,8 @@ class TaxDetailForm extends React.Component {
                     visible: true,
                     disable: false
                 },
-                txtTaxNum2: {
-                    value: props!==undefined && props.txtTaxNum2!==undefined?props.txtTaxNum2:'',
+                taxNumber2: {
+                    value: props!==undefined && props.taxNumber2!==undefined?props.taxNumber2:'',
           
                     valid: false,
                     validationRules: {
@@ -72,8 +93,8 @@ class TaxDetailForm extends React.Component {
                     visible: true,
                     disable: false
                 },
-                txtVatRegistration: {
-                    value: props!==undefined && props.txtVatRegistration!==undefined?props.txtVatRegistration:'',
+                vatNumber: {
+                    value: props!==undefined && props.vatNumber!==undefined?props.vatNumber:'',
           
                     valid: false,
                     validationRules: {
@@ -86,8 +107,8 @@ class TaxDetailForm extends React.Component {
                     disable: false
                 },
 
-                ddlVendorAccountGroup: {
-                    value: props!==undefined && props.ddlVendorAccountGroup!==undefined?props.ddlVendorAccountGroup:'',
+                vendorAcctGrp: {
+                    value: props!==undefined && props.vendorAcctGrp!==undefined?props.vendorAcctGrp:'',
           
                     valid: false,
                     validationRules: {
@@ -99,8 +120,8 @@ class TaxDetailForm extends React.Component {
                     visible: true,
                     disable: false
                 },
-                txtVendorImporterRecord: {
-                    value: props!==undefined && props.txtVendorImporterRecord!==undefined?props.txtVendorImporterRecord:'',
+                vendorImporterRecord: {
+                    value: props!==undefined && props.vendorImporterRecord!==undefined?props.vendorImporterRecord:'',
           
                     valid: false,
                     validationRules: {
@@ -112,8 +133,8 @@ class TaxDetailForm extends React.Component {
                     visible: true,
                     disable: false
                 },
-                radioTaxType: {
-                    value: props!==undefined && props.radioTaxType!==undefined?props.radioTaxType:'',
+                taxWithholdType: {
+                    value: props!==undefined && props.taxWithholdType!==undefined?props.taxWithholdType:'',
           
                     valid: false,
                     validationRules: {
@@ -125,8 +146,8 @@ class TaxDetailForm extends React.Component {
                     visible: true,
                     disable: false
                 },
-                radioSubjectTax: {
-                    value: props!==undefined && props.radioSubjectTax!==undefined?props.radioSubjectTax:'',
+                taxWithholdingSubject: {
+                    value: props!==undefined && props.taxWithholdingSubject!==undefined?props.taxWithholdingSubject:'',
           
                     valid: false,
                     validationRules: {
@@ -140,8 +161,8 @@ class TaxDetailForm extends React.Component {
                     visible: true,
                     disable: false
                 },
-                txtWithholdingTaxCode: {
-                    value: props!==undefined && props.txtWithholdingTaxCode!==undefined?props.txtWithholdingTaxCode:'',
+                taxWithholdCode: {
+                    value: props!==undefined && props.taxWithholdCode!==undefined?props.taxWithholdCode:'',
           
                     valid: false,
                     validationRules: {
@@ -155,8 +176,8 @@ class TaxDetailForm extends React.Component {
                     visible: true,
                     disable: false
                 },
-                txtConfirmationControlKey: {
-                    value: props!==undefined && props.txtConfirmationControlKey!==undefined?props.txtConfirmationControlKey:'',
+                confirmationControlkey: {
+                    value: props!==undefined && props.confirmationControlkey!==undefined?props.confirmationControlkey:'',
           
                     valid: false,
                     validationRules: {
@@ -170,8 +191,8 @@ class TaxDetailForm extends React.Component {
                     visible: true,
                     disable: false
                 },
-                txtDeleteKey: {
-                    value: props!==undefined && props.txtDeleteKey!==undefined?props.txtDeleteKey:'',
+                deleteFlagForVendor: {
+                    value: props!==undefined && props.deleteFlagForVendor!==undefined?props.deleteFlagForVendor:'',
           
                     valid: false,
                     validationRules: {
@@ -185,8 +206,8 @@ class TaxDetailForm extends React.Component {
                     visible: true,
                     disable: false
                 },
-                txtShippingConditions: {
-                    value: props!==undefined && props.txtShippingConditions!==undefined?props.txtShippingConditions:'',
+                shippingConditions: {
+                    value: props!==undefined && props.shippingConditions!==undefined?props.shippingConditions:'',
           
                     valid: false,
                     validationRules: {
@@ -200,8 +221,8 @@ class TaxDetailForm extends React.Component {
                     visible: true,
                     disable: false
                 },
-                radioGSTHSTVerification: {
-                    value: props!==undefined && props.radioGSTHSTVerification!==undefined?props.radioGSTHSTVerification:'',
+                gstHstReminder: {
+                    value: props!==undefined && props.gstHstReminder!==undefined?props.gstHstReminder:'',
           
                     valid: false,
                     validationRules: {
@@ -215,8 +236,8 @@ class TaxDetailForm extends React.Component {
                     visible: true,
                     disable: false
                 },
-                radioSalesTaxExemption: {
-                    value: props!==undefined && props.radioSalesTaxExemption!==undefined?props.radioSalesTaxExemption:'',
+                salesTaxExemption: {
+                    value: props!==undefined && props.salesTaxExemption!==undefined?props.salesTaxExemption:'',
           
                     valid: false,
                     validationRules: {
@@ -230,8 +251,8 @@ class TaxDetailForm extends React.Component {
                     visible: true,
                     disable: false
                 },
-                radioQSTVerification: {
-                    value: props!==undefined && props.radioQSTVerification!==undefined?props.radioQSTVerification:'',
+                qstVerificationReminder: {
+                    value: props!==undefined && props.qstVerificationReminder!==undefined?props.qstVerificationReminder:'',
           
                     valid: false,
                     validationRules: {
@@ -245,8 +266,8 @@ class TaxDetailForm extends React.Component {
                     visible: true,
                     disable: false
                 },
-                radioFormW9Verification: {
-                    value: props!==undefined && props.radioFormW9Verification!==undefined?props.radioFormW9Verification:'',
+                "w8-9VerificationReminder": {
+                    value: props!==undefined && props["w8-9VerificationReminder"]!==undefined?props["w8-9VerificationReminder"]:'',
           
                     valid: false,
                     validationRules: {
@@ -297,41 +318,41 @@ class TaxDetailForm extends React.Component {
                 <div className="form-row">
                     <div className="col-md-4 mb-3">
                         <TextField
-                            id="txtTaxNum1"
-                            name="txtTaxNum1"
-                            label={this.state.controls.txtTaxNum1.placeholder}
-                            value={this.state.controls.txtTaxNum1.value}
+                            id="taxNumber1"
+                            name="taxNumber1"
+                            label={this.state.controls.taxNumber1.placeholder}
+                            value={this.state.controls.taxNumber1.value}
                             onChange={this.handleChange}
                             className="form-control"
-                            placeholder={this.state.controls.txtTaxNum1.value}
+                            placeholder={this.state.controls.taxNumber1.value}
                             margin="dense"
                             variant="outlined"
                         />
                     </div>
                     <div className="col-md-4 mb-3">
                         <TextField
-                            id="txtTaxNum2"
+                            id="taxNumber2"
                             margin="dense"
-                            name="txtTaxNum2"
-                            label={this.state.controls.txtTaxNum2.placeholder}
-                            value={this.state.controls.txtTaxNum2.value}
+                            name="taxNumber2"
+                            label={this.state.controls.taxNumber2.placeholder}
+                            value={this.state.controls.taxNumber2.value}
                             onChange={this.handleChange}
                             className="form-control"
                             variant="outlined"
-                            placeholder={this.state.controls.txtTaxNum2.value}
+                            placeholder={this.state.controls.taxNumber2.value}
                         />
                     </div>
                     <div className="col-md-4 mb-3">
                         <TextField
-                            id="txtVatRegistration"
+                            id="vatNumber"
                             margin="dense"
-                            name="txtVatRegistration"
-                            label={this.state.controls.txtVatRegistration.placeholder}
-                            value={this.state.controls.txtVatRegistration.value}
+                            name="vatNumber"
+                            label={this.state.controls.vatNumber.placeholder}
+                            value={this.state.controls.vatNumber.value}
                             onChange={this.handleChange}
                             className="form-control"
                             variant="outlined"
-                            placeholder={this.state.controls.txtVatRegistration.value}
+                            placeholder={this.state.controls.vatNumber.value}
                         />
                     </div>
                 </div>
@@ -340,16 +361,16 @@ class TaxDetailForm extends React.Component {
                         <FormControl style={{ width: '100%' }}>
                             <TextField
                                 select
-                                id='ddlVendorAccountGroup'
+                                id='vendorAcctGrp'
                                 variant="outlined"
-                                name='ddlVendorAccountGroup'
+                                name='vendorAcctGrp'
                                 label="Vendor Account Group"
-                                value={this.state.controls.ddlVendorAccountGroup.value}
+                                value={this.state.controls.vendorAcctGrp.value}
                                 onChange={this.handleChange}
                                 className="form-control"
                                 margin="dense"
                             >
-                                {ddlVendorAccountGroup.map(option => (
+                                {vendorAcctGrp.map(option => (
                                     <MenuItem key={option.value} value={option.value}>
                                         {option.label}
                                     </MenuItem>
@@ -359,15 +380,15 @@ class TaxDetailForm extends React.Component {
                     </div>
                     <div className="col-md-8 mb-3">
                         <TextField
-                            id="txtVendorImporterRecord"
+                            id="vendorImporterRecord"
                             margin="dense"
                             variant="outlined"
-                            name="txtVendorImporterRecord"
-                            label={this.state.controls.txtVendorImporterRecord.placeholder}
-                            value={this.state.controls.txtVendorImporterRecord.value}
+                            name="vendorImporterRecord"
+                            label={this.state.controls.vendorImporterRecord.placeholder}
+                            value={this.state.controls.vendorImporterRecord.value}
                             onChange={this.handleChange}
                             className="form-control"
-                            placeholder={this.state.controls.txtVendorImporterRecord.value}
+                            placeholder={this.state.controls.vendorImporterRecord.value}
                         />
                     </div>
                 </div>
@@ -392,29 +413,29 @@ class TaxDetailForm extends React.Component {
                     </div>
                     <div className="col-md-4 mb-3">
                         <TextField
-                            id="txtWithholdingTaxCode"
+                            id="taxWithholdCode"
                             margin="dense"
-                            name="txtWithholdingTaxCode"
-                            label={this.state.controls.txtWithholdingTaxCode.placeholder}
-                            value={this.state.controls.txtWithholdingTaxCode.value}
+                            name="taxWithholdCode"
+                            label={this.state.controls.taxWithholdCode.placeholder}
+                            value={this.state.controls.taxWithholdCode.value}
                             onChange={this.handleChange}
                             className="form-control"
                             variant="outlined"
-                            placeholder={this.state.controls.txtWithholdingTaxCode.value}
+                            placeholder={this.state.controls.taxWithholdCode.value}
                         /></div>
                 </div>
                 <div className="form-row">
                     <div className="col-md-7 mb-3">
                         <TextField
-                            id="txtConfirmationControlKey"
+                            id="confirmationControlkey"
                             margin="dense"
-                            name="txtConfirmationControlKey"
-                            label={this.state.controls.txtConfirmationControlKey.placeholder}
-                            value={this.state.controls.txtConfirmationControlKey.value}
+                            name="confirmationControlkey"
+                            label={this.state.controls.confirmationControlkey.placeholder}
+                            value={this.state.controls.confirmationControlkey.value}
                             onChange={this.handleChange}
                             className="form-control"
                             variant="outlined"
-                            placeholder={this.state.controls.txtConfirmationControlKey.value}
+                            placeholder={this.state.controls.confirmationControlkey.value}
                         />
                     </div>
                     <div className="col-md-5 mb-3">
@@ -436,15 +457,15 @@ class TaxDetailForm extends React.Component {
                 <div className="form-row">
                     <div className="col-md-12 mb-3">
                         <TextField
-                            id="txtShippingConditions"
+                            id="shippingConditions"
                             margin="dense"
-                            name="txtShippingConditions"
-                            label={this.state.controls.txtShippingConditions.placeholder}
-                            value={this.state.controls.txtShippingConditions.value}
+                            name="shippingConditions"
+                            label={this.state.controls.shippingConditions.placeholder}
+                            value={this.state.controls.shippingConditions.value}
                             onChange={this.handleChange}
                             className="form-control"
                             variant="outlined"
-                            placeholder={this.state.controls.txtShippingConditions.placeholder}
+                            placeholder={this.state.controls.shippingConditions.placeholder}
                         />
                     </div>
                 </div>

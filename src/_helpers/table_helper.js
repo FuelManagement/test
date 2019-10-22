@@ -577,7 +577,45 @@ let Table_Config = {
 							</div>
 			}]
 		}
-	}
+	},
+	Participant:{
+		participants:{
+			options:{...globalOptions},
+			columns:(props)=>[{
+				Header: 'Participant Name',
+				accessor: 'registerId',
+				Cell: row => <span title={row.original.registerId}>{row.original.registerId}</span>
+			},{
+				Header: 'Participant Id',
+				accessor: 'subCategory',
+				Cell: row => <span title={row.original.subCategory}>{row.original.subCategory}</span>
+			},
+			{
+				Header: 'Organization Name',
+				accessor: 'productName',
+				Cell: row => <span title={row.original.productName}>{row.original.productName}</span>
+			},
+			{
+				Header: 'Participant Type',
+				accessor: 'price',
+				Cell: row => <span title={row.original.productName}>{row.original.productName}</span>
+			},{
+				Header: 'Status',
+				accessor: 'productStatus',
+				Cell: row => <span title={row.original.productStatus=='true'?'Active':'Inactive'}>{row.original.productStatus=='true'?'Active':'Inactive'}</span>
+			},
+			{
+				Header: 'Action',
+				accessor: 'productName',
+				Cell: row => <button 
+								className="btn btn-info btn-sm button-style"
+								style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
+								onClick={e=>{props.toggleParticipantModal(e, row.original)}}>
+									Edit
+							</button>
+			}]
+		}
+	},
 
 }
 

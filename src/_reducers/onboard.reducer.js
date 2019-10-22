@@ -2,58 +2,28 @@ import { onboardConstants } from '../_constants';
 
 export function onboard(state = {}, action) {
   switch (action.type) {
-    case onboardConstants.ONBRD_GETALL_REQUEST:
+    case onboardConstants.ONBRD_GET_ALL_PARTICIPANT_REQUEST:
+    case onboardConstants.ONBRD_GET_PARTICIPANT_REQUEST:
+        case onboardConstants.ONBRD_CREATE_PARTICIPANT_REQUEST:
+            case onboardConstants.ONBRD_UPDATE_PARTICIPANT_REQUEST:
+                case onboardConstants.ONBRD_GETALL_REQUEST:
+                    case onboardConstants.ONBRD_CREATE_ONBOARD_REQUEST:
       return {
         ...state,
         loading: true
-      };
-      case onboardConstants.ONBRD_GETALL_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        participants:action.onboarders
-      };
-      case onboardConstants.ONBRD_GETALL_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.error
-      };
-      case onboardConstants.ONBRD_CREATE_ONBOARD_REQUEST:
-      return {
-        ...state,
-        loading: true
-      };
-      case onboardConstants.ONBRD_CREATE_ONBOARD_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        participant:action.onboarder
       };
       case onboardConstants.ONBRD_CREATE_ONBOARD_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.error
-      };
-      case onboardConstants.ONBRD_UPLOAD_PARTICIPANT_FILE_REQUEST:
-        return {
-          ...state,
-          loading: true,
-          documentslist: []
-        };
-        case onboardConstants.ONBRD_UPLOAD_PARTICIPANT_FILE_SUCCESS:
+      case onboardConstants.ONBRD_GET_PARTICIPANT_FAILURE:
+          case onboardConstants.ONBRD_GET_ALL_PARTICIPANT_FAILURE:
+              case onboardConstants.ONBRD_UPDATE_PARTICIPANT_FAILURE:
+                  case onboardConstants.ONBRD_GETALL_FAILURE:
+                      case onboardConstants.ONBRD_CREATE_ONBOARD_FAILURE:
           return {
             ...state,
             loading: false,
-            documentslist: action.files
+            error: action.error
           };
-          case onboardConstants.ONBRD_UPLOAD_PARTICIPANT_FILE_FAILURE:
-            return {
-              ...state,
-              loading: false,
-              error: action.error
-            };
+      
             case onboardConstants.ONBRD_MODE_PARTICIPANT:
               return {
                 ...state,
@@ -75,23 +45,35 @@ export function onboard(state = {}, action) {
                  action.collection.value
                 }
               };
-              case onboardConstants.ONBRD_CREATE_PARTICIPANT_REQUEST:
-                return {
-                  ...state,
-                  loading: true
-                };
+ 
                 case onboardConstants.ONBRD_CREATE_PARTICIPANT_SUCCESS:
+                case onboardConstants.ONBRD_UPDATE_PARTICIPANT_SUCCESS:
+                    case onboardConstants.ONBRD_GET_PARTICIPANT_SUCCESS:
                 return {
                   ...state,
                   loading: false,
                   participant:action.participant
                 };
-                case onboardConstants.ONBRD_CREATE_PARTICIPANT_FAILURE:
-                return {
-                  ...state,
-                  loading: false,
-                  error: action.error
-                };
+                case onboardConstants.ONBRD_GETALL_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        participants:action.onboarders
+      };
+      case onboardConstants.ONBRD_CREATE_ONBOARD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        participant:action.onboarder
+      };
+                case onboardConstants.ONBRD_GET_ALL_PARTICIPANT_SUCCESS:
+                    return {
+                      ...state,
+                      loading: false,
+                      participants:action.participants
+                    };
+                  
+    
       default:
           return {
               ...state

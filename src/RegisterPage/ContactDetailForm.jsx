@@ -28,12 +28,33 @@ class ContactDetailForm extends React.Component {
     this.state = this.initialState(null, this.props.onboard.participant);
     this.handleChange = this.handleChange.bind(this);
   }
+  componentWillReceiveProps(nextprops)
+  {
+  if(JSON.stringify(this.props.onboard.participant)!==JSON.stringify(nextprops.onboard.participant))
+  {
+    ["streetAddress","postalCode","city","faxNumber","firstContactNumber","firstContactNumberType","state"
+    ,"secondContactNumber","SecondContactNumberType"].forEach(name => {
+      this.setState(prevState => {
+        return {
+          controls: {
+            ...prevState.controls,
+            [name]: {
+              ...prevState.controls[name],
+              value: name ==='productStatus'?!(nextprops.onboard.participant[name]=='true'?true:false):(nextprops.onboard.participant[name]!==undefined?nextprops.onboard.participant[name]:''), 
+            
+            }
+          }
+        }
+      });
+    });
+  
+  }}
   initialState(mode, props) {
     let state = {};
     state = {
       controls: {
-        txtStreetAddress: {
-          value: props !== undefined && props.txtStreetAddress !== undefined ? props.txtStreetAddress : '',
+        streetAddress: {
+          value: props !== undefined && props.streetAddress !== undefined ? props.streetAddress : '',
 
           valid: false,
           validationRules: {
@@ -46,8 +67,8 @@ class ContactDetailForm extends React.Component {
           visible: true,
           disable: false
         },
-        txtNeighborhoodCity: {
-          value: props !== undefined && props.txtNeighborhoodCity !== undefined ? props.txtNeighborhoodCity : '',
+        city: {
+          value: props !== undefined && props.city !== undefined ? props.city : '',
 
           valid: false,
           validationRules: {
@@ -59,8 +80,8 @@ class ContactDetailForm extends React.Component {
           visible: true,
           disable: false
         },
-        txtPostalCode: {
-          value: props !== undefined && props.txtPostalCode !== undefined ? props.txtPostalCode : '',
+        postalCode: {
+          value: props !== undefined && props.postalCode !== undefined ? props.postalCode : '',
 
           valid: false,
           validationRules: {
@@ -73,8 +94,8 @@ class ContactDetailForm extends React.Component {
           disable: false
         },
 
-        txtRegion: {
-          value: props !== undefined && props.txtRegion !== undefined ? props.txtRegion : '',
+        state: {
+          value: props !== undefined && props.state !== undefined ? props.state : '',
 
           valid: false,
           validationRules: {
@@ -99,8 +120,8 @@ class ContactDetailForm extends React.Component {
           visible: true,
           disable: false
         },
-        txtFaxNumber: {
-          value: props !== undefined && props.txtFaxNumber !== undefined ? props.txtFaxNumber : '',
+        faxNumber: {
+          value: props !== undefined && props.faxNumber !== undefined ? props.faxNumber : '',
 
           valid: false,
           validationRules: {
@@ -112,8 +133,8 @@ class ContactDetailForm extends React.Component {
           visible: true,
           disable: false
         },
-        txtFirstTelephoneNumber: {
-          value: props !== undefined && props.txtFirstTelephoneNumber !== undefined ? props.txtFirstTelephoneNumber : '',
+        firstContactNumber: {
+          value: props !== undefined && props.firstContactNumber !== undefined ? props.firstContactNumber : '',
 
           valid: false,
           validationRules: {
@@ -126,8 +147,8 @@ class ContactDetailForm extends React.Component {
           visible: true,
           disable: false
         },
-        radioFirstTelephoneNumber: {
-          value: props !== undefined && props.radioFirstTelephoneNumber !== undefined ? props.radioFirstTelephoneNumber : 'mobile',
+        firstContactNumberType: {
+          value: props !== undefined && props.firstContactNumberType !== undefined ? props.firstContactNumberType : 'mobile',
 
           valid: false,
           validationRules: {
@@ -140,8 +161,8 @@ class ContactDetailForm extends React.Component {
           visible: true,
           disable: false
         },
-        txtSecondTelephoneNumber: {
-          value: props !== undefined && props.txtSecondTelephoneNumber !== undefined ? props.txtSecondTelephoneNumber : '',
+        secondContactNumber: {
+          value: props !== undefined && props.secondContactNumber !== undefined ? props.secondContactNumber : '',
 
           valid: false,
           validationRules: {
@@ -154,8 +175,8 @@ class ContactDetailForm extends React.Component {
           visible: true,
           disable: true
         },
-        radioSecondTelephoneNumber: {
-          value: props !== undefined && props.radioSecondTelephoneNumber !== undefined ? props.radioSecondTelephoneNumber : 'telephone',
+        SecondContactNumberType: {
+          value: props !== undefined && props.SecondContactNumberType !== undefined ? props.SecondContactNumberType : 'telephone',
 
           valid: false,
           validationRules: {
@@ -204,10 +225,10 @@ class ContactDetailForm extends React.Component {
         <div className="form-row">
           <div className="col-md-12 mb-3">
             <TextField
-              id="txtStreetAddress"
+              id="streetAddress"
               label="Street Address"
-              name="txtStreetAddress"
-              value={this.state.controls.txtStreetAddress.value}
+              name="streetAddress"
+              value={this.state.controls.streetAddress.value}
               onChange={this.handleChange}
               variant="outlined"
               className="form-control"
@@ -220,11 +241,11 @@ class ContactDetailForm extends React.Component {
         <div className="form-row">
           <div className="col-md-12 mb-3 ">
             <TextField
-              id="txtNeighborhoodCity"
+              id="city"
               margin="normal"
-              name="txtNeighborhoodCity"
+              name="city"
               label="Neighborhood / City"
-              value={this.state.controls.txtNeighborhoodCity.value}
+              value={this.state.controls.city.value}
               onChange={this.handleChange}
               className="form-control"
               variant="outlined"
@@ -236,11 +257,11 @@ class ContactDetailForm extends React.Component {
         <div className="form-row">
           <div className="col-md-4 mb-3">
             <TextField
-              id="txtPostalCode"
+              id="postalCode"
               margin="normal"
-              name="txtPostalCode"
+              name="postalCode"
               label="Postal Code"
-              value={this.state.controls.txtPostalCode.value}
+              value={this.state.controls.postalCode.value}
               onChange={this.handleChange}
               className="form-control"
               variant="outlined"
@@ -250,11 +271,11 @@ class ContactDetailForm extends React.Component {
           </div>
           <div className="col-md-4 mb-3">
             <TextField
-              id="txtRegion"
+              id="state"
               margin="normal"
-              name="txtRegion"
+              name="state"
               label="Region"
-              value={this.state.controls.txtRegion.value}
+              value={this.state.controls.state.value}
               onChange={this.handleChange}
               className="form-control"
               variant="outlined"
@@ -280,11 +301,11 @@ class ContactDetailForm extends React.Component {
         <div className="form-row">
           <div className="col-md-4 md-3">
             <TextField
-              id="txtFaxNumber"
+              id="faxNumber"
               margin="normal"
-              name="txtFaxNumber"
+              name="faxNumber"
               label="Fax Number"
-              value={this.state.controls.txtFaxNumber.value}
+              value={this.state.controls.faxNumber.value}
               onChange={this.handleChange}
               className="form-control"
               variant="outlined"
@@ -294,10 +315,10 @@ class ContactDetailForm extends React.Component {
           </div>
           <div className="col-md-4 md-3">
             <TextField
-              id="txtFirstTelephoneNumber"
+              id="firstContactNumber"
               label="First Telephone Number"
-              name="txtFirstTelephoneNumber"
-              value={this.state.controls.txtFirstTelephoneNumber.value}
+              name="firstContactNumber"
+              value={this.state.controls.firstContactNumber.value}
               onChange={this.handleChange}
               variant="outlined"
               className="form-control"
@@ -305,7 +326,7 @@ class ContactDetailForm extends React.Component {
               margin="dense"
             />
             <FormControl component="fieldset" >
-              <RadioGroup aria-label="radioFirstTelephoneNumber" name="radioFirstTelephoneNumber" value={this.state.controls.radioFirstTelephoneNumber.value} onChange={this.handleChange} row>
+              <RadioGroup aria-label="firstContactNumberType" name="firstContactNumberType" value={this.state.controls.firstContactNumberType.value} onChange={this.handleChange} row>
                 <FormControlLabel
                   value="mobile"
                   control={<GreenRadio />}
@@ -322,18 +343,18 @@ class ContactDetailForm extends React.Component {
           </div>
           <div className="col-md-4 md-3">
             <TextField
-              id="txtSecondTelephoneNumber"
+              id="secondContactNumber"
               margin="dense"
-              name="txtSecondTelephoneNumber"
+              name="secondContactNumber"
               label="Second Telephone Number"
-              value={this.state.controls.txtSecondTelephoneNumber.value}
+              value={this.state.controls.secondContactNumber.value}
               onChange={this.handleChange}
               className="form-control"
               variant="outlined"
               autoComplete="off"
             />
             <FormControl component="fieldset" >
-              <RadioGroup aria-label="radioFirstTelephoneNumber" name="radioSecondTelephoneNumber" value={this.state.controls.radioSecondTelephoneNumber.value} onChange={this.handleChange} row>
+              <RadioGroup aria-label="SecondContactNumberType" name="SecondContactNumberType" value={this.state.controls.SecondContactNumberType.value} onChange={this.handleChange} row>
                 <FormControlLabel
                   value="mobile"
                   control={<GreenRadio />}

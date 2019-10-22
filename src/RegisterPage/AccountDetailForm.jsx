@@ -10,7 +10,7 @@ import {
   KeyboardDatePicker
 } from '@material-ui/pickers';
 import {onboardActions} from '../_actions';
-const ddlPurchaseordercurrency = [
+const poCurrency = [
   {
       value: "",
       label: "None"
@@ -28,7 +28,7 @@ const ddlPurchaseordercurrency = [
       label: "Thirty"
   }
 ];
-const ddlPartnerBankType = [
+const bankPartnerType = [
   {
       value: "",
       label: "None"
@@ -69,12 +69,33 @@ class AccountDetailForm extends React.Component {
     this.state = this.initialState(null, this.props.onboard.participant);
     this.handleChange = this.handleChange.bind(this);
   }
+  componentWillReceiveProps(nextprops)
+  {
+  if(JSON.stringify(this.props.onboard.participant)!==JSON.stringify(nextprops.onboard.participant))
+  {
+    ["bankName","bankAccountName","bankAccountNumber","bankControlKey","bankCountryKey","bankKeys","bankPartnerType"
+    ,"bankReferencedetail","poCurrency"].forEach(name => {
+      this.setState(prevState => {
+        return {
+          controls: {
+            ...prevState.controls,
+            [name]: {
+              ...prevState.controls[name],
+              value: name ==='productStatus'?!(nextprops.onboard.participant[name]=='true'?true:false):(nextprops.onboard.participant[name]!==undefined?nextprops.onboard.participant[name]:''), 
+            
+            }
+          }
+        }
+      });
+    });
+  
+  }}
   initialState(mode, props) {
     let state = {};
     state = {
       controls: {
-        txtNameBank: {
-          value: props!==undefined && props.txtNameBank!==undefined?props.txtNameBank:'',
+        bankName: {
+          value: props!==undefined && props.bankName!==undefined?props.bankName:'',
                    
           valid: false,
           validationRules: {
@@ -87,8 +108,8 @@ class AccountDetailForm extends React.Component {
           visible: true,
           disable: false
         },
-        txtAccountHolderName: {
-          value: props!==undefined && props.txtAccountHolderName!==undefined?props.txtAccountHolderName:'',
+        bankAccountName: {
+          value: props!==undefined && props.bankAccountName!==undefined?props.bankAccountName:'',
                    
           valid: false,
           validationRules: {
@@ -100,8 +121,8 @@ class AccountDetailForm extends React.Component {
           visible: true,
           disable: false
         },
-        txtAccountNumber: {
-          value: props!==undefined && props.txtAccountNumber!==undefined?props.txtAccountNumber:'',
+        bankAccountNumber: {
+          value: props!==undefined && props.bankAccountNumber!==undefined?props.bankAccountNumber:'',
                    
           valid: false,
           validationRules: {
@@ -114,8 +135,8 @@ class AccountDetailForm extends React.Component {
           disable: false
         },
 
-        txtBankControlKey: {
-          value: props!==undefined && props.txtBankControlKey!==undefined?props.txtBankControlKey:'',
+        bankControlKey: {
+          value: props!==undefined && props.bankControlKey!==undefined?props.bankControlKey:'',
                    
           valid: false,
           validationRules: {
@@ -127,8 +148,8 @@ class AccountDetailForm extends React.Component {
           visible: true,
           disable: false
         },
-        txtBankcountrykey: {
-          value: props!==undefined && props.txtBankcountrykey!==undefined?props.txtBankcountrykey:'',
+        bankCountryKey: {
+          value: props!==undefined && props.bankCountryKey!==undefined?props.bankCountryKey:'',
                    
           valid: false,
           validationRules: {
@@ -140,8 +161,8 @@ class AccountDetailForm extends React.Component {
           visible: true,
           disable: false
         },
-        txtBankkey: {
-          value: props!==undefined && props.txtBankkey!==undefined?props.txtBankkey:'',
+        bankKeys: {
+          value: props!==undefined && props.bankKeys!==undefined?props.bankKeys:'',
                    
           valid: false,
           validationRules: {
@@ -153,8 +174,8 @@ class AccountDetailForm extends React.Component {
           visible: true,
           disable: false
         },
-        txtReferencespecificationsforbankdetails: {
-          value: props!==undefined && props.txtReferencespecificationsforbankdetails!==undefined?props.txtReferencespecificationsforbankdetails:'',
+        bankReferencedetail: {
+          value: props!==undefined && props.bankReferencedetail!==undefined?props.bankReferencedetail:'',
                    
           valid: false,
           validationRules: {
@@ -168,8 +189,8 @@ class AccountDetailForm extends React.Component {
           visible: true,
           disable: false
         },
-        ddlPurchaseordercurrency: {
-          value: props!==undefined && props.ddlPurchaseordercurrency!==undefined?props.ddlPurchaseordercurrency:'',
+        poCurrency: {
+          value: props!==undefined && props.poCurrency!==undefined?props.poCurrency:'',
                    
           valid: false,
           validationRules: {
@@ -183,8 +204,8 @@ class AccountDetailForm extends React.Component {
           visible: true,
           disable: false
         },
-        ddlPartnerBankType: {
-          value: props!==undefined && props.ddlPartnerBankType!==undefined?props.ddlPartnerBankType:'',
+        bankPartnerType: {
+          value: props!==undefined && props.bankPartnerType!==undefined?props.bankPartnerType:'',
                    
           valid: false,
           validationRules: {
@@ -234,10 +255,10 @@ class AccountDetailForm extends React.Component {
         <div className="form-row">
         <div className="col-md-12 mb-3">
             <TextField
-              id="txtNameBank"
-              name="txtNameBank"
+              id="bankName"
+              name="bankName"
               label="Name of Bank"
-              value={this.state.controls.txtNameBank.value}
+              value={this.state.controls.bankName.value}
               onChange={this.handleChange}
               className="form-control"
               margin="dense"
@@ -248,10 +269,10 @@ class AccountDetailForm extends React.Component {
         <div className="form-row">   
           <div className="col-md-8 mb-3 ">
             <TextField
-              id="txtAccountHolderName"
-              name="txtAccountHolderName"
+              id="bankAccountName"
+              name="bankAccountName"
               label="Account Holder Name"
-              value={this.state.controls.txtAccountHolderName.value}
+              value={this.state.controls.bankAccountName.value}
               onChange={this.handleChange}
               className="form-control"
               margin="dense"
@@ -260,10 +281,10 @@ class AccountDetailForm extends React.Component {
           </div>
           <div className="col-md-4 mb-3 ">
             <TextField
-              id="txtAccountNumber"
-              name="txtAccountNumber"
+              id="bankAccountNumber"
+              name="bankAccountNumber"
               label="Account Number"
-              value={this.state.controls.txtAccountNumber.value}
+              value={this.state.controls.bankAccountNumber.value}
               onChange={this.handleChange}
               className="form-control"
               margin="dense"
@@ -274,10 +295,10 @@ class AccountDetailForm extends React.Component {
         <div className="form-row">
           <div className="col-md-4 mb-3">
             <TextField
-              id="txtBankControlKey"
-              name="txtBankControlKey"
+              id="bankControlKey"
+              name="bankControlKey"
               label="Bank Control Key"
-              value={this.state.controls.txtBankControlKey.value}
+              value={this.state.controls.bankControlKey.value}
               onChange={this.handleChange}
               className="form-control"
               margin="dense"
@@ -286,11 +307,11 @@ class AccountDetailForm extends React.Component {
           </div>
           <div className="col-md-4 mb-3 ">
             <TextField
-              id="txtBankcountrykey"
-              name="txtBankcountrykey"
+              id="bankCountryKey"
+              name="bankCountryKey"
               label="Bank country key"
               className="form-control"
-              value={this.state.controls.txtBankcountrykey.value}
+              value={this.state.controls.bankCountryKey.value}
               onChange={this.handleChange}
               margin="dense"
               variant="outlined"
@@ -298,10 +319,10 @@ class AccountDetailForm extends React.Component {
           </div>
           <div className="col-md-4 mb-3 ">
             <TextField
-              id="txtBankkey"
-              name="txtBankkey"
+              id="bankKeys"
+              name="bankKeys"
               label="Bank key"
-              value={this.state.controls.txtBankkey.value}
+              value={this.state.controls.bankKeys.value}
               onChange={this.handleChange}
               className="form-control"
               margin="dense"
@@ -314,16 +335,16 @@ class AccountDetailForm extends React.Component {
             <FormControl style={{ width: '100%'}}> 
               <TextField
                 select
-                id='ddlPartnerBankType'
+                id='bankPartnerType'
                 variant="outlined"
-                name='ddlPartnerBankType'
+                name='bankPartnerType'
                 label="Partner Bank Type"
                 className="form-control"
-                value={this.state.controls.ddlPartnerBankType.value}
+                value={this.state.controls.bankPartnerType.value}
                 onChange={this.handleChange}
                 margin="dense"
               >
-                {ddlPartnerBankType.map(option => (
+                {bankPartnerType.map(option => (
                   <MenuItem key={option.value} value={option.value}>
                     {option.label}
                   </MenuItem>
@@ -333,10 +354,10 @@ class AccountDetailForm extends React.Component {
           </div>
           <div className="col-md-8 mb-3 ">
             <TextField
-              id="txtReferencespecificationsforbankdetails"
-              name="txtReferencespecificationsforbankdetails"
+              id="bankReferencedetail"
+              name="bankReferencedetail"
               label="Reference specifications for bank"
-              value={this.state.controls.txtReferencespecificationsforbankdetails.value}
+              value={this.state.controls.bankReferencedetail.value}
               onChange={this.handleChange}
               className="form-control"
               margin="dense"
@@ -347,12 +368,12 @@ class AccountDetailForm extends React.Component {
             <FormControl style={{ width: '100%'}}> 
               <TextField
                 select
-                id='ddlPurchaseordercurrency'
+                id='poCurrency'
                 variant="outlined"
-                name='ddlPurchaseordercurrency'
+                name='poCurrency'
                 label="Purchase Order Currency"
                 className="form-control"
-                value={this.state.controls.ddlPurchaseordercurrency.value}
+                value={this.state.controls.poCurrency.value}
                 onChange={this.handleChange}
                 margin="dense"
               >

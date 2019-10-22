@@ -299,6 +299,18 @@ header .pad-50{
 .xyx:active,.xyx:hover,.xyx:focus,.xyx:focus-within,.MuiTreeView-root:active,.MuiTreeView-root:focus-within,.MuiTreeView-root:focus{
   background: green !important;
 }
+
+/* Onboard profile add form Styles */
+.onboard-profile .modal-dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 80%;
+}
+.onboard-profile .modal-body {
+  display: flex;
+  justify-content: center;
+}
 /*Add RFQ Styles*/
 .add-rfq-main{
 	border-top:none;

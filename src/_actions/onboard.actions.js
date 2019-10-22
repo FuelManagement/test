@@ -3,71 +3,18 @@ import { onboardService } from '../_services';
 import { alertActions } from './';
 import { history } from '../_helpers';
 import { create } from 'filepond';
-const _participant={
-    "registerId": "",
-    "dateOfIncorporation": "",
-    "stateOfIncorporation": "",
-    "countryOfIncorporation": "",
-    "BuisnessType": "",
-    "entityType": "",
-    "entityTypeOther": "",
-    "numberOfYearsinBuisness": "",
-    "emailAddress": "",
-    "defaultEmailaddress": "",
-    "streetAddress": "",
-    "postalCode": "",
-    "city": "",
-    "faxNumber": "",
-    "firstContactNumber": "",
-    "firstContactNumberType": "",
-    "state": "",
-    "secondContactNumber": "",
-    "SecondContactNumberType": "",
-    "taxNumber1": "",
-    "taxNumber2": "",
-    "vatNumber": "",
-    "vendorAcctGrp": "",
-    "vendorImporterRecord": "",
-    "poCurrency": "",
-    "companyCode": "",
-    "clearingBetCustAndVend": "",
-    "bankName": "",
-    "bankAccountName": "",
-    "bankAccountNumber": "",
-    "bankControlKey": "",
-    "bankCountryKey": "",
-    "bankKeys": "",
-    "bankPartnerType": "",
-    "bankReferencedetail": "",
-    "taxWithholdType": "",
-    "taxWithholdingSubject": "",
-    "taxWithholdCode": "",
-    "confirmationControlkey": "",
-    "deleteFlagForVendor": "",
-    "shippingConditions": "",
-    "gstHstReminder": "",
-    "salesTaxExemption": "",
-    "qstVerificationReminder": "",
-    "w8-9VerificationReminder": "",
-    "hash": "",
-    "status": 0,
-    "cert_id": "",
-    "isIdentityCreated": false,
-    "pubKey": "",
-    "priKey": "",
-    "Documentslist":[],
-   
-}
+
 export const onboardActions = {
     getAllOnBoarder,
     createOnBoarder,
     createParticipant,
     getParticipant,
+    getAllParticipant,
     updateParticipant,
     changeParticipant,
     resetParticipant,
     changeModeParticipant,
-    uploadParticipantFile
+
 }
 function getAllOnBoarder() {
     return dispatch => {
@@ -138,10 +85,49 @@ function createParticipant(collection,Documentslist)
 }
 function getParticipant(collection)
 {
+    return dispatch => {
+        dispatch(alertActions.loading());
+        dispatch(request());
+        onboardService.getParticipant(collection)
+            .then(
+                participant => { 
+                   
+                    dispatch(success(participant.participant));
+                   
+                    dispatch(alertActions.clearLoading());
+                },
+                error => {
+                    dispatch(failure(error))
+                    dispatch(alertActions.clearLoading());
+                }
+            );
+    };
+
+    function request() { return { type: onboardConstants.ONBRD_GET_PARTICIPANT_REQUEST } }
+    function success(participant) { return { type: onboardConstants.ONBRD_GET_ALL_PARTICIPANT_SUCCESS, participant } }
+    function failure(error) { return { type: onboardConstants.ONBRD_GET_PARTICIPANT_FAILURE, error } }
 
 }
 function updateParticipant(collection)
 {
+    return dispatch => {
+        dispatch(request());
+        onboardService.updateParticipant(collection,Documentslist)
+            .then((collection)=>
+            {
+                dispatch(success({}));
+                dispatch(alertActions.success(`Participant Added Successfully !`));
+            history.push('/');
+        })
+            .catch(error => {
+                dispatch(failure(error))
+                dispatch(alertActions.error(`Failed to add participant!`));
+            });
+    };
+
+    function request() { return { type: onboardConstants.ONBRD_UPDATE_PARTICIPANT_REQUEST} }
+    function success(participant) { return { type: onboardConstants.ONBRD_UPDATE_PARTICIPANT_SUCCESS, participant } }
+    function failure(error) { return { type: onboardConstants.ONBRD_UPDATE_PARTICIPANT_FAILURE, error } }
 
 }
 function changeParticipant(key,value)
@@ -187,13 +173,28 @@ function changeModeParticipant(mode){
     function success(collection) { return { type: onboardConstants.ONBRD_MODE_PARTICIPANT, collection } }
    
 }
-function uploadParticipantFile(collection)
-{
+
+function getAllParticipant(){
     return dispatch => {
-        dispatch(success(collection));
-        
+        dispatch(alertActions.loading());
+        dispatch(request());
+        onboardService.getAllParticipant()
+            .then(
+                participant => { 
+                   
+                    dispatch(success(participant.participants));
+                   
+                    dispatch(alertActions.clearLoading());
+                },
+                error => {
+                    dispatch(failure(error))
+                    dispatch(alertActions.clearLoading());
+                }
+            );
     };
 
-    function success(files) { return { type: onboardConstants.ONBRD_UPLOAD_PARTICIPANT_FILE_SUCCESS, files } }
+    function request() { return { type: onboardConstants.ONBRD_GET_ALL_PARTICIPANT_REQUEST } }
+    function success(participants) { return { type: onboardConstants.ONBRD_GET_ALL_PARTICIPANT_SUCCESS, participants } }
+    function failure(error) { return { type: onboardConstants.ONBRD_GET_ALL_PARTICIPANT_FAILURE, error } }
 
 }
