@@ -81,7 +81,7 @@ return uploadFile(Documentslist)
        
        'Content-Length': '1315',
        'Accept-Encoding': 'gzip, deflate',
-       Host: 'localhost:3009',
+       Host: '192.168.1.2:3009',
        
        'Cache-Control': 'no-cache',
        Accept: '*/*',
@@ -108,7 +108,7 @@ return uploadFile(Documentslist)
        
        'Content-Length': '1315',
        'Accept-Encoding': 'gzip, deflate',
-       Host: 'localhost:3009',
+       Host: '192.168.1.2:3009',
        
        'Cache-Control': 'no-cache',
        Accept: '*/*',

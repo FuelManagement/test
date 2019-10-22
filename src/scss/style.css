@@ -67,11 +67,8 @@ body {
   width: 70%;
 }
 
-.input-icon{
-  position: absolute;
-  top: 12px;
-  left: 0px;
-  font-size: 20px;
+.input-icon{ 
+  font-size: 15px;
   color: #887b7b;
 }
 .info-section{
@@ -280,7 +277,7 @@ header .pad-50{
 .filepond--root .filepond--drop-label {
   min-height: 3.25em;
 }
-.product-form .MuiFormLabel-root{
+.product-form .MuiFormLabel-root,.organization .MuiFormLabel-root{
   background: #fff;
   padding: 0px 5px;
 }
@@ -288,17 +285,14 @@ header .pad-50{
   display: flex;
   align-items: center;
 }
+.form-content .MuiPaper-root{
+  background-color: unset !important;
+}
 
 /* React table css   */
 .rt-resizable-header-content{
   font-weight: bold;
-}
-.xyx{
-  color: red;
-}
-.xyx:active,.xyx:hover,.xyx:focus,.xyx:focus-within,.MuiTreeView-root:active,.MuiTreeView-root:focus-within,.MuiTreeView-root:focus{
-  background: green !important;
-}
+} 
 
 /* Onboard profile add form Styles */
 .onboard-profile .modal-dialog {
