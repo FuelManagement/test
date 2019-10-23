@@ -9,7 +9,8 @@ export const onboardService = {
     createParticipant,
     updateParticipant,
     getParticipant,
-    uploadFile
+    uploadFile,
+    approveParticipant
 };
 function getAllOnBoarder() {
     let user = JSON.parse(localStorage.getItem('user'));
@@ -162,4 +163,12 @@ function uploadFile(collection)
             resolve(response);
         });
     })
+}
+function approveParticipant(data){
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+    return fetch(config.apiUrl + '/product/getParticipants', requestOptions)
+    .then(handleResponse)
 }

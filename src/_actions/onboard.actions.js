@@ -14,7 +14,8 @@ export const onboardActions = {
     changeParticipant,
     resetParticipant,
     changeModeParticipant,
-    uploadParticipantFile
+    uploadParticipantFile,
+    approveParticipant
 }
 function getAllOnBoarder() {
     return dispatch => {
@@ -219,3 +220,19 @@ function uploadParticipantFile(collection)
     //function failure(error) { return { type: onboardConstants.ONBRD_UPLOAD_PARTICIPANT_FILE_FAILURE, error } }
 
 } 
+function approveParticipant(data, action){
+    return dispatch => {
+        dispatch(request());
+        onboardService.approveParticipant(data, action)
+            .then(participant => dispatch(success(participant)))
+            .then(()=>dispatch(alertActions.success(`Updated Sucessfully !`)))
+            .catch(error => {
+                dispatch(failure(error))
+                dispatch(alertActions.error(`Failed to Update!`));
+            });
+    };
+ 
+    function request() { return { type: onboardConstants.ONBRD_APPROVE_PARTICIPANT_REQUEST} }
+    function success(participant) { return { type: onboardConstants.ONBRD_APPROVE_PARTICIPANT_SUCCESS, participant } }
+    function failure(error) { return { type: onboardConstants.ONBRD_APPROVE_PARTICIPANT_FAILURE, error } }
+}
