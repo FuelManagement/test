@@ -57,6 +57,9 @@ class OnBoard_Profile extends React.Component {
         this.props.dispatch(onboardActions.getParticipant(data));
         this.setState({createParticipantModal:!this.state.createParticipantModal});
     }
+    approveParticipant(e, data, action){
+        this.props.dispatch(onboardActions.approveParticipant(data, action));
+    }
     render() {
         //const { loading,product,products,mode} = this.props.product;
         if(this.state.createParticipantModal){
@@ -65,7 +68,7 @@ class OnBoard_Profile extends React.Component {
             $('#createParticipantModal').modal('hide');
         }
         return (
-            <div className="col-md-8 offset-md-3 contentDiv">
+            <div className="col-md-9 contentDiv" style={{left:"22%"}}>
                 <h2 style={{display:"inline-block"}}>
                     OnBoarding - Profile Setup
                 </h2>
@@ -81,7 +84,10 @@ class OnBoard_Profile extends React.Component {
                 <br/>
                 <ReactTable
                     data={this.props.onboard.participants}
-                    columns={Table_Config.Participant.participants.columns({toggleParticipantModal:this.toggleParticipantModal.bind(this)})}
+                    columns={Table_Config.Participant.participants.columns({
+                        toggleParticipantModal:this.toggleParticipantModal.bind(this),
+                        approveParticipant: this.approveParticipant.bind(this)
+                    })}
                     {...Table_Config.Participant.participants.options}
                 />
 

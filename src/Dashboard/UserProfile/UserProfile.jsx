@@ -330,9 +330,12 @@ class UserProfile extends React.Component {
                 <LandingPageHeader />
              <div className="row brd-tp1px">
              <CarouselComponent></CarouselComponent> 
-                   
-              <div className="login-section">   
-                <div className="col-12 col-md-10  form-wrapper formtext formborder">                    
+                  
+              <div className="login-section user-profile-setup-main">  
+                 
+                <div className="col-12 col-md-9  form-wrapper formtext formborder set-up-profile-left">  
+                <h2 className='profile-set-up-header'>User - Profile Setup</h2>    
+                <div className='col-12 col-md-12 set-border'>   
                 <h2 className="reg-heading"><img src={require('../../../assets/img/UserIcon.png')} height='25px' width='25px'></img>User Information</h2>
                     <div className="form-row">
                        <div className="col-md-4 mb-3">
@@ -596,10 +599,11 @@ class UserProfile extends React.Component {
                     </div>
                   </div> 
                </div>
-              
-               <button className="btn btn-primary create-btn link-bg button-style">Create</button>
-               
+              <div className='col-lg-12 col-md-12'>
+               <button className="btn btn-primary create-btn link-bg button-style float-right mb10">Create</button>
+               </div>
               </div>
+            </div>
             </div>
         </div>
     </div> 

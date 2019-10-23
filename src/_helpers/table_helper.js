@@ -1,9 +1,9 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faEye, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEdit, faCheckSquare } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faEye, faEdit);
+library.add(faEye, faEdit, faCheckSquare);
 
 let globalOptions = {
     showPagination: true,
@@ -619,20 +619,29 @@ let Table_Config = {
 			{
 				Header: 'Action',
 				accessor: 'participantName',
-				Cell: row =><div className="row">
-				<button 
-					className="btn btn-outline-info btn-sm"
-					style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
-					onClick={e=>{props.toggleParticipantModal(e, row.original._id,'view')}}>
-						<FontAwesomeIcon icon="eye" size="xs"/>
-				</button>
-				<button 
-					className="btn btn-outline-primary btn-sm"
-					style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
-					onClick={e=>{props.toggleParticipantModal(e, row.original._id,'update')}}>
-						<FontAwesomeIcon icon="edit" size="xs"/>
-				</button>
-			</div> 
+				Cell: row =>
+				<div className="row">
+					<button 
+						className="btn btn-outline-info btn-sm"
+						style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
+						onClick={e=>{props.toggleParticipantModal(e, row.original._id,'view')}}>
+							<FontAwesomeIcon icon="eye" size="xs"/>
+					</button>
+					<button 
+						className="btn btn-outline-primary btn-sm"
+						style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
+						onClick={e=>{props.toggleParticipantModal(e, row.original._id,'update')}}>
+							<FontAwesomeIcon icon="edit" size="xs"/>
+					</button>
+					{row.original.status===0 ? 
+						(<button 
+							className="btn btn-outline-success btn-sm"
+							style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
+							onClick={e=>{props.approveParticipant(e, row.original._id,'approve')}}>
+								{/* <FontAwesomeIcon icon="check-square" size="xs"/>*/} Approve 
+						</button>):""
+					}
+				</div> 
 			}]
 		}
 	},
