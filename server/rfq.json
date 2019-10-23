@@ -1,0 +1,64 @@
+[
+    {
+        "projectId": 101,
+        "entityType": "exporter",
+        "projectDetails": "Dummy",
+        "startTime": "08/06/2019",
+        "endTime": "08/06/2020",
+        "status": "Active",
+        "activationTime": "09/06/2019",
+        "closerTime": "08/06/2020",
+        "currency": "USD",
+        "products": [
+            {
+                "productCategory": "category1",
+                "subCategory": "subCategory1",
+                "productName": "productName1",
+                "quantity": "100",
+                "price": "2000$",
+                "priceAdjustment": "1900$",
+                "quantityUnit": "2000"
+            },
+            {
+                "productCategory": "productCategory2",
+                "subCategory": "subCategory2",
+                "productName": "productName2",
+                "quantity": "1001",
+                "price": "20001$",
+                "priceAdjustment": "19001$",
+                "quantityUnit": "20001"
+            }
+        ]
+    },
+    {
+        "projectId": 102,
+        "entityType": "importer",
+        "projectDetails": "projectDetails dummy data",
+        "startTime": "12/12/2021",
+        "endTime": "12/21/2021",
+        "status": "Active",
+        "activationTime": "12/12/2021",
+        "closerTime": "12/21/2021",
+        "currency": "INR",
+        "products": [
+            {
+                "productCategory": "productCategory1",
+                "subCategory": "subCategory1",
+                "productName": "productName1",
+                "quantity": "100",
+                "price": "2000$",
+                "priceAdjustment": "1900$",
+                "quantityUnit": "2000"
+            },
+            {
+                "productCategory": "productCategory2",
+                "subCategory": "subCategory2",
+                "productName": "productName2",
+                "quantity": "1002",
+                "price": "20001$",
+                "priceAdjustment": "19001$",
+                "quantityUnit": "20001"
+            }
+        ]
+    }
+]

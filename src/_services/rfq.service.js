@@ -1,42 +1,11 @@
-import { authHeader, config, Utils } from '../_helpers';
+import { authHeader, config, Utils, API_Helpers } from '../_helpers';
 const { handleError, handleResponse } = Utils;
-
-let dummyData = [
-    {   projectId : 101, entityType: "Exporter", projectDetails: "Some dummy text",
-        startTime: "08/14/2020 08:30", endTime: "08/14/2021 08:30", status: "Open",
-        activationTime: "08/14/2019 7:30", closerTime: "08/14/2019 17:30", currency: "USD",
-        category: "Category1", subCategory: "SubCategory2", product: "Petrol",
-        quantity: "100", price: "120", priceAdjustment: "11", quantityUnit: "Gallon",
-    },
-    {   projectId : 102, entityType: "Exporter", projectDetails: "Some dummy text",
-        startTime: "08/14/2020 08:30", endTime: "08/14/2021 08:30", status: "Open",
-        activationTime: "08/14/2019 7:30", closerTime: "08/14/2019 17:30", currency: "USD",
-        category: "Category1", subCategory: "SubCategory2", product: "Petrol",
-        quantity: "100", price: "120", priceAdjustment: "11", quantityUnit: "Gallon",
-    },
-    {   projectId : 103, entityType: "Importer", projectDetails: "Some other dummy text",
-        startTime: "08/14/2020 08:30", endTime: "08/14/2021 08:30", status: "Open",
-        activationTime: "08/14/2019 7:30", closerTime: "08/14/2019 17:30", currency: "USD",
-        category: "Category1", subCategory: "SubCategory2", product: "Petrol",
-        quantity: "100", price: "120", priceAdjustment: "11", quantityUnit: "Gallon",
-    },
-    {   projectId : 104, entityType: "Exporter", projectDetails: "Some dummy text",
-        startTime: "08/14/2020 08:30", endTime: "08/14/2021 08:30", status: "Open",
-        activationTime: "08/14/2019 7:30", closerTime: "08/14/2019 17:30", currency: "USD",
-        category: "Category1", subCategory: "SubCategory2", product: "Petrol",
-        quantity: "100", price: "120", priceAdjustment: "11", quantityUnit: "Gallon",
-    },
-    {   projectId : 105, entityType: "Exporter", projectDetails: "Some dummy text",
-        startTime: "08/14/2020 08:30", endTime: "08/14/2021 08:30", status: "Open",
-        activationTime: "08/14/2019 7:30", closerTime: "08/14/2019 17:30", currency: "USD",
-        category: "Category1", subCategory: "SubCategory2", product: "Petrol",
-        quantity: "100", price: "120", priceAdjustment: "11", quantityUnit: "Gallon",
-    },
-]
+import { rfq as dummyData } from "../../server";
 
 export const rfqService = {
     getAllRfq,
-    postNewRfq
+    postNewRfq,
+    getAllProducts,
 };
 
 function getAllRfq() {
@@ -45,11 +14,13 @@ function getAllRfq() {
         method: 'GET',
         headers: authHeader()
     };
-    return fetch(config.apiUrl + '/product/getProductList?userID='+user.email, requestOptions)
+    return Promise.resolve(dummyData);
+    return fetch(config.apiUrl + '/producct/getProductList?userID='+user.email, requestOptions)
     .then(handleResponse)
     .then(()=> dummyData)
     .catch(err => {
         // handleError(err)
+        debugger;
         return dummyData;
     })
 }
@@ -66,4 +37,7 @@ function postNewRfq() {
         // handleError(err)
         return dummyData;
     })
+}
+function getAllProducts(){
+    return API_Helpers.getAllProducts();
 }

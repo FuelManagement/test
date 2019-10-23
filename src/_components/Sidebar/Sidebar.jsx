@@ -122,7 +122,7 @@ class Sidebar extends React.Component {
                                     </Link>
                                     <div className="sidebar-submenu">
                                         <ul>
-                                            <li><Link to="/">Profile Setup for User</Link></li>
+                                            <li><Link to="/userProfile">Profile Setup for User</Link></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -134,31 +134,6 @@ class Sidebar extends React.Component {
                                     <div className="sidebar-submenu">
                                         <ul>
                                             <li><Link to="/product">Product Management</Link></li>
-                                            
-                                        </ul>
-                                    </div>
-                                </li>
-                                {/* <li className="sidebar-dropdown">
-                                    <Link to="/product">
-                                        <i className="fa fa-shopping-cart"></i>
-                                        <span>Product Management</span>
-                                    </Link>
-                                </li> */}
-
-                                <li className="sidebar-dropdown">
-                                    <Link to="#">
-                                        <i className="fa fa-shopping-cart"></i>
-                                        <span>Document Management</span>
-
-                                    </Link>
-                                </li>
-                                <li className="sidebar-dropdown">
-                                    <Link to="/">
-                                        <i className="fa fa-shopping-cart"></i>
-                                        <span>Management</span>
-                                    </Link>
-                                    <div className="sidebar-submenu">
-                                        <ul>
                                             <li className="sidebar-dropdown">
                                                 <Link to="/">
                                                     <span>Project Management</span>
@@ -187,6 +162,20 @@ class Sidebar extends React.Component {
                                             </li>
                                         </ul>
                                     </div>
+                                </li>
+                                {/* <li className="sidebar-dropdown">
+                                    <Link to="/product">
+                                        <i className="fa fa-shopping-cart"></i>
+                                        <span>Product Management</span>
+                                    </Link>
+                                </li> */}
+
+                                <li className="sidebar-dropdown">
+                                    <Link to="#">
+                                        <i className="fa fa-shopping-cart"></i>
+                                        <span>Document Management</span>
+
+                                    </Link>
                                 </li>
                                 <li className="sidebar-dropdown">
                                     <Link to="#">

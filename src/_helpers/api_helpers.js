@@ -63,4 +63,30 @@ export class API_Helpers {
         })
         .catch(error => Promise.reject(error.message || error));
     }
+
+    static getAllProducts(){
+        const requestOptions = {
+            method: 'POST',
+            headers: authHeader()
+        };
+        return fetch(config.apiUrl + 'product/getProductList?userID=admin@gmail.com', requestOptions)
+        .then(response => {
+            if (response.ok) {
+                try{
+                    return response.json()
+                    .catch(err => {
+                        console.log("Invalid response headers/content")
+                        // ignoring response type/msg in case of 200 status
+                       return "Success";
+                    });
+                }catch(e){
+                    return Promise.reject("Invalid response");
+                }
+            } else {
+                // return error message from response body
+                return response.text().then(text => Promise.reject(text));
+            }
+        })
+        .catch(error => Promise.reject(error.message || error));
+    }
 }

@@ -15,6 +15,7 @@ window.jQuery = $; // hack
 window.$ = $;      // hack 
 import 'bootstrap';
 import { rfqActions } from '../../_actions';
+import { AddRFQ } from './AddRFQ';
 class RFQ extends React.Component {
     constructor(props) {
         super(props);
@@ -29,6 +30,7 @@ class RFQ extends React.Component {
     }
     componentDidMount() {
         this.props.dispatch(rfqActions.getAllRfq());
+        this.props.dispatch(rfqActions.getAllProducts());
     }
     handleSubmit(event) {
         event.preventDefault();
@@ -64,15 +66,10 @@ class RFQ extends React.Component {
                 <div className="modal" id="rfqModal" tabIndex="-1" role="dialog">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="">{this.state.mode === 'create' ? 'Add' : 'Edit'} Product</h5>
-                                <button type="button" className="close" onClick={(e) => this.toggleModal(e)} aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div className="modal-body">
-                                {this.state.mode=="edit"?"Form Component":"View Component"}
-                            </div>
+                            <AddRFQ 
+                                row={this.state.selectedRfq}
+                                mode={this.state.mode}
+                            />
                         </div>
                     </div>
                 </div>

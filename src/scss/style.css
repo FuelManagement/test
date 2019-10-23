@@ -20,6 +20,21 @@ body {
 .brd-tp1px{
   border-top: 1px solid #00ce1b;
 }
+/* .MuiToolbar-root{
+  display: contents !important;
+} */
+.MTableToolbar-actions-118{
+  display: inline-block !important;
+}
+.MuiTableCell-body{
+  padding: 0px 0px 0px 8px !important; 
+}
+.MuiTableCell-body .MuiIcon-root{
+  font-size: 16px !important;
+}
+.MuiTableHead-root .MuiTableCell-root{
+  padding: 10px 0px 10px 8px !important;
+}
 
 .submit-btn{
   background: -webkit-linear-gradient(left, rgb(110, 113, 251) 0%, rgb(82, 175, 250) 63%, rgb(71, 183, 233) 100%);
@@ -202,7 +217,9 @@ header .pad-50{
 .link:hover {
   color: #2a931f!important;
 }
-
+.addrfq-dateTime .MuiFormControl-root {
+  width: 100%;
+}
 .button-style{
   background-color: #23a830 !important;
   border-color: #23a830 !important;
@@ -309,7 +326,7 @@ header .pad-50{
 .add-rfq-main{
 	border-top:none;
 	top:88px;
-  left:20%;
+  left:22%;
   background-image: none;
   min-height: auto;
   clip-path:none;
