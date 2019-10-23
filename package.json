@@ -26,6 +26,7 @@
     "history": "^4.6.3",
     "jquery": "^3.4.1",
     "localtunnel": "^2.0.0",
+    "material-table": "^1.52.0",
     "material-ui-phone-number": "^2.2.2",
     "popper.js": "^1.15.0",
     "promise": "^8.0.3",
