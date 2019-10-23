@@ -14,7 +14,8 @@ export const onboardActions = {
     changeParticipant,
     resetParticipant,
     changeModeParticipant,
-    uploadParticipantFile
+    uploadParticipantFile,
+    changeFormState
 }
 function getAllOnBoarder() {
     return dispatch => {
@@ -95,7 +96,7 @@ function getParticipant(collection)
                 participant => { 
                    
                     dispatch(success(participant.find(f=>f.Documentslist!==undefined && f.Documentslist.length>0 && f._id==collection)));
-                   
+                   //dispatch(successDoc(participant.find(f=>f.Documentslist!==undefined && f.Documentslist.length>0 && f._id==collection).Documentslist));
                     dispatch(alertActions.clearLoading());
                 },
                 error => {
@@ -108,9 +109,10 @@ function getParticipant(collection)
     function request() { return { type: onboardConstants.ONBRD_GET_PARTICIPANT_REQUEST } }
     function success(participant) { return { type: onboardConstants.ONBRD_GET_PARTICIPANT_SUCCESS, participant } }
     function failure(error) { return { type: onboardConstants.ONBRD_GET_PARTICIPANT_FAILURE, error } }
+    function successDoc(files) { return { type: onboardConstants.ONBRD_UPLOAD_PARTICIPANT_FILE_SUCCESS, files } }
 
 }
-function updateParticipant(collection)
+function updateParticipant(collection,Documentslist)
 {
     return dispatch => {
         dispatch(request());
@@ -118,12 +120,12 @@ function updateParticipant(collection)
             .then((collection)=>
             {
                 dispatch(success({}));
-                dispatch(alertActions.success(`Participant Added Successfully !`));
+                dispatch(alertActions.success(`Participant updated successfully !`));
            // history.push('/');
         })
             .catch(error => {
                 dispatch(failure(error))
-                dispatch(alertActions.error(`Failed to add participant!`));
+                dispatch(alertActions.error(`Failed to update participant!`));
             });
     };
 
@@ -172,6 +174,16 @@ function changeModeParticipant(mode){
        
     };
     function success(collection) { return { type: onboardConstants.ONBRD_MODE_PARTICIPANT, collection } }
+   
+}
+function changeFormState(valid){
+    return dispatch => {
+      
+            dispatch(success(valid));
+     
+       
+    };
+    function success(valid) { return { type: onboardConstants.ONBRD_CHANGE_FORM_STATE, valid } }
    
 }
 

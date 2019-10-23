@@ -68,6 +68,8 @@ class AccountDetailForm extends React.Component {
     super(props);
     this.state = this.initialState(null, this.props.onboard.participant);
     this.handleChange = this.handleChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.props.dispatch(onboardActions.changeFormState(this.props.onboard.mode==='create'?false:true));
   }
   componentWillReceiveProps(nextprops)
   {
@@ -114,6 +116,7 @@ class AccountDetailForm extends React.Component {
           valid: false,
           validationRules: {
             notEmpty: true,
+            isName:true
           },
           error: "Please enter account holder name",
           placeholder: "Account Holder Name",
@@ -127,6 +130,7 @@ class AccountDetailForm extends React.Component {
           valid: false,
           validationRules: {
             notEmpty: true,
+            isNumber:true
           },
           error: "Please enter account name",
           placeholder: "AccountNumber",
@@ -180,8 +184,6 @@ class AccountDetailForm extends React.Component {
           valid: false,
           validationRules: {
             notEmpty: true,
-            minLength: true,
-            isName: true
           },
           error: "Please enter reference specifications for bank details",
           placeholder: "Reference specifications for bank details",
@@ -195,8 +197,7 @@ class AccountDetailForm extends React.Component {
           valid: false,
           validationRules: {
             notEmpty: true,
-            minLength: true,
-            isName: true
+
           },
           error: "Please enter purchase order currency",
           placeholder: "Purchase Order Currency",
@@ -210,8 +211,6 @@ class AccountDetailForm extends React.Component {
           valid: false,
           validationRules: {
             notEmpty: true,
-            minLength: true,
-            isName: true
           },
           error: "Please enter partner bank type",
           placeholder: "Partner Bank Type",
@@ -235,19 +234,39 @@ class AccountDetailForm extends React.Component {
           [key]: {
             ...prevState.controls[key],
             value: value,
-            // valid: validate(
-            //   value,
-            //   prevState.controls[key].validationRules,
-            //   connectedValue
-            // ),
+            valid: validate(
+              value,
+              prevState.controls[key].validationRules,
+              connectedValue,
+              key
+            ),
             touched: true
           }
         }
       };
     });
     this.props.dispatch(onboardActions.changeParticipant(key,value));   
+    this.handleFormSubmit();
   }
-
+  handleFormSubmit(){
+    let isFormVaild=true;
+   if (this.state.controls !== undefined) {
+    ["bankName","bankAccountName","bankAccountNumber","bankControlKey","bankCountryKey","bankKeys","bankPartnerType"
+    ,"bankReferencedetail","poCurrency"].forEach(name => {
+         let value = this.state.controls[name].valid, touched = this.state.controls[name].touched;
+         if (!value && this.props.onboard.mode==='create') {
+         
+          isFormVaild=false;
+         }
+         else if(!value && touched && this.props.onboard.mode!=='create'){
+         
+          isFormVaild=false;
+         }
+         
+       });
+    }
+    this.props.dispatch(onboardActions.changeFormState(isFormVaild));
+}
   render() {
     return (
       <div className="mx-auto">
@@ -263,6 +282,8 @@ class AccountDetailForm extends React.Component {
               className="form-control"
               margin="dense"
               variant="outlined"
+              error={!this.state.controls.bankName.valid && this.state.controls.bankName.touched}
+              
             />
           </div>
         </div>
@@ -277,6 +298,7 @@ class AccountDetailForm extends React.Component {
               className="form-control"
               margin="dense"
               variant="outlined"
+              error={!this.state.controls.bankAccountName.valid && this.state.controls.bankAccountName.touched}
             />
           </div>
           <div className="col-md-4 mb-3 ">
@@ -289,6 +311,7 @@ class AccountDetailForm extends React.Component {
               className="form-control"
               margin="dense"
               variant="outlined"
+              error={!this.state.controls.bankAccountNumber.valid && this.state.controls.bankAccountNumber.touched}
             />
           </div>
         </div>
@@ -303,6 +326,8 @@ class AccountDetailForm extends React.Component {
               className="form-control"
               margin="dense"
               variant="outlined"
+              error={!this.state.controls.bankControlKey.valid && this.state.controls.bankControlKey.touched}
+           
             />
           </div>
           <div className="col-md-4 mb-3 ">
@@ -315,6 +340,8 @@ class AccountDetailForm extends React.Component {
               onChange={this.handleChange}
               margin="dense"
               variant="outlined"
+              error={!this.state.controls.bankCountryKey.valid && this.state.controls.bankCountryKey.touched}
+           
             />
           </div>
           <div className="col-md-4 mb-3 ">
@@ -327,6 +354,8 @@ class AccountDetailForm extends React.Component {
               className="form-control"
               margin="dense"
               variant="outlined"
+              error={!this.state.controls.bankKeys.valid && this.state.controls.bankKeys.touched}
+           
             />
           </div>
         </div>
@@ -343,6 +372,8 @@ class AccountDetailForm extends React.Component {
                 value={this.state.controls.bankPartnerType.value}
                 onChange={this.handleChange}
                 margin="dense"
+                error={!this.state.controls.bankPartnerType.valid && this.state.controls.bankPartnerType.touched}
+           
               >
                 {bankPartnerType.map(option => (
                   <MenuItem key={option.value} value={option.value}>
@@ -362,6 +393,8 @@ class AccountDetailForm extends React.Component {
               className="form-control"
               margin="dense"
               variant="outlined"
+              error={!this.state.controls.bankReferencedetail.valid && this.state.controls.bankReferencedetail.touched}
+           
             />
           </div>
           <div className="col-md-4">
@@ -376,6 +409,8 @@ class AccountDetailForm extends React.Component {
                 value={this.state.controls.poCurrency.value}
                 onChange={this.handleChange}
                 margin="dense"
+                error={!this.state.controls.poCurrency.valid && this.state.controls.poCurrency.touched}
+           
               >
                 {ddlCurr.map(option => (
                   <MenuItem key={option.value} value={option.value}>

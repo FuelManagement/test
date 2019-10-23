@@ -40,6 +40,9 @@ class TaxDetailForm extends React.Component {
         super(props);
         this.state = this.initialState(null, this.props.onboard.participant);
         this.handleChange = this.handleChange.bind(this);
+        this.handleOnChange=this.handleOnChange.bind(this);
+        this.handleFormSubmit=this.handleFormSubmit.bind(this);
+        this.props.dispatch(onboardActions.changeFormState(this.props.onboard.mode==='create'?false:true));
     }
     componentWillReceiveProps(nextprops)
     {
@@ -72,7 +75,7 @@ class TaxDetailForm extends React.Component {
                     valid: false,
                     validationRules: {
                         notEmpty: true,
-                        isName: true
+
                     },
                     error: "Please enter first tax number ",
                     placeholder: "Tax Number 1",
@@ -134,11 +137,11 @@ class TaxDetailForm extends React.Component {
                     disable: false
                 },
                 taxWithholdType: {
-                    value: props!==undefined && props.taxWithholdType!==undefined?props.taxWithholdType:'',
+                    value: props!==undefined && props.taxWithholdType!==undefined?props.taxWithholdType:true,
           
-                    valid: false,
+                    valid: true,
                     validationRules: {
-                        notEmpty: true,
+                        notEmpty: false,
                     },
                     error: "Please enter indicator for withholding tax type",
                     placeholder: "Withholding tax type indicator",
@@ -147,13 +150,11 @@ class TaxDetailForm extends React.Component {
                     disable: false
                 },
                 taxWithholdingSubject: {
-                    value: props!==undefined && props.taxWithholdingSubject!==undefined?props.taxWithholdingSubject:'',
+                    value: props!==undefined && props.taxWithholdingSubject!==undefined?props.taxWithholdingSubject:true,
           
-                    valid: false,
+                    valid: true,
                     validationRules: {
-                        notEmpty: true,
-                        minLength: true,
-                        isName: true
+                        notEmpty: false,
                     },
                     error: "Please specify whether subject to withholding tax.",
                     placeholder: "Subject to withholding tax?",
@@ -167,8 +168,7 @@ class TaxDetailForm extends React.Component {
                     valid: false,
                     validationRules: {
                         notEmpty: true,
-                        minLength: true,
-                        isName: true
+
                     },
                     error: "Please enter withholding tax code",
                     placeholder: "Withholding tax code",
@@ -182,8 +182,7 @@ class TaxDetailForm extends React.Component {
                     valid: false,
                     validationRules: {
                         notEmpty: true,
-                        minLength: true,
-                        isName: true
+
                     },
                     error: "Please enter confirmation control key",
                     placeholder: "Confirmation Control Key",
@@ -192,13 +191,12 @@ class TaxDetailForm extends React.Component {
                     disable: false
                 },
                 deleteFlagForVendor: {
-                    value: props!==undefined && props.deleteFlagForVendor!==undefined?props.deleteFlagForVendor:'',
+                    value: props!==undefined && props.deleteFlagForVendor!==undefined?props.deleteFlagForVendor:true,
           
-                    valid: false,
+                    valid: true,
                     validationRules: {
-                        notEmpty: true,
-                        minLength: true,
-                        isName: true
+                        notEmpty: false,
+
                     },
                     error: "Please enter delete flag for vendor at purchasing level",
                     placeholder: "Delete flag for vendor at purchasing level",
@@ -212,8 +210,7 @@ class TaxDetailForm extends React.Component {
                     valid: false,
                     validationRules: {
                         notEmpty: true,
-                        minLength: true,
-                        isName: true
+                       
                     },
                     error: "Please enter shipping conditions",
                     placeholder: "Shipping Conditions",
@@ -222,13 +219,12 @@ class TaxDetailForm extends React.Component {
                     disable: false
                 },
                 gstHstReminder: {
-                    value: props!==undefined && props.gstHstReminder!==undefined?props.gstHstReminder:'',
+                    value: props!==undefined && props.gstHstReminder!==undefined?props.gstHstReminder:true,
           
-                    valid: false,
+                    valid: true,
                     validationRules: {
-                        notEmpty: true,
-                        minLength: true,
-                        isName: true
+                        notEmpty: false,
+
                     },
                     error: "Please enter GST/HST # verification ",
                     placeholder: "GST/HST # Verification Reminder",
@@ -237,13 +233,12 @@ class TaxDetailForm extends React.Component {
                     disable: false
                 },
                 salesTaxExemption: {
-                    value: props!==undefined && props.salesTaxExemption!==undefined?props.salesTaxExemption:'',
+                    value: props!==undefined && props.salesTaxExemption!==undefined?props.salesTaxExemption:true,
           
-                    valid: false,
+                    valid: true,
                     validationRules: {
-                        notEmpty: true,
-                        minLength: true,
-                        isName: true
+                        notEmpty: false,
+
                     },
                     error: "Please enter sales tax exemption",
                     placeholder: "Sales Tax Exemption Reminder",
@@ -252,13 +247,12 @@ class TaxDetailForm extends React.Component {
                     disable: false
                 },
                 qstVerificationReminder: {
-                    value: props!==undefined && props.qstVerificationReminder!==undefined?props.qstVerificationReminder:'',
+                    value: props!==undefined && props.qstVerificationReminder!==undefined?props.qstVerificationReminder:true,
           
-                    valid: false,
+                    valid: true,
                     validationRules: {
-                        notEmpty: true,
-                        minLength: true,
-                        isName: true
+                        notEmpty: false,
+                       
                     },
                     error: "Please enter QST # verification reminder",
                     placeholder: "QST # Verification Reminder",
@@ -267,13 +261,12 @@ class TaxDetailForm extends React.Component {
                     disable: false
                 },
                 "w8-9VerificationReminder": {
-                    value: props!==undefined && props["w8-9VerificationReminder"]!==undefined?props["w8-9VerificationReminder"]:'',
+                    value: props!==undefined && props["w8-9VerificationReminder"]!==undefined?props["w8-9VerificationReminder"]:true,
           
-                    valid: false,
+                    valid: true,
                     validationRules: {
-                        notEmpty: true,
-                        minLength: true,
-                        isName: true
+                        notEmpty: false,
+                       
                     },
                     error: "Please enter form W-9 or W-8 verification",
                     placeholder: "Form W-9 or W-8 Verification Reminder",
@@ -287,6 +280,7 @@ class TaxDetailForm extends React.Component {
         return state;
     }
     handleChange(event) {
+        console.log(event)
         let key = event.target.name, value = event.target.value;
         let connectedValue = {};
         this.setState(prevState => {
@@ -296,18 +290,58 @@ class TaxDetailForm extends React.Component {
                     [key]: {
                         ...prevState.controls[key],
                         value: value,
+                        valid: validate(
+                          value,
+                          prevState.controls[key].validationRules,
+                          connectedValue,key
+                        ),
+                        touched: true
+                    }
+                }
+            };
+        });
+        this.props.dispatch(onboardActions.changeParticipant(key,value)); 
+        this.handleFormSubmit();  
+    } 
+    handleOnChange(key,value) {
+        let connectedValue = {};
+        this.setState(prevState => {
+            return {
+                controls: {
+                    ...prevState.controls,
+                    [key]: {
+                        ...prevState.controls[key],
+                        value: !value,
                         // valid: validate(
-                        //   value,
+                        //   !value,
                         //   prevState.controls[key].validationRules,
-                        //   connectedValue
+                        //   connectedValue,key
                         // ),
                         touched: true
                     }
                 }
             };
         });
-        this.props.dispatch(onboardActions.changeParticipant(key,value));   
+        this.props.dispatch(onboardActions.changeParticipant(key,value)); 
+        this.handleFormSubmit();   
     } 
+    handleFormSubmit(){
+        let isFormVaild=true;
+       if (this.state.controls !== undefined) {
+        ["taxWithholdType","taxWithholdingSubject","taxWithholdCode","confirmationControlkey","deleteFlagForVendor","shippingConditions","gstHstReminder"
+      ,"salesTaxExemption","qstVerificationReminder","w8-9VerificationReminder","taxNumber1","taxNumber2","vatNumber","vendorAcctGrp","vendorImporterRecord"].forEach(name => {
+             let value = this.state.controls[name].valid, touched = this.state.controls[name].touched;
+             if (!value && this.props.onboard.mode==='create') {
+             isFormVaild=false;
+             }
+             else if(!value && touched && this.props.onboard.mode!=='create'){
+              isFormVaild=false;
+             }
+             
+           });
+        }
+        this.props.dispatch(onboardActions.changeFormState(isFormVaild));
+    }
     render() {
         return (
             <div className="mx-auto" onLoad={this.props.onPageLoad}>
@@ -327,6 +361,8 @@ class TaxDetailForm extends React.Component {
                             placeholder={this.state.controls.taxNumber1.value}
                             margin="dense"
                             variant="outlined"
+                            error={!this.state.controls.taxNumber1.valid && this.state.controls.taxNumber1.touched}
+                            
                         />
                     </div>
                     <div className="col-md-4 mb-3">
@@ -340,6 +376,8 @@ class TaxDetailForm extends React.Component {
                             className="form-control"
                             variant="outlined"
                             placeholder={this.state.controls.taxNumber2.value}
+                            error={!this.state.controls.taxNumber2.valid && this.state.controls.taxNumber2.touched}
+                            
                         />
                     </div>
                     <div className="col-md-4 mb-3">
@@ -353,6 +391,8 @@ class TaxDetailForm extends React.Component {
                             className="form-control"
                             variant="outlined"
                             placeholder={this.state.controls.vatNumber.value}
+                            error={!this.state.controls.vatNumber.valid && this.state.controls.vatNumber.touched}
+                            
                         />
                     </div>
                 </div>
@@ -369,6 +409,8 @@ class TaxDetailForm extends React.Component {
                                 onChange={this.handleChange}
                                 className="form-control"
                                 margin="dense"
+                                error={!this.state.controls.vendorAcctGrp.valid && this.state.controls.vendorAcctGrp.touched}
+                            
                             >
                                 {vendorAcctGrp.map(option => (
                                     <MenuItem key={option.value} value={option.value}>
@@ -389,13 +431,20 @@ class TaxDetailForm extends React.Component {
                             onChange={this.handleChange}
                             className="form-control"
                             placeholder={this.state.controls.vendorImporterRecord.value}
+                            error={!this.state.controls.vendorImporterRecord.valid && this.state.controls.vendorImporterRecord.touched}
+                            
                         />
                     </div>
                 </div>
                 <div className="form-row">
                     <div className="col-md-4 mb-3"> 
                         <FormControlLabel
-                            control={<Checkbox icon={<CircleUnchecked className="checkboxIcon"/>} checkedIcon={<CircleCheckedFilled className="checkboxIcon" />} value="checkedH" />}
+                            control={<Checkbox icon={<CircleUnchecked className="checkboxIcon"/>} 
+                            checkedIcon={<CircleCheckedFilled className="checkboxIcon" />} 
+                            onChange={e=>this.handleOnChange(e.target.name,e.target.value)} 
+                             name="taxWithholdType" 
+                             checked={this.state.controls.taxWithholdType.value==='true'?true:false}
+                             value={this.state.controls.taxWithholdType.value} />}
                             label="Withholding tax type indicator"
                             className="form-checkbox"
                         />
@@ -404,7 +453,12 @@ class TaxDetailForm extends React.Component {
                         <FormControl component="fieldset" >
                             
                             <FormControlLabel
-                                control={<Checkbox icon={<CircleUnchecked className="checkboxIcon"/>} checkedIcon={<CircleCheckedFilled className="checkboxIcon" />} value="checkedH" />}
+                                control={<Checkbox icon={<CircleUnchecked className="checkboxIcon"/>}
+                                 checkedIcon={<CircleCheckedFilled className="checkboxIcon" />} 
+                                 onChange={e=>this.handleOnChange(e.target.name,e.target.value)} 
+                             name="taxWithholdingSubject" 
+                             checked={this.state.controls.taxWithholdingSubject.value==='true'?true:false}
+                             value={this.state.controls.taxWithholdingSubject.value} />}
                                 label="Subject to withholding tax"
                             className="form-checkbox"
 
@@ -422,6 +476,8 @@ class TaxDetailForm extends React.Component {
                             className="form-control"
                             variant="outlined"
                             placeholder={this.state.controls.taxWithholdCode.value}
+                            error={!this.state.controls.taxWithholdCode.valid && this.state.controls.taxWithholdCode.touched}
+                            
                         /></div>
                 </div>
                 <div className="form-row">
@@ -436,12 +492,19 @@ class TaxDetailForm extends React.Component {
                             className="form-control"
                             variant="outlined"
                             placeholder={this.state.controls.confirmationControlkey.value}
+                            error={!this.state.controls.confirmationControlkey.valid && this.state.controls.confirmationControlkey.touched}
+                            
                         />
                     </div>
                     <div className="col-md-5 mb-3">
                         
                         <FormControlLabel
-                            control={<Checkbox icon={<CircleUnchecked className="checkboxIcon"/>} checkedIcon={<CircleCheckedFilled  className="checkboxIcon"/>} value="checkedH" />}
+                            control={<Checkbox icon={<CircleUnchecked className="checkboxIcon"/>} 
+                            checkedIcon={<CircleCheckedFilled  className="checkboxIcon"/>}
+                            onChange={e=>this.handleOnChange(e.target.name,e.target.value)} 
+                             name="deleteFlagForVendor" 
+                             checked={this.state.controls.deleteFlagForVendor.value==='true'?true:false}
+                             value={this.state.controls.deleteFlagForVendor.value} />}
                             label="Delete flag for vendor at purchasing level"
                             className="form-checkbox"
                         />
@@ -466,6 +529,8 @@ class TaxDetailForm extends React.Component {
                             className="form-control"
                             variant="outlined"
                             placeholder={this.state.controls.shippingConditions.placeholder}
+                            error={!this.state.controls.shippingConditions.valid && this.state.controls.shippingConditions.touched}
+                           
                         />
                     </div>
                 </div>
@@ -474,7 +539,12 @@ class TaxDetailForm extends React.Component {
                     <div className="col-md-4 mb-3">
                        
                         <FormControlLabel
-                            control={<Checkbox  icon={<CircleUnchecked className="checkboxIcon"/>} checkedIcon={<CircleCheckedFilled className="checkboxIcon"/>} value="checkedH" />}
+                            control={<Checkbox  icon={<CircleUnchecked className="checkboxIcon"/>}
+                             checkedIcon={<CircleCheckedFilled className="checkboxIcon"/>} 
+                             onChange={e=>this.handleOnChange(e.target.name,e.target.value)} 
+                             name="gstHstReminder" 
+                             checked={this.state.controls.gstHstReminder.value==='true'?true:false}
+                             value={this.state.controls.gstHstReminder.value} />}
                             label="GST/HST # Verification"
                             className="form-checkbox"  
                         />
@@ -482,14 +552,25 @@ class TaxDetailForm extends React.Component {
                     <div className="col-md-4 mb-3">
                          
                         <FormControlLabel
-                            control={<Checkbox icon={<CircleUnchecked className="checkboxIcon"/>} checkedIcon={<CircleCheckedFilled className="checkboxIcon"/>} value="checkedH" />}
+                            control={<Checkbox icon={<CircleUnchecked className="checkboxIcon"/>} 
+                            checkedIcon={<CircleCheckedFilled className="checkboxIcon"/>} 
+                            onChange={e=>this.handleOnChange(e.target.name,e.target.value)} 
+                    name="salesTaxExemption" 
+                             checked={this.state.controls.salesTaxExemption.value==='true'?true:false}
+                             value={this.state.controls.salesTaxExemption.value} />}
                             label="Sales Tax Exemption"
                             className="form-checkbox"
                         />  
                     </div>
                     <div className="col-md-4">
                     <FormControlLabel
-                            control={<Checkbox icon={<CircleUnchecked className="checkboxIcon"/>} checkedIcon={<CircleCheckedFilled className="checkboxIcon"/>} value="checkedH" />}
+                            control={<Checkbox icon={<CircleUnchecked className="checkboxIcon"/>} 
+                            checkedIcon={<CircleCheckedFilled className="checkboxIcon"/>}
+                            onChange={e=>this.handleOnChange(e.target.name,e.target.value)} 
+                             name="w8-9VerificationReminder" 
+                             checked={this.state.controls["w8-9VerificationReminder"].value==='true'?true:false}
+                             value={this.state.controls["w8-9VerificationReminder"].value}
+ />}
                             label="Form W-9 or W-8 Verification "
                             className="form-checkbox"
                         />  
@@ -498,7 +579,13 @@ class TaxDetailForm extends React.Component {
                 <div className="form-row">
                     <div className="col-md-6">
                     <FormControlLabel
-                            control={<Checkbox icon={<CircleUnchecked className="checkboxIcon"/>} checkedIcon={<CircleCheckedFilled className="checkboxIcon" />} value="checkedH" />}
+                            control={<Checkbox icon={<CircleUnchecked className="checkboxIcon"/>} checkedIcon={<CircleCheckedFilled className="checkboxIcon" />} 
+                             onChange={e=>this.handleOnChange(e.target.name,e.target.value)} 
+                             name="qstVerificationReminder" 
+                             checked={this.state.controls.qstVerificationReminder.value==='true'?true:false}
+                             value={this.state.controls.qstVerificationReminder.value}
+
+                            />}
                             label="QST # Verification "
                             className="form-checkbox"
                         />  

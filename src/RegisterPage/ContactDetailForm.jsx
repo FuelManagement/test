@@ -11,7 +11,7 @@ import {
 } from '@material-ui/pickers';
 import { green } from '@material-ui/core/colors';
 import { withStyles } from '@material-ui/core/styles';
-import { onboardActions } from '../_actions';
+import { onboardActions,alertActions } from '../_actions';
 import MuiPhoneInput from 'material-ui-phone-number';
 const GreenRadio = withStyles({
   root: {
@@ -28,6 +28,9 @@ class ContactDetailForm extends React.Component {
     super(props);
     this.state = this.initialState(null, this.props.onboard.participant);
     this.handleChange = this.handleChange.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleFormSubmit=this.handleFormSubmit.bind(this);
+    this.props.dispatch(onboardActions.changeFormState(this.props.onboard.mode==='create'?false:true));
   }
   componentWillReceiveProps(nextprops) {
     if (JSON.stringify(this.props.onboard.participant) !== JSON.stringify(nextprops.onboard.participant)) {
@@ -59,7 +62,7 @@ class ContactDetailForm extends React.Component {
           valid: false,
           validationRules: {
             notEmpty: true,
-            isName: true
+
           },
           error: "Please enter street Address",
           placeholder: "Street Address",
@@ -167,8 +170,7 @@ class ContactDetailForm extends React.Component {
           valid: false,
           validationRules: {
             notEmpty: true,
-            minLength: true,
-            isName: true
+
           },
           error: "Please enter second telephone number",
           touched: false,
@@ -203,21 +205,63 @@ class ContactDetailForm extends React.Component {
           [key]: {
             ...prevState.controls[key],
             value: value,
-            // valid: validate(
-            //   value,
-            //   prevState.controls[key].validationRules,
-            //   connectedValue
-            // ),
+            valid: validate(
+              value,
+              prevState.controls[key].validationRules,
+              connectedValue,
+              key
+            ),
             touched: true
           }
         }
       };
     });
     this.props.dispatch(onboardActions.changeParticipant(key, value));
+    this.handleFormSubmit();
   }
-  handleOnChange(value) {
-    this.setState({ phone: value })
+  handleOnChange(value,key) {
+    console.log(value,key)
+    let connectedValue = {};
+    this.setState(prevState => {
+      return {
+        controls: {
+          ...prevState.controls,
+          [key]: {
+            ...prevState.controls[key],
+            value: value,
+            valid: validate(
+              value,
+              prevState.controls[key].validationRules,
+              connectedValue,
+              key
+            ),
+            touched: true
+          }
+        }
+      };
+    });
+    this.props.dispatch(onboardActions.changeParticipant(key, value));
+    this.handleFormSubmit();
   }
+  handleFormSubmit(){
+    let isFormVaild=true;
+   if (this.state.controls !== undefined) {
+    ["streetAddress", "postalCode", "city", "faxNumber", "firstContactNumber", "firstContactNumberType", "state"
+        , "secondContactNumber", "SecondContactNumberType"].forEach(name => {
+         let value = this.state.controls[name].valid, touched = this.state.controls[name].touched;
+         if (!value && this.props.onboard.mode==='create') {
+         
+          isFormVaild=false;
+         }
+         else if(!value && touched && this.props.onboard.mode!=='create'){
+         
+          isFormVaild=false;
+         }
+         
+       });
+    }
+    this.props.dispatch(onboardActions.changeFormState(isFormVaild));
+}
   render() {
     return (
       <div className="mx-auto">
@@ -235,6 +279,8 @@ class ContactDetailForm extends React.Component {
               autoComplete="off"
               margin="dense"
               inputProps={{ maxLength: 100 }}
+              error={!this.state.controls.streetAddress.valid && this.state.controls.streetAddress.touched}
+                            
             />
           </div>
         </div>
@@ -251,6 +297,7 @@ class ContactDetailForm extends React.Component {
               variant="outlined"
               autoComplete="off"
               margin="dense"
+              error={!this.state.controls.city.valid && this.state.controls.city.touched}
             />
           </div>
         </div>
@@ -267,6 +314,7 @@ class ContactDetailForm extends React.Component {
               variant="outlined"
               autoComplete="off"
               margin="dense"
+              error={!this.state.controls.postalCode.valid && this.state.controls.postalCode.touched}
             />
           </div>
           <div className="col-md-4 mb-3">
@@ -281,6 +329,7 @@ class ContactDetailForm extends React.Component {
               variant="outlined"
               autoComplete="off"
               margin="dense"
+              error={!this.state.controls.state.valid && this.state.controls.state.touched}
             />
           </div>
           <div className="col-md-4 md-3">
@@ -295,43 +344,37 @@ class ContactDetailForm extends React.Component {
               variant="outlined"
               autoComplete="off"
               margin="dense"
+              error={!this.state.controls.txtCountry.valid && this.state.controls.txtCountry.touched}
             />
           </div>
         </div>
         <div className="form-row">
           <div className="col-md-4 md-3">
-            <TextField
-              id="faxNumber"
-              margin="normal"
-              name="faxNumber"
-              label="Fax Number"
-              value={this.state.controls.faxNumber.value}
-              onChange={this.handleChange}
-              className="form-control"
-              variant="outlined"
-              autoComplete="off"
-              margin="dense"
-            />
-          </div>
-          <div className="col-md-4 md-3">
-            {/* <TextField
-              id="firstContactNumber"
-              label="First Telephone Number"
-              name="firstContactNumber"
-              value={this.state.controls.firstContactNumber.value}
-              onChange={this.handleChange}
-              variant="outlined"
-              className="form-control"
-              autoComplete="off"
-              margin="dense"
-            /> */} 
+            
             <MuiPhoneInput
                defaultCountry='us'
               //  regions={['north-america']}
               margin="dense"
               variant="outlined"
+              label="Fax Number"
+              name="faxNumber" 
+              value={this.state.controls.faxNumber.value}
+              onChange={val=>this.handleOnChange(val,'faxNumber')}
+              error={!this.state.controls.faxNumber.valid && this.state.controls.faxNumber.touched}
+           
+            /> 
+          </div>
+          <div className="col-md-4 md-3">
+            
+            <MuiPhoneInput
+               defaultCountry='us'
+              margin="dense"
+              variant="outlined"
               label="First Telephone Number"
               name="firstContactNumber" 
+              value={this.state.controls.firstContactNumber.value}
+              onChange={val=>this.handleOnChange(val,'firstContactNumber')}
+              error={!this.state.controls.firstContactNumber.valid && this.state.controls.firstContactNumber.touched}
             /> 
             <FormControl component="fieldset" >
               <RadioGroup aria-label="firstContactNumberType" name="firstContactNumberType" value={this.state.controls.firstContactNumberType.value} onChange={this.handleChange} row>
@@ -350,17 +393,7 @@ class ContactDetailForm extends React.Component {
               </RadioGroup></FormControl>
           </div>
           <div className="col-md-4 md-3">
-            {/* <TextField
-              id="secondContactNumber"
-              margin="dense"
-              name="secondContactNumber"
-              label="Second Telephone Number"
-              value={this.state.controls.secondContactNumber.value}
-              onChange={this.handleChange}
-              className="form-control"
-              variant="outlined"
-              autoComplete="off"
-            /> */}
+            
             <MuiPhoneInput
                defaultCountry='us'
               //  regions={['north-america']}
@@ -368,6 +401,10 @@ class ContactDetailForm extends React.Component {
               variant="outlined"
               label="Second Telephone Number"
               name="secondContactNumber" 
+              value={this.state.controls.secondContactNumber.value}
+              onChange={val=>this.handleOnChange(val,'secondContactNumber')}
+              error={!this.state.controls.secondContactNumber.valid && this.state.controls.secondContactNumber.touched}
+           
             /> 
             <FormControl component="fieldset" >
               <RadioGroup aria-label="SecondContactNumberType" name="SecondContactNumberType" value={this.state.controls.SecondContactNumberType.value} onChange={this.handleChange} row>

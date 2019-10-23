@@ -254,7 +254,13 @@ function CustomizedSteppers(props) {
         alert("File not selected");
         return false;
     }
+    console.log(props.mode);
+    if(props.mode==='create'){
       props.dispatch(onboardActions.createParticipant(props.participant,props.documentslist));
+    }
+    else{
+      props.dispatch(onboardActions.updateParticipant(props.participant,props.documentslist));
+    }
     }
     else
     {
@@ -309,6 +315,7 @@ function CustomizedSteppers(props) {
                 variant="contained" 
                 onClick={(e)=>handleNext(e)}
                 className={[classes.button,classes.nextbutton,"next-button"].join(" ")}
+                disabled={!props.isFormValid}
               >
                 {activeStep === steps.length - 1  ? "Submit" : "Next"}
               </Button>  
@@ -324,7 +331,9 @@ const mapStateToProps=function(state) {
    
     return {
       documentslist: onboard.documentslist,
-       participant: onboard.participant
+       participant: onboard.participant,
+       isFormValid: onboard.isFormValid,
+       mode:onboard.mode
     };
 }
 

@@ -9,6 +9,7 @@ class Upload extends React.Component{
         this.state = {
             files: this.props.onboard.documentslist!==undefined?this.props.onboard.documentslist:[]
           };
+          this.props.dispatch(onboardActions.changeFormState(this.props.onboard.mode==='create'?false:true));
     }
     render(){
         return(
@@ -18,6 +19,12 @@ class Upload extends React.Component{
               files: fileItems.map(fileItem => fileItem.file)
             });
            this.props.dispatch(onboardActions.uploadParticipantFile(this.state.files));
+           if(this.state.files.length>0){
+            this.props.dispatch(onboardActions.changeFormState(true));
+           }
+           else{
+            this.props.dispatch(onboardActions.changeFormState(false));
+           }
           }}
                 labelIdle='Upload Files <span class="filepond--label-action">Upload Files</span>'/> 
             </div>

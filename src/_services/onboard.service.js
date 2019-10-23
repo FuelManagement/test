@@ -95,12 +95,12 @@ return uploadFile(Documentslist)
 })
     
 }
-function updateParticipant()
+function updateParticipant(collection,Documentslist)
 {
     
 return uploadFile(Documentslist)
     .then(uploadResponse => {
-        formData.Documentslist=uploadResponse;
+        collection.Documentslist=uploadResponse;
     const requestOptions = {
         method: 'POST',
        headers: { 'cache-control': 'no-cache',
@@ -114,10 +114,10 @@ return uploadFile(Documentslist)
        Accept: '*/*',
        'User-Agent': '*',
        'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(collection)
     };
-
-    return fetch(config.apiUrl + '/product/createParticipant', requestOptions).then(handleResponse, handleError);
+console.log(collection);
+    return fetch(config.apiUrl + '/product/updateParticipant', requestOptions).then(handleResponse, handleError);
 
 })
     

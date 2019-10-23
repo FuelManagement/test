@@ -78,7 +78,10 @@ export function onboard(state = {}, action) {
                         loading: false,
                         documentslist: action.files
                       };      
-    
+    case onboardConstants.ONBRD_CHANGE_FORM_STATE: return {
+      ...state,
+      isFormValid:action.valid
+    };
       default:
           return {
               ...state
