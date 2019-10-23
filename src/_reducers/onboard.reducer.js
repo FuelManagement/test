@@ -72,7 +72,12 @@ export function onboard(state = {}, action) {
                       loading: false,
                       participants:action.participants
                     };
-                  
+                    case onboardConstants.ONBRD_UPLOAD_PARTICIPANT_FILE_SUCCESS:
+                      return {
+                        ...state,
+                        loading: false,
+                        documentslist: action.files
+                      };      
     
       default:
           return {

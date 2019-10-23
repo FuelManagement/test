@@ -14,7 +14,7 @@ export const onboardActions = {
     changeParticipant,
     resetParticipant,
     changeModeParticipant,
-
+    uploadParticipantFile
 }
 function getAllOnBoarder() {
     return dispatch => {
@@ -70,6 +70,7 @@ function createParticipant(collection,Documentslist)
             .then((collection)=>
             {
                 dispatch(success({}));
+                dispatch(successDoc({}));
                 dispatch(alertActions.success(`Participant Added Successfully !`));
             history.push('/');
         })
@@ -82,6 +83,7 @@ function createParticipant(collection,Documentslist)
     function request() { return { type: onboardConstants.ONBRD_CREATE_PARTICIPANT_REQUEST} }
     function success(participant) { return { type: onboardConstants.ONBRD_CREATE_PARTICIPANT_SUCCESS, participant } }
     function failure(error) { return { type: onboardConstants.ONBRD_CREATE_PARTICIPANT_FAILURE, error } }
+    function successDoc(files) { return { type: onboardConstants.ONBRD_UPLOAD_PARTICIPANT_FILE_SUCCESS, files } }
 }
 function getParticipant(collection)
 {
@@ -197,3 +199,23 @@ function getAllParticipant(){
     function failure(error) { return { type: onboardConstants.ONBRD_GET_ALL_PARTICIPANT_FAILURE, error } }
 
 }
+function uploadParticipantFile(collection)
+{
+    return dispatch => {
+       // dispatch(request());
+        // onboardService.uploadFile(collection)
+        //     .then(collection => dispatch(success(collection)))
+        //     .then(()=>dispatch(alertActions.success(`Uploaded Sucessfully !`)))
+        //     .catch(error => {
+        //         dispatch(failure(error))
+        //         dispatch(alertActions.error(`Failed to upload file(s) !`));
+        //     });
+        dispatch(success(collection));
+
+    };
+
+    //function request() { return { type: onboardConstants.ONBRD_UPLOAD_PARTICIPANT_FILE_REQUEST} }
+    function success(files) { return { type: onboardConstants.ONBRD_UPLOAD_PARTICIPANT_FILE_SUCCESS, files } }
+    //function failure(error) { return { type: onboardConstants.ONBRD_UPLOAD_PARTICIPANT_FILE_FAILURE, error } }
+
+} 
