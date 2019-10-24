@@ -42,17 +42,17 @@ class AddRFQ extends React.Component {
         this.handleLineItemChange = this.handleLineItemChange.bind(this);
         this.state = {
             formData: props.row && Object.keys(props.row).length ? props.row : {
-                products: [
-                    {
-                        "productCategory": "",
-                        "subCategory": "",
-                        "productName": "",
-                        "quantity": "",
-                        "price": "",
-                        "priceAdjustment": "",
-                        "quantityUnit": ""
-                    }
-                ]
+                // products: [
+                //     {
+                //         "productCategory": "",
+                //         "subCategory": "",
+                //         "productName": "",
+                //         "quantity": "",
+                //         "price": "",
+                //         "priceAdjustment": "",
+                //         "quantityUnit": ""
+                //     }
+                // ]
             }
         }
     }
@@ -73,7 +73,7 @@ class AddRFQ extends React.Component {
     }
     handleLineItemChange(product, index) {
         let formData = { ...this.state.formData };
-        formData.products[index] = product;
+        // formData.products[index] = product;
         this.setState({ formData });
     }
     // addLineItem() {
@@ -115,20 +115,23 @@ class AddRFQ extends React.Component {
             value: "Refinery",
             label: "Refinery"
         }];
-
-        // let lineItems = () => {
-        //     let items = [];
-        //     this.state.formData.products && this.state.formData.products.map((data, idx) => {
-        //         items.push(
-        //             <LineItem
-        //                 handleLineItemChange={this.handleLineItemChange}
-        //                 lineItem={data}
-        //                 removeLineItem={this.removeLineItem}
-        //                 index={idx}
-        //                 key={idx} />)
-        //     })
-        //     return items;
-        // }
+        const participantId=[
+            {
+                value: "",
+                label: "None"
+            }, {
+                value: "1",
+                label: "1"
+            },
+            {
+                value: "2",
+                label: "2"
+            },
+            {
+                value: "3",
+                label: "3"
+            }
+        ] 
 
         return (
             <div className="mx-auto">
@@ -176,6 +179,30 @@ class AddRFQ extends React.Component {
                                 </div>
                                 <div className="col-md-4 mb-3  ">
                                     <TextField
+                                        select
+                                        id="participantId"
+                                        label="participant Id"
+                                        value={this.state.formData.participantId || ""}
+                                        onChange={this.handleChange}
+                                        name="participantId"
+                                        variant="outlined"
+                                        className="form-control"
+                                        autoComplete="off"
+                                        margin="dense"
+                                        disabled={false}
+                                    >
+                                        {participantId.map(option => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </MenuItem>
+                                        ))}
+                                    </TextField>
+                                </div>
+                                
+                            </div>
+                            <div className="row fom-row">
+                            <div className="col-md-12 mb-3  ">
+                                    <TextField
                                         id="projectDetails"
                                         label="Project Details"
                                         value={this.state.formData.projectDetails || ""}
@@ -188,7 +215,6 @@ class AddRFQ extends React.Component {
                                         disabled={false}
                                     />
                                 </div>
-
                             </div>
                             <div className="row form-row">
                                 <div className="col-md-4 mb-3  addrfq-dateTime">
@@ -243,8 +269,7 @@ class AddRFQ extends React.Component {
                                         name="activationTime"
                                         label="Activation Time"
                                         type="datetime-local"
-                                        defaultValue={this.state.formData.activationTime || ""}
-
+                                        defaultValue={this.state.formData.startTime || ""} 
                                         onChange={(date) => { this.handleDateChange(date, 'activationTime') }}
                                         margin="dense"
                                         variant="outlined"

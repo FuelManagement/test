@@ -15,10 +15,10 @@ class LineItem extends React.Component {
               },
           { title: 'Category', field: 'category', editable: 'never' },
           { title: 'Sub Category', field: 'subCategory', editable: 'never' },
-          { title: 'Measuring Units', field: 'msgUnits' },
+          { title: 'Measuring Units', field: 'msgUnits',editable: 'never'},
           { title: 'Quantity', field: 'quantity' },
-          { title: 'Price', field: 'price',editable: 'never' },
-          { title: 'Price Adjustment', field: 'priceAdjustment' },
+          { title: 'Price', field: 'price' },
+          { title: 'Price Adjustment', field: 'priceAdjustment', editable: 'never'},
           
         ],
         data: [

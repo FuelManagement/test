@@ -555,15 +555,17 @@ let Table_Config = {
 				Header: 'Status',
 				accessor: 'status',
 				Cell: row => <span title={row.original.status=='true'?'Active':'Inactive'}>{row.original.status=='true'?'Active':'Inactive'}</span>
-			},{
-				Header: 'Activation Time',
-				accessor: 'activationTime',
-				Cell: row => <span title={row.original.activationTime}>{row.original.activationTime}</span>
-			},{
-				Header: 'Closer Time',
-				accessor: 'closerTime',
-				Cell: row => <span title={row.original.closerTime}>{row.original.closerTime}</span>
-			},{
+			},
+			// {
+			// 	Header: 'Activation Time',
+			// 	accessor: 'activationTime',
+			// 	Cell: row => <span title={row.original.activationTime}>{row.original.activationTime}</span>
+			// },{
+			// 	Header: 'Closer Time',
+			// 	accessor: 'closerTime',
+			// 	Cell: row => <span title={row.original.closerTime}>{row.original.closerTime}</span>
+			// },
+			{
 				Header: 'Currency',
 				accessor: 'currency',
 				Cell: row => <span title={row.original.currency}>{row.original.currency}</span>
@@ -645,7 +647,45 @@ let Table_Config = {
 			}]
 		}
 	},
-
+	UserProfiles:{
+		userProfile:{
+			options:{...globalOptions},
+			columns:(props)=>[{
+				Header: 'Name',
+				accessor: 'name',
+				Cell: row => <span title={row.original.name}>{row.original.name}</span>
+			},{
+				Header: 'Organization Name',
+				accessor: 'organizationName',
+				Cell: row => <span title={row.original.organizationName}>{row.original.organizationName}</span>
+			},{
+				Header: 'Roll Type',
+				accessor: 'rollType',
+				Cell: row => <span title={row.original.rollType}>{row.original.rollType}</span>
+			},{
+				Header: 'Email ID',
+				accessor: 'emailId',
+				Cell: row => <span title={row.original.emailId}>{row.original.emailId}</span>
+			},{
+				Header: 'Actions',
+				accessor: 'userProfile',
+				Cell: row => <div className="row">
+								<button 
+									className="btn btn-outline-info btn-sm"
+									style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
+									onClick={e=>{props.toggleRfqModal(e, row.original, "view")}}>
+										<FontAwesomeIcon icon="eye" size="xs"/>
+								</button>
+								<button 
+									className="btn btn-outline-primary btn-sm"
+									style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
+									onClick={e=>{props.toggleRfqModal(e, row.original, "edit")}}>
+										<FontAwesomeIcon icon="edit" size="xs"/>
+								</button>
+							</div>
+			}]
+		}
+	},
 }
 
 module.exports = { Table_Config };
