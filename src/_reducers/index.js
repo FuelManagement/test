@@ -10,6 +10,7 @@ import { admin } from './admin.reducer';
 import { onboard } from './onboard.reducer';
 import { product } from './product.reducer';
 import { rfq } from './rfq.reducer';
+import {userProfile} from './userProfile.reducer';
 const rootReducer = combineReducers({
   authentication,
   registration,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   admin,
   onboard,
   product,
-  rfq
+  rfq,
+  userProfile
 });
 
 export default rootReducer;
