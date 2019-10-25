@@ -8,24 +8,19 @@ class LineItem extends React.Component {
       this.state = {
         selectedRow: null,
         columns: [
-            {
-                title: 'Product',
-                field: 'product',
-                lookup: { 0: 'Product1', 1: 'Product2' },
-              },
+          {
+            title: 'Product',
+            field: 'product',
+            lookup: { 0: 'Product1', 1: 'Product2' },
+          },
           { title: 'Category', field: 'category', editable: 'never' },
           { title: 'Sub Category', field: 'subCategory', editable: 'never' },
           { title: 'Measuring Units', field: 'msgUnits',editable: 'never'},
           { title: 'Quantity', field: 'quantity' },
           { title: 'Price', field: 'price' },
           { title: 'Price Adjustment', field: 'priceAdjustment', editable: 'never'},
-          
         ],
-        data: [
-          {product: 0, category: 'Category1', subCategory: 'Sub Category1', quantity: "42 BBl",price:'6000 $',priceAdjustment:'80000 $', msgUnits:'42 BBL' },
-          {  product: 1,category: 'Category2', subCategory: 'Sub Category2', quantity: "56BBL",price:"7000 $",priceAdjustment:'70000 $', msgUnits:'42 BBL'},
-          {  product: 1,category: 'Category2', subCategory: 'Sub Category2', quantity: "56BBL",price:"7000 $",priceAdjustment:'70000 $', msgUnits:'42 BBL'},
-        ]
+        products: props.products
       }
     }
   
@@ -38,7 +33,6 @@ class LineItem extends React.Component {
             search:false,
             pageSizeOptions:[1,3,5,7], 
             pageSize:3,
-            
             rowStyle: rowData => ({
                 backgroundColor: (this.state.selectedRow && this.state.selectedRow.tableData.id === rowData.tableData.id) ? '#EEE' : '#FFF'
               }),
@@ -51,13 +45,13 @@ class LineItem extends React.Component {
           }} 
           title=""
           columns={this.state.columns}
-          data={this.state.data}
+          data={this.state.products}
           editable={{     
             onRowAdd: newData =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
                   {
-                    const data = this.state.data;
+                    const data = this.state.products;
                     data.push(newData);
                     this.setState({ data }, () => resolve());
                   }
@@ -68,7 +62,7 @@ class LineItem extends React.Component {
               new Promise((resolve, reject) => {
                 setTimeout(() => {
                   {
-                    const data = this.state.data;
+                    const data = this.state.products;
                     const index = data.indexOf(oldData);
                     data[index] = newData;
                     this.setState({ data }, () => resolve());
@@ -80,7 +74,7 @@ class LineItem extends React.Component {
               new Promise((resolve, reject) => {
                 setTimeout(() => {
                   {
-                    let data = this.state.data;
+                    let data = this.state.products;
                     const index = data.indexOf(oldData);
                     data.splice(index, 1);
                     this.setState({ data }, () => resolve());

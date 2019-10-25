@@ -1,17 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { TextField, Select, InputLabel, MenuItem, FormControl } from '@material-ui/core';
-import {
-    MuiPickersUtilsProvider,
-    DatePicker,
-    KeyboardDatePicker
-} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
+import { TextField, MenuItem } from '@material-ui/core';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faAngleLeft, faPlus, faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 import { LineItem } from '../../_components/LineItem';
+import { rfqActions } from '../../_actions';
 library.add(faAngleLeft, faPlus);
 const currencytype = [
     {
@@ -56,7 +51,9 @@ class AddRFQ extends React.Component {
             }
         }
     }
-
+    componentDidMount() {
+        this.props.dispatch(rfqActions.getAllProducts());
+    }
     submitForm() {
     }
     handleDateChange(date, key) {
@@ -99,7 +96,7 @@ class AddRFQ extends React.Component {
 
     // }
     render() {
-        const { row = [], mode = "edit" } = this.props;
+        const { row = [], mode = "edit", rfq = {} } = this.props;
         const entitryType = [{
             value: "",
             label: "None"
@@ -323,7 +320,7 @@ class AddRFQ extends React.Component {
                             </div>
                             <div className="row form-row mb-3">
                                 <div className="col-md-12">
-                                    <LineItem />
+                                    <LineItem products={rfq.products} />
                                 </div>
                             </div>
                             <div className="row form-row">
@@ -340,4 +337,10 @@ class AddRFQ extends React.Component {
     }
 }
 
-export { AddRFQ };
+function mapStateToProps(state) {
+    const { rfq } = state;
+    return { rfq };
+}
+
+const connectedRfq = connect(mapStateToProps)(AddRFQ);
+export { connectedRfq as AddRFQ };

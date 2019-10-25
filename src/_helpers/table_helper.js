@@ -622,7 +622,7 @@ let Table_Config = {
 				Header: 'Action',
 				accessor: 'participantName',
 				Cell: row =>
-				<div className="row">
+				<div className="row onBoarding-action-row">
 					<button 
 						className="btn btn-outline-info btn-sm"
 						style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}

@@ -25,7 +25,8 @@ export function rfq(state = {}, action) {
         ...state,
         loading: true,
       };
-    case rfqConstants.GETALL_PRODUCT_SUCCESS:
+    case rfqConstants.GETALL_PRODUCTS_SUCCESS:
+      debugger;
       return {
         ...state,
         loading: false,
