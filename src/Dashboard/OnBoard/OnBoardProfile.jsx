@@ -27,7 +27,7 @@ class OnBoard_Profile extends React.Component {
        
         this.toggleModal=this.toggleModal.bind(this);
     }
-    componentWillReceiveProps(nextprops)
+    UNSAFE_componentWillReceiveProps(nextprops)
     {
     if(JSON.stringify(this.props.onboard.mode)!==JSON.stringify(nextprops.onboard.mode))
     {

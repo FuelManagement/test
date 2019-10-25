@@ -44,12 +44,12 @@ function getAllProducts() {
         dispatch(request());
         rfqService.getAllProducts()
             .then(
-                products => dispatch(success(rfqs)),
+                products => dispatch(success(products)),
                 error => dispatch(failure(error))
             );
     }
 
     function request() { return { type: rfqConstants.GETALL_PRODUCTS_REQUEST } }
-    function success(rfqs) { return { type: rfqConstants.GETALL_PRODUCTS_SUCCESS, products } }
+    function success(products) { return { type: rfqConstants.GETALL_PRODUCTS_SUCCESS, products } }
     function failure(error) { return { type: rfqConstants.GETALL_PRODUCTS_FAILURE, error } }
 }
