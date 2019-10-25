@@ -9,7 +9,9 @@ import { height } from '@material-ui/system';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ContactsIcon from '@material-ui/icons/Contacts';
 import ContactPhoneIcon from '@material-ui/icons/ContactPhone';
-import { userProfileActions,alertActions } from '../../_actions';
+import { userProfileActions, alertActions } from '../../_actions';
+import MuiPhoneInput from 'material-ui-phone-number';
+
 const GreenRadio = withStyles({
     root: {
         color: green[400],
@@ -44,35 +46,37 @@ class AddUserProfile extends React.Component {
         super(props);
         this.state = this.initialState(this.props.userProfile.mode, this.props.userProfile.userProfile);
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit= this.handleSubmit.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this); 
+    this.handleOnChange = this.handleOnChange.bind(this);
+
     }
-    componentWillReceiveProps(nextprops)
-    {
-    if(JSON.stringify(this.props.userProfile.userProfile)!==JSON.stringify(nextprops.userProfile.userProfile))
-    {
-        ["participantID","role","designation","first_Name","middle_Name","last_Name","firstContactNo","firstContactNoType","secondContactNo","secondContactNoType","email","address1","address2","city","state","zip","country"].forEach(name => {
-        this.setState(prevState => {
-          return {
-            controls: {
-              ...prevState.controls,
-              [name]: {
-                ...prevState.controls[name],
-                value: nextprops.userProfile.userProfile[name], 
-               // disable: nextprops.mode==='view'?true:false
-              }
-            }
-          }
-        });
-      });
-    
-    }}
+    componentWillReceiveProps(nextprops) {
+        if (JSON.stringify(this.props.userProfile.userProfile) !== JSON.stringify(nextprops.userProfile.userProfile)) {
+            ["participantID", "role", "designation", "first_Name", "middle_Name", "last_Name", "firstContactNo", "firstContactNoType", "secondContactNo", "secondContactNoType", "email", "address1", "address2", "city", "state", "zip", "country"].forEach(name => {
+                this.setState(prevState => {
+                    return {
+                        controls: {
+                            ...prevState.controls,
+                            [name]: {
+                                ...prevState.controls[name],
+                                value: nextprops.userProfile.userProfile[name],
+                                // disable: nextprops.mode==='view'?true:false
+                            }
+                        }
+                    }
+                });
+            });
+
+        }
+    }
     initialState(mode, props) {
         let state = {};
         state = {
+            data: "",
             controls: {
                 participantID: {
-                    value: props!==undefined && props.participantID!==undefined?props.participantID:'',
-                    valid:mode !=='create'?true:false,
+                    value: props !== undefined && props.participantID !== undefined ? props.participantID : '',
+                    valid: mode !== 'create' ? true : false,
                     validationRules: {
                         notEmpty: true,
                     },
@@ -83,22 +87,22 @@ class AddUserProfile extends React.Component {
                     disable: false
                 },
                 role: {
-                    value: props!==undefined && props.role!==undefined?props.role:'',
-                   
-                    valid:mode !=='create'?true:false,
+                    value: props !== undefined && props.role !== undefined ? props.role : '',
+
+                    valid: mode !== 'create' ? true : false,
                     validationRules: {
                         notEmpty: true,
                     },
                     error: "Please enter Roll Type",
                     placeholder: "Roll Type",
-                    touched: false,
+                    touched: true,
                     visible: true,
                     disable: false
                 },
                 designation: {
-                    value: props!==undefined && props.designation!==undefined?props.designation:'',
-                   
-                    valid:mode !=='create'?true:false,
+                    value: props !== undefined && props.designation !== undefined ? props.designation : '',
+
+                    valid: mode !== 'create' ? true : false,
                     validationRules: {
                         notEmpty: true,
                     },
@@ -109,9 +113,9 @@ class AddUserProfile extends React.Component {
                     disable: false
                 },
                 first_Name: {
-                    value: props!==undefined && props.first_Name!==undefined?props.first_Name:'',
-                   
-                    valid:mode !=='create'?true:false,
+                    value: props !== undefined && props.first_Name !== undefined ? props.first_Name : '',
+
+                    valid: mode !== 'create' ? true : false,
                     validationRules: {
                         notEmpty: true,
                         isName: true
@@ -123,11 +127,11 @@ class AddUserProfile extends React.Component {
                     disable: false
                 },
                 middle_Name: {
-                    value: props!==undefined && props.middle_Name!==undefined?props.middle_Name:'',
-                   
+                    value: props !== undefined && props.middle_Name !== undefined ? props.middle_Name : '',
+
                     valid: true,
                     validationRules: {
-                       
+
                     },
                     error: "Please enter Middle Name",
                     placeholder: "Middle Name",
@@ -136,9 +140,9 @@ class AddUserProfile extends React.Component {
                     disable: false
                 },
                 last_Name: {
-                    value: props!==undefined && props.last_Name!==undefined?props.last_Name:'',
-                   
-                    valid:mode !=='create'?true:false,
+                    value: props !== undefined && props.last_Name !== undefined ? props.last_Name : '',
+
+                    valid: mode !== 'create' ? true : false,
                     validationRules: {
                         notEmpty: true,
                         isName: true
@@ -151,9 +155,9 @@ class AddUserProfile extends React.Component {
                 },
 
                 firstContactNo: {
-                    value: props!==undefined && props.firstContactNo!==undefined?props.firstContactNo:'',
-                   
-                    valid:mode !=='create'?true:false,
+                    value: props !== undefined && props.firstContactNo !== undefined ? props.firstContactNo : '',
+
+                    valid: mode !== 'create' ? true : false,
                     validationRules: {
                         notEmpty: true,
 
@@ -165,8 +169,8 @@ class AddUserProfile extends React.Component {
                     disable: false
                 },
                 firstContactNoType: {
-                    value: props!==undefined && props.firstContactNoType!==undefined?props.firstContactNoType:'mobile',
-                   
+                    value: props !== undefined && props.firstContactNoType !== undefined ? props.firstContactNoType : 'mobile',
+
                     valid: true,
                     validationRules: {
                         //notEmpty: true,
@@ -179,8 +183,8 @@ class AddUserProfile extends React.Component {
                     disable: false
                 },
                 secondContactNo: {
-                    value: props!==undefined && props.secondContactNo!==undefined?props.secondContactNo:'',
-                   
+                    value: props !== undefined && props.secondContactNo !== undefined ? props.secondContactNo : '',
+
                     valid: true,
                     validationRules: {
                         // notEmpty: true,
@@ -193,11 +197,11 @@ class AddUserProfile extends React.Component {
                     disable: true
                 },
                 secondContactNoType: {
-                    value: props!==undefined && props.secondContactNoType!==undefined?props.secondContactNoType:'mobile',
-                   
+                    value: props !== undefined && props.secondContactNoType !== undefined ? props.secondContactNoType : 'mobile',
+
                     valid: true,
                     validationRules: {
-                       // notEmpty: true,
+                        // notEmpty: true,
                     },
                     error: "Please enter second telephone number",
                     touched: false,
@@ -205,9 +209,9 @@ class AddUserProfile extends React.Component {
                     disable: true
                 },
                 email: {
-                    value: props!==undefined && props.email!==undefined?props.email:'',
-                   
-                    valid:mode !=='create'?true:false,
+                    value: props !== undefined && props.email !== undefined ? props.email : '',
+
+                    valid: mode !== 'create' ? true : false,
                     validationRules: {
                         notEmpty: true,
                         isEmail: true
@@ -218,11 +222,23 @@ class AddUserProfile extends React.Component {
                     visible: true,
                     disable: false
                 },
+                password: {
+                    value: props !== undefined && props.password !== undefined ? props.password : '',
 
+                    valid: mode !== 'create' ? true : false,
+                    validationRules: {
+                        notEmpty: true,
+                    },
+                    error: "Please enter Email Address",
+                    placeholder: "Email Address ",
+                    touched: false,
+                    visible: true,
+                    disable: false
+                },
                 address1: {
-                    value: props!==undefined && props.address1!==undefined?props.address1:'',
-                   
-                    valid:mode !=='create'?true:false,
+                    value: props !== undefined && props.address1 !== undefined ? props.address1 : '',
+
+                    valid: mode !== 'create' ? true : false,
                     validationRules: {
                         notEmpty: true,
                         isName: true
@@ -235,9 +251,9 @@ class AddUserProfile extends React.Component {
                 },
 
                 address2: {
-                    value: props!==undefined && props.address2!==undefined?props.address2:'',
-                   
-                    valid:true,
+                    value: props !== undefined && props.address2 !== undefined ? props.address2 : '',
+
+                    valid: true,
                     validationRules: {
                         //notEmpty: true,
                         //isName: true
@@ -249,9 +265,9 @@ class AddUserProfile extends React.Component {
                     disable: false
                 },
                 city: {
-                    value: props!==undefined && props.city!==undefined?props.city:'',
-                   
-                    valid:mode !=='create'?true:false,
+                    value: props !== undefined && props.city !== undefined ? props.city : '',
+
+                    valid: mode !== 'create' ? true : false,
                     validationRules: {
                         notEmpty: true,
                         isName: true
@@ -263,9 +279,9 @@ class AddUserProfile extends React.Component {
                     disable: false
                 },
                 state: {
-                    value: props!==undefined && props.state!==undefined?props.state:'',
-                   
-                    valid:mode !=='create'?true:false,
+                    value: props !== undefined && props.state !== undefined ? props.state : '',
+
+                    valid: mode !== 'create' ? true : false,
                     validationRules: {
                         notEmpty: true,
                         isName: true
@@ -277,9 +293,9 @@ class AddUserProfile extends React.Component {
                     disable: false
                 },
                 country: {
-                    value: props!==undefined && props.country!==undefined?props.country:'',
-                   
-                    valid:mode !=='create'?true:false,
+                    value: props !== undefined && props.country !== undefined ? props.country : '',
+
+                    valid: mode !== 'create' ? true : false,
                     validationRules: {
                         notEmpty: true,
                         isName: true
@@ -291,12 +307,12 @@ class AddUserProfile extends React.Component {
                     disable: false
                 },
                 zip: {
-                    value: props!==undefined && props.zip!==undefined?props.zip:'',
-                   
-                    valid:mode !=='create'?true:false,
+                    value: props !== undefined && props.zip !== undefined ? props.zip : '',
+
+                    valid: mode !== 'create' ? true : false,
                     validationRules: {
                         notEmpty: true,
-                        
+
                     },
                     error: "Please enter Zipcode",
                     placeholder: "Zipcode",
@@ -313,6 +329,14 @@ class AddUserProfile extends React.Component {
     }
     handleChange(event) {
         let key = event.target.name, value = event.target.value;
+        if (event.target.name === "participantID") {
+
+            var myValue = this.props.participants.filter(f => f._id === event.target.value);
+            this.setState({
+                data: myValue[0].entityType
+            })
+        }
+
         let connectedValue = {};
         this.setState(prevState => {
             return {
@@ -322,46 +346,70 @@ class AddUserProfile extends React.Component {
                         ...prevState.controls[key],
                         value: value,
                         valid: validate(
-                          value,
-                          prevState.controls[key].validationRules,
-                          connectedValue,
-                          key
+                            value,
+                            prevState.controls[key].validationRules,
+                            connectedValue,
+                            key
                         ),
                         touched: true
                     }
                 }
             };
         });
-        this.props.dispatch(userProfileActions.changeUserProfile(key,value));
+        this.props.dispatch(userProfileActions.changeUserProfile(key, value));
     }
-    
-    handleSubmit(){ 
-     
-     let isFormVaild=true;
-     if (this.state.controls !== undefined) {
-        ["participantID","role","designation","first_Name","middle_Name","last_Name","firstContactNo","firstContactNoType","secondContactNo","secondContactNoType","email","address1","address2","city","state","zip","country"].forEach(name => {
-           let value = this.state.controls[name].valid, touched = this.state.controls[name].touched;
-           if (!value && this.props.userProfile.mode==='create') {
-            this.props.dispatch(alertActions.error("Field(s) cannot be empty."));
-            isFormVaild=false;
-           }
-           else if(!value && touched && this.props.userProfile.mode!=='create'){
-             this.props.dispatch(alertActions.error("Field(s) cannot be empty."));
-            isFormVaild=false;
-           }
-           
-         });
-         if(isFormVaild){
-      if(this.props.userProfile.mode==='create')
-      {
-          this.props.dispatch(userProfileActions.createUserProfile(this.props.userProfile.userProfile));
-      }else{
-         this.props.dispatch(userProfileActions.updateUserProfile(this.props.userProfile.userProfile));
+    handleOnChange(value,key) {
+        console.log(value,key)
+        let connectedValue = {};
+        this.setState(prevState => {
+          return {
+            controls: {
+              ...prevState.controls,
+              [key]: {
+                ...prevState.controls[key],
+                value: value,
+                valid: validate(
+                  value,
+                  prevState.controls[key].validationRules,
+                  connectedValue,
+                  key
+                ),
+                touched: true
+              }
+            }
+          };
+        }); 
       }
-     
-     }
-     }
-  
+
+    handleSubmit() {
+        let isFormVaild = true;
+        if (this.state.controls !== undefined) {
+            ["participantID", "designation", "first_Name", "middle_Name", "last_Name", "firstContactNo", "firstContactNoType", "secondContactNo","role", "password", "secondContactNoType", "email", "address1", "address2", "city", "state", "zip", "country"].forEach(name => {
+                let value = this.state.controls[name].valid, touched = this.state.controls[name].touched;
+                //  if(name === "role"){
+                console.log("values");
+                console.log(value);
+                //  }   
+                if (!value && this.props.userProfile.mode === 'create') {
+                    this.props.dispatch(alertActions.error("Field(s) cannot be empty."));
+                    isFormVaild = false;
+                }
+                else if (!value && touched && this.props.userProfile.mode !== 'create') {
+                    this.props.dispatch(alertActions.error("Field(s) cannot be empty."));
+                    isFormVaild = false;
+                }
+
+            });
+            if (isFormVaild) {
+                if (this.props.userProfile.mode === 'create') {
+                    this.props.dispatch(userProfileActions.createUserProfile(this.props.userProfile.userProfile));
+                } else {
+                    this.props.dispatch(userProfileActions.updateUserProfile(this.props.userProfile.userProfile));
+                }
+
+            }
+        }
+
     }
 
     render() {
@@ -378,7 +426,7 @@ class AddUserProfile extends React.Component {
                                     <TextField
                                         select
                                         error={!this.state.controls.participantID.valid && this.state.controls.participantID.touched}
-                                
+
                                         id='participantID'
                                         variant="outlined"
                                         name='participantID'
@@ -387,7 +435,6 @@ class AddUserProfile extends React.Component {
                                         className="form-control"
                                         onChange={this.handleChange}
                                         margin="dense"
-
                                     >
                                         {this.props.participants.map(option => (
                                             <MenuItem key={option._id} value={option._id}>
@@ -398,30 +445,29 @@ class AddUserProfile extends React.Component {
                                 </div>
                                 <div className="col-md-4 mb-3  ">
                                     <TextField
-                                     error={!this.state.controls.role.valid && this.state.controls.role.touched}
-                                
-                                        select
+                                        // error={!this.state.controls.role.valid && this.state.controls.role.touched} 
                                         id='role'
                                         variant="outlined"
                                         name='role'
                                         label="Role"
-                                        value={this.state.controls.role.value}
+                                        value={this.state.data}
                                         className="form-control"
-                                        onChange={this.handleChange}
+                                        // onChange={this.handleChange}
                                         margin="dense"
-
-                                    >
-                                        {businessRange.map(option => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
+                                        disabled
+                                    />
+                                    {/* {this.state.data.map(option => (
+                                            <MenuItem key={option._id} value={option._id}>
+                                                {option.entityType}
                                             </MenuItem>
-                                        ))}
-                                    </TextField>
+                                         ))} */}
+
+                                    {/* </TextField> */}
                                 </div>
                                 <div className="col-md-4 mb-3  ">
                                     <TextField
-                                     error={!this.state.controls.designation.valid && this.state.controls.designation.touched}
-                                
+                                        error={!this.state.controls.designation.valid && this.state.controls.designation.touched}
+
                                         id="designation"
                                         label="Designation"
                                         name="designation"
@@ -438,8 +484,8 @@ class AddUserProfile extends React.Component {
                             <div className="row form-row">
                                 <div className="col-md-4 mb-3  addrfq-dateTime">
                                     <TextField
-                                     error={!this.state.controls.first_Name.valid && this.state.controls.first_Name.touched}
-                                
+                                        error={!this.state.controls.first_Name.valid && this.state.controls.first_Name.touched}
+
                                         id="first_Name"
                                         label="First Name"
                                         name="first_Name"
@@ -466,8 +512,8 @@ class AddUserProfile extends React.Component {
                                 </div>
                                 <div className="col-md-4 mb-3  ">
                                     <TextField
-                                     error={!this.state.controls.last_Name.valid && this.state.controls.last_Name.touched}
-                                
+                                        error={!this.state.controls.last_Name.valid && this.state.controls.last_Name.touched}
+
                                         id="last_Name"
                                         label="Last Name"
                                         name="last_Name"
@@ -486,10 +532,10 @@ class AddUserProfile extends React.Component {
                                 </div>
                             </div>
                             <div className="row form-row">
-                                <div className="col-md-4 mb-3  addrfq-dateTime">
-                                    <TextField
-                                     error={!this.state.controls.firstContactNo.valid && this.state.controls.firstContactNo.touched}
-                                
+                                <div className="col-md-6 mb-3  addrfq-dateTime">
+                                    {/* <TextField
+                                        error={!this.state.controls.firstContactNo.valid && this.state.controls.firstContactNo.touched}
+
                                         id="firstContactNo"
                                         label="First Telephone Number"
                                         name="firstContactNo"
@@ -499,6 +545,18 @@ class AddUserProfile extends React.Component {
                                         className="form-control"
                                         autoComplete="off"
                                         margin="dense"
+                                    /> */}
+                                    <MuiPhoneInput
+                                        defaultCountry='us'
+                                        //  regions={['north-america']}
+                                        margin="dense"
+                                        variant="outlined"
+                                        label="First Telephone Number"
+                                        name="firstContactNo"
+                                        id="firstContactNo"  
+                                        value={this.state.controls.firstContactNo.value}
+                                        onChange={val => this.handleOnChange(val, 'firstContactNo')}
+                                        error={!this.state.controls.firstContactNo.valid && this.state.controls.firstContactNo.touched}
                                     />
                                     <FormControl component="fieldset" >
                                         <RadioGroup aria-label="firstContactNoType" name="firstContactNoType" value={this.state.controls.firstContactNoType.value} onChange={this.handleChange} row>
@@ -517,10 +575,9 @@ class AddUserProfile extends React.Component {
                                         </RadioGroup>
                                     </FormControl>
                                 </div>
-                                <div className="col-md-4 mb-3 addrfq-dateTime ">
-                                    <TextField
-                                     error={!this.state.controls.secondContactNo.valid && this.state.controls.secondContactNo.touched}
-                                
+                                <div className="col-md-6 mb-3 addrfq-dateTime ">
+                                    {/* <TextField
+                                        error={!this.state.controls.secondContactNo.valid && this.state.controls.secondContactNo.touched}
                                         id="secondContactNo"
                                         margin="dense"
                                         name="secondContactNo"
@@ -530,6 +587,18 @@ class AddUserProfile extends React.Component {
                                         className="form-control"
                                         variant="outlined"
                                         autoComplete="off"
+                                    /> */}
+                                    <MuiPhoneInput
+                                        defaultCountry='us'
+                                        //  regions={['north-america']}
+                                        margin="dense"
+                                        variant="outlined"
+                                        label="Second Telephone Number"
+                                        name="secondContactNo"
+                                        id="secondContactNo" 
+                                        value={this.state.controls.secondContactNo.value}
+                                        onChange={val => this.handleOnChange(val, 'secondContactNo')}
+                                        error={!this.state.controls.secondContactNo.valid && this.state.controls.secondContactNo.touched}
                                     />
                                     <FormControl component="fieldset" >
                                         <RadioGroup aria-label="radioFirstTelephoneNumber" name="secondContactNoType" value={this.state.controls.secondContactNoType.value} onChange={this.handleChange} row>
@@ -548,14 +617,31 @@ class AddUserProfile extends React.Component {
                                         </RadioGroup>
                                     </FormControl>
                                 </div>
-                                <div className="col-md-4 mb-3 ">
+
+                            </div>
+                            <div className="row">
+                                <div className="col-md-6 mb-3 ">
                                     <TextField
-                                     error={!this.state.controls.email.valid && this.state.controls.email.touched}
-                                
+                                        error={!this.state.controls.email.valid && this.state.controls.email.touched}
                                         id="email"
                                         label="Email Address"
                                         name="email"
                                         value={this.state.controls.email.value}
+                                        onChange={this.handleChange}
+                                        variant="outlined"
+                                        className="form-control"
+                                        autoComplete="off"
+                                        margin="dense"
+                                    />
+                                </div>
+                                <div className="col-md-6">
+                                    <TextField
+                                        error={!this.state.controls.password.valid && this.state.controls.email.touched}
+                                        type="password"
+                                        id="password"
+                                        label="Password"
+                                        name="password"
+                                        value={this.state.controls.password.value}
                                         onChange={this.handleChange}
                                         variant="outlined"
                                         className="form-control"
@@ -572,8 +658,8 @@ class AddUserProfile extends React.Component {
                             <div className="row form-row">
                                 <div className="col-md-4 mb-3 ">
                                     <TextField
-                                     error={!this.state.controls.address1.valid && this.state.controls.address1.touched}
-                                
+                                        error={!this.state.controls.address1.valid && this.state.controls.address1.touched}
+
                                         id="address1"
                                         label="Address line 1"
                                         name="address1"
@@ -600,8 +686,8 @@ class AddUserProfile extends React.Component {
                                 </div>
                                 <div className="col-md-4 mb-3 ">
                                     <TextField
-                                     error={!this.state.controls.city.valid && this.state.controls.city.touched}
-                                
+                                        error={!this.state.controls.city.valid && this.state.controls.city.touched}
+
                                         id="city"
                                         label="City"
                                         name="city"
@@ -617,8 +703,8 @@ class AddUserProfile extends React.Component {
                             <div className="row form-row">
                                 <div className="col-md-4 mb-3 ">
                                     <TextField
-                                     error={!this.state.controls.state.valid && this.state.controls.state.touched}
-                                
+                                        error={!this.state.controls.state.valid && this.state.controls.state.touched}
+
                                         id="state"
                                         label="State"
                                         name="state"
@@ -632,8 +718,8 @@ class AddUserProfile extends React.Component {
                                 </div>
                                 <div className="col-md-4 mb-3 ">
                                     <TextField
-                                     error={!this.state.controls.zip.valid && this.state.controls.zip.touched}
-                                
+                                        error={!this.state.controls.zip.valid && this.state.controls.zip.touched}
+
                                         id="zip"
                                         label="Zipcode"
                                         name="zip"
@@ -647,8 +733,8 @@ class AddUserProfile extends React.Component {
                                 </div>
                                 <div className="col-md-4 mb-3 ">
                                     <TextField
-                                     error={!this.state.controls.country.valid && this.state.controls.country.touched}
-                                
+                                        error={!this.state.controls.country.valid && this.state.controls.country.touched}
+
                                         id="country"
                                         label="Country"
                                         name="country"
@@ -664,7 +750,7 @@ class AddUserProfile extends React.Component {
                             <div className="row form-row">
                                 <div className="col-md-9"></div>
                                 <div className="col-md-3 mb-3 ">
-                                 {this.props.userProfile.mode!=='view'? <button className="btn btn-primary create-btn link-bg button-style float-right mb10" onClick={this.handleSubmit}>{this.props.userProfile.mode==='create'?'Create':'Update'}</button>:null}
+                                    {this.props.userProfile.mode !== 'view' ? <button className="btn btn-primary create-btn link-bg button-style float-right mb10" onClick={this.handleSubmit}>{this.props.userProfile.mode === 'create' ? 'Create' : 'Update'}</button> : null}
                                 </div>
                             </div>
                         </div>
@@ -676,12 +762,9 @@ class AddUserProfile extends React.Component {
 }
 
 function mapStateToProps(state) {
-    
     return {
-        userProfile:state.userProfile,
-        participants:state.onboard.participants
-      
-      
+        userProfile: state.userProfile,
+        participants: state.onboard.participants
     };
 }
 

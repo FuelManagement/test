@@ -178,7 +178,7 @@ class AddRFQ extends React.Component {
                                     <TextField
                                         select
                                         id="participantId"
-                                        label="participant Id"
+                                        label="Organisation Name"
                                         value={this.state.formData.participantId || ""}
                                         onChange={this.handleChange}
                                         name="participantId"
@@ -339,6 +339,8 @@ class AddRFQ extends React.Component {
 
 function mapStateToProps(state) {
     const { rfq } = state;
+    console.log("welcome12")
+    console.log(rfq);
     return { rfq };
 }
 
