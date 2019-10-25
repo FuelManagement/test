@@ -110,7 +110,7 @@ class Sidebar extends React.Component {
                                     </Link>
                                     <div className="sidebar-submenu">
                                         <ul>
-                                            <li><Link to="/">Registration</Link></li>
+                                            {/* <li><Link to="/">Registration</Link></li> */}
                                             <li><Link to="/profile">Profile</Link></li>
                                         </ul>
                                     </div>
