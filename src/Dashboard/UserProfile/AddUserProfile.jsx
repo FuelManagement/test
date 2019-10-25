@@ -52,7 +52,7 @@ class AddUserProfile extends React.Component {
     }
     componentWillReceiveProps(nextprops) {
         if (JSON.stringify(this.props.userProfile.userProfile) !== JSON.stringify(nextprops.userProfile.userProfile)) {
-            ["participantID", "role", "designation", "first_Name", "middle_Name", "last_Name", "firstContactNo", "firstContactNoType", "secondContactNo", "secondContactNoType", "email", "address1", "address2", "city", "state", "zip", "country"].forEach(name => {
+            ["participantID", "role", "designation", "first_Name", "middle_Name", "last_Name", "firstContactNo", "firstContactNoType", "secondContactNo", "secondContactNoType", "email","password", "address1", "address2", "city", "state", "zip", "country"].forEach(name => {
                 this.setState(prevState => {
                     return {
                         controls: {
@@ -60,7 +60,7 @@ class AddUserProfile extends React.Component {
                             [name]: {
                                 ...prevState.controls[name],
                                 value: nextprops.userProfile.userProfile[name],
-                                // disable: nextprops.mode==='view'?true:false
+                               
                             }
                         }
                     }
@@ -89,9 +89,9 @@ class AddUserProfile extends React.Component {
                 role: {
                     value: props !== undefined && props.role !== undefined ? props.role : '',
 
-                    valid: mode !== 'create' ? true : false,
+                    valid: true,
                     validationRules: {
-                        notEmpty: true,
+                        notEmpty: false,
                     },
                     error: "Please enter Roll Type",
                     placeholder: "Roll Type",
@@ -331,10 +331,20 @@ class AddUserProfile extends React.Component {
         let key = event.target.name, value = event.target.value;
         if (event.target.name === "participantID") {
 
-            var myValue = this.props.participants.filter(f => f._id === event.target.value);
-            this.setState({
-                data: myValue[0].entityType
-            })
+            let role = this.props.participants.find(f => f._id === event.target.value).entityType;
+            this.setState(prevState => {
+                return {
+                    controls: {
+                        ...prevState.controls,
+                        ['role']: {
+                            ...prevState.controls['role'],
+                            value: role,
+                           
+                        }
+                    }
+                };
+            });
+            this.props.dispatch(userProfileActions.changeUserProfile('role', role));
         }
 
         let connectedValue = {};
@@ -359,7 +369,6 @@ class AddUserProfile extends React.Component {
         this.props.dispatch(userProfileActions.changeUserProfile(key, value));
     }
     handleOnChange(value,key) {
-        console.log(value,key)
         let connectedValue = {};
         this.setState(prevState => {
           return {
@@ -386,10 +395,7 @@ class AddUserProfile extends React.Component {
         if (this.state.controls !== undefined) {
             ["participantID", "designation", "first_Name", "middle_Name", "last_Name", "firstContactNo", "firstContactNoType", "secondContactNo","role", "password", "secondContactNoType", "email", "address1", "address2", "city", "state", "zip", "country"].forEach(name => {
                 let value = this.state.controls[name].valid, touched = this.state.controls[name].touched;
-                //  if(name === "role"){
-                console.log("values");
-                console.log(value);
-                //  }   
+                
                 if (!value && this.props.userProfile.mode === 'create') {
                     this.props.dispatch(alertActions.error("Field(s) cannot be empty."));
                     isFormVaild = false;
@@ -450,7 +456,7 @@ class AddUserProfile extends React.Component {
                                         variant="outlined"
                                         name='role'
                                         label="Role"
-                                        value={this.state.data}
+                                        value={this.state.controls.role.value}
                                         className="form-control"
                                         // onChange={this.handleChange}
                                         margin="dense"
@@ -636,7 +642,7 @@ class AddUserProfile extends React.Component {
                                 </div>
                                 <div className="col-md-6">
                                     <TextField
-                                        error={!this.state.controls.password.valid && this.state.controls.email.touched}
+                                        error={!this.state.controls.password.valid && this.state.controls.password.touched}
                                         type="password"
                                         id="password"
                                         label="Password"

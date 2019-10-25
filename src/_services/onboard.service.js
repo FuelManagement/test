@@ -98,6 +98,9 @@ function createParticipant(collection, Documentslist) {
 
 }
 function updateParticipant(collection, Documentslist) {
+    let user = JSON.parse(localStorage.getItem('user'));
+    collection.email=user.email;
+    collection._id=undefined;
     let tokenObj = JSON.parse(localStorage.getItem('token'));
     // return uploadFile(Documentslist)
     //     .then(uploadResponse => {
@@ -172,18 +175,14 @@ function uploadFile(collection) {
 }
 function approveParticipant(data) {
     
-    let requestData = {
-        "registerId":data,
-        "streetAddress":"dsfsd"
-    }
+    
   
     const requestOptions = {
         method: 'POST',
         headers: authHeader(),
-        body: JSON.stringify(requestData)
+        body: JSON.stringify(data)
     };
-  
-   console.log(requestData);
+
     return fetch(config.apiUrl + '/product/enrollParticipant', requestOptions)
         .then(handleResponse)
 }

@@ -40,6 +40,7 @@ function createUserProfile(collection) {
             .then( userprofile => { 
                 dispatch(success(userprofile));
                 dispatch(alertActions.success('User Profile Added Successfully !'));
+                history.push('/userProfile');
             })
             .then(()=>dispatch(getAllUserProfile()))
             .then(()=> dispatch(alertActions.clearLoading()))

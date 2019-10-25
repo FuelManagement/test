@@ -639,7 +639,11 @@ let Table_Config = {
 						(<button 
 							className="btn btn-outline-success btn-sm"
 							style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
-							onClick={e=>{props.approveParticipant(e, row.original._id,'approve')}}>
+							onClick={e=>{props.approveParticipant(e,   {
+								"email": row.original.emailAddress,
+								"registerId": row.original.registerId,
+								
+								},'approve')}}>
 								{/* <FontAwesomeIcon icon="check-square" size="xs"/>*/} Approve 
 						</button>):""
 					}

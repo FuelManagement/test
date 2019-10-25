@@ -248,7 +248,7 @@ function CustomizedSteppers(props) {
   const steps = getSteps();
   const handleNext = (event) => {
     
-    if(activeStep===steps.length-1)
+    if(activeStep===steps.length-1 )
     {
       if (props.documentslist===undefined || props.documentslist.length<1) {
         alert("File not selected");

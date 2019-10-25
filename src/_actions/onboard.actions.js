@@ -196,7 +196,7 @@ function getAllParticipant(){
             .then(
                 participant => { 
                    
-                    dispatch(success(participant.filter(f=>f.Documentslist!==undefined && f.Documentslist.length>0)));
+                    dispatch(success(participant));
                    
                     dispatch(alertActions.clearLoading());
                 },

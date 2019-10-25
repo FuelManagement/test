@@ -14,7 +14,7 @@ function getAllUserProfile() {
         method: 'GET',
         headers: authHeader()
     };
-    return fetch(config.apiUrl + '/user/getuserList?userID='+user.email, requestOptions)
+    return fetch(config.apiUrl + '/product/getSubUsersById?email=example@example.com', requestOptions)
     .then(handleResponse)
 }
 function createUserProfile(collection) {
