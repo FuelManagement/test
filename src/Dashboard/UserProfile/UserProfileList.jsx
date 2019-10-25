@@ -1,13 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';  
-
-import { API_Helpers, Utils, Table_Config } from '../../_helpers';
+import { userProfileActions } from '../../_actions';
+import { API_Helpers, Utils, Table_Config,history } from '../../_helpers';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faPlus);
 
 import ReactTable from 'react-table';
 import 'react-table/react-table.css'; 
@@ -18,7 +15,20 @@ class UserProfile extends React.Component {
         super(props); 
         this.state={ 
         }   
+        
     }   
+    componentDidMount() {
+        this.props.dispatch(userProfileActions.changeModeUserProfile('create'));
+        this.props.dispatch(userProfileActions.getAllUserProfile());  
+    }
+    editUserProfile(collection,mode){
+        this.props.dispatch(userProfileActions.changeModeUserProfile(mode));
+        this.props.dispatch(userProfileActions.getUserProfile(collection));
+        history.push('/userProfile/add');
+    }
+    shouldComponentUpdate(){
+        return true;
+    }
     render() {
 
         return ( 
@@ -33,8 +43,8 @@ class UserProfile extends React.Component {
                 <div className="clearDiv"></div>
                 <br />
                 <ReactTable
-                    // data={this.props.rfq.rfqs}
-                    columns={Table_Config.UserProfiles.userProfile.columns({})}
+                    data={this.props.userProfile.userProfiles!==undefined && this.props.userProfile.userProfiles!==null ?this.props.userProfile.userProfiles:[]}
+                    columns={Table_Config.UserProfiles.userProfile.columns({editUserProfile:this.editUserProfile.bind(this)})}
                     {...Table_Config.UserProfiles.userProfile.options}
                 /> 
                 </div>
@@ -43,8 +53,11 @@ class UserProfile extends React.Component {
 }
 
 function mapStateToProps(state) {
+    const { userProfile } = state;
+   
     return {
-            
+        userProfile
+      
     };
 }
 

@@ -652,34 +652,34 @@ let Table_Config = {
 			options:{...globalOptions},
 			columns:(props)=>[{
 				Header: 'Name',
-				accessor: 'name',
-				Cell: row => <span title={row.original.name}>{row.original.name}</span>
+				accessor: 'first_Name',
+				Cell: row => <span title={row.original.first_Name+' '+row.original.middle_Name+' '+row.original.last_Name}>{row.original.first_Name+' '+row.original.middle_Name+' '+row.original.last_Name}</span>
 			},{
 				Header: 'Organization Name',
-				accessor: 'organizationName',
-				Cell: row => <span title={row.original.organizationName}>{row.original.organizationName}</span>
+				accessor: 'participantID',
+				Cell: row => <span title={row.original.participantID}>{row.original.participantID}</span>
 			},{
-				Header: 'Roll Type',
-				accessor: 'rollType',
-				Cell: row => <span title={row.original.rollType}>{row.original.rollType}</span>
+				Header: 'Role',
+				accessor: 'role',
+				Cell: row => <span title={row.original.role}>{row.original.role}</span>
 			},{
 				Header: 'Email ID',
-				accessor: 'emailId',
-				Cell: row => <span title={row.original.emailId}>{row.original.emailId}</span>
+				accessor: 'email',
+				Cell: row => <span title={row.original.email}>{row.original.email}</span>
 			},{
 				Header: 'Actions',
-				accessor: 'userProfile',
+				accessor: 'participantID',
 				Cell: row => <div className="row">
 								<button 
 									className="btn btn-outline-info btn-sm"
 									style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
-									onClick={e=>{props.toggleRfqModal(e, row.original, "view")}}>
+									onClick={e=>{props.editUserProfile(e, row.original, "view")}}>
 										<FontAwesomeIcon icon="eye" size="xs"/>
 								</button>
 								<button 
 									className="btn btn-outline-primary btn-sm"
 									style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
-									onClick={e=>{props.toggleRfqModal(e, row.original, "edit")}}>
+									onClick={e=>{props.editUserProfile(e, row.original, "update")}}>
 										<FontAwesomeIcon icon="edit" size="xs"/>
 								</button>
 							</div>
