@@ -9,57 +9,53 @@ import { LineItem } from '../../_components/LineItem';
 import { rfqActions } from '../../_actions';
 library.add(faAngleLeft, faPlus);
 const currencytype = [
-    {
-        value: "",
-        label: "None"
-    },
-    {
-        value: "LLC",
-        label: "LLC"
-    },
-    {
-        value: "LLP",
-        label: "LLP"
-    },
-    {
-        value: "30",
-        label: "Thirty"
-    }
+    {value: "",label: "None"},
+    {value: "LLC",label: "LLC"},
+    {value: "LLP",label: "LLP"},
+    {value: "30",label: "Thirty"}
 ];
 class AddRFQ extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
-        this.handleDateChange = this.handleDateChange.bind(this);
+        this.handleEntityChange= this.handleEntityChange.bind(this);
         this.newRFQSubmit = this.submitForm.bind(this);
-        // this.addLineItem = this.addLineItem.bind(this);
-        // this.removeLineItem = this.removeLineItem.bind(this);
         this.handleLineItemChange = this.handleLineItemChange.bind(this);
+        this.getEntityTypes = this.getEntityTypes.bind(this);
+        this.filterParticipants = this.filterParticipants.bind(this);
         this.state = {
-            formData: props.row && Object.keys(props.row).length ? props.row : {
-                // products: [
-                //     {
-                //         "productCategory": "",
-                //         "subCategory": "",
-                //         "productName": "",
-                //         "quantity": "",
-                //         "price": "",
-                //         "priceAdjustment": "",
-                //         "quantityUnit": ""
-                //     }
-                // ]
-            }
+            formData: props.row && Object.keys(props.row).length ? props.row : {},
+            participants: props.rfq.participants || [],
+            entityTypes: this.getEntityTypes(props.rfq.participants) || [{value:"", label:"None"}]
         }
     }
     componentDidMount() {
         this.props.dispatch(rfqActions.getAllProducts());
+        this.props.dispatch(rfqActions.getAllParticipant());
+    }
+    UNSAFE_componentWillReceiveProps(){
+        if(this.props.rfq.participants && this.props.rfq.participants.length){
+            this.setState({
+                entityTypes:this.getEntityTypes(this.props.rfq.participants),
+                participants: this.props.rfq.participants
+            });
+        }
     }
     submitForm() {
     }
-    handleDateChange(date, key) {
-        let formData = { ...this.state.formData };
-        formData[key] = date;
-        this.setState({ formData });
+    getEntityTypes(participants=[]){
+        let entityTypes = {};
+        participants.map(participant => {
+            if(participant.entityType)
+                entityTypes[participant.entityType] = participant.entityType;
+        })
+        let types = Object.keys(entityTypes).map(type=> ({value:type, label:type}));
+        return types.length?types:false;
+    }
+    filterParticipants(entityType){
+        let participants = this.props.rfq && this.props.rfq.participants || [];
+        participants = participants.filter(participant => participant.entityType === entityType);
+        this.setState({participants});
     }
     handleChange(event) {
         let key = event.target.name,
@@ -68,68 +64,16 @@ class AddRFQ extends React.Component {
         formData[key] = value;
         this.setState({ formData });
     }
+    handleEntityChange(event){
+        this.handleChange(event);
+        this.filterParticipants(event.target.value);
+    }
     handleLineItemChange(product, index) {
         let formData = { ...this.state.formData };
-        // formData.products[index] = product;
         this.setState({ formData });
     }
-    // addLineItem() {
-    //     let formData = this.state.formData;
-    //     formData.products.push({
-    //         "productCategory": "",
-    //         "subCategory": "",
-    //         "productName": "",
-    //         "quantity": "",
-    //         "price": "",
-    //         "priceAdjustment": "",
-    //         "quantityUnit": ""
-    //     })
-    //     this.setState({ formData })
-    // }
-    // removeLineItem(idx) {
-    //     if (!idx) return;
-    //     let formData = this.state.formData;
-    //     if (formData.products[idx]) {
-    //         formData.products.splice(idx, 1);
-    //     }
-    //     this.setState({ formData });
-
-    // }
     render() {
-        const { row = [], mode = "edit", rfq = {} } = this.props;
-        const entitryType = [{
-            value: "",
-            label: "None"
-        }, {
-            value: "Exporter",
-            label: "Exporter"
-        },
-        {
-            value: "Importer",
-            label: "Importer"
-        },
-        {
-            value: "Refinery",
-            label: "Refinery"
-        }];
-        const participantId=[
-            {
-                value: "",
-                label: "None"
-            }, {
-                value: "1",
-                label: "1"
-            },
-            {
-                value: "2",
-                label: "2"
-            },
-            {
-                value: "3",
-                label: "3"
-            }
-        ] 
-
+        const { mode = "edit", rfq = {} } = this.props;
         return (
             <div className="mx-auto">
                 <div className="row brd-tp1px">
@@ -138,7 +82,6 @@ class AddRFQ extends React.Component {
                         <hr />
                         <div className="col-12 col-md-12 form-wrapper">
                             <div className="row form-row">
-                                {/* <div className="form-row"> */}
                                 <div className="col-md-4 mb-3  ">
                                     <TextField
                                         id="projectId"
@@ -150,7 +93,8 @@ class AddRFQ extends React.Component {
                                         className="form-control"
                                         autoComplete="off"
                                         margin="dense"
-                                        disabled={false}
+                                        disabled={true}
+                                        readOnly={true}
                                     />
                                 </div>
                                 <div className="col-md-4 mb-3  ">
@@ -159,7 +103,7 @@ class AddRFQ extends React.Component {
                                         id="entityType"
                                         label="Entity Type"
                                         value={this.state.formData.entityType || ""}
-                                        onChange={this.handleChange}
+                                        onChange={this.handleEntityChange}
                                         name="entityType"
                                         variant="outlined"
                                         className="form-control"
@@ -167,7 +111,7 @@ class AddRFQ extends React.Component {
                                         margin="dense"
                                         disabled={false}
                                     >
-                                        {entitryType.map(option => (
+                                        {this.state.entityTypes.map(option => (
                                             <MenuItem key={option.value} value={option.value}>
                                                 {option.label}
                                             </MenuItem>
@@ -177,25 +121,22 @@ class AddRFQ extends React.Component {
                                 <div className="col-md-4 mb-3  ">
                                     <TextField
                                         select
-                                        id="participantId"
-                                        label="Organisation Name"
-                                        value={this.state.formData.participantId || ""}
-                                        onChange={this.handleChange}
-                                        name="participantId"
+                                        id='participantID'
                                         variant="outlined"
+                                        name='participantID'
+                                        label="Organisation Name"
+                                        value={this.state.formData.participantID || ""}
                                         className="form-control"
-                                        autoComplete="off"
+                                        onChange={this.handleChange}
                                         margin="dense"
-                                        disabled={false}
                                     >
-                                        {participantId.map(option => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
+                                        { this.state.participants && this.state.participants.map(option => (
+                                            <MenuItem key={option._id} value={option._id}>
+                                                {option.registerId}
                                             </MenuItem>
                                         ))}
                                     </TextField>
                                 </div>
-                                
                             </div>
                             <div className="row fom-row">
                             <div className="col-md-12 mb-3  ">
@@ -220,8 +161,8 @@ class AddRFQ extends React.Component {
                                         name="startTime"
                                         label="Start Time"
                                         type="datetime-local"
-                                        defaultValue={this.state.formData.startTime || ""}
-                                        onChange={(date) => { this.handleDateChange(date, 'startTime') }}
+                                        value={this.state.formData.startTime || ""}
+                                        onChange={this.handleChange}
                                         margin="dense"
                                         variant="outlined"
                                         InputLabelProps={{
@@ -235,8 +176,8 @@ class AddRFQ extends React.Component {
                                         name="endTime"
                                         label="End Time"
                                         type="datetime-local"
-                                        defaultValue={this.state.formData.endTime || ""}
-                                        onChange={(date) => { this.handleDateChange(date, 'endTime') }}
+                                        value={this.state.formData.endTime || ""}
+                                        onChange={this.handleChange}
                                         margin="dense"
                                         variant="outlined"
                                         InputLabelProps={{
@@ -248,14 +189,14 @@ class AddRFQ extends React.Component {
                                     <TextField
                                         id="status"
                                         label="Status"
-                                        value={this.state.formData.status || ""}
+                                        value={this.state.formData.status || "Created"}
                                         onChange={this.handleChange}
                                         name="status"
                                         variant="outlined"
                                         className="form-control"
                                         autoComplete="off"
                                         margin="dense"
-                                        disabled={false}
+                                        disabled={true}
                                     />
                                 </div>
                             </div>
@@ -267,12 +208,15 @@ class AddRFQ extends React.Component {
                                         label="Activation Time"
                                         type="datetime-local"
                                         defaultValue={this.state.formData.startTime || ""} 
-                                        onChange={(date) => { this.handleDateChange(date, 'activationTime') }}
+                                        value={this.state.formData.startTime}
+                                        onChange={()=>false}
                                         margin="dense"
                                         variant="outlined"
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
+                                        disabled={true}
+                                        readOnly={true}
                                     />
                                 </div>
                                 <div className="col-md-4 mb-3 addrfq-dateTime ">
@@ -281,13 +225,15 @@ class AddRFQ extends React.Component {
                                         name="closerTime"
                                         label="Closer Time"
                                         type="datetime-local"
-                                        defaultValue={this.state.formData.closerTime || ""}
-                                        onChange={(date) => { this.handleDateChange(date, 'closerTime') }}
+                                        value={this.state.formData.endTime || ""}
+                                        onChange={()=>false}
                                         margin="dense"
                                         variant="outlined"
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
+                                        disabled={true}
+                                        readOnly={true}
                                     />
                                 </div>
                                 <div className="col-md-4 mb-3 ">
@@ -312,11 +258,6 @@ class AddRFQ extends React.Component {
                                         ))}
                                     </TextField>
                                 </div>
-                                {/* {lineItems()} */}
-                                {/* <button className="btn btn-outline" onClick={this.addLineItem}>
-                                    <FontAwesomeIcon icon="plus" />
-                                </button> */}
-
                             </div>
                             <div className="row form-row mb-3">
                                 <div className="col-md-12">
@@ -339,8 +280,6 @@ class AddRFQ extends React.Component {
 
 function mapStateToProps(state) {
     const { rfq } = state;
-    console.log("welcome12")
-    console.log(rfq);
     return { rfq };
 }
 

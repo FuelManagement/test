@@ -1,5 +1,5 @@
-import { authHeader, config } from './';
-
+import { authHeader, config, Utils } from './';
+const { handleError, handleResponse } = Utils;
 export class API_Helpers {
     static getAllUsers(){
         const requestOptions = {
@@ -66,10 +66,10 @@ export class API_Helpers {
 
     static getAllProducts(){
         const requestOptions = {
-            method: 'POST',
+            method: 'GET',
             headers: authHeader()
         };
-        return fetch(config.apiUrl + 'product/getProductList?userID=admin@gmail.com', requestOptions)
+        return fetch(config.apiUrl + '/product/getProductList?userID=admin@gmail.com', requestOptions)
         .then(response => {
             if (response.ok) {
                 try{
@@ -88,5 +88,15 @@ export class API_Helpers {
             }
         })
         .catch(error => Promise.reject(error.message || error));
+    }
+    
+    static getAllParticipant() {
+        let user = JSON.parse(localStorage.getItem('user'));
+        const requestOptions = {
+            method: 'GET',
+            headers: authHeader()
+        };
+        return fetch(config.apiUrl + '/product/getParticipants', requestOptions)
+            .then(handleResponse)
     }
 }

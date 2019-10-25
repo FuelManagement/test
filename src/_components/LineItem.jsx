@@ -1,7 +1,6 @@
 import React from 'react';
 import MaterialTable from 'material-table';
 
-
 class LineItem extends React.Component {
     constructor(props) {
       super(props);
@@ -20,11 +19,13 @@ class LineItem extends React.Component {
           { title: 'Price', field: 'price' },
           { title: 'Price Adjustment', field: 'priceAdjustment', editable: 'never'},
         ],
-        products: props.products
+        products: props.products || []
       }
     }
   
     render() {
+      debugger;
+      let properties = this.props;
       return (
         <MaterialTable  
         onRowClick={((evt, selectedRow) => this.setState({ selectedRow }))}
@@ -51,9 +52,9 @@ class LineItem extends React.Component {
               new Promise((resolve, reject) => {
                 setTimeout(() => {
                   {
-                    const data = this.state.products;
-                    data.push(newData);
-                    this.setState({ data }, () => resolve());
+                    const products = this.state.products;
+                    products.push(newData);
+                    this.setState({ products }, () => resolve());
                   }
                   resolve()
                 }, 1000)
@@ -62,10 +63,10 @@ class LineItem extends React.Component {
               new Promise((resolve, reject) => {
                 setTimeout(() => {
                   {
-                    const data = this.state.products;
-                    const index = data.indexOf(oldData);
-                    data[index] = newData;
-                    this.setState({ data }, () => resolve());
+                    const products = this.state.products;
+                    const index = products.indexOf(oldData);
+                    products[index] = newData;
+                    this.setState({ products }, () => resolve());
                   }
                   resolve()
                 }, 1000)
@@ -74,10 +75,10 @@ class LineItem extends React.Component {
               new Promise((resolve, reject) => {
                 setTimeout(() => {
                   {
-                    let data = this.state.products;
-                    const index = data.indexOf(oldData);
-                    data.splice(index, 1);
-                    this.setState({ data }, () => resolve());
+                    let products = this.state.products;
+                    const index = products.indexOf(oldData);
+                    products.splice(index, 1);
+                    this.setState({ products }, () => resolve());
                   }
                   resolve()
                 }, 1000)

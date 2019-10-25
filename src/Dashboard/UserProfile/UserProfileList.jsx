@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';  
 import { userProfileActions,onboardActions } from '../../_actions';
-import { API_Helpers, Utils, Table_Config,history } from '../../_helpers';
+import { Table_Config,history } from '../../_helpers';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 

@@ -6,6 +6,7 @@ export const rfqService = {
     getAllRfq,
     postNewRfq,
     getAllProducts,
+    getAllParticipant
 };
 
 function getAllRfq() {
@@ -39,10 +40,8 @@ function postNewRfq() {
     })
 }
 function getAllProducts(){
-    return Promise.resolve([
-        {   product: 0, category: 'Category1', subCategory: 'Sub Category1', quantity: "42BBl",price:'6000 $',priceAdjustment:'80000 $', msgUnits:'42 BBL'  },
-        {   product: 1, category: 'Category2', subCategory: 'Sub Category2', quantity: "56BBL",price:"7000 $",priceAdjustment:'70000 $', msgUnits:'42 BBL'  },
-        {   product: 1, category: 'Category2', subCategory: 'Sub Category2', quantity: "56BBL",price:"7000 $",priceAdjustment:'70000 $', msgUnits:'42 BBL'  },
-    ])
     return API_Helpers.getAllProducts();
+}
+function getAllParticipant(){
+    return API_Helpers.getAllParticipant();
 }

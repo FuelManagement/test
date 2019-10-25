@@ -47,10 +47,9 @@ class AddUserProfile extends React.Component {
         this.state = this.initialState(this.props.userProfile.mode, this.props.userProfile.userProfile);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this); 
-    this.handleOnChange = this.handleOnChange.bind(this);
-
+        this.handleOnChange = this.handleOnChange.bind(this);
     }
-    componentWillReceiveProps(nextprops) {
+    UNSAFE_componentWillReceiveProps(nextprops) {
         if (JSON.stringify(this.props.userProfile.userProfile) !== JSON.stringify(nextprops.userProfile.userProfile)) {
             ["participantID", "role", "designation", "first_Name", "middle_Name", "last_Name", "firstContactNo", "firstContactNoType", "secondContactNo", "secondContactNoType", "email","password", "address1", "address2", "city", "state", "zip", "country"].forEach(name => {
                 this.setState(prevState => {
