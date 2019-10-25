@@ -41,6 +41,8 @@ class RFQ extends React.Component {
         this.setState({ rfqModal: !this.state.rfqModal, mode, selectedRfq: data })
     }
     render() {
+        debugger;
+        const { rfq } = this.props;
         if (this.state.rfqModal) {
             $('#rfqModal').modal('show');
         } else {
@@ -58,7 +60,7 @@ class RFQ extends React.Component {
                 <div className="clearDiv"></div>
                 <br />
                 <ReactTable
-                    data={this.props.rfq.rfqs}
+                    data={rfq.rfqs}
                     columns={Table_Config.RFQ.rfqs.columns({toggleRfqModal: this.toggleModal.bind(this)})}
                     {...Table_Config.RFQ.rfqs.options}
                 />
@@ -69,6 +71,7 @@ class RFQ extends React.Component {
                             <AddRFQ 
                                 row={this.state.selectedRfq}
                                 mode={this.state.mode}
+                                products={rfq.products}
                             />
                         </div>
                     </div>
