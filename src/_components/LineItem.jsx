@@ -4,14 +4,12 @@ import MaterialTable from 'material-table';
 class LineItem extends React.Component {
     constructor(props) {
       super(props);
+      this.productLookup = this.productLookup.bind(this);
+      this.getLineItemDetails = this.getLineItemDetails.bind(this);
       this.state = {
         selectedRow: null,
         columns: [
-          {
-            title: 'Product',
-            field: 'product',
-            lookup: { 0: 'Product1', 1: 'Product2' },
-          },
+          { title: 'Product', field: 'product', lookup: this.productLookup(props.products && props.products.products),},
           { title: 'Category', field: 'category', editable: 'never' },
           { title: 'Sub Category', field: 'subCategory', editable: 'never' },
           { title: 'Measuring Units', field: 'msgUnits',editable: 'never'},
@@ -22,10 +20,38 @@ class LineItem extends React.Component {
         products: props.products || []
       }
     }
-  
+    productLookup(products = []){
+      let lookup = {};
+      products.map((product) => {
+        lookup[product.productID]=product.productName;
+      })
+      return lookup;
+    }
+    UNSAFE_componentWillReceiveProps(){
+      if(this.props.products && this.props.products.products.length){
+        let columns = this.state.columns;
+        columns[0].lookup = this.productLookup(this.props.products.products);
+        this.setState({columns})
+      }
+    }
+    getLineItemDetails(newData){
+      let lineItem = {...newData};
+      for(let i=0; i<this.props.products.products.length; i++){
+        let product = this.props.products.products[i];
+        if(product.productID === newData.product) {
+          lineItem = {
+            ...lineItem,
+            product: product.productID,
+            category: product.productCategory,
+            subCategory: product.subCategory,
+            msgUnits: product.measuringUnit,
+          }
+          break;
+        }
+      }
+      return lineItem
+    }
     render() {
-      debugger;
-      let properties = this.props;
       return (
         <MaterialTable  
         onRowClick={((evt, selectedRow) => this.setState({ selectedRow }))}
@@ -50,37 +76,26 @@ class LineItem extends React.Component {
           editable={{     
             onRowAdd: newData =>
               new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  {
-                    const products = this.state.products;
-                    products.push(newData);
-                    this.setState({ products }, () => resolve());
-                  }
-                  resolve()
-                }, 1000)
+                const products = this.state.products;
+                products.push(this.getLineItemDetails(newData));
+                this.setState({ products }, () => resolve());
               }),
             onRowUpdate: (newData, oldData) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
-                  {
-                    const products = this.state.products;
-                    const index = products.indexOf(oldData);
-                    products[index] = newData;
-                    this.setState({ products }, () => resolve());
-                  }
-                  resolve()
+                  const products = this.state.products;
+                  const index = products.indexOf(oldData);
+                  products[index] = this.getLineItemDetails(newData);
+                  this.setState({ products }, () => resolve());
                 }, 1000)
               }),
             onRowDelete: oldData =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
-                  {
-                    let products = this.state.products;
-                    const index = products.indexOf(oldData);
-                    products.splice(index, 1);
-                    this.setState({ products }, () => resolve());
-                  }
-                  resolve()
+                  let products = this.state.products;
+                  const index = products.indexOf(oldData);
+                  products.splice(index, 1);
+                  this.setState({ products }, () => resolve());
                 }, 1000)
               }),
           }}
