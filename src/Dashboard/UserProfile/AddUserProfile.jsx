@@ -389,9 +389,9 @@ class AddUserProfile extends React.Component {
                                         margin="dense"
 
                                     >
-                                        {businessRange.map(option => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
+                                        {this.props.participants.map(option => (
+                                            <MenuItem key={option._id} value={option._id}>
+                                                {option.registerId}
                                             </MenuItem>
                                         ))}
                                     </TextField>
@@ -676,10 +676,11 @@ class AddUserProfile extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { userProfile } = state;
-   
+    
     return {
-        userProfile
+        userProfile:state.userProfile,
+        participants:state.onboard.participants
+      
       
     };
 }

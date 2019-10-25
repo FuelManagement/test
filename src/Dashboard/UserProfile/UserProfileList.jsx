@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';  
-import { userProfileActions } from '../../_actions';
+import { userProfileActions,onboardActions } from '../../_actions';
 import { API_Helpers, Utils, Table_Config,history } from '../../_helpers';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -15,7 +15,7 @@ class UserProfile extends React.Component {
         super(props); 
         this.state={ 
         }   
-        
+        this.props.dispatch(onboardActions.getAllParticipant());
     }   
     componentDidMount() {
         this.props.dispatch(userProfileActions.changeModeUserProfile('create'));
@@ -53,10 +53,9 @@ class UserProfile extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { userProfile } = state;
-   
+    
     return {
-        userProfile
+        userProfile:state.userProfile
       
     };
 }
