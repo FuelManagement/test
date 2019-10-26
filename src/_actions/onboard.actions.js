@@ -97,8 +97,10 @@ function getParticipant(collection)
                 participant => { 
                    
                     dispatch(success(participant.find(f=>f.Documentslist!==undefined && f.Documentslist.length>0 && f._id==collection)));
-                   //dispatch(successDoc(participant.find(f=>f.Documentslist!==undefined && f.Documentslist.length>0 && f._id==collection).Documentslist));
-                    dispatch(alertActions.clearLoading());
+                   dispatch(successDoc([]));
+                   dispatch(successDownloadabbleDoc(JSON.parse(participant.find(f=>f.Documentslist!==undefined && f.Documentslist.length>0 && f._id==collection).Documentslist)));
+                   
+                   dispatch(alertActions.clearLoading());
                 },
                 error => {
                     dispatch(failure(error))
@@ -111,7 +113,7 @@ function getParticipant(collection)
     function success(participant) { return { type: onboardConstants.ONBRD_GET_PARTICIPANT_SUCCESS, participant } }
     function failure(error) { return { type: onboardConstants.ONBRD_GET_PARTICIPANT_FAILURE, error } }
     function successDoc(files) { return { type: onboardConstants.ONBRD_UPLOAD_PARTICIPANT_FILE_SUCCESS, files } }
-
+    function successDownloadabbleDoc(files){return {type: onboardConstants.ONBRD_DOWNLOAD_PARTICIPANT_FILE, files}}
 }
 function updateParticipant(collection,Documentslist)
 {

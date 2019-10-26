@@ -3,6 +3,7 @@ import { FilePond } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
 import { connect } from 'react-redux';
 import {onboardActions} from '../_actions';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 class Upload extends React.Component{
     constructor(props){
         super(props);
@@ -27,6 +28,14 @@ class Upload extends React.Component{
            }
           }}
                 labelIdle='Upload Files <span class="filepond--label-action">Upload Files</span>'/> 
+
+                {this.props.onboard.downloadDocumentslist.length>0 && this.props.mode!=='create'?<div >
+                    <ul className="fa-ul">
+                    {this.props.onboard.downloadDocumentslist.map(item=>
+                    <li><span class="fa-li"><i class="fa fa-file"></i></span><a href={item.path}>{item.filename}</a></li>
+                   )}
+                    </ul>
+                </div>:null}
             </div>
         )
     }

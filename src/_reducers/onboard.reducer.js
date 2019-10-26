@@ -82,7 +82,10 @@ export function onboard(state = {}, action) {
         documentslist: action.files
       };
 
-                   
+       case onboardConstants.ONBRD_DOWNLOAD_PARTICIPANT_FILE: return{
+        ...state,
+        downloadDocumentslist: action.files
+       };           
     case onboardConstants.ONBRD_CHANGE_FORM_STATE: return {
       ...state,
       isFormValid:action.valid
