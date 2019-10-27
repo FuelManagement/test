@@ -21,7 +21,6 @@ function getAllRfq() {
     .then(()=> dummyData)
     .catch(err => {
         // handleError(err)
-        debugger;
         return dummyData;
     })
 }

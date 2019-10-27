@@ -41,7 +41,6 @@ class RFQ extends React.Component {
         this.setState({ rfqModal: !this.state.rfqModal, mode, selectedRfq: data })
     }
     render() {
-        debugger;
         const { rfq } = this.props;
         if (this.state.rfqModal) {
             $('#rfqModal').modal('show');
