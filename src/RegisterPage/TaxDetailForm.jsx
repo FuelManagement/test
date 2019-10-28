@@ -543,7 +543,7 @@ class TaxDetailForm extends React.Component {
                                                 checkedIcon={<CircleCheckedFilled className="checkboxIcon" />}
                                                 onChange={e => this.handleOnChange(e.target.name, e.target.value)}
                                                 name="gstHstReminder"
-                                                checked={this.state.controls.gstHstReminder.value === 'true' ? true : false}
+                                                // checked={this.state.controls.gstHstReminder.value === 'true' ? true : false}
                                                 value={this.state.controls.gstHstReminder.value} />}
                                             label="GST/HST # Verification"
                                             className="form-checkbox"
@@ -556,7 +556,7 @@ class TaxDetailForm extends React.Component {
                                                 checkedIcon={<CircleCheckedFilled className="checkboxIcon" />}
                                                 onChange={e => this.handleOnChange(e.target.name, e.target.value)}
                                                 name="salesTaxExemption"
-                                                checked={this.state.controls.salesTaxExemption.value === 'true' ? true : false}
+                                                // checked={this.state.controls.salesTaxExemption.value === 'true' ? true : false}
                                                 value={this.state.controls.salesTaxExemption.value} />}
                                             label="Sales Tax Exemption"
                                             className="form-checkbox"
@@ -568,7 +568,7 @@ class TaxDetailForm extends React.Component {
                                                 checkedIcon={<CircleCheckedFilled className="checkboxIcon" />}
                                                 onChange={e => this.handleOnChange(e.target.name, e.target.value)}
                                                 name="w8-9VerificationReminder"
-                                                checked={this.state.controls["w8-9VerificationReminder"].value === 'true' ? true : false}
+                                                // checked={this.state.controls["w8-9VerificationReminder"].value === 'true' ? true : false}
                                                 value={this.state.controls["w8-9VerificationReminder"].value}
                                             />}
                                             label="Form W-9 or W-8 Verification "
@@ -582,7 +582,7 @@ class TaxDetailForm extends React.Component {
                                             control={<Checkbox icon={<CircleUnchecked className="checkboxIcon" />} checkedIcon={<CircleCheckedFilled className="checkboxIcon" />}
                                                 onChange={e => this.handleOnChange(e.target.name, e.target.value)}
                                                 name="qstVerificationReminder"
-                                                checked={this.state.controls.qstVerificationReminder.value === 'true' ? true : false}
+                                                // checked={this.state.controls.qstVerificationReminder.value === 'true' ? true : false}
                                                 value={this.state.controls.qstVerificationReminder.value}
 
                                             />}
