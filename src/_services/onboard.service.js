@@ -70,7 +70,11 @@ function createParticipant(collection, Documentslist) {
     collection.priKey = "";
     collection.Documentslist = [];
     collection["cert_id"] = "";
-
+    let user = JSON.parse(localStorage.getItem('user'));
+if(user!==undefined && user!==null)
+{
+    collection.email=user.email;
+}
     return uploadFile(Documentslist)
         .then(uploadResponse => {
             collection.Documentslist = uploadResponse;

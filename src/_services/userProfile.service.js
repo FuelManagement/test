@@ -14,7 +14,7 @@ function getAllUserProfile() {
         method: 'GET',
         headers: authHeader()
     };
-    return fetch(config.apiUrl + '/product/getSubUsersById?email='+user.email, requestOptions)
+    return fetch(config.apiUrl + '/admin/getAllUsers', requestOptions)
     .then(handleResponse)
 }
 function createUserProfile(collection) {
@@ -33,6 +33,7 @@ function updateUserProfile(collection)
 {
     let user = JSON.parse(localStorage.getItem('user'));
     collection.userID= user.email;
+    collection._id= undefined;
  
     
     const requestOptions = {

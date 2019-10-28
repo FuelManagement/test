@@ -56,8 +56,8 @@ class OrganizationDetailForm extends React.Component {
   {
   if(JSON.stringify(this.props.onboard.participant)!==JSON.stringify(nextprops.onboard.participant))
   {
-    ["registerId","dateOfIncorporation","stateOfIncorporation","countryOfIncorporation","BuisnessType","entityType","entityTypeOther"
-    ,"numberOfYearsinBuisness","emailAddress","companyCode"].forEach(name => {
+    ["domain","dateOfIncorporation","stateOfIncorporation","countryOfIncorporation","BuisnessType","entityType","entityTypeOther"
+    ,"numberOfYearsinBuisness","registerId","companyCode"].forEach(name => {
       this.setState(prevState => {
         return {
           controls: {
@@ -83,8 +83,8 @@ class OrganizationDetailForm extends React.Component {
         let state = {};
         state = {
             controls: {
-                registerId: {
-                    value: props!==undefined && props.registerId!==undefined?props.registerId:'',
+                domain: {
+                    value: props!==undefined && props.domain!==undefined?props.domain:'',
                     valid: false,
                     validationRules: {
                         notEmpty: true,
@@ -191,8 +191,8 @@ class OrganizationDetailForm extends React.Component {
                     visible: true,
                     disable: false
                 },
-                emailAddress: {
-                    value: props!==undefined && props.emailAddress!==undefined?props.emailAddress:'',
+                registerId: {
+                    value: props!==undefined && props.registerId!==undefined?props.registerId:'',
                    
                     valid: false,
                     validationRules: {
@@ -225,7 +225,7 @@ class OrganizationDetailForm extends React.Component {
     }
     handleChange(event) {
         let key = event.target.name, value = event.target.value;
-        let connectedValue = {registerId:{minLength:3,maxLength:15}};
+        let connectedValue = {domain:{minLength:3,maxLength:15}};
         this.setState(prevState => {
             return {
                 controls: {
@@ -274,8 +274,8 @@ class OrganizationDetailForm extends React.Component {
     handleFormSubmit(){
         let isFormVaild=true;
        if (this.state.controls !== undefined) {
-        ["registerId","dateOfIncorporation","stateOfIncorporation","countryOfIncorporation","BuisnessType","entityType","entityTypeOther"
-        ,"numberOfYearsinBuisness","emailAddress","companyCode"].forEach(name => {
+        ["domain","dateOfIncorporation","stateOfIncorporation","countryOfIncorporation","BuisnessType","entityType","entityTypeOther"
+        ,"numberOfYearsinBuisness","registerId","companyCode"].forEach(name => {
              let value = this.state.controls[name].valid, touched = this.state.controls[name].touched;
              if (!value && this.props.onboard.mode==='create') {
              
@@ -298,16 +298,16 @@ class OrganizationDetailForm extends React.Component {
                 <div className="form-row">
                     <div className="col-md-4 mb-3">
                         <TextField
-                            id="registerId"
+                            id="domain"
                             label="Full Legal Name"
-                            name="registerId"
-                            value={this.state.controls.registerId.value}
+                            name="domain"
+                            value={this.state.controls.domain.value}
                             onChange={this.handleChange}
                             variant="outlined"
                             className="form-control"
                             autoComplete="off"
                             margin="dense"
-                            error={!this.state.controls.registerId.valid && this.state.controls.registerId.touched}
+                            error={!this.state.controls.domain.valid && this.state.controls.domain.touched}
                                 
                         />
                     </div>
@@ -439,16 +439,16 @@ class OrganizationDetailForm extends React.Component {
                     </div>
                     <div className="col-md-4 mb-3">
                         <TextField
-                            id="emailAddress"
+                            id="registerId"
                             label="E-Mail Address"
-                            name="emailAddress"
-                            value={this.state.controls.emailAddress.value}
+                            name="registerId"
+                            value={this.state.controls.registerId.value}
                             onChange={this.handleChange}
                             variant="outlined"
                             className="form-control"
                             autoComplete="off"
                             margin="dense"
-                            error={!this.state.controls.emailAddress.valid && this.state.controls.emailAddress.touched}
+                            error={!this.state.controls.registerId.valid && this.state.controls.registerId.touched}
                         />
                     </div>
                 </div>

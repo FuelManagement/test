@@ -18,7 +18,7 @@ function getAllUserProfile() {
         userProfileService.getAllUserProfile()
             .then(
                 userProfile => { 
-                    dispatch(success(userProfile.sub_user_list));
+                    dispatch(success(userProfile));
                     dispatch(alertActions.clearLoading());
                 },
                 error => {

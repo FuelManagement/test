@@ -29,7 +29,7 @@ class Upload extends React.Component{
           }}
                 labelIdle='Upload Files <span class="filepond--label-action">Upload Files</span>'/> 
 
-                {this.props.onboard.downloadDocumentslist.length>0 && this.props.mode!=='create'?<div >
+                {this.props.onboard.downloadDocumentslist!==undefined && this.props.onboard.downloadDocumentslist!==null && this.props.onboard.downloadDocumentslist.length>0 && this.props.mode!=='create'?<div >
                     <ul className="fa-ul">
                     {this.props.onboard.downloadDocumentslist.map(item=>
                     <li><span class="fa-li"><i class="fa fa-file"></i></span><a href={item.path}>{item.filename}</a></li>

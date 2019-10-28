@@ -595,13 +595,13 @@ let Table_Config = {
 			columns:(props)=>[
 				{
 					Header: 'Organization Name',
-					accessor: 'registerId',
-					Cell: row => <span title={row.original.registerId}>{row.original.registerId}</span>
+					accessor: 'domain',
+					Cell: row => <span title={row.original.domain}>{row.original.domain}</span>
 				},
 				{
 				Header: 'Email Id',
-				accessor: 'emailAddress',
-				Cell: row => <span title={row.original.emailAddress}>{row.original.emailAddress}</span>
+				accessor: 'registerId',
+				Cell: row => <span title={row.original.registerId}>{row.original.registerId}</span>
 			},
 			{
 				Header: 'Business type ',
@@ -636,7 +636,7 @@ let Table_Config = {
 							<FontAwesomeIcon icon="edit" size="xs"/>
 					</button>
 					{row.original.status===0 ? 
-						(<button 
+						(<button  disable={row.original.isIdentityCreated}
 							className="btn btn-outline-success btn-sm"
 							style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
 							onClick={e=>{props.approveParticipant(e,   {
@@ -656,8 +656,8 @@ let Table_Config = {
 			options:{...globalOptions},
 			columns:(props)=>[{
 				Header: 'Name',
-				accessor: 'first_Name',
-				Cell: row => <span title={row.original.first_Name+' '+row.original.middle_Name+' '+row.original.last_Name}>{row.original.first_Name+' '+row.original.middle_Name+' '+row.original.last_Name}</span>
+				accessor: 'first_name',
+				Cell: row => <span title={row.original.first_name+' '+row.original.middle_name+' '+row.original.last_name}>{row.original.first_name+' '+row.original.middle_name+' '+row.original.last_name}</span>
 			},{
 				Header: 'Organization Name',
 				accessor: 'participantID',
