@@ -28,7 +28,7 @@ class LineItem extends React.Component {
       return lookup;
     }
     UNSAFE_componentWillReceiveProps(){
-      if(this.props.products && this.props.products.products.length){
+      if(this.props.products && this.props.products.products && this.props.products.products.length){
         let columns = this.state.columns;
         columns[0].lookup = this.productLookup(this.props.products.products);
         this.setState({columns})
