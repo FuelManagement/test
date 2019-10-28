@@ -637,7 +637,7 @@ let Table_Config = {
 							<FontAwesomeIcon icon="edit" size="xs"/>
 					</button>
 					{row.original.status===0 ? 
-						(<button  disable={row.original.isIdentityCreated}
+						(<button  disabled={row.original.isIdentityCreated}
 							className="btn btn-outline-success btn-sm"
 							style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
 							onClick={e=>{props.approveParticipant(e,   {

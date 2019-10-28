@@ -14,7 +14,17 @@ function downloadFile(collection) {
         body: JSON.stringify({'file':collection})
     };
 
-    return fetch(config.apiUrl + '/product/downloadFileForParticipnt', requestOptions).then(handleResponse, handleError)
-    .then(result=> {console.log(result);fileUtility.downloadDoc(result,collection.mimetype,collection.originalname)});
+    return fetch(config.apiUrl + '/product/downloadFile', requestOptions)
+    .then(response => {
+        if(!resposne.ok){
+            throw new Error("Error while downloading file");
+        }
+        return response;
+    })
+    .then(response => response.blob())
+    .then(result=> {fileUtility.downloadDoc(result,collection.mimetype,collection.originalname)}).catch((error) => {
+        console.log(error);
+        alert("Error while downloading file. Please retry.");
+    });;
 
 }

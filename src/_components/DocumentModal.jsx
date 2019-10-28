@@ -31,7 +31,7 @@ class DocumentModal extends React.Component {
         })
         .catch((error) => {
             console.log(error);
-        }); ;
+        });
     }
 
     getLocalDateString(timestamp){

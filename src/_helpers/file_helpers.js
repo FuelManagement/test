@@ -23,7 +23,7 @@ export const fileUtility = {
    return icon;
   }
   function downloadDoc(data,type,filename) {
-    let blob=new Blob([data],{type:type});
+    let blob=new Blob([data]);
     saveAs(blob,filename);
    }
   
