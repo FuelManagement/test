@@ -36,6 +36,7 @@ function getAllRfq() {
 function postNewRfq(formData) {
     return dispatch => {
         dispatch(request());
+        dispatch(alertActions.loading());
         rfqService.postNewRfq(formData)
             .then(
                 rfqs => {
