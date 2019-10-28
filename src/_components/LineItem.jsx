@@ -17,7 +17,7 @@ class LineItem extends React.Component {
           { title: 'Price', field: 'price' },
           { title: 'Price Adjustment', field: 'priceAdjustment', editable: 'never'},
         ],
-        products: props.products || []
+        products: []
       }
     }
     productLookup(products = []){
