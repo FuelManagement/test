@@ -45,7 +45,7 @@ class TaxDetailForm extends React.Component {
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.props.dispatch(onboardActions.changeFormState(this.props.onboard.mode === 'create' ? false : true));
     }
-    componentWillReceiveProps(nextprops) {
+    UNSAFE_componentWillReceiveProps(nextprops) {
         if (JSON.stringify(this.props.onboard.participant) !== JSON.stringify(nextprops.onboard.participant)) {
             ["taxWithholdType", "taxWithholdingSubject", "taxWithholdCode", "confirmationControlkey", "deleteFlagForVendor", "shippingConditions", "gstHstReminder"
                 , "salesTaxExemption", "qstVerificationReminder", "w8-9VerificationReminder", "taxNumber1", "taxNumber2", "vatNumber", "vendorAcctGrp", "vendorImporterRecord"].forEach(name => {

@@ -79,6 +79,7 @@ class LineItem extends React.Component {
                 const products = this.state.products;
                 products.push(this.getLineItemDetails(newData));
                 this.setState({ products }, () => resolve());
+                this.props.updateLineItems(products);
               }),
             onRowUpdate: (newData, oldData) =>
               new Promise((resolve, reject) => {
@@ -87,6 +88,7 @@ class LineItem extends React.Component {
                   const index = products.indexOf(oldData);
                   products[index] = this.getLineItemDetails(newData);
                   this.setState({ products }, () => resolve());
+                  this.props.updateLineItems(products);
                 }, 1000)
               }),
             onRowDelete: oldData =>
@@ -96,6 +98,7 @@ class LineItem extends React.Component {
                   const index = products.indexOf(oldData);
                   products.splice(index, 1);
                   this.setState({ products }, () => resolve());
+                  this.props.updateLineItems(products);
                 }, 1000)
               }),
           }}

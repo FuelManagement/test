@@ -1,5 +1,5 @@
 import { rfqConstants } from '../_constants';
-import { rfqService, onboardService } from '../_services';
+import { rfqService } from '../_services';
 import { alertActions } from './';
 import { history } from '../_helpers';
 
@@ -7,16 +7,24 @@ export const rfqActions = {
     getAllRfq,
     postNewRfq,
     getAllProducts,
-    getAllParticipant
+    getAllParticipant,
 };
 
 function getAllRfq() {
     return dispatch => {
         dispatch(request());
+        dispatch(alertActions.loading());
         rfqService.getAllRfq()
             .then(
-                rfqs => dispatch(success(rfqs)),
-                error => dispatch(failure(error))
+                rfqs => { 
+                    dispatch(success(rfqs))
+                    dispatch(alertActions.clearLoading());
+                },
+                error => {
+                    dispatch(failure(error))
+                    dispatch(alertActions.error("Error loading list. Try Again."));
+                    dispatch(alertActions.clearLoading());
+                }
             );
     };
 
@@ -25,13 +33,21 @@ function getAllRfq() {
     function failure(error) { return { type: rfqConstants.GETALL_FAILURE, error } }
 }
 
-function postNewRfq() {
+function postNewRfq(formData) {
     return dispatch => {
         dispatch(request());
-        rfqService.postNewRfq()
+        rfqService.postNewRfq(formData)
             .then(
-                rfqs => dispatch(success(rfqs)),
-                error => dispatch(failure(error))
+                rfqs => {
+                    dispatch(success(rfqs))
+                    dispatch(alertActions.success('RFQ Created Successfully'));
+                    dispatch(alertActions.clearLoading());
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error("Error Creating RFQ."));
+                    dispatch(alertActions.clearLoading());
+                }
             );
     };
 
