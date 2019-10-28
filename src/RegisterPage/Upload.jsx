@@ -23,7 +23,13 @@ class Upload extends React.Component {
             body: JSON.stringify(formData)
         };
         return fetch(config.apiUrl + '/product/downloadFile', requestOptions)
-        .then((response) => response.blob())
+        .then(response => {
+            if(!resposne.ok){
+                throw new Error("Error while downloading file");
+            }
+            return response;
+        })
+        .then(response => response.blob())
         .then((blob) => {
             console.log(blob);
             if(!blob.size){
