@@ -298,9 +298,9 @@ function CustomizedSteppers(props) {
           </div>
         ) : (
           <div>
-            <Typography className={classes.instructions}>
+            {/* <Typography className={classes.instructions}> */}
               {getStepContent(activeStep)}
-            </Typography>
+            {/* </Typography> */}
             <div>
             { (activeStep != 0 )?(
               <Button

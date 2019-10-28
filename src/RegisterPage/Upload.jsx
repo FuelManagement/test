@@ -66,8 +66,8 @@ class Upload extends React.Component {
                     this.props.mode !== 'create' ? 
                 <div >
                     <ul className="fa-ul">
-                        {this.props.onboard.downloadDocumentslist.map(item =>
-                            <li>
+                        {this.props.onboard.downloadDocumentslist.map((item,idx) =>
+                            <li key={idx}>
                                 <button className="btn btn-outline btn-default" onClick={() => this.downloadFile(item)}>
                                     <i className="fa fa-file"></i> {item.filename}
                                 </button>
