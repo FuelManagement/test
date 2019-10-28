@@ -101,41 +101,27 @@ if(user!==undefined && user!==null)
         })
 
 }
-function updateParticipant(collection, Documentslist) {
+function updateParticipant(collection, Documentslist,downloadDocumentslist) 
+{
+
     let user = JSON.parse(localStorage.getItem('user'));
     collection.email=user.email;
     collection._id=undefined;
     let tokenObj = JSON.parse(localStorage.getItem('token'));
-    // return uploadFile(Documentslist)
-    //     .then(uploadResponse => {
-    //         collection.Documentslist = uploadResponse;
-    //         const requestOptions = {
-    //             method: 'POST',
-    //             headers: {
-    //                 'cache-control': 'no-cache',
-    //                 Connection: 'keep-alive',
-
-    //                 'Content-Length': '1315',
-    //                 'Accept-Encoding': 'gzip, deflate',
-    //                 Host: '192.168.1.2:3009',
-
-    //                 'Cache-Control': 'no-cache',
-    //                 Accept: '*/*',
-    //                 'User-Agent': '*',
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(collection)
-    //         }; 
+    return uploadFile(Documentslist)
+        .then(uploadResponse => {
             
+            collection.Documentslist = uploadResponse;
+            const requestOptions = {
+                method: 'POST',
+                headers: authHeader(),
+                body: JSON.stringify(collection)
+            };
+                    return fetch(config.apiUrl + '/product/updateParticipant', requestOptions).then(handleResponse, handleError);
+        
     
-    //     })
-    const requestOptions = {
-        method: 'POST',
-        headers: authHeader(),
-        body: JSON.stringify(collection)
-    };
-            return fetch(config.apiUrl + '/product/updateParticipant', requestOptions).then(handleResponse, handleError);
-
+        })
+    
 }
 function getParticipant(collection) {
     let user = JSON.parse(localStorage.getItem('user'));

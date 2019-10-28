@@ -4,6 +4,7 @@ import 'filepond/dist/filepond.min.css';
 import { connect } from 'react-redux';
 import {onboardActions} from '../_actions';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {downloadFileService} from '../_services/downloadFile.service';
 class Upload extends React.Component{
     constructor(props){
         super(props);
@@ -11,6 +12,9 @@ class Upload extends React.Component{
             files: this.props.onboard.documentslist!==undefined?this.props.onboard.documentslist:[]
           };
           this.props.dispatch(onboardActions.changeFormState(this.props.onboard.mode==='create'?false:true));
+    }
+    download(collection){
+        downloadFileService.downloadFile(collection);
     }
     render(){
         return(
@@ -32,7 +36,7 @@ class Upload extends React.Component{
                 {this.props.onboard.downloadDocumentslist!==undefined && this.props.onboard.downloadDocumentslist!==null && this.props.onboard.downloadDocumentslist.length>0 && this.props.mode!=='create'?<div >
                     <ul className="fa-ul">
                     {this.props.onboard.downloadDocumentslist.map(item=>
-                    <li><span class="fa-li"><i class="fa fa-file"></i></span><a href={item.path}>{item.filename}</a></li>
+                    <li><span class="fa-li"><i class="fa fa-file"></i></span><a onClick={()=>this.download(item)} href="JavaScript:Void(0);">{item.originalname}</a></li>
                    )}
                     </ul>
                 </div>:null}

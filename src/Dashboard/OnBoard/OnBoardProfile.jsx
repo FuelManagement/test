@@ -10,10 +10,7 @@ import 'bootstrap';
 import { onboardActions } from '../../_actions';
 import RegisterationStepper from '../../RegisterPage/RegisterationStepper';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faPlus);
 class OnBoard_Profile extends React.Component {
 
     constructor(props) {
