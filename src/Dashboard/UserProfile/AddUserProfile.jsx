@@ -104,6 +104,8 @@ class AddUserProfile extends React.Component {
                     valid: mode !== 'create' ? true : false,
                     validationRules: {
                         notEmpty: true,
+                        minLength:true,
+                        maxLength:true
                     },
                     error: "Please enter Designation",
                     placeholder: "Designation",
@@ -346,7 +348,9 @@ class AddUserProfile extends React.Component {
             this.props.dispatch(userProfileActions.changeUserProfile('role', role));
         }
 
-        let connectedValue = {};
+        let connectedValue = {
+            designation:{minLength:2,maxLength:50},
+        };
         this.setState(prevState => {
             return {
                 controls: {
@@ -416,6 +420,35 @@ class AddUserProfile extends React.Component {
         }
 
     }
+    //Allow only letters
+    allowOnlyletters(e){   
+        var regex = new RegExp("^[a-zA-Z]+$"); 
+        
+        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (regex.test(str)) {
+            return true;
+        }
+        else
+        {
+        e.preventDefault(); 
+        return false;
+        } 
+    }
+
+     //Allow only numbers 
+     allowOnlynumbers(e){   
+        var regex = new RegExp(/^[0-9\b]+$/); 
+        
+        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (regex.test(str)) {
+            return true;
+        }
+        else
+        {
+        e.preventDefault(); 
+        return false;
+        } 
+    }
 
     render() {
 
@@ -472,7 +505,6 @@ class AddUserProfile extends React.Component {
                                 <div className="col-md-4 mb-3  ">
                                     <TextField
                                         error={!this.state.controls.designation.valid && this.state.controls.designation.touched}
-
                                         id="designation"
                                         label="Designation"
                                         name="designation"
@@ -482,6 +514,7 @@ class AddUserProfile extends React.Component {
                                         className="form-control"
                                         autoComplete="off"
                                         margin="dense"
+                                        onKeyPress  ={this.allowOnlyletters.bind(this)}
                                     />
                                 </div>
 
@@ -500,6 +533,7 @@ class AddUserProfile extends React.Component {
                                         className="form-control"
                                         autoComplete="off"
                                         margin="dense"
+                                        onKeyPress  ={this.allowOnlyletters.bind(this)}
                                     />
                                 </div>
                                 <div className="col-md-4 mb-3  addrfq-dateTime">
@@ -513,12 +547,12 @@ class AddUserProfile extends React.Component {
                                         className="form-control"
                                         autoComplete="off"
                                         margin="dense"
+                                        onKeyPress  ={this.allowOnlyletters.bind(this)}
                                     />
                                 </div>
                                 <div className="col-md-4 mb-3  ">
                                     <TextField
                                         error={!this.state.controls.last_Name.valid && this.state.controls.last_Name.touched}
-
                                         id="last_Name"
                                         label="Last Name"
                                         name="last_Name"
@@ -528,6 +562,7 @@ class AddUserProfile extends React.Component {
                                         className="form-control"
                                         autoComplete="off"
                                         margin="dense"
+                                        onKeyPress  ={this.allowOnlyletters.bind(this)}
                                     />
                                 </div>
                             </div>
@@ -692,7 +727,6 @@ class AddUserProfile extends React.Component {
                                 <div className="col-md-4 mb-3 ">
                                     <TextField
                                         error={!this.state.controls.city.valid && this.state.controls.city.touched}
-
                                         id="city"
                                         label="City"
                                         name="city"
@@ -702,6 +736,7 @@ class AddUserProfile extends React.Component {
                                         className="form-control"
                                         autoComplete="off"
                                         margin="dense"
+                                        onKeyPress  ={this.allowOnlyletters.bind(this)}
                                     />
                                 </div>
                             </div>
@@ -709,7 +744,6 @@ class AddUserProfile extends React.Component {
                                 <div className="col-md-4 mb-3 ">
                                     <TextField
                                         error={!this.state.controls.state.valid && this.state.controls.state.touched}
-
                                         id="state"
                                         label="State"
                                         name="state"
@@ -719,6 +753,7 @@ class AddUserProfile extends React.Component {
                                         className="form-control"
                                         autoComplete="off"
                                         margin="dense"
+                                        onKeyPress  ={this.allowOnlyletters.bind(this)}
                                     />
                                 </div>
                                 <div className="col-md-4 mb-3 ">
@@ -734,12 +769,12 @@ class AddUserProfile extends React.Component {
                                         className="form-control"
                                         autoComplete="off"
                                         margin="dense"
+                                        onKeyPress={this.allowOnlynumbers.bind(this)}
                                     />
                                 </div>
                                 <div className="col-md-4 mb-3 ">
                                     <TextField
                                         error={!this.state.controls.country.valid && this.state.controls.country.touched}
-
                                         id="country"
                                         label="Country"
                                         name="country"
@@ -749,6 +784,7 @@ class AddUserProfile extends React.Component {
                                         className="form-control"
                                         autoComplete="off"
                                         margin="dense"
+                                        onKeyPress  ={this.allowOnlyletters.bind(this)}
                                     />
                                 </div>
                             </div>

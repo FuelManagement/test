@@ -244,7 +244,7 @@ function getStepContent(step) {
 function CustomizedSteppers(props) {
   
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(3);
   const steps = getSteps();
   const handleNext = (event) => {
     

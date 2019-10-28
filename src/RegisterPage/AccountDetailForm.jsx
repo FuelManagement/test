@@ -267,6 +267,32 @@ class AccountDetailForm extends React.Component {
     }
     this.props.dispatch(onboardActions.changeFormState(isFormVaild));
 }
+//Allow only letters
+allowOnlyletters(e) {
+  var regex = new RegExp("^[a-zA-Z]+$");
+
+  var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+  if (regex.test(str)) {
+      return true;
+  }
+  else {
+      e.preventDefault();
+      return false;
+  }
+}
+//Allow only numbers 
+allowOnlynumbers(e) {
+  var regex = new RegExp(/^[0-9\b]+$/);
+
+  var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+  if (regex.test(str)) {
+      return true;
+  }
+  else {
+      e.preventDefault();
+      return false;
+  }
+}
   render() {
     return (
       <div className="mx-auto">
@@ -283,7 +309,8 @@ class AccountDetailForm extends React.Component {
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankName.valid && this.state.controls.bankName.touched}
-              
+              onKeyPress={this.allowOnlyletters.bind(this)}    
+              inputProps={{ maxLength: 50 }}
             />
           </div>
         </div>
@@ -299,6 +326,8 @@ class AccountDetailForm extends React.Component {
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankAccountName.valid && this.state.controls.bankAccountName.touched}
+              onKeyPress={this.allowOnlyletters.bind(this)}
+              inputProps={{ maxLength: 50 }}
             />
           </div>
           <div className="col-md-4 mb-3 ">
@@ -312,6 +341,8 @@ class AccountDetailForm extends React.Component {
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankAccountNumber.valid && this.state.controls.bankAccountNumber.touched}
+              onKeyPress={this.allowOnlynumbers.bind(this)}
+              inputProps={{ maxLength: 50 }}
             />
           </div>
         </div>
@@ -327,7 +358,7 @@ class AccountDetailForm extends React.Component {
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankControlKey.valid && this.state.controls.bankControlKey.touched}
-           
+              inputProps={{ maxLength: 50 }}           
             />
           </div>
           <div className="col-md-4 mb-3 ">
@@ -341,7 +372,7 @@ class AccountDetailForm extends React.Component {
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankCountryKey.valid && this.state.controls.bankCountryKey.touched}
-           
+              inputProps={{ maxLength: 50 }}
             />
           </div>
           <div className="col-md-4 mb-3 ">
@@ -355,7 +386,7 @@ class AccountDetailForm extends React.Component {
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankKeys.valid && this.state.controls.bankKeys.touched}
-           
+              inputProps={{ maxLength: 50 }}
             />
           </div>
         </div>
@@ -394,7 +425,7 @@ class AccountDetailForm extends React.Component {
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankReferencedetail.valid && this.state.controls.bankReferencedetail.touched}
-           
+              inputProps={{ maxLength: 100 }}                  
             />
           </div>
           <div className="col-md-4">

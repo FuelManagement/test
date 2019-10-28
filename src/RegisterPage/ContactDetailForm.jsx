@@ -262,6 +262,32 @@ class ContactDetailForm extends React.Component {
     }
     this.props.dispatch(onboardActions.changeFormState(isFormVaild));
 }
+//Allow only letters
+allowOnlyletters(e) {
+  var regex = new RegExp("^[a-zA-Z]+$");
+
+  var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+  if (regex.test(str)) {
+      return true;
+  }
+  else {
+      e.preventDefault();
+      return false;
+  }
+}
+//Allow only numbers 
+allowOnlynumbers(e) {
+  var regex = new RegExp(/^[0-9\b]+$/);
+
+  var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+  if (regex.test(str)) {
+      return true;
+  }
+  else {
+      e.preventDefault();
+      return false;
+  }
+}
   render() {
     return (
       <div className="mx-auto">
@@ -278,7 +304,7 @@ class ContactDetailForm extends React.Component {
               className="form-control"
               autoComplete="off"
               margin="dense"
-              inputProps={{ maxLength: 100 }}
+              inputProps={{ maxLength: 50 }}
               error={!this.state.controls.streetAddress.valid && this.state.controls.streetAddress.touched}
                             
             />
@@ -298,6 +324,8 @@ class ContactDetailForm extends React.Component {
               autoComplete="off"
               margin="dense"
               error={!this.state.controls.city.valid && this.state.controls.city.touched}
+              onKeyPress={this.allowOnlyletters.bind(this)}
+              inputProps={{ maxLength: 50 }}
             />
           </div>
         </div>
@@ -315,7 +343,9 @@ class ContactDetailForm extends React.Component {
               autoComplete="off"
               margin="dense"
               error={!this.state.controls.postalCode.valid && this.state.controls.postalCode.touched}
-            />
+              onKeyPress={this.allowOnlynumbers.bind(this)}
+              inputProps={{ maxLength: 50 }}
+              />
           </div>
           <div className="col-md-4 mb-3">
             <TextField
@@ -330,6 +360,8 @@ class ContactDetailForm extends React.Component {
               autoComplete="off"
               margin="dense"
               error={!this.state.controls.state.valid && this.state.controls.state.touched}
+              onKeyPress={this.allowOnlyletters.bind(this)}
+              inputProps={{ maxLength: 50 }}
             />
           </div>
           <div className="col-md-4 md-3">
@@ -345,6 +377,8 @@ class ContactDetailForm extends React.Component {
               autoComplete="off"
               margin="dense"
               error={!this.state.controls.txtCountry.valid && this.state.controls.txtCountry.touched}
+              onKeyPress={this.allowOnlyletters.bind(this)}
+              inputProps={{ maxLength: 50 }}
             />
           </div>
         </div>
