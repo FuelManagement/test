@@ -57,7 +57,6 @@ function dispatchOrder(order) {
             hashes: "0101pqp101010010",
             time: tmpDate.getHours()+":"+tmpDate.getMinutes()
         }
-        debugger;
         const requestOptions = {
             method: 'POST',
             headers: authHeader(),
@@ -75,7 +74,6 @@ function uploadFiles2(data){
         headers: authHeader(),
         body: formData
     };
-    debugger;
     requestOptions.headers['Content-Type'] = undefined;
     return fetch(config.apiUrl + '/product/uploadFile', requestOptions).then(handleResponse, handleError);
 }

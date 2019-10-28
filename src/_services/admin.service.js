@@ -26,7 +26,6 @@ function approveUser(row) {
         name:row.first_name,
         address: row.address
     }
-    debugger;
     const requestOptions = {
         method: 'POST',
         headers: authHeader(),

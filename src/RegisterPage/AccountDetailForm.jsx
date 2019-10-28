@@ -71,7 +71,7 @@ class AccountDetailForm extends React.Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.props.dispatch(onboardActions.changeFormState(this.props.onboard.mode==='create'?false:true));
   }
-  componentWillReceiveProps(nextprops)
+  UNSAFE_componentWillReceiveProps(nextprops)
   {
   if(JSON.stringify(this.props.onboard.participant)!==JSON.stringify(nextprops.onboard.participant))
   {

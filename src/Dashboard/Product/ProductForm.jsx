@@ -83,7 +83,7 @@ class ProductForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillReceiveProps(nextprops)
+  UNSAFE_componentWillReceiveProps(nextprops)
   {
   if(JSON.stringify(this.props.product.product)!==JSON.stringify(nextprops.product.product))
   {

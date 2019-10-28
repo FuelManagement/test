@@ -19,10 +19,11 @@ class AddRFQ extends React.Component {
         super(props);
         this.handleChange = this.handleChange.bind(this);
         this.handleEntityChange= this.handleEntityChange.bind(this);
-        this.newRFQSubmit = this.submitForm.bind(this);
+        this.postNewRfq = this.postNewRfq.bind(this);
         this.handleLineItemChange = this.handleLineItemChange.bind(this);
         this.getEntityTypes = this.getEntityTypes.bind(this);
         this.filterParticipants = this.filterParticipants.bind(this);
+        this.updateLineItems = this.updateLineItems.bind(this);
         this.state = {
             formData: props.row && Object.keys(props.row).length ? props.row : {},
             participants: props.rfq.participants || [],
@@ -41,7 +42,14 @@ class AddRFQ extends React.Component {
             });
         }
     }
-    submitForm() {
+    postNewRfq() {
+        let formData = this.state.formData;
+        this.props.dispatch(rfqActions.postNewRfq(formData));
+    }
+    updateLineItems(lineItems){
+        let formData = this.state.formData;
+        formData.products = lineItems;
+        this.setState({formData});
     }
     getEntityTypes(participants=[]){
         let entityTypes = {};
@@ -261,13 +269,13 @@ class AddRFQ extends React.Component {
                             </div>
                             <div className="row form-row mb-3">
                                 <div className="col-md-12">
-                                    <LineItem products={rfq.products} />
+                                    <LineItem products={rfq.products} updateLineItems={this.updateLineItems}/>
                                 </div>
                             </div>
                             <div className="row form-row">
                                 <div className="col-md-7"></div>
                                 <div className="col-md-4 mb-3 ">
-                                    <button className="btn btn-success rfq-submit-btn float-right" onClick={this.newRFQSubmit}>Submit</button>
+                                    <button className="btn btn-success rfq-submit-btn float-right" onClick={(e) => this.postNewRfq()}>Submit</button>
                                 </div>
                             </div>
                         </div>

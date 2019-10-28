@@ -27,7 +27,7 @@ class Product extends React.Component {
         this.handleSubmit=this.handleSubmit.bind(this);
         this.toggleModal=this.toggleModal.bind(this);
     }
-    componentWillReceiveProps(nextprops)
+    UNSAFE_componentWillReceiveProps(nextprops)
     {
     if(JSON.stringify(this.props.product.mode)!==JSON.stringify(nextprops.product.mode))
     {
