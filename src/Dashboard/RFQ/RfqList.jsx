@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { API_Helpers, Utils, Table_Config } from '../../_helpers';
+import { API_Helpers, Utils, Table_Config ,history} from '../../_helpers';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons"; 
+
 
 library.add(faPlus);
 
@@ -14,8 +15,7 @@ import $ from 'jquery';
 window.jQuery = $; // hack
 window.$ = $;      // hack 
 import 'bootstrap';
-import { rfqActions } from '../../_actions';
-import { AddRFQ } from './AddRFQ';
+import { rfqActions } from '../../_actions'; 
 class RFQ extends React.Component {
     constructor(props) {
         super(props);
@@ -38,7 +38,8 @@ class RFQ extends React.Component {
         return this.props.dispatch(rfqActions.updateRfq(data));
     }
     toggleModal(event, data={}, mode="view") {
-        this.setState({ rfqModal: !this.state.rfqModal, mode, selectedRfq: data })
+        this.setState({ rfqModal: !this.state.rfqModal, mode, selectedRfq: data });
+        history.push('/rfq/add');
     }
     render() {
         const { rfq } = this.props;
@@ -62,19 +63,7 @@ class RFQ extends React.Component {
                     data={rfq.rfqs}
                     columns={Table_Config.RFQ.rfqs.columns({toggleRfqModal: this.toggleModal.bind(this)})}
                     {...Table_Config.RFQ.rfqs.options}
-                />
-                <hr />
-                <div className="modal" id="rfqModal" tabIndex="-1" role="dialog">
-                    <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                            <AddRFQ 
-                                row={this.state.selectedRfq}
-                                mode={this.state.mode}
-                                products={rfq.products}
-                            />
-                        </div>
-                    </div>
-                </div>
+                /> 
             </div>
         );
     }
