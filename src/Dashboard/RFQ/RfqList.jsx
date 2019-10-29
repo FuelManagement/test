@@ -39,7 +39,7 @@ class RFQ extends React.Component {
     }
     toggleModal(event, data={}, mode="view") {
         this.setState({ rfqModal: !this.state.rfqModal, mode, selectedRfq: data });
-        history.push('/rfq/add');
+        history.push('/rfq/edit', {data});
     }
     render() {
         const { rfq } = this.props;

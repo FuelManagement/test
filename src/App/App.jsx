@@ -90,7 +90,9 @@ class App extends React.Component {
                                 <Route path="/userProfile" exact component={Dashboard.UserProfile} />
                                 <Route path="/rfq" exact component={Dashboard.RFQ} />
 							    <Route path="/userProfile/add" exact component={Dashboard.AddUserProfile} /> 
-							    <Route path="/rfq/add" exact component={Dashboard.AddRFQ} /> 
+							    <Route path="/rfq/add" exact component={Dashboard.AddRFQ} />
+                                <Route path="/rfq/edit" exact component={Dashboard.AddRFQ} />
+                                <Route path="/rfq/view" exact component={Dashboard.AddRFQ} />
                             </React.Fragment>
                         </ Router>
                     </div>

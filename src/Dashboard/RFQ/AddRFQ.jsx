@@ -24,15 +24,21 @@ class AddRFQ extends React.Component {
         this.getEntityTypes = this.getEntityTypes.bind(this);
         this.filterParticipants = this.filterParticipants.bind(this);
         this.updateLineItems = this.updateLineItems.bind(this);
+        this.mapSelectedRfqFormData = this.mapSelectedRfqFormData.bind(this);
         this.state = {
             formData: props.row && Object.keys(props.row).length ? props.row : {},
             participants: props.rfq.participants || [],
-            entityTypes: this.getEntityTypes(props.rfq.participants) || [{value:"", label:"None"}]
+            entityTypes: this.getEntityTypes(props.rfq.participants) || [{value:"", label:"None"}],
+            selectedRfq: this.props.history 
+                        && this.props.history.location 
+                        && this.props.history.location.state 
+                        && this.props.history.location.state.data
         }
     }
     componentDidMount() {
         this.props.dispatch(rfqActions.getAllProducts());
         this.props.dispatch(rfqActions.getAllParticipant());
+        this.mapSelectedRfqFormData();
     }
     UNSAFE_componentWillReceiveProps(){
         if(this.props.rfq.participants && this.props.rfq.participants.length){
@@ -41,6 +47,17 @@ class AddRFQ extends React.Component {
                 participants: this.props.rfq.participants
             });
         }
+    }
+    mapSelectedRfqFormData(){
+        if(!this.state.selectedRfq) return;
+        let formData = this.state.formData;
+        formData.entityType = this.state.selectedRfq.entityType || formData.entityType;
+        formData.participantID = this.state.selectedRfq.participantID || formData.participantID;
+        formData.projectDetails = this.state.selectedRfq.projectDetails || formData.projectDetails;
+
+
+        this.setState({formData});
+
     }
     postNewRfq() {
         let formData = this.state.formData;
@@ -88,7 +105,7 @@ class AddRFQ extends React.Component {
             <div className="mx-auto">
                 <div className="row brd-tp1px">
                     <div className='col-lg-9 add-rfq-main'>
-                        <h3><Link to="/rfq"> <FontAwesomeIcon icon="angle-left" /></Link> &nbsp;&nbsp;&nbsp;Add RFQ</h3>
+                        <h3><Link to="/rfq"> <FontAwesomeIcon icon="angle-left" /></Link> &nbsp;&nbsp;&nbsp;{this.state.selectedRfq?"Update":"Add"} RFQ</h3>
                         <hr />
                         <div className="col-12 col-md-12 form-wrapper">
                             <div className="row form-row">
