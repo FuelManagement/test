@@ -36,7 +36,7 @@ class UserProfile extends React.Component {
                 <h2 style={{ display: "inline-block" }}>User Profile</h2>
                 <hr />
                 <Link to="/userProfile/add">
-                    <button className="btn btn-outline btn-info">
+                    <button className="btn btn-outline btn-success">
                         <FontAwesomeIcon icon="plus"/> Add User Profile
                     </button>
                 </Link>

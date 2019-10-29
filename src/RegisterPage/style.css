@@ -183,6 +183,7 @@ header .pad-50{
 
 .searchBox {
   float: right;
+  width: 50%;
 }
 
 .inlineHeading {

@@ -271,7 +271,7 @@ let Table_Config = {
 				Cell: row => { 
 					if(row.row.documents && row.row.documents.length){
 						return <button 
-								className="btn btn-info btn-sm button-style"
+								className="btn btn-success btn-sm button-style"
 								style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
 								onClick={e=>{props.toggleDocumentModal(e, row.row, true)}}>
 									View
@@ -338,7 +338,7 @@ let Table_Config = {
 				Cell: row => { 
 					if(row.row.documents && row.row.documents.length){
 						return <button 
-								className="btn btn-info btn-sm button-style"								
+								className="btn btn-success btn-sm button-style"								
 								style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
 								onClick={e=>{props.toggleDocumentModal(e, row.row, true)}}>
 									View
@@ -436,7 +436,7 @@ let Table_Config = {
 				Cell: row => { 
 					if(row.row.documents && row.row.documents.length){
 						return <button 
-								className="btn btn-info btn-sm button-style"
+								className="btn btn-success btn-sm button-style"
 								style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
 								onClick={e=>{props.toggleDocumentModal(e, row.row, true)}}>
 									View

@@ -78,7 +78,7 @@ class Product extends React.Component {
                 
                 <hr/>
                 <div>
-                <button name="btnAddProduct" className="btn btn-outline btn-info"   onClick={e => {this.toggleModal(e);this.props.dispatch(productActions.changeModeProduct('create'));}}>
+                <button name="btnAddProduct" className="btn btn-outline btn-success"   onClick={e => {this.toggleModal(e);this.props.dispatch(productActions.changeModeProduct('create'));}}>
                         <FontAwesomeIcon icon="plus"/>  Add Product
                     </button>
                 

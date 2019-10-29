@@ -196,6 +196,7 @@ header .pad-50{
 
 .searchBox {
   float: right;
+  width: 50%;
 }
 
 .inlineHeading {
@@ -288,6 +289,10 @@ header .pad-50{
   border-radius: 5px;
   text-decoration-color: #00ce1b;
   font-size: 17px !important;
+}
+.rt-thead{
+  background:#00ce1b;
+  color: #fff;
 }
 .filepond--root .filepond--drop-label {
   min-height: 3.25em;
