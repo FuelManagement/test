@@ -23,24 +23,7 @@ const GreenRadio = withStyles({
 })(props => <Radio color="default" {...props} />);
 
 
-const businessRange = [
-    {
-        value: "",
-        label: "None"
-    },
-    {
-        value: "10",
-        label: "Ten"
-    },
-    {
-        value: "20",
-        label: "Twenty"
-    },
-    {
-        value: "30",
-        label: "Thirty"
-    }
-];
+
 class AddUserProfile extends React.Component {
     constructor(props) {
         super(props);
@@ -332,7 +315,10 @@ class AddUserProfile extends React.Component {
         let key = event.target.name, value = event.target.value;
         if (event.target.name === "participantID") {
 
-            let role = this.props.participants.find(f => f._id === event.target.value).entityType;
+            let role = this.props.participants.find(f => f.registerId.toLowerCase() === event.target.value.toLowerCase()).entityType;
+            let participantName = this.props.participants.find(f => f.registerId.toLowerCase() === event.target.value.toLowerCase()).domain;
+            let participantType = this.props.participants.find(f => f.registerId.toLowerCase() === event.target.value.toLowerCase()).entityType;
+            
             this.setState(prevState => {
                 return {
                     controls: {
@@ -346,6 +332,8 @@ class AddUserProfile extends React.Component {
                 };
             });
             this.props.dispatch(userProfileActions.changeUserProfile('role', role));
+            this.props.dispatch(userProfileActions.changeUserProfile('participantName', participantName));
+            this.props.dispatch(userProfileActions.changeUserProfile('participantType', participantType));
         }
 
         let connectedValue = {
@@ -391,6 +379,7 @@ class AddUserProfile extends React.Component {
             }
           };
         }); 
+        this.props.dispatch(userProfileActions.changeUserProfile(key, value));
       }
 
     handleSubmit() {
@@ -475,7 +464,7 @@ class AddUserProfile extends React.Component {
                                         margin="dense"
                                     >
                                         {this.props.participants.map(option => (
-                                            <MenuItem key={option._id} value={option._id}>
+                                            <MenuItem key={option.registerId} value={option.registerId}>
                                                 {option.registerId}
                                             </MenuItem>
                                         ))}

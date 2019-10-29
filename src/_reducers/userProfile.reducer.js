@@ -23,13 +23,13 @@ export function userProfile(state = {}, action) {
         return {
             ...state,
             loading: false,
-            userProfiles: action.userProfiles
+            userProfiles: action.userprofiles
               };
               case userProfileConstants.USER_PROFILE_GET_SUCCESS:
         return {
             ...state,
             loading: false,
-            userProfile: action.userProfile
+            userProfile: action.userprofile
               };
               case userProfileConstants.USER_PROFILE_CREATE_SUCCESS:
               case userProfileConstants.USER_PROFILE_UPDATE_SUCCESS:

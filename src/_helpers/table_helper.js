@@ -1,10 +1,11 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faEye, faEdit, faCheckSquare } from "@fortawesome/free-solid-svg-icons";
+// import { library } from "@fortawesome/fontawesome-svg-core";
+// import { faEye, faEdit, faCheckSquare } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faEye, faEdit, faCheckSquare);
-
+// library.add(faEye, faEdit, faCheckSquare);
+let user = JSON.parse(localStorage.getItem('user'));
+    
 let globalOptions = {
     showPagination: true,
     showPaginationTop: false,
@@ -595,13 +596,13 @@ let Table_Config = {
 			columns:(props)=>[
 				{
 					Header: 'Organization Name',
-					accessor: 'registerId',
-					Cell: row => <span title={row.original.registerId}>{row.original.registerId}</span>
+					accessor: 'domain',
+					Cell: row => <span title={row.original.domain}>{row.original.domain}</span>
 				},
 				{
 				Header: 'Email Id',
-				accessor: 'emailAddress',
-				Cell: row => <span title={row.original.emailAddress}>{row.original.emailAddress}</span>
+				accessor: 'registerId',
+				Cell: row => <span title={row.original.registerId}>{row.original.registerId}</span>
 			},
 			{
 				Header: 'Business type ',
@@ -636,11 +637,11 @@ let Table_Config = {
 							<FontAwesomeIcon icon="edit" size="xs"/>
 					</button>
 					{row.original.status===0 ? 
-						(<button 
+						(<button  disabled={row.original.isIdentityCreated}
 							className="btn btn-outline-success btn-sm"
 							style={{horizontalAlign: 'middle',display:'block',margin:'auto'}}
 							onClick={e=>{props.approveParticipant(e,   {
-								"email": row.original.emailAddress,
+								"email": user.email,
 								"registerId": row.original.registerId,
 								
 								},'approve')}}>
@@ -660,8 +661,8 @@ let Table_Config = {
 				Cell: row => <span title={row.original.first_Name+' '+row.original.middle_Name+' '+row.original.last_Name}>{row.original.first_Name+' '+row.original.middle_Name+' '+row.original.last_Name}</span>
 			},{
 				Header: 'Organization Name',
-				accessor: 'participantID',
-				Cell: row => <span title={row.original.participantID}>{row.original.participantID}</span>
+				accessor: 'participantName',
+				Cell: row => <span title={row.original.participantName}>{row.original.participantName}</span>
 			},{
 				Header: 'Role',
 				accessor: 'role',

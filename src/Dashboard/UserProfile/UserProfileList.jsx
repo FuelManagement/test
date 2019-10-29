@@ -21,7 +21,7 @@ class UserProfile extends React.Component {
         this.props.dispatch(userProfileActions.changeModeUserProfile('create'));
         this.props.dispatch(userProfileActions.getAllUserProfile());  
     }
-    editUserProfile(collection,mode){
+    editUserProfile(e,collection,mode){
         this.props.dispatch(userProfileActions.changeModeUserProfile(mode));
         this.props.dispatch(userProfileActions.getUserProfile(collection));
         history.push('/userProfile/add');

@@ -250,16 +250,15 @@ function CustomizedSteppers(props) {
     
     if(activeStep===steps.length-1 )
     {
-      if (props.documentslist===undefined || props.documentslist.length<1) {
+      if (props.documentslist===undefined && props.documentslist.length<1 && props.mode==='create') {
         alert("File not selected");
         return false;
     }
-    console.log(props.mode);
     if(props.mode==='create'){
       props.dispatch(onboardActions.createParticipant(props.participant,props.documentslist));
     }
     else{
-      props.dispatch(onboardActions.updateParticipant(props.participant,props.documentslist));
+      props.dispatch(onboardActions.updateParticipant(props.participant,props.documentslist,props.downloadDocumentslist));
     }
     }
     else
@@ -298,9 +297,9 @@ function CustomizedSteppers(props) {
           </div>
         ) : (
           <div>
-            <Typography className={classes.instructions}>
+            {/* <Typography className={classes.instructions}> */}
               {getStepContent(activeStep)}
-            </Typography>
+            {/* </Typography> */}
             <div>
             { (activeStep != 0 )?(
               <Button
@@ -333,7 +332,8 @@ const mapStateToProps=function(state) {
       documentslist: onboard.documentslist,
        participant: onboard.participant,
        isFormValid: onboard.isFormValid,
-       mode:onboard.mode
+       mode:onboard.mode,
+       downloadDocumentslist:onboard.downloadDocumentslist
     };
 }
 

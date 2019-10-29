@@ -14,7 +14,6 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { TextField } from '@material-ui/core';
 
-library.add(faPlus);
 class OnBoard_Profile extends React.Component {
 
     constructor(props) {

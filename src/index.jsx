@@ -5,9 +5,9 @@ import { Provider } from 'react-redux';
 import { store } from './_helpers';
 import { App } from './App';
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus,faFileDownload,faEye, faEdit, faCheckSquare} from "@fortawesome/free-solid-svg-icons";
 
-library.add(faPlus);
+library.add(faPlus,faFileDownload,faEye, faEdit, faCheckSquare);
 render(
     <Provider store={store}>
         <App />
