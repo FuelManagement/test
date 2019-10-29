@@ -10,9 +10,9 @@ import { rfqActions } from '../../_actions';
 library.add(faAngleLeft, faPlus);
 const currencytype = [
     {value: "",label: "None"},
-    {value: "LLC",label: "LLC"},
-    {value: "LLP",label: "LLP"},
-    {value: "30",label: "Thirty"}
+    {value: "USD",label: "USD"},
+    {value: "CAN $",label: "CAN $"},
+    {value: "Mex $",label: "MEX $"}
 ];
 class AddRFQ extends React.Component {
     constructor(props) {
