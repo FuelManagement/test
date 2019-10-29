@@ -64,7 +64,7 @@ class App extends React.Component {
             <div className="container-fluid">
                 <div className="row">
                     <div className="w-100">
-                        <HashRouter history={history}>
+                        <Router history={history}>
                             <React.Fragment>
                                 <Components.Overlay loading={alert.loading}/>
                                 <ToastContainer />
@@ -92,7 +92,7 @@ class App extends React.Component {
 							    <Route path="/userProfile/add" exact component={Dashboard.AddUserProfile} /> 
 							    <Route path="/rfq/add" exact component={Dashboard.AddRFQ} /> 
                             </React.Fragment>
-                        </ HashRouter>
+                        </ Router>
                     </div>
                 </div>
                 <ToastContainer />
