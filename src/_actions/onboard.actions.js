@@ -189,14 +189,14 @@ function changeModeParticipant(mode){
     function success(collection) { return { type: onboardConstants.ONBRD_MODE_PARTICIPANT, collection } }
    
 }
-function changeFormState(valid){
+function changeFormState(key,valid){
     return dispatch => {
       
-            dispatch(success(valid));
+            dispatch(success({'key':key,'valid':valid}));
      
        
     };
-    function success(valid) { return { type: onboardConstants.ONBRD_CHANGE_FORM_STATE, valid } }
+    function success(collection) { return { type: onboardConstants.ONBRD_CHANGE_FORM_STATE, collection } }
    
 }
 

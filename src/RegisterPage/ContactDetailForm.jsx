@@ -51,9 +51,7 @@ class ContactDetailForm extends React.Component {
 
     }
   }
-  componentDidMount(){
-    this.handleFormSubmit();
-  }
+  
   initialState(mode, props) {
     let state = {};
     state = {
@@ -61,7 +59,7 @@ class ContactDetailForm extends React.Component {
         streetAddress: {
           value: props !== undefined && props.streetAddress !== undefined ? props.streetAddress : '',
 
-          valid: false,
+          valid: this.props.onboard.isContactFormValid?true:false,
           validationRules: {
             notEmpty: true,
 
@@ -75,7 +73,7 @@ class ContactDetailForm extends React.Component {
         city: {
           value: props !== undefined && props.city !== undefined ? props.city : '',
 
-          valid: false,
+          valid: this.props.onboard.isContactFormValid?true:false,
           validationRules: {
             notEmpty: true,
           },
@@ -88,7 +86,7 @@ class ContactDetailForm extends React.Component {
         postalCode: {
           value: props !== undefined && props.postalCode !== undefined ? props.postalCode : '',
 
-          valid: false,
+          valid: this.props.onboard.isContactFormValid?true:false,
           validationRules: {
             notEmpty: true,
           },
@@ -102,7 +100,7 @@ class ContactDetailForm extends React.Component {
         state: {
           value: props !== undefined && props.state !== undefined ? props.state : '',
 
-          valid: false,
+          valid: this.props.onboard.isContactFormValid?true:false,
           validationRules: {
             notEmpty: true,
           },
@@ -115,7 +113,7 @@ class ContactDetailForm extends React.Component {
         txtCountry: {
           value: props !== undefined && props.txtCountry !== undefined ? props.txtCountry : '',
 
-          valid: false,
+          valid: this.props.onboard.isContactFormValid?true:false,
           validationRules: {
             notEmpty: true,
           },
@@ -128,7 +126,7 @@ class ContactDetailForm extends React.Component {
         faxNumber: {
           value: props !== undefined && props.faxNumber !== undefined ? props.faxNumber : '',
 
-          valid: false,
+          valid: this.props.onboard.isContactFormValid?true:false,
           validationRules: {
             notEmpty: true,
           },
@@ -141,7 +139,7 @@ class ContactDetailForm extends React.Component {
         firstContactNumber: {
           value: props !== undefined && props.firstContactNumber !== undefined ? props.firstContactNumber : '',
 
-          valid: false,
+          valid: this.props.onboard.isContactFormValid?true:false,
           validationRules: {
             notEmpty: true,
 
@@ -155,7 +153,7 @@ class ContactDetailForm extends React.Component {
         firstContactNumberType: {
           value: props !== undefined && props.firstContactNumberType !== undefined ? props.firstContactNumberType : 'mobile',
 
-          valid: false,
+          valid: this.props.onboard.isContactFormValid?true:false,
           validationRules: {
             notEmpty: true,
 
@@ -169,7 +167,7 @@ class ContactDetailForm extends React.Component {
         secondContactNumber: {
           value: props !== undefined && props.secondContactNumber !== undefined ? props.secondContactNumber : '',
 
-          valid: false,
+          valid: this.props.onboard.isContactFormValid?true:false,
           validationRules: {
             notEmpty: true,
 
@@ -182,7 +180,7 @@ class ContactDetailForm extends React.Component {
         SecondContactNumberType: {
           value: props !== undefined && props.SecondContactNumberType !== undefined ? props.SecondContactNumberType : 'telephone',
 
-          valid: false,
+          valid: this.props.onboard.isContactFormValid?true:false,
           validationRules: {
             notEmpty: true,
           },
@@ -262,7 +260,8 @@ class ContactDetailForm extends React.Component {
          
        });
     }
-    this.props.dispatch(onboardActions.changeFormState(isFormVaild));
+    this.props.dispatch(onboardActions.changeFormState('isContactFormVaild',isFormVaild));
+    this.props.dispatch(onboardActions.changeFormState('isFormVaild',isFormVaild));
 }
 //Allow only letters
 allowOnlyletters(e) {

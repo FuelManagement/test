@@ -70,13 +70,15 @@ class OrganizationDetailForm extends React.Component {
           }
         }
     });
-});}
+});
+}
+
   }
     componentDidMount() {
         if (this.props.onboard.participant === undefined) {
             this.props.dispatch(onboardActions.changeModeParticipant('create'));
         }
-        this.handleFormSubmit();
+       
     }
 
     initialState(mode, props) {
@@ -85,7 +87,7 @@ class OrganizationDetailForm extends React.Component {
             controls: {
                 domain: {
                     value: props!==undefined && props.domain!==undefined?props.domain:'',
-                    valid: false,
+                    valid: this.props.onboard.isOrgFormValid?true:false,
                     validationRules: {
                         notEmpty: true,
                         isName: true,
@@ -100,7 +102,7 @@ class OrganizationDetailForm extends React.Component {
                 },
                 BuisnessType: {
                     value: props !== undefined && props.BuisnessType !== undefined ? props.BuisnessType : '',
-                    valid: false,
+                    valid: this.props.onboard.isOrgFormValid?true:false,
                     validationRules: {
                         notEmpty: true,
                     },
@@ -113,7 +115,7 @@ class OrganizationDetailForm extends React.Component {
                 numberOfYearsinBuisness: {
                     value: props !== undefined && props.numberOfYearsinBuisness !== undefined ? props.numberOfYearsinBuisness : '',
 
-                    valid: false,
+                    valid: this.props.onboard.isOrgFormValid?true:false,
                     validationRules: {
                         notEmpty: true,
                         minLength:true,
@@ -127,9 +129,7 @@ class OrganizationDetailForm extends React.Component {
                 },
                 dateOfIncorporation: {
                     value: props !== undefined && props.dateOfIncorporation !== undefined ? props.dateOfIncorporation : new Date(),
-
-                    value: new Date(),
-                    valid: false,
+                    valid: this.props.onboard.isOrgFormValid?true:false,
                     validationRules: {
                         notEmpty: true,
                     },
@@ -143,7 +143,7 @@ class OrganizationDetailForm extends React.Component {
                 stateOfIncorporation: {
                     value: props !== undefined && props.stateOfIncorporation !== undefined ? props.stateOfIncorporation : '',
 
-                    valid: false,
+                    valid: this.props.onboard.isOrgFormValid?true:false,
                     validationRules: {
                         notEmpty: true,
                         minLength:true,
@@ -158,7 +158,7 @@ class OrganizationDetailForm extends React.Component {
                 countryOfIncorporation: {
                     value: props !== undefined && props.countryOfIncorporation !== undefined ? props.countryOfIncorporation : '',
 
-                    valid: false,
+                    valid: this.props.onboard.isOrgFormValid?true:false,
                     validationRules: {
                         notEmpty: true,
                         minLength:true,
@@ -173,7 +173,7 @@ class OrganizationDetailForm extends React.Component {
                 participantType: {
                     value: props !== undefined && props.participantType !== undefined ? props.participantType : '',
 
-                    valid: false,
+                    valid: this.props.onboard.isOrgFormValid?true:false,
                     validationRules: {
                         notEmpty: true,
                     },
@@ -201,7 +201,7 @@ class OrganizationDetailForm extends React.Component {
                 registerId: {
                     value: props!==undefined && props.registerId!==undefined?props.registerId:'',
                    
-                    valid: false,
+                    valid: this.props.onboard.isOrgFormValid?true:false,
                     validationRules: {
                         notEmpty: true,
                         isEmail: true
@@ -215,7 +215,7 @@ class OrganizationDetailForm extends React.Component {
                 companyCode: {
                     value: props !== undefined && props.companyCode !== undefined ? props.companyCode : '',
 
-                    valid: false,
+                    valid: this.props.onboard.isOrgFormValid?true:false,
                     validationRules: {
                         notEmpty: true,
                         minLength:true,
@@ -305,7 +305,9 @@ class OrganizationDetailForm extends React.Component {
              
            });
         }
-        this.props.dispatch(onboardActions.changeFormState(isFormVaild));
+       
+        this.props.dispatch(onboardActions.changeFormState('isFormVaild',isFormVaild));
+        this.props.dispatch(onboardActions.changeFormState('isOrgFormVaild',isFormVaild));
     }
     //Allow only letters
     allowOnlyletters(e) {
