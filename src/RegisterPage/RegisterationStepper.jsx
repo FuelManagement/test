@@ -274,6 +274,28 @@ function CustomizedSteppers(props) {
   const handleReset = () => {
     setActiveStep(0);
   };
+  const handleFormValid = () => {
+    let flag=false;
+   switch(activeStep)
+   {
+     case 0:
+       flag= props.onboard.isOrgFormVaild?true:false;
+       break;
+       case 1:
+       flag= props.onboard.isContactFormVaild?true:false;
+       break;
+       case 2:
+          flag= props.onboard.isAccountFormVaild?true:false;
+       break;
+       case 3:
+          flag= props.onboard.isTaxFormValid?true:false;
+       break;
+       default:
+          flag= true;
+         break;
+   }
+   return flag;
+  };
   
   return (
     <div className={classes.root}>
@@ -314,7 +336,7 @@ function CustomizedSteppers(props) {
                 variant="contained" 
                 onClick={(e)=>handleNext(e)}
                 className={[classes.button,classes.nextbutton,"next-button"].join(" ")}
-                disabled={!props.isFormValid}
+                disabled={!(handleFormValid())}
               >
                 {activeStep === steps.length - 1  ? "Submit" : "Next"}
               </Button>  
@@ -331,8 +353,9 @@ const mapStateToProps=function(state) {
     return {
       documentslist: onboard.documentslist,
        participant: onboard.participant,
-       isFormValid: onboard.isFormValid,
+       isFormVaild: onboard.isFormVaild,
        mode:onboard.mode,
+       onboard:onboard,
        downloadDocumentslist:onboard.downloadDocumentslist
     };
 }

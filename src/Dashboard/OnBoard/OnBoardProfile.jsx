@@ -52,6 +52,11 @@ class OnBoard_Profile extends React.Component {
             $('#createParticipantModal input[type="text"]').val("");
         }
         this.props.dispatch(onboardActions.changeModeParticipant(mode));
+        this.props.dispatch(onboardActions.changeFormState('isOrgFormVaild',true));
+        this.props.dispatch(onboardActions.changeFormState('isAccountFormVaild',true));
+        this.props.dispatch(onboardActions.changeFormState('isTaxFormVaild',true));
+        this.props.dispatch(onboardActions.changeFormState('isContactFormVaild',true));
+        this.props.dispatch(onboardActions.changeFormState('isFormValid',true));
         this.props.dispatch(onboardActions.getParticipant(data));
         this.setState({ createParticipantModal: !this.state.createParticipantModal });
     }

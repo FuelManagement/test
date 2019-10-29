@@ -91,9 +91,7 @@ class AccountDetailForm extends React.Component {
     });
   
   }}
-  componentDidMount(){
-    this.handleFormSubmit();
-  }
+  
   initialState(mode, props) {
     let state = {};
     state = {
@@ -101,7 +99,7 @@ class AccountDetailForm extends React.Component {
         bankName: {
           value: props!==undefined && props.bankName!==undefined?props.bankName:'',
                    
-          valid: false,
+          valid: this.props.onboard.isAccountFormValid?true:false,
           validationRules: {
             notEmpty: true,
             isName: true
@@ -115,7 +113,7 @@ class AccountDetailForm extends React.Component {
         bankAccountName: {
           value: props!==undefined && props.bankAccountName!==undefined?props.bankAccountName:'',
                    
-          valid: false,
+          valid: this.props.onboard.isAccountFormValid?true:false,
           validationRules: {
             notEmpty: true,
             isName:true
@@ -129,7 +127,7 @@ class AccountDetailForm extends React.Component {
         bankAccountNumber: {
           value: props!==undefined && props.bankAccountNumber!==undefined?props.bankAccountNumber:'',
                    
-          valid: false,
+          valid: this.props.onboard.isAccountFormValid?true:false,
           validationRules: {
             notEmpty: true,
             isNumber:true
@@ -144,7 +142,7 @@ class AccountDetailForm extends React.Component {
         bankControlKey: {
           value: props!==undefined && props.bankControlKey!==undefined?props.bankControlKey:'',
                    
-          valid: false,
+          valid: this.props.onboard.isAccountFormValid?true:false,
           validationRules: {
             notEmpty: true,
           },
@@ -157,7 +155,7 @@ class AccountDetailForm extends React.Component {
         bankCountryKey: {
           value: props!==undefined && props.bankCountryKey!==undefined?props.bankCountryKey:'',
                    
-          valid: false,
+          valid: this.props.onboard.isAccountFormValid?true:false,
           validationRules: {
             notEmpty: true,
           },
@@ -170,7 +168,7 @@ class AccountDetailForm extends React.Component {
         bankKeys: {
           value: props!==undefined && props.bankKeys!==undefined?props.bankKeys:'',
                    
-          valid: false,
+          valid: this.props.onboard.isAccountFormValid?true:false,
           validationRules: {
             notEmpty: true,
           },
@@ -183,7 +181,7 @@ class AccountDetailForm extends React.Component {
         bankReferencedetail: {
           value: props!==undefined && props.bankReferencedetail!==undefined?props.bankReferencedetail:'',
                    
-          valid: false,
+          valid: this.props.onboard.isAccountFormValid?true:false,
           validationRules: {
             notEmpty: true,
           },
@@ -196,7 +194,7 @@ class AccountDetailForm extends React.Component {
         poCurrency: {
           value: props!==undefined && props.poCurrency!==undefined?props.poCurrency:'',
                    
-          valid: false,
+          valid: this.props.onboard.isAccountFormValid?true:false,
           validationRules: {
             notEmpty: true,
 
@@ -210,7 +208,7 @@ class AccountDetailForm extends React.Component {
         bankPartnerType: {
           value: props!==undefined && props.bankPartnerType!==undefined?props.bankPartnerType:'',
                    
-          valid: false,
+          valid: this.props.onboard.isAccountFormValid?true:false,
           validationRules: {
             notEmpty: true,
           },
@@ -267,7 +265,8 @@ class AccountDetailForm extends React.Component {
          
        });
     }
-    this.props.dispatch(onboardActions.changeFormState(isFormVaild));
+    this.props.dispatch(onboardActions.changeFormState('isAccountFormVaild',isFormVaild));
+    this.props.dispatch(onboardActions.changeFormState('isFormVaild',isFormVaild));
 }
 //Allow only letters
 allowOnlyletters(e) {

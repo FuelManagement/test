@@ -88,7 +88,7 @@ export function onboard(state = {}, action) {
        };           
     case onboardConstants.ONBRD_CHANGE_FORM_STATE: return {
       ...state,
-      isFormValid:action.valid
+      [action.collection.key]:action.collection.valid
     };
       default:
           return {

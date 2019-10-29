@@ -64,9 +64,7 @@ class TaxDetailForm extends React.Component {
 
         }
     }
-    componentDidMount(){
-        this.handleFormSubmit();
-      }
+    
     initialState(mode, props) {
         let state = {};
         state = {
@@ -74,7 +72,7 @@ class TaxDetailForm extends React.Component {
                 taxNumber1: {
                     value: props !== undefined && props.taxNumber1 !== undefined ? props.taxNumber1 : '',
 
-                    valid: false,
+                    valid: this.props.onboard.isTaxFormValid?true:false,
                     validationRules: {
                         notEmpty: true,
 
@@ -88,7 +86,7 @@ class TaxDetailForm extends React.Component {
                 taxNumber2: {
                     value: props !== undefined && props.taxNumber2 !== undefined ? props.taxNumber2 : '',
 
-                    valid: false,
+                    valid: this.props.onboard.isTaxFormValid?true:false,
                     validationRules: {
                         notEmpty: true,
                     },
@@ -101,7 +99,7 @@ class TaxDetailForm extends React.Component {
                 vatNumber: {
                     value: props !== undefined && props.vatNumber !== undefined ? props.vatNumber : '',
 
-                    valid: false,
+                    valid: this.props.onboard.isTaxFormValid?true:false,
                     validationRules: {
                         notEmpty: true,
                     },
@@ -115,7 +113,7 @@ class TaxDetailForm extends React.Component {
                 vendorAcctGrp: {
                     value: props !== undefined && props.vendorAcctGrp !== undefined ? props.vendorAcctGrp : '',
 
-                    valid: false,
+                    valid: this.props.onboard.isTaxFormValid?true:false,
                     validationRules: {
                         notEmpty: true,
                     },
@@ -128,7 +126,7 @@ class TaxDetailForm extends React.Component {
                 vendorImporterRecord: {
                     value: props !== undefined && props.vendorImporterRecord !== undefined ? props.vendorImporterRecord : '',
 
-                    valid: false,
+                    valid: this.props.onboard.isTaxFormValid?true:false,
                     validationRules: {
                         notEmpty: true,
                     },
@@ -167,7 +165,7 @@ class TaxDetailForm extends React.Component {
                 taxWithholdCode: {
                     value: props !== undefined && props.taxWithholdCode !== undefined ? props.taxWithholdCode : '',
 
-                    valid: false,
+                    valid: this.props.onboard.isTaxFormValid?true:false,
                     validationRules: {
                         notEmpty: true,
 
@@ -181,7 +179,7 @@ class TaxDetailForm extends React.Component {
                 confirmationControlkey: {
                     value: props !== undefined && props.confirmationControlkey !== undefined ? props.confirmationControlkey : '',
 
-                    valid: false,
+                    valid: this.props.onboard.isTaxFormValid?true:false,
                     validationRules: {
                         notEmpty: true,
 
@@ -209,7 +207,7 @@ class TaxDetailForm extends React.Component {
                 shippingConditions: {
                     value: props !== undefined && props.shippingConditions !== undefined ? props.shippingConditions : '',
 
-                    valid: false,
+                    valid: this.props.onboard.isTaxFormValid?true:false,
                     validationRules: {
                         notEmpty: true,
 
@@ -342,7 +340,8 @@ class TaxDetailForm extends React.Component {
 
                 });
         }
-        this.props.dispatch(onboardActions.changeFormState(isFormVaild));
+        this.props.dispatch(onboardActions.changeFormState('isTaxFormValid',isFormVaild));
+        this.props.dispatch(onboardActions.changeFormState('isFormVaild',isFormVaild));
     }
     render() {
         return (
