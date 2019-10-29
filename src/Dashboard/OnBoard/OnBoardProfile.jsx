@@ -12,6 +12,7 @@ import RegisterationStepper from '../../RegisterPage/RegisterationStepper';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { TextField } from '@material-ui/core';
 
 library.add(faPlus);
 class OnBoard_Profile extends React.Component {
@@ -21,94 +22,105 @@ class OnBoard_Profile extends React.Component {
         this.state = {
             search: "",
             createParticipantModal: false,
-            domain:'',
-            mode:this.props.onboard.mode!==undefined?this.props.onboard.mode:'create'
+            domain: '',
+            mode: this.props.onboard.mode !== undefined ? this.props.onboard.mode : 'create'
         }
-       
-        this.toggleModal=this.toggleModal.bind(this);
+
+        this.toggleModal = this.toggleModal.bind(this);
     }
-    UNSAFE_componentWillReceiveProps(nextprops)
-    {
-    if(JSON.stringify(this.props.onboard.mode)!==JSON.stringify(nextprops.onboard.mode))
-    {
-  this.setState({mode:nextprops.onboard.mode})
-    }}
+    UNSAFE_componentWillReceiveProps(nextprops) {
+        if (JSON.stringify(this.props.onboard.mode) !== JSON.stringify(nextprops.onboard.mode)) {
+            this.setState({ mode: nextprops.onboard.mode })
+        }
+    }
     componentDidMount() {
-       
-        this.props.dispatch(onboardActions.getAllParticipant());  
+
+        this.props.dispatch(onboardActions.getAllParticipant());
     }
 
-    shouldComponentUpdate(){
+    shouldComponentUpdate() {
         return true;
     }
-   
-    toggleModal(event){
-        if(this.state.createParticipantModal){
+
+    toggleModal(event) {
+        if (this.state.createParticipantModal) {
             $('#createParticipantModal input[type="text"]').val("");
         }
-        this.setState({createParticipantModal:!this.state.createParticipantModal})
+        this.setState({ createParticipantModal: !this.state.createParticipantModal })
     }
-    toggleParticipantModal(e,data,mode)
-    {
-        if(this.state.createParticipantModal){
+    toggleParticipantModal(e, data, mode) {
+        if (this.state.createParticipantModal) {
             $('#createParticipantModal input[type="text"]').val("");
         }
         this.props.dispatch(onboardActions.changeModeParticipant(mode));
         this.props.dispatch(onboardActions.getParticipant(data));
-        this.setState({createParticipantModal:!this.state.createParticipantModal});
+        this.setState({ createParticipantModal: !this.state.createParticipantModal });
     }
-    approveParticipant(e, data, action){
+    approveParticipant(e, data, action) {
         this.props.dispatch(onboardActions.approveParticipant(data, action));
     }
     render() {
         //const { loading,product,products,mode} = this.props.product;
-        if(this.state.createParticipantModal){
+        if (this.state.createParticipantModal) {
             $('#createParticipantModal').modal('show');
-        } else{
+        } else {
             $('#createParticipantModal').modal('hide');
         }
         return (
-            <div className="col-md-9 contentDiv" style={{left:"22%"}}>
-                <h2 style={{display:"inline-block"}}>
+            <div className="col-md-9 contentDiv" style={{ left: "22%" }}>
+                <h2 style={{ display: "inline-block" }}>
                     OnBoarding - Profile Setup
                 </h2>
-                
-                <hr/>
+
+                <hr />
                 <div>
-               
-                <button name="btnAddParticipant" className="btn btn-outline btn-info"    onClick={e => {this.toggleModal(e);this.props.dispatch(onboardActions.changeModeParticipant('create'));}}>
-                        <FontAwesomeIcon icon="plus"/>  Add OnBoarding Profile
+
+                    <button name="btnAddParticipant" className="btn btn-outline btn-success" onClick={e => { this.toggleModal(e); this.props.dispatch(onboardActions.changeModeParticipant('create')); }}>
+                        <FontAwesomeIcon icon="plus" />  Add OnBoarding Profile
                     </button>
+                    <TextField className="searchBox"
+                        type="text" name="searc"
+                        value={this.state.search}
+                        label="Search By Organization Name"
+                        onChange={e => this.setState({ search: e.target.value })}
+                        variant="outlined"
+                        margin="dense"
+                    />
+                    {/* <input className="searchBox"
+                        type="text" name="search" 
+                        value={this.state.search} 
+                        onChange={e => this.setState({search:e.target.value})} 
+                        placeholder="Search By Name" /> */}
                 </div>
                 <div className="clearDiv"></div>
-                <br/>
+                <br />
                 <ReactTable
                     data={this.props.onboard.participants}
                     columns={Table_Config.Participant.participants.columns({
-                        toggleParticipantModal:this.toggleParticipantModal.bind(this),
+                        toggleParticipantModal: this.toggleParticipantModal.bind(this),
                         approveParticipant: this.approveParticipant.bind(this)
                     })}
                     {...Table_Config.Participant.participants.options}
                 />
 
-                <hr/>
-                <br/>
+                <hr />
+                <br />
 
                 <div className="modal onboard-profile" id="createParticipantModal" tabIndex="-1" role="dialog">
-                  {this.state.createParticipantModal?  <div className="modal-dialog " role="document">
+                    {this.state.createParticipantModal ? <div className="modal-dialog " role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="">{this.state.mode==='create'?'Add':'Edit'} Participant</h5>
-                                <button type="button" className="close" onClick={(e)=>this.toggleModal(e)} aria-label="Close">
+                                <h5 className="">{this.state.mode === 'create' ? 'Add' : 'Edit'} Participant</h5>
+                                <button type="button" className="close" onClick={(e) => this.toggleModal(e)} aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div className="modal-body">
                                 {/* <ProductForm mode={this.state.mode} closeModal={this.toggleModal}/> */}
                                 <RegisterationStepper />
-                                 </div>
+                            </div>
                         </div>
-                    </div>:null}
+                    </div> : null}
                 </div>
             </div>
         );
@@ -117,10 +129,10 @@ class OnBoard_Profile extends React.Component {
 
 function mapStateToProps(state) {
     const { onboard } = state;
-   
+
     return {
         onboard
-      
+
     };
 }
 

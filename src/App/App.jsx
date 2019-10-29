@@ -74,7 +74,7 @@ class App extends React.Component {
                                         component_imp={Dashboard.Dashboard_Importer} 
                                         component_exp={Dashboard.Dashboard_Exporter}
                                         component_ref={Dashboard.Dashboard_Refinery}
-                                        component_adm={Dashboard.HomePage_Admin}  />
+                                        component_adm={Dashboard.OnBoardProfile}  />
                                 
                                 <Components.Route_Orders exact path="/orders" 
                                         component_imp={Dashboard.HomePage_Importer} 
