@@ -44,6 +44,8 @@ class AddRFQ extends React.Component {
     }
     postNewRfq() {
         let formData = this.state.formData;
+        formData.toUserID=this.state.participants.find(f=>f._id===this.state.formData.participantID).registerId;
+        formData.participant_name=this.state.participants.find(f=>f._id===this.state.formData.participantID).domain;
         this.props.dispatch(rfqActions.postNewRfq(formData));
     }
     updateLineItems(lineItems){
@@ -140,7 +142,7 @@ class AddRFQ extends React.Component {
                                     >
                                         { this.state.participants && this.state.participants.map(option => (
                                             <MenuItem key={option._id} value={option._id}>
-                                                {option.registerId}
+                                                {option.domain}
                                             </MenuItem>
                                         ))}
                                     </TextField>

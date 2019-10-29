@@ -15,18 +15,20 @@ function getAllRfq() {
         method: 'GET',
         headers: authHeader()
     };
-    return fetch(config.apiUrl + '/product/getIOList?userID='+user.email, requestOptions)
+    return fetch(config.apiUrl + '/product/getRFQListByFromUserID?userID='+user.email, requestOptions)
     .then(handleResponse)
-    .then(()=> dummyData)
+    .then((data)=> data.rfqs)
     .catch(err => {
         // handleError(err)
-        return dummyData;
+        return [];
     })
 }
 function postNewRfq(formData){
     let user = JSON.parse(localStorage.getItem('user'));
     formData.userID = user.email;
     formData.role = user.role;
+    formData.status = 'Created';
+    formData.fromUserID=user.email;
     const requestOptions = {
         method: 'POST',
         headers: authHeader(),

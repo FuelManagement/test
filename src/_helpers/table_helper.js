@@ -538,8 +538,8 @@ let Table_Config = {
 			options:{...globalOptions},
 			columns:(props)=>[{
 				Header: 'Project ID',
-				accessor: 'projectId',
-				Cell: row => <span title={row.original.projectId}>{row.original.projectId}</span>
+				accessor: 'rfqID',
+				Cell: row => <span title={row.original.rfqID}>{row.original.rfqID}</span>
 			},{
 				Header: 'Entity Type',
 				accessor: 'entityType',
@@ -555,7 +555,7 @@ let Table_Config = {
 			},{
 				Header: 'Status',
 				accessor: 'status',
-				Cell: row => <span title={row.original.status=='true'?'Active':'Inactive'}>{row.original.status=='true'?'Active':'Inactive'}</span>
+				Cell: row => <span title={row.original.status}>{row.original.status}</span>
 			},
 			// {
 			// 	Header: 'Activation Time',
