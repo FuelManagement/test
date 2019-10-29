@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route } from 'react-router-dom';
+import { Router, Route, HashRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { history } from '../_helpers';
 import { alertActions } from '../_actions';
@@ -64,7 +64,7 @@ class App extends React.Component {
             <div className="container-fluid">
                 <div className="row">
                     <div className="w-100">
-                        <Router history={history}>
+                        <HashRouter history={history}>
                             <React.Fragment>
                                 <Components.Overlay loading={alert.loading}/>
                                 <ToastContainer />
@@ -92,7 +92,7 @@ class App extends React.Component {
 							    <Route path="/userProfile/add" exact component={Dashboard.AddUserProfile} /> 
 							    <Route path="/rfq/add" exact component={Dashboard.AddRFQ} /> 
                             </React.Fragment>
-                        </ Router>
+                        </ HashRouter>
                     </div>
                 </div>
                 <ToastContainer />
