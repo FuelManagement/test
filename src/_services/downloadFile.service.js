@@ -11,9 +11,13 @@ function downloadFile(collection) {
     const requestOptions = {
         method: 'POST',
         headers: authHeader(),
-        body: JSON.stringify({'file':collection})
-    };
+        body: JSON.stringify({"file": {
 
+            "originalname": collection.originalname,
+            "path": collection.path.replace(/\\/g, "\\\\")
+                   }})
+    };
+    
     return fetch(config.apiUrl + '/product/downloadFile', requestOptions)
     .then(response => {
         if(!resposne.ok){
