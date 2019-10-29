@@ -249,7 +249,11 @@ function approveParticipant(data, action){
         dispatch(request());
         onboardService.approveParticipant(data, action)
             .then(participant => dispatch(success(participant)))
-            .then(()=>dispatch(alertActions.success(`Updated Sucessfully !`)))
+            .then(()=>
+            {dispatch(alertActions.success(`Updated Sucessfully !`))
+            getAllParticipant();
+        
+        })
             .catch(error => {
                 dispatch(failure(error))
                 dispatch(alertActions.error(`Failed to Update!`));

@@ -612,12 +612,12 @@ let Table_Config = {
 			
 			{
 				Header: 'Entity Type',
-				accessor: 'entityType',
-				Cell: row => <span title={row.original.entityType}>{row.original.entityType}</span>
+				accessor: 'participantType',
+				Cell: row => <span title={row.original.participantType}>{row.original.participantType}</span>
 			},{
 				Header: 'Status',
 				accessor: 'status',
-				Cell: row => <span title={row.original.status!==0?'approved':'pending'}>{row.original.status!==0?'approved':'pending'}</span>
+				Cell: row => <span title={row.original.status!==0?'Approved':'Pending'}>{row.original.status!==0?'Approved':'Pending'}</span>
 			},
 			{
 				Header: 'Action',

@@ -69,8 +69,7 @@ class AccountDetailForm extends React.Component {
     this.state = this.initialState(null, this.props.onboard.participant);
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.props.dispatch(onboardActions.changeFormState(this.props.onboard.mode==='create'?false:true));
-  }
+     }
   UNSAFE_componentWillReceiveProps(nextprops)
   {
   if(JSON.stringify(this.props.onboard.participant)!==JSON.stringify(nextprops.onboard.participant))
@@ -92,6 +91,9 @@ class AccountDetailForm extends React.Component {
     });
   
   }}
+  componentDidMount(){
+    this.handleFormSubmit();
+  }
   initialState(mode, props) {
     let state = {};
     state = {

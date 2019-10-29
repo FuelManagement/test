@@ -30,8 +30,7 @@ class ContactDetailForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleFormSubmit=this.handleFormSubmit.bind(this);
-    this.props.dispatch(onboardActions.changeFormState(this.props.onboard.mode==='create'?false:true));
-  }
+     }
   UNSAFE_componentWillReceiveProps(nextprops) {
     if (JSON.stringify(this.props.onboard.participant) !== JSON.stringify(nextprops.onboard.participant)) {
       ["streetAddress", "postalCode", "city", "faxNumber", "firstContactNumber", "firstContactNumberType", "state"
@@ -51,6 +50,9 @@ class ContactDetailForm extends React.Component {
         });
 
     }
+  }
+  componentDidMount(){
+    this.handleFormSubmit();
   }
   initialState(mode, props) {
     let state = {};

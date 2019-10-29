@@ -68,6 +68,8 @@ function createParticipant(collection, Documentslist) {
     collection.isIdentityCreated = false;
     collection.pubKey = "";
     collection.priKey = "";
+    collection.firstName = "test";
+    collection.lastName = "test";
     collection.Documentslist = [];
     collection["cert_id"] = "";
     let user = JSON.parse(localStorage.getItem('user'));

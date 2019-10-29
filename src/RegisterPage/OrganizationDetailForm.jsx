@@ -50,13 +50,13 @@ class OrganizationDetailForm extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
-        this.props.dispatch(onboardActions.changeFormState(this.props.onboard.mode === 'create' ? false : true));
+    
     }
     UNSAFE_componentWillReceiveProps(nextprops)
   {
   if(JSON.stringify(this.props.onboard.participant)!==JSON.stringify(nextprops.onboard.participant))
   {
-    ["domain","dateOfIncorporation","stateOfIncorporation","countryOfIncorporation","BuisnessType","entityType","entityTypeOther"
+    ["domain","dateOfIncorporation","stateOfIncorporation","countryOfIncorporation","BuisnessType","participantType","entityTypeOther"
     ,"numberOfYearsinBuisness","registerId","companyCode"].forEach(name => {
       this.setState(prevState => {
         return {
@@ -76,6 +76,7 @@ class OrganizationDetailForm extends React.Component {
         if (this.props.onboard.participant === undefined) {
             this.props.dispatch(onboardActions.changeModeParticipant('create'));
         }
+        this.handleFormSubmit();
     }
 
     initialState(mode, props) {
@@ -169,8 +170,8 @@ class OrganizationDetailForm extends React.Component {
                     visible: true,
                     disable: false
                 },
-                entityType: {
-                    value: props !== undefined && props.entityType !== undefined ? props.entityType : '',
+                participantType: {
+                    value: props !== undefined && props.participantType !== undefined ? props.participantType : '',
 
                     valid: false,
                     validationRules: {
@@ -290,7 +291,7 @@ class OrganizationDetailForm extends React.Component {
     handleFormSubmit(){
         let isFormVaild=true;
        if (this.state.controls !== undefined) {
-        ["domain","dateOfIncorporation","stateOfIncorporation","countryOfIncorporation","BuisnessType","entityType","entityTypeOther"
+        ["domain","dateOfIncorporation","stateOfIncorporation","countryOfIncorporation","BuisnessType","participantType","entityTypeOther"
         ,"numberOfYearsinBuisness","registerId","companyCode"].forEach(name => {
              let value = this.state.controls[name].valid, touched = this.state.controls[name].touched;
              if (!value && this.props.onboard.mode==='create') {
@@ -446,15 +447,15 @@ class OrganizationDetailForm extends React.Component {
                         <FormControl style={{ width: '100%' }}>
                             <TextField
                                 select
-                                id='entityType'
+                                id='participantType'
                                 variant="outlined"
-                                name='entityType'
+                                name='participantType'
                                 label="Entity Type"
-                                value={this.state.controls.entityType.value}
+                                value={this.state.controls.participantType.value}
                                 onChange={this.handleChange}
                                 className="form-control"
                                 margin="dense"
-                                error={!this.state.controls.entityType.valid && this.state.controls.entityType.touched}
+                                error={!this.state.controls.participantType.valid && this.state.controls.participantType.touched}
 
                             >
                                 {entitryType.map(option => (

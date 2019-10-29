@@ -43,7 +43,7 @@ class OnBoard_Admin extends React.Component {
     }
 
     render() {
-        const { loading,participants} = this.props.onboard;
+        const { loading} = this.props.onboard;
         //let participantList = Utils.search(this.state.search, this.props.onboard.participants);
         if(this.state.createBoardModal){
             $('#createBoardModal').modal('show');
@@ -71,9 +71,10 @@ class OnBoard_Admin extends React.Component {
                 <div className="clearDiv"></div>
                 <br/>
                 <ReactTable
-                    data={participants}
+                    data={this.props.onboard.participants}
                     columns={Table_Config.Boarder.participants.columns}
-                    {...Table_Config.Boarder.participants.options}
+                   
+                      {...Table_Config.Boarder.participants.options}
                 />
 
                 <hr/>
@@ -225,10 +226,8 @@ class OnBoard_Admin extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { onboard } = state;
-   
-    return {
-        onboard
+        return {
+        onboard:state.onboard
       
     };
 }
