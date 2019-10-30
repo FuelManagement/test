@@ -73,14 +73,14 @@ class OnBoard_Profile extends React.Component {
         return (
             <div className="col-md-9 contentDiv" style={{ left: "22%" }}>
                 <h2 style={{ display: "inline-block" }}>
-                    OnBoarding - Profile Setup
+                    On-boarding - Profile Setup
                 </h2>
 
                 <hr />
                 <div>
 
                     <button name="btnAddParticipant" className="btn btn-outline btn-success" onClick={e => { this.toggleModal(e); this.props.dispatch(onboardActions.changeModeParticipant('create')); }}>
-                        <FontAwesomeIcon icon="plus" />  Add OnBoarding Profile
+                        <FontAwesomeIcon icon="plus" />  Add On-boarding Profile
                     </button>
                     <TextField className="searchBox"
                         type="text" name="searc"

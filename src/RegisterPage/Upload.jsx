@@ -14,44 +14,11 @@ class Upload extends React.Component {
             files: this.props.onboard.documentslist !== undefined ? this.props.onboard.documentslist : []
         };
         this.props.dispatch(onboardActions.changeFormState(this.props.onboard.mode === 'create' ? false : true));
-        this.downloadFile = this.downloadFile.bind(this);
+      
     }
-    downloadFile(file) {
-        let formData = { file };
-        const requestOptions = {
-            method: 'POST',
-            headers: authHeader(),
-            body: JSON.stringify(formData)
-        };
-        return fetch(config.apiUrl + '/product/downloadFile', requestOptions)
-        .then(response => {
-            if(!resposne.ok){
-                throw new Error("Error while downloading file");
-            }
-            return response;
-        })
-        .then(response => response.blob())
-        .then((blob) => {
-            console.log(blob);
-            if(!blob.size){
-                alert("Inlvalid/ tempered File. Cannot Download.");
-                throw new Error("File size 0. tempered File");
-            }
-            const url = window.URL.createObjectURL(new Blob([blob]));
-            const link = document.createElement('a');
-            link.href = url;
-            link.setAttribute('download', file.originalname);
-            document.body.appendChild(link);
-            link.click();
-            link.parentNode.removeChild(link);
-        })
-        .catch((error) => {
-            console.log(error);
-            alert("Error while downloading file. Please retry.");
-        });
-    }
+   
     download(collection){
-        downloadFileService.downloadFile(collection);
+        downloadFileService.downloadFileForParticipnt(collection);
     }
    
     render() {
@@ -80,13 +47,7 @@ class Upload extends React.Component {
                     {this.props.onboard.downloadDocumentslist.map(item=>
                     <li><span class="fa-li"><i class="fa fa-file"></i></span><a onClick={()=>this.download(item)} href="JavaScript:Void(0);">{item.originalname}</a></li>
                    )}
-                        {/* {this.props.onboard.downloadDocumentslist.map((item,idx) =>
-                            <li key={idx}>
-                                <button className="btn btn-outline btn-default" onClick={() => this.downloadFile(item)}>
-                                    <i className="fa fa-file"></i> {item.filename}
-                                </button>
-                            </li>
-                        )} */}
+                       
                     </ul>
                 </div> 
                 : null}
