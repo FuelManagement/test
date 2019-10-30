@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route } from 'react-router-dom';
+import { Router, Route, HashRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { history } from '../_helpers';
 import { alertActions } from '../_actions';
@@ -74,7 +74,7 @@ class App extends React.Component {
                                         component_imp={Dashboard.Dashboard_Importer} 
                                         component_exp={Dashboard.Dashboard_Exporter}
                                         component_ref={Dashboard.Dashboard_Refinery}
-                                        component_adm={Dashboard.OnBoardProfile}  />
+                                        component_adm={Dashboard.Dashboard_Importer}  />
                                 
                                 <Components.Route_Orders exact path="/orders" 
                                         component_imp={Dashboard.HomePage_Importer} 
@@ -90,7 +90,12 @@ class App extends React.Component {
                                 <Route path="/userProfile" exact component={Dashboard.UserProfile} />
                                 <Route path="/rfq" exact component={Dashboard.RFQ} />
 							    <Route path="/userProfile/add" exact component={Dashboard.AddUserProfile} /> 
-							    <Route path="/rfq/add" exact component={Dashboard.AddRFQ} /> 
+							    <Route path="/rfq/add" exact component={Dashboard.AddRFQ} />
+                                <Route path="/rfq/edit" exact component={Dashboard.AddRFQ} />
+                                <Route path="/rfq/view" exact component={Dashboard.AddRFQ} />
+                                <Route path="/indicative-offer" exact component={Dashboard.IndicativeOffer} />
+                                <Route path="/indicative-offer/edit" exact component={Dashboard.IndicativeOfferEdit} />
+                                <Route path="/indicative-offer/view" exact component={Dashboard.IndicativeOfferEdit} />
                             </React.Fragment>
                         </ Router>
                     </div>

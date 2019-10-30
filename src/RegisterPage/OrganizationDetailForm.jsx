@@ -380,7 +380,7 @@ class OrganizationDetailForm extends React.Component {
                         </FormControl>
                     </div>
                     <div className="col-md-4 mb-3">
-                        <TextField
+                        <TextField type="number"
                             id="numberOfYearsinBuisness"
                             label="Number of Years in Business"
                             name="numberOfYearsinBuisness"

@@ -150,8 +150,8 @@ class Sidebar extends React.Component {
                                                                 RFQ</Link>
                                                         </li>
                                                         <li>
-                                                            <Link to="/Indicative-order">
-                                                                Indicative Order</Link>
+                                                            <Link to="/indicative-offer">
+                                                                Indicative Offer</Link>
                                                         </li>
                                                         <li>
                                                             <Link to="/contract">

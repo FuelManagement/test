@@ -62,7 +62,6 @@ class ContactDetailForm extends React.Component {
           valid: this.props.onboard.isContactFormValid?true:false,
           validationRules: {
             notEmpty: true,
-
           },
           error: "Please enter street Address",
           placeholder: "Street Address",
@@ -324,8 +323,7 @@ allowOnlynumbers(e) {
               variant="outlined"
               autoComplete="off"
               margin="dense"
-              error={!this.state.controls.city.valid && this.state.controls.city.touched}
-              onKeyPress={this.allowOnlyletters.bind(this)}
+              error={!this.state.controls.city.valid && this.state.controls.city.touched} 
               inputProps={{ maxLength: 50 }}
             />
           </div>
@@ -353,7 +351,7 @@ allowOnlynumbers(e) {
               id="state"
               margin="normal"
               name="state"
-              label="Region"
+              label="Region - State"
               value={this.state.controls.state.value}
               onChange={this.handleChange}
               className="form-control"

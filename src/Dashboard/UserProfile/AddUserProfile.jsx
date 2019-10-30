@@ -315,7 +315,7 @@ class AddUserProfile extends React.Component {
         let key = event.target.name, value = event.target.value;
         if (event.target.name === "participantID") {
 
-            let role = this.props.participants.find(f => f.registerId.toLowerCase() === event.target.value.toLowerCase()).entityType;
+            let role = this.props.participants.find(f => f.registerId.toLowerCase() === event.target.value.toLowerCase()).participantType;
             let participantName = this.props.participants.find(f => f.registerId.toLowerCase() === event.target.value.toLowerCase()).domain;
             let participantType = this.props.participants.find(f => f.registerId.toLowerCase() === event.target.value.toLowerCase()).entityType;
             
@@ -465,7 +465,7 @@ class AddUserProfile extends React.Component {
                                     >
                                         {this.props.participants.map(option => (
                                             <MenuItem key={option.registerId} value={option.registerId}>
-                                                {option.registerId}
+                                                {option.domain}
                                             </MenuItem>
                                         ))}
                                     </TextField>

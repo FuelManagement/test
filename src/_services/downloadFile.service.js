@@ -15,8 +15,8 @@ function downloadFileForParticipnt(collection) {
             "originalname": collection.originalname,
             "path": collection.path.replace(/\\/g, "\\\\")
                    }})
-    };
-    
+                }
+   
     
     return fetch(config.apiUrl + '/product/downloadFileForParticipnt', requestOptions)
     
