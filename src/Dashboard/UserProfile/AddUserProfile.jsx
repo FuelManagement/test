@@ -465,7 +465,7 @@ class AddUserProfile extends React.Component {
                                     >
                                         {this.props.participants.map(option => (
                                             <MenuItem key={option.registerId} value={option.registerId}>
-                                                {option.registerId}
+                                                {option.domain}
                                             </MenuItem>
                                         ))}
                                     </TextField>

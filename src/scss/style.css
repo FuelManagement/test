@@ -338,6 +338,13 @@ header .pad-50{
   justify-content: center;
 }
 /*Add RFQ Styles*/
+.addRFQ-link{
+  display: block;
+  float: right;
+}
+.vendor-text{
+  float: left;
+}
 .add-rfq-main{
 	border-top:none;
 	top:88px;

@@ -8,16 +8,18 @@ export const downloadFileService = {
 
 function downloadFile(collection) {
     let user = JSON.parse(localStorage.getItem('user'));
-    const requestOptions = {
-        method: 'POST',
-        headers: authHeader(),
-        body: JSON.stringify({"file": {
+    let downloadBody =  {"file": {
 
             "originalname": collection.originalname,
             "path": collection.path.replace(/\\/g, "\\\\")
-                   }})
+                   }}
+    const requestOptions = {
+        method: 'POST',
+        headers: authHeader(),
+        
+        body: JSON.stringify(downloadBody)
     };
-    
+    console.log(requestOptions);
     return fetch(config.apiUrl + '/product/downloadFile', requestOptions)
     .then(response => {
         if(!resposne.ok){

@@ -30,6 +30,7 @@ class RFQ extends React.Component {
     }
     componentDidMount() {
         this.props.dispatch(rfqActions.getAllRfq());
+        
         this.props.dispatch(rfqActions.getAllProducts());
     }
     handleSubmit(event) {
@@ -52,7 +53,9 @@ class RFQ extends React.Component {
             <div className="col-md-8 offset-md-3 contentDiv">
                 <h2 style={{ display: "inline-block" }}>RFQs</h2>
                 <hr />
-                <Link to="/rfq/add">
+                <div>
+                <h3 className="vendor-text">RFQs To Supplier</h3>
+                <Link to="/rfq/add" className="addRFQ-link">
                     <button className="btn btn-outline btn-success">
                         <FontAwesomeIcon icon="plus"/> Add RFQ
                     </button>
@@ -64,6 +67,22 @@ class RFQ extends React.Component {
                     columns={Table_Config.RFQ.rfqs.columns({toggleRfqModal: this.toggleModal.bind(this)})}
                     {...Table_Config.RFQ.rfqs.options}
                 /> 
+                </div>
+                <div>
+                <h3 className="vendor-text">RFQs From Customer</h3>
+                <Link to="/rfq/add" className="addRFQ-link">
+                    <button className="btn btn-outline btn-success">
+                        <FontAwesomeIcon icon="plus"/> Add RFQ
+                    </button>
+                </Link>
+                <div className="clearDiv"></div>
+                <br />
+                <ReactTable
+                    data={rfq.rfqs}
+                    columns={Table_Config.CustomerRFQ.rfqs.columns({toggleRfqModal: this.toggleModal.bind(this)})}
+                    {...Table_Config.RFQ.rfqs.options}
+                /> 
+                </div>
             </div>
         );
     }
