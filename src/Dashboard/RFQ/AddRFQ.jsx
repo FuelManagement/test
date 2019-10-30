@@ -173,7 +173,7 @@ class AddRFQ extends React.Component {
                                         margin="dense"
                                     >
                                         {this.state.participants && this.state.participants.map(option => (
-                                            <MenuItem key={option._id} value={option.doma}>
+                                            <MenuItem key={option._id} value={option.domain}>
                                                 {option.domain}
                                             </MenuItem>
                                         ))}
