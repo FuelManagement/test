@@ -15,7 +15,7 @@ function getAllIO() {
         method: 'GET',
         headers: authHeader()
     };
-    return fetch(config.apiUrl + '/product/getRFQListByFromUserID?userID='+user.email, requestOptions)
+    return fetch(config.apiUrl + '/product/getIOListByFromUserID?userID='+user.email, requestOptions)
     .then(handleResponse)
     .then((data)=> data.rfqs)
     .catch(err => {
@@ -34,7 +34,7 @@ function postNewIO(formData){
         headers: authHeader(),
         body: JSON.stringify(formData)
     };
-    return fetch(config.apiUrl + '/product/createRFQ', requestOptions)
+    return fetch(config.apiUrl + '/product/createIO', requestOptions)
     .then(handleResponse)
     .then(()=> dummyData)
     .catch(err => {
