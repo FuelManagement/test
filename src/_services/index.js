@@ -6,3 +6,4 @@ export * from './onboard.service';
 export * from './product.service';
 export * from './rfq.service';
 export * from './userProfile.service';
+export * from './io.service';

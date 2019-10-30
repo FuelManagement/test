@@ -6,28 +6,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faAngleLeft, faPlus, faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 import { LineItem } from '../../_components/LineItem';
-import { rfqActions } from '../../_actions';
+import { ioActions } from '../../_actions';
 library.add(faAngleLeft, faPlus);
 const currencytype = [
-    {
-        value: "",
-        label: "None"
-    }, {
-        value: "USD",
-        label: "United State Dollor (USD)"
-    }, {
-        value: "CAD",
-        label: "Canadian Dollar (CAD)"
-    }, {
-        value: "MXN",
-        label: "Maxecian Peso (MXN)"
-    },
+    {value: "",label: "None"},
+    {value: "USD",label: "USD"},
+    {value: "CAN $",label: "CAN $"},
+    {value: "Mex $",label: "MEX $"}
 ];
-class AddRFQ extends React.Component {
+class IndicativeOfferEdit extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
-        this.handleEntityChange = this.handleEntityChange.bind(this);
+        this.handleEntityChange= this.handleEntityChange.bind(this);
         this.postNewRfq = this.postNewRfq.bind(this);
         this.handleLineItemChange = this.handleLineItemChange.bind(this);
         this.getEntityTypes = this.getEntityTypes.bind(this);
@@ -37,30 +28,30 @@ class AddRFQ extends React.Component {
         this.state = {
             formData: props.row && Object.keys(props.row).length ? props.row : {},
             participants: props.rfq.participants || [],
-            entityTypes: this.getEntityTypes(props.rfq.participants) || [{ value: "", label: "None" }],
-            selectedRfq: this.props.history
-                && this.props.history.location
-                && this.props.history.location.state
-                && this.props.history.location.state.data
+            entityTypes: this.getEntityTypes(props.rfq.participants) || [{value:"", label:"None"}],
+            selectedRfq: this.props.history 
+                        && this.props.history.location 
+                        && this.props.history.location.state 
+                        && this.props.history.location.state.data
         }
     }
     componentDidMount() {
-        this.props.dispatch(rfqActions.getAllProducts());
-        this.props.dispatch(rfqActions.getAllParticipant());
+        this.props.dispatch(ioActions.getAllProducts());
+        this.props.dispatch(ioActions.getAllParticipant());
         this.mapSelectedRfqFormData();
     }
-    UNSAFE_componentWillReceiveProps() {
-        if (this.props.rfq.participants && this.props.rfq.participants.length) {
+    UNSAFE_componentWillReceiveProps(){
+        if(this.props.rfq.participants && this.props.rfq.participants.length){
             this.setState({
-                entityTypes: this.getEntityTypes(this.props.rfq.participants),
+                entityTypes:this.getEntityTypes(this.props.rfq.participants),
                 participants: this.props.rfq.participants
             });
         }
     }
-    mapSelectedRfqFormData() {
-        if (!this.state.selectedRfq) return;
+    mapSelectedRfqFormData(){
+        if(!this.state.selectedRfq) return;
         let formData = this.state.formData;
-        formData.entityType = this.state.selectedRfq.entityType || formData.entityType;
+        formData.entityType = this.state.selectedRfq.entityType || formData.entityType; 
         formData.status = this.state.selectedRfq.status || formData.status;
         formData.startTime = this.state.selectedRfq.startTime || formData.startTime;
         formData.endTime = this.state.selectedRfq.endTime || formData.endTime;
@@ -71,33 +62,33 @@ class AddRFQ extends React.Component {
         console.log("formData");
         console.log(formData);
 
-        this.setState({ formData });
+        this.setState({formData});
 
     }
     postNewRfq() {
         let formData = this.state.formData;
-        formData.toUserID = this.state.participants.find(f => f._id === this.state.formData.participantID).registerId;
-        formData.participant_name = this.state.participants.find(f => f._id === this.state.formData.participantID).domain;
-        this.props.dispatch(rfqActions.postNewRfq(formData));
+        formData.toUserID=this.state.participants.find(f=>f._id===this.state.formData.participantID).registerId;
+        formData.participant_name=this.state.participants.find(f=>f._id===this.state.formData.participantID).domain;
+        this.props.dispatch(ioActions.postNewRfq(formData));
     }
-    updateLineItems(lineItems) {
+    updateLineItems(lineItems){
         let formData = this.state.formData;
         formData.products = lineItems;
-        this.setState({ formData });
+        this.setState({formData});
     }
-    getEntityTypes(participants = []) {
+    getEntityTypes(participants=[]){
         let entityTypes = {};
         participants.map(participant => {
-            if (participant.entityType)
+            if(participant.entityType)
                 entityTypes[participant.entityType] = participant.entityType;
         })
-        let types = Object.keys(entityTypes).map(type => ({ value: type, label: type }));
-        return types.length ? types : false;
+        let types = Object.keys(entityTypes).map(type=> ({value:type, label:type}));
+        return types.length?types:false;
     }
-    filterParticipants(entityType) {
+    filterParticipants(entityType){
         let participants = this.props.rfq && this.props.rfq.participants || [];
         participants = participants.filter(participant => participant.entityType === entityType);
-        this.setState({ participants });
+        this.setState({participants});
     }
     handleChange(event) {
         let key = event.target.name,
@@ -106,7 +97,7 @@ class AddRFQ extends React.Component {
         formData[key] = value;
         this.setState({ formData });
     }
-    handleEntityChange(event) {
+    handleEntityChange(event){
         this.handleChange(event);
         this.filterParticipants(event.target.value);
     }
@@ -120,7 +111,7 @@ class AddRFQ extends React.Component {
             <div className="mx-auto">
                 <div className="row brd-tp1px">
                     <div className='col-lg-9 add-rfq-main'>
-                        <h3><Link to="/rfq"> <FontAwesomeIcon icon="angle-left" /></Link> &nbsp;&nbsp;&nbsp;{this.state.selectedRfq ? "Update" : "Add"} RFQ</h3>
+                        <h3><Link to="/indicative-offer"> <FontAwesomeIcon icon="angle-left" /></Link> &nbsp;&nbsp;&nbsp;{this.state.selectedRfq?"Update":"Add"} Indicative Offer</h3>
                         <hr />
                         <div className="col-12 col-md-12 form-wrapper">
                             <div className="row form-row">
@@ -172,7 +163,7 @@ class AddRFQ extends React.Component {
                                         onChange={this.handleChange}
                                         margin="dense"
                                     >
-                                        {this.state.participants && this.state.participants.map(option => (
+                                        { this.state.participants && this.state.participants.map(option => (
                                             <MenuItem key={option._id} value={option.doma}>
                                                 {option.domain}
                                             </MenuItem>
@@ -181,7 +172,7 @@ class AddRFQ extends React.Component {
                                 </div>
                             </div>
                             <div className="row fom-row">
-                                <div className="col-md-12 mb-3  ">
+                            <div className="col-md-12 mb-3  ">
                                     <TextField
                                         id="projectDetails"
                                         label="Project Details"
@@ -249,9 +240,9 @@ class AddRFQ extends React.Component {
                                         name="activationTime"
                                         label="Activation Time"
                                         type="datetime-local"
-                                        defaultValue={this.state.formData.startTime || ""}
+                                        defaultValue={this.state.formData.startTime || ""} 
                                         value={this.state.formData.startTime}
-                                        onChange={() => false}
+                                        onChange={()=>false}
                                         margin="dense"
                                         variant="outlined"
                                         InputLabelProps={{
@@ -268,7 +259,7 @@ class AddRFQ extends React.Component {
                                         label="Closer Time"
                                         type="datetime-local"
                                         value={this.state.formData.endTime || ""}
-                                        onChange={() => false}
+                                        onChange={()=>false}
                                         margin="dense"
                                         variant="outlined"
                                         InputLabelProps={{
@@ -303,7 +294,7 @@ class AddRFQ extends React.Component {
                             </div>
                             <div className="row form-row mb-3">
                                 <div className="col-md-12">
-                                    <LineItem products={rfq.products} updateLineItems={this.updateLineItems} />
+                                    <LineItem products={rfq.products} updateLineItems={this.updateLineItems}/>
                                 </div>
                             </div>
                             <div className="row form-row">
@@ -325,5 +316,5 @@ function mapStateToProps(state) {
     return { rfq };
 }
 
-const connectedRfq = connect(mapStateToProps)(AddRFQ);
-export { connectedRfq as AddRFQ };
+const connectedRfq = connect(mapStateToProps)(IndicativeOfferEdit);
+export { connectedRfq as IndicativeOfferEdit };

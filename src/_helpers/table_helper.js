@@ -537,7 +537,7 @@ let Table_Config = {
 			}]
 		}
 	},
-	RFQ: {
+	SupplierRFQ: {
 		rfqs: {
 			options: { ...globalOptions },
 			columns: (props) => [{
@@ -610,6 +610,144 @@ let Table_Config = {
 			},
 			{
 				Header: 'Customer Name',
+				accessor: 'participant_name',
+				Cell: row => <span title={row.original.participant_name}>{row.original.participant_name}</span>
+			},
+			{
+				Header: 'Entity Type',
+				accessor: 'entityType',
+				Cell: row => <span title={row.original.entityType}>{row.original.entityType}</span>
+			}, {
+				Header: 'Start Time',
+				accessor: 'startTime',
+				Cell: row => <span title={row.original.startTime}>{row.original.startTime}</span>
+			}, {
+				Header: 'End Time',
+				accessor: 'endTime',
+				Cell: row => <span title={row.original.endTime}>{row.original.endTime}</span>
+			}, {
+				Header: 'Status',
+				accessor: 'status',
+				Cell: row => <span title={row.original.status}>{row.original.status}</span>
+			},
+			// {
+			// 	Header: 'Activation Time',
+			// 	accessor: 'activationTime',
+			// 	Cell: row => <span title={row.original.activationTime}>{row.original.activationTime}</span>
+			// },{
+			// 	Header: 'Closer Time',
+			// 	accessor: 'closerTime',
+			// 	Cell: row => <span title={row.original.closerTime}>{row.original.closerTime}</span>
+			// },
+			{
+				Header: 'Currency',
+				accessor: 'currency',
+				Cell: row => <span title={row.original.currency}>{row.original.currency}</span>
+			}, {
+				Header: 'Actions',
+				accessor: 'productName',
+				Cell: row => <div className="row">
+					<button
+						className="btn btn-outline-info btn-sm"
+						style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
+						onClick={e => { props.toggleRfqModal(e, row.original, "view") }}>
+						<FontAwesomeIcon icon="eye" size="xs" />
+					</button>
+					<button
+						className="btn btn-outline-primary btn-sm"
+						style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
+						onClick={e => { props.toggleRfqModal(e, row.original, "edit") }}>
+						<FontAwesomeIcon icon="edit" size="xs" />
+					</button>
+				</div>
+			}]
+		}
+	},
+	IndicativeOfferCustomer: {
+		indicativeOffers: {
+			options: { ...globalOptions },
+			columns: (props) => [
+				{
+					Header: 'Indicative ID',
+					accessor: 'rfqID',
+					Cell: row => <span title={row.original.rfqID}>{row.original.rfqID}</span>
+				},
+				{
+				Header: 'Project ID',
+				accessor: 'rfqID',
+				Cell: row => <span title={row.original.rfqID}>{row.original.rfqID}</span>
+			},
+			{
+				Header: 'Supplier Name',
+				accessor: 'participant_name',
+				Cell: row => <span title={row.original.participant_name}>{row.original.participant_name}</span>
+			},
+			{
+				Header: 'Entity Type',
+				accessor: 'entityType',
+				Cell: row => <span title={row.original.entityType}>{row.original.entityType}</span>
+			}, {
+				Header: 'Start Time',
+				accessor: 'startTime',
+				Cell: row => <span title={row.original.startTime}>{row.original.startTime}</span>
+			}, {
+				Header: 'End Time',
+				accessor: 'endTime',
+				Cell: row => <span title={row.original.endTime}>{row.original.endTime}</span>
+			}, {
+				Header: 'Status',
+				accessor: 'status',
+				Cell: row => <span title={row.original.status}>{row.original.status}</span>
+			},
+			// {
+			// 	Header: 'Activation Time',
+			// 	accessor: 'activationTime',
+			// 	Cell: row => <span title={row.original.activationTime}>{row.original.activationTime}</span>
+			// },{
+			// 	Header: 'Closer Time',
+			// 	accessor: 'closerTime',
+			// 	Cell: row => <span title={row.original.closerTime}>{row.original.closerTime}</span>
+			// },
+			{
+				Header: 'Currency',
+				accessor: 'currency',
+				Cell: row => <span title={row.original.currency}>{row.original.currency}</span>
+			}, {
+				Header: 'Actions',
+				accessor: 'productName',
+				Cell: row => <div className="row">
+					<button
+						className="btn btn-outline-info btn-sm"
+						style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
+						onClick={e => { props.toggleRfqModal(e, row.original, "view") }}>
+						<FontAwesomeIcon icon="eye" size="xs" />
+					</button>
+					<button
+						className="btn btn-outline-primary btn-sm"
+						style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
+						onClick={e => { props.toggleRfqModal(e, row.original, "edit") }}>
+						<FontAwesomeIcon icon="edit" size="xs" />
+					</button>
+				</div>
+			}]
+		}
+	},
+	IndicativeOfferSupplier: {
+		indicativeOffers: {
+			options: { ...globalOptions },
+			columns: (props) => [
+				{
+					Header: 'Indicative ID',
+					accessor: 'rfqID',
+					Cell: row => <span title={row.original.rfqID}>{row.original.rfqID}</span>
+				},
+				{
+				Header: 'Project ID',
+				accessor: 'rfqID',
+				Cell: row => <span title={row.original.rfqID}>{row.original.rfqID}</span>
+			},
+			{
+				Header: 'Supplier Name',
 				accessor: 'participant_name',
 				Cell: row => <span title={row.original.participant_name}>{row.original.participant_name}</span>
 			},
