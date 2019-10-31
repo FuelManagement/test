@@ -65,7 +65,7 @@ class RFQ extends React.Component {
                 <div className="clearDiv"></div>
                 <br />
                 <ReactTable
-                    data={rfq.rfqs}
+                    data={rfq.rfqs || []}
                     columns={Table_Config.SupplierRFQ.rfqs.columns({toggleRfqModal: this.toggleModal.bind(this)})}
                     {...Table_Config.SupplierRFQ.rfqs.options}
                 /> 
@@ -80,7 +80,7 @@ class RFQ extends React.Component {
                 <div className="clearDiv"></div>
                 <br />
                 <ReactTable
-                    data={rfq.rfqs}
+                    data={rfq.rfqs || []}
                     columns={Table_Config.CustomerRFQ.rfqs.columns({toggleRfqModal: this.toggleModal.bind(this)})}
                     {...Table_Config.CustomerRFQ.rfqs.options}
                 /> 
