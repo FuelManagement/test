@@ -80,7 +80,7 @@ class OnBoard_Profile extends React.Component {
                 <div>
 
                     <button name="btnAddParticipant" className="btn btn-outline btn-success" onClick={e => { this.toggleModal(e); this.props.dispatch(onboardActions.changeModeParticipant('create')); }}>
-                        <FontAwesomeIcon icon="plus" />  Add On-boarding Profile
+                        <FontAwesomeIcon icon="plus" /> On-boarding Profile
                     </button>
                     <TextField className="searchBox"
                         type="text" name="searc"

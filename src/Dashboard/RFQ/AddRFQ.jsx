@@ -7,22 +7,9 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faAngleLeft, faPlus, faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 import { LineItem } from '../../_components/LineItem';
 import { rfqActions } from '../../_actions';
-library.add(faAngleLeft, faPlus);
-const currencytype = [
-    {
-        value: "",
-        label: "None"
-    }, {
-        value: "USD",
-        label: "United State Dollor (USD)"
-    }, {
-        value: "CAD",
-        label: "Canadian Dollar (CAD)"
-    }, {
-        value: "MXN",
-        label: "Maxecian Peso (MXN)"
-    },
-];
+library.add(faAngleLeft, faPlus); 
+import {Common_JsonData} from '../../_helpers';
+
 class AddRFQ extends React.Component {
     constructor(props) {
         super(props);
@@ -59,25 +46,25 @@ class AddRFQ extends React.Component {
     }
     mapSelectedRfqFormData() {
         if (!this.state.selectedRfq) return;
-        let formData = this.state.formData;
+        let formData = this.state.formData; 
+        console.log("selectedRfq");
+        console.log(this.state.selectedRfq);
         formData.entityType = this.state.selectedRfq.entityType || formData.entityType;
         formData.status = this.state.selectedRfq.status || formData.status;
         formData.startTime = this.state.selectedRfq.startTime || formData.startTime;
         formData.endTime = this.state.selectedRfq.endTime || formData.endTime;
-        formData.participantID = this.state.selectedRfq.participantID || formData.participantID;
+        formData.participantID = this.state.selectedRfq.participant_name || formData.participant_name;
         formData.projectDetails = this.state.selectedRfq.projectDetails || formData.projectDetails;
         formData.projectId = this.state.selectedRfq.projectID || formData.projectID;
         formData.currency = this.state.selectedRfq.currency || formData.currency;
-        console.log("formData");
-        console.log(formData);
+        console.log("formData123");
+        console.log(formData.participantID);
 
         this.setState({ formData });
 
     }
     postNewRfq() {
-        let formData = this.state.formData;
-        formData.toUserID = this.state.participants.find(f => f._id === this.state.formData.participantID).registerId;
-        formData.participant_name = this.state.participants.find(f => f._id === this.state.formData.participantID).domain;
+        let formData = this.state.formData; 
         this.props.dispatch(rfqActions.postNewRfq(formData));
     }
     updateLineItems(lineItems) {
@@ -102,6 +89,14 @@ class AddRFQ extends React.Component {
     handleChange(event) {
         let key = event.target.name,
             value = event.target.value;
+            if (event.target.name === "participantID") {
+                let formData = this.state.formData; 
+        let participantName = this.state.participants.find(f => f.registerId.toLowerCase() === event.target.value.toLowerCase()).domain;
+        
+        formData.participant_name =  participantName;
+        console.log("domain data");
+        console.log(formData.participant_name);
+            }
         let formData = { ...this.state.formData };
         formData[key] = value;
         this.setState({ formData });
@@ -173,7 +168,7 @@ class AddRFQ extends React.Component {
                                         margin="dense"
                                     >
                                         {this.state.participants && this.state.participants.map(option => (
-                                            <MenuItem key={option._id} value={option.domain}>
+                                            <MenuItem key={option.registerId} value={option.registerId}>
                                                 {option.domain}
                                             </MenuItem>
                                         ))}
@@ -293,7 +288,7 @@ class AddRFQ extends React.Component {
                                         autoComplete="off"
                                         margin="dense"
                                     >
-                                        {currencytype.map(option => (
+                                        {Common_JsonData.Currency && Common_JsonData.Currency.map(option => (
                                             <MenuItem key={option.value} value={option.value}>
                                                 {option.label}
                                             </MenuItem>

@@ -8,72 +8,73 @@ import {productActions, alertActions} from '../../_actions';
 import { validate } from '../../_helpers';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
+import {Common_JsonData} from '../../_helpers';
   
-const dropdownData={
-    productCategory:[{
-        value: "",
-        label: "None"
-    },
-    {
-        value: "prod1",
-        label: "prod1"
-    },
-    {
-        value: "prod2",
-        label: "prod2"
-    },],
-    subCategory:[{
-        value: "",
-        label: "None",
-        productCategory:""
-    },{
-        value: "Sub1Prod1",
-        label: "Sub1Prod1",
-        productCategory:"prod1"
-    },{
-        value: "Sub2Prod1",
-        label: "Sub2Prod1",
-        productCategory:"prod1"
-    },{
-        value: "Sub1Prod2",
-        label: "Sub1Prod2",
-        productCategory:"prod2"
-    },{
-        value: "Sub2Prod2",
-        label: "Sub2Prod2",
-        productCategory:"prod2"
-    },{
-        value: "Sub3Prod2",
-        label: "Sub3Prod2",
-        productCategory:"prod2"
-    },],
-    measuringUnit:[{
-        value: "",
-        label: "None"
-    },{
-        value: "Litre",
-        label: "Litre"
-    },{
-        value: "Barrel",
-        label: "Barrel"
-    },{
-        value: "Gallon (US)",
-        label: "Gallon (US)"
-    },],
-    currency:[{
-        value: "",
-        label: "None"
-    },{
-        value: "USD",
-        label: "United State Dollor (USD)"
-    },{
-        value: "CAD",
-        label: "Canadian Dollar (CAD)"
-    },{
-        value: "MXN",
-        label: "Maxecian Peso (MXN)"
-    },],
-}
+// const Common_JsonData={
+//     productCategory:[{
+//         value: "",
+//         label: "None"
+//     },
+//     {
+//         value: "prod1",
+//         label: "prod1"
+//     },
+//     {
+//         value: "prod2",
+//         label: "prod2"
+//     },],
+//     subCategory:[{
+//         value: "",
+//         label: "None",
+//         productCategory:""
+//     },{
+//         value: "Sub1Prod1",
+//         label: "Sub1Prod1",
+//         productCategory:"prod1"
+//     },{
+//         value: "Sub2Prod1",
+//         label: "Sub2Prod1",
+//         productCategory:"prod1"
+//     },{
+//         value: "Sub1Prod2",
+//         label: "Sub1Prod2",
+//         productCategory:"prod2"
+//     },{
+//         value: "Sub2Prod2",
+//         label: "Sub2Prod2",
+//         productCategory:"prod2"
+//     },{
+//         value: "Sub3Prod2",
+//         label: "Sub3Prod2",
+//         productCategory:"prod2"
+//     },],
+//     measuringUnit:[{
+//         value: "",
+//         label: "None"
+//     },{
+//         value: "Litre",
+//         label: "Litre"
+//     },{
+//         value: "Barrel",
+//         label: "Barrel"
+//     },{
+//         value: "Gallon (US)",
+//         label: "Gallon (US)"
+//     },],
+//     currency:[{
+//         value: "",
+//         label: "None"
+//     },{
+//         value: "USD",
+//         label: "United State Dollor (USD)"
+//     },{
+//         value: "CAD",
+//         label: "Canadian Dollar (CAD)"
+//     },{
+//         value: "MXN",
+//         label: "Maxecian Peso (MXN)"
+//     },],
+// }
 
 class ProductForm extends React.Component {
   constructor(props) {
@@ -270,7 +271,7 @@ class ProductForm extends React.Component {
                                 margin="dense"
                                disabled={this.state.controls.productCategory.disable}
                             >
-                                {dropdownData.productCategory.map(option => (
+                                {Common_JsonData.productCategory && Common_JsonData.productCategory.map(option => (
                                     <MenuItem key={option.value} value={option.value}>
                                         {option.label}
                                     </MenuItem>
@@ -293,7 +294,7 @@ class ProductForm extends React.Component {
                                 margin="dense"
                                 disabled={this.state.controls.subCategory.disable}
                             >
-                                {dropdownData.subCategory.filter(f=>f.productCategory===this.state.controls.productCategory.value).map(option => (
+                                {Common_JsonData.subCategory && Common_JsonData.subCategory.filter(f=>f.productCategory===this.state.controls.productCategory.value).map(option => (
                                     <MenuItem key={option.value} value={option.value}>
                                         {option.label}
                                     </MenuItem>
@@ -354,7 +355,7 @@ class ProductForm extends React.Component {
                                 margin="dense"
                                 disabled={this.state.controls.measuringUnit.disable}
                             >
-                                {dropdownData.measuringUnit.map(option => (
+                                {Common_JsonData.measuringUnit && Common_JsonData.measuringUnit.map(option => (
                                     <MenuItem key={option.value} value={option.value}>
                                         {option.label}
                                     </MenuItem>
@@ -377,7 +378,7 @@ class ProductForm extends React.Component {
                                 margin="dense"
                                 disabled={this.state.controls.currency.disable}
                             >
-                                {dropdownData.currency.map(option => (
+                                {Common_JsonData.Currency && Common_JsonData.Currency.map(option => (
                                     <MenuItem key={option.value} value={option.value}>
                                         {option.label}
                                     </MenuItem>

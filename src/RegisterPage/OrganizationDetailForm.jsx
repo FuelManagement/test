@@ -10,6 +10,7 @@ import {
     KeyboardDatePicker
 } from '@material-ui/pickers';
 import { onboardActions } from '../_actions';
+import {Common_JsonData} from '../_helpers'
 const businessRange = [
     {
         value: "",
@@ -182,6 +183,7 @@ class OrganizationDetailForm extends React.Component {
                     touched: false,
                     visible: true,
                     disable: false
+ 
                 },
                 entityTypeOther: {
                     value: props !== undefined && props.entityTypeOther !== undefined ? props.entityTypeOther : '',
@@ -460,7 +462,7 @@ class OrganizationDetailForm extends React.Component {
                                 error={!this.state.controls.participantType.valid && this.state.controls.participantType.touched}
 
                             >
-                                {entitryType.map(option => (
+                                {Common_JsonData.EntitryType && Common_JsonData.EntitryType.map(option => (
                                     <MenuItem key={option.value} value={option.value}>
                                         {option.label}
                                     </MenuItem>

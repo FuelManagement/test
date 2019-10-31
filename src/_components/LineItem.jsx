@@ -23,7 +23,7 @@ class LineItem extends React.Component {
     productLookup(products = []){
       let lookup = {};
       products.map((product) => {
-        lookup[product.productID]=product.productName;
+        lookup[product.productName]=product.productName;
       })
       return lookup;
     }
@@ -38,13 +38,14 @@ class LineItem extends React.Component {
       let lineItem = {...newData};
       for(let i=0; i<this.props.products.products.length; i++){
         let product = this.props.products.products[i];
-        if(product.productID === newData.product) {
+        if(product.productName === newData.product) {
           lineItem = {
             ...lineItem,
-            product: product.productID,
-            category: product.productCategory,
+            productName: product.productName,
+            productCategory: product.productCategory,
             subCategory: product.subCategory,
-            msgUnits: product.measuringUnit,
+            quantityUnit: product.measuringUnit,
+            priceAdjustment : "0",
           }
           break;
         }

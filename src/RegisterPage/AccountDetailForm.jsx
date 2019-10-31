@@ -10,6 +10,7 @@ import {
   KeyboardDatePicker
 } from '@material-ui/pickers';
 import {onboardActions} from '../_actions';
+import {Common_JsonData} from '../_helpers';
 const poCurrency = [
   {
       value: "",
@@ -43,25 +44,25 @@ const bankPartnerType = [
   },
  
 ];
-const ddlCurr = [
-  {
-      value: "",
-      label: "None"
-  },
-  {
-      value: "USD",
-      label: "USD"
-  },
-  {
-    value: "CAN$",
-    label: "CAN $"
-},
-  {
-      value: "MEX$",
-      label: "MEX $"
-  },
+// const ddlCurr = [
+//   {
+//       value: "",
+//       label: "None"
+//   },
+//   {
+//       value: "USD",
+//       label: "USD"
+//   },
+//   {
+//     value: "CAN$",
+//     label: "CAN $"
+// },
+//   {
+//       value: "MEX$",
+//       label: "MEX $"
+//   },
   
-];
+// ];
 
 class AccountDetailForm extends React.Component {
   constructor(props) {
@@ -442,9 +443,8 @@ allowOnlynumbers(e) {
                 onChange={this.handleChange}
                 margin="dense"
                 error={!this.state.controls.poCurrency.valid && this.state.controls.poCurrency.touched}
-           
               >
-                {ddlCurr.map(option => (
+                {Common_JsonData.Currency && Common_JsonData.Currency.map(option => (
                   <MenuItem key={option.value} value={option.value}>
                     {option.label}
                   </MenuItem>

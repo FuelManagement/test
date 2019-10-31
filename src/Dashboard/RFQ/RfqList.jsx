@@ -59,7 +59,7 @@ class RFQ extends React.Component {
                 <h3 className="vendor-text">Supplier's RFQ</h3>
                 <Link to="/rfq/add" className="addRFQ-link">
                     <button className="btn btn-outline btn-success">
-                        <FontAwesomeIcon icon="plus"/> Add RFQ
+                        <FontAwesomeIcon icon="plus"/> RFQ
                     </button>
                 </Link>
                 <div className="clearDiv"></div>
@@ -74,7 +74,7 @@ class RFQ extends React.Component {
                 <h3 className="vendor-text">Customer's RFQ</h3>
                 <Link to="/rfq/add" className="addRFQ-link">
                     <button className="btn btn-outline btn-success">
-                        <FontAwesomeIcon icon="plus"/> Add RFQ
+                        <FontAwesomeIcon icon="plus"/> RFQ
                     </button>
                 </Link>
                 <div className="clearDiv"></div>

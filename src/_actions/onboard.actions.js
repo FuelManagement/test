@@ -250,13 +250,13 @@ function approveParticipant(data, action){
         onboardService.approveParticipant(data, action)
             .then(participant => dispatch(success(participant)))
             .then(()=>
-            {dispatch(alertActions.success(`Updated Sucessfully !`))
+            {dispatch(alertActions.success(`Approved Sucessfully !`))
             getAllParticipant();
         
         })
             .catch(error => {
                 dispatch(failure(error))
-                dispatch(alertActions.error(`Failed to Update!`));
+                dispatch(alertActions.error(`Failed to Approved!`));
             });
     };
  

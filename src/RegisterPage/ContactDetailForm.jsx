@@ -351,7 +351,7 @@ allowOnlynumbers(e) {
               id="state"
               margin="normal"
               name="state"
-              label="Region - State"
+              label="Region / State"
               value={this.state.controls.state.value}
               onChange={this.handleChange}
               className="form-control"
@@ -383,22 +383,6 @@ allowOnlynumbers(e) {
         </div>
         <div className="form-row">
           <div className="col-md-4 md-3">
-            
-            <MuiPhoneInput
-               defaultCountry='us'
-              //  regions={['north-america']}
-              margin="dense"
-              variant="outlined"
-              label="Fax Number"
-              name="faxNumber" 
-              value={this.state.controls.faxNumber.value}
-              onChange={val=>this.handleOnChange(val,'faxNumber')}
-              error={!this.state.controls.faxNumber.valid && this.state.controls.faxNumber.touched}
-           
-            /> 
-          </div>
-          <div className="col-md-4 md-3">
-            
             <MuiPhoneInput
                defaultCountry='us'
               margin="dense"
@@ -455,6 +439,19 @@ allowOnlynumbers(e) {
                 />
               </RadioGroup>
             </FormControl>
+          </div>
+          <div className="col-md-4 md-3">      
+            <MuiPhoneInput
+               defaultCountry='us'
+              //  regions={['north-america']}
+              margin="dense"
+              variant="outlined"
+              label="Fax Number"
+              name="faxNumber" 
+              value={this.state.controls.faxNumber.value}
+              onChange={val=>this.handleOnChange(val,'faxNumber')}
+              error={!this.state.controls.faxNumber.valid && this.state.controls.faxNumber.touched}     
+            /> 
           </div>
         </div>
       </div>
