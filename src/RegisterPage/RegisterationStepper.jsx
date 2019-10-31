@@ -348,15 +348,13 @@ function CustomizedSteppers(props) {
   );
 }
 const mapStateToProps=function(state) {
-  const { onboard } = state;
-   
-    return {
-      documentslist: onboard.documentslist,
-       participant: onboard.participant,
-       isFormVaild: onboard.isFormVaild,
-       mode:onboard.mode,
-       onboard:onboard,
-       downloadDocumentslist:onboard.downloadDocumentslist
+      return {
+      documentslist: state.onboard.documentslist,
+       participant: state.onboard.participant,
+       isFormVaild: state.onboard.isFormVaild,
+       mode:state.onboard.mode,
+       onboard:state.onboard,
+       downloadDocumentslist:state.onboard.downloadDocumentslist
     };
 }
 

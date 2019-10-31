@@ -34,7 +34,7 @@ class ContactDetailForm extends React.Component {
   UNSAFE_componentWillReceiveProps(nextprops) {
     if (JSON.stringify(this.props.onboard.participant) !== JSON.stringify(nextprops.onboard.participant)) {
       ["streetAddress", "postalCode", "city", "faxNumber", "firstContactNumber", "firstContactNumberType", "state"
-        , "secondContactNumber", "SecondContactNumberType"].forEach(name => {
+        ,"country", "secondContactNumber", "SecondContactNumberType"].forEach(name => {
           this.setState(prevState => {
             return {
               controls: {
@@ -62,6 +62,8 @@ class ContactDetailForm extends React.Component {
           valid: this.props.onboard.isContactFormValid?true:false,
           validationRules: {
             notEmpty: true,
+            maxLength:true, // for validation check make value true else false.
+           // isName:true
           },
           error: "Please enter street Address",
           placeholder: "Street Address",
@@ -109,8 +111,8 @@ class ContactDetailForm extends React.Component {
           visible: true,
           disable: false
         },
-        txtCountry: {
-          value: props !== undefined && props.txtCountry !== undefined ? props.txtCountry : '',
+        country: {
+          value: props !== undefined && props.country !== undefined ? props.country : '',
 
           valid: this.props.onboard.isContactFormValid?true:false,
           validationRules: {
@@ -152,7 +154,7 @@ class ContactDetailForm extends React.Component {
         firstContactNumberType: {
           value: props !== undefined && props.firstContactNumberType !== undefined ? props.firstContactNumberType : 'mobile',
 
-          valid: this.props.onboard.isContactFormValid?true:false,
+          valid: true,
           validationRules: {
             notEmpty: true,
 
@@ -170,6 +172,7 @@ class ContactDetailForm extends React.Component {
           validationRules: {
             notEmpty: true,
 
+
           },
           error: "Please enter second telephone number",
           touched: false,
@@ -179,7 +182,7 @@ class ContactDetailForm extends React.Component {
         SecondContactNumberType: {
           value: props !== undefined && props.SecondContactNumberType !== undefined ? props.SecondContactNumberType : 'telephone',
 
-          valid: this.props.onboard.isContactFormValid?true:false,
+          valid: true,
           validationRules: {
             notEmpty: true,
           },
@@ -196,7 +199,7 @@ class ContactDetailForm extends React.Component {
   }
   handleChange(event) {
     let key = event.target.name, value = event.target.value;
-    let connectedValue = {};
+    let connectedValue = {streetAddress:{maxLength:50}};
     this.setState(prevState => {
       return {
         controls: {
@@ -291,7 +294,7 @@ allowOnlynumbers(e) {
   render() {
     return (
       <div className="mx-auto">
-        <h2 className="reg-heading">Contact Information</h2>
+        <h2 className="reg-heading">Contact Information<span style={{float:'right',verticalAlign:'bottom',fontSize:'13px',padding: '11px 0 0 0'}}>All fields are mandatory</span></h2>
         <div className="form-row">
           <div className="col-md-12 mb-3">
             <TextField
@@ -304,7 +307,7 @@ allowOnlynumbers(e) {
               className="form-control"
               autoComplete="off"
               margin="dense"
-              inputProps={{ maxLength: 50 }}
+              
               error={!this.state.controls.streetAddress.valid && this.state.controls.streetAddress.touched}
                             
             />
@@ -324,7 +327,7 @@ allowOnlynumbers(e) {
               autoComplete="off"
               margin="dense"
               error={!this.state.controls.city.valid && this.state.controls.city.touched} 
-              inputProps={{ maxLength: 50 }}
+               
             />
           </div>
         </div>
@@ -342,8 +345,8 @@ allowOnlynumbers(e) {
               autoComplete="off"
               margin="dense"
               error={!this.state.controls.postalCode.valid && this.state.controls.postalCode.touched}
-              onKeyPress={this.allowOnlynumbers.bind(this)}
-              inputProps={{ maxLength: 50 }}
+              
+               
               />
           </div>
           <div className="col-md-4 mb-3">
@@ -359,25 +362,25 @@ allowOnlynumbers(e) {
               autoComplete="off"
               margin="dense"
               error={!this.state.controls.state.valid && this.state.controls.state.touched}
-              onKeyPress={this.allowOnlyletters.bind(this)}
-              inputProps={{ maxLength: 50 }}
+             
+               
             />
           </div>
           <div className="col-md-4 md-3">
             <TextField
-              id="txtCountry"
+              id="country"
               margin="normal"
-              name="txtCountry"
-              label="Country"
-              value={this.state.controls.txtCountry.value}
+              name="country"
+              label="country"
+              value={this.state.controls.country.value}
               onChange={this.handleChange}
               className="form-control"
               variant="outlined"
               autoComplete="off"
               margin="dense"
-              error={!this.state.controls.txtCountry.valid && this.state.controls.txtCountry.touched}
-              onKeyPress={this.allowOnlyletters.bind(this)}
-              inputProps={{ maxLength: 50 }}
+              error={!this.state.controls.country.valid && this.state.controls.country.touched}
+             
+               
             />
           </div>
         </div>

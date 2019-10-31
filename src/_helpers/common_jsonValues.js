@@ -47,6 +47,7 @@ let Common_JsonData = {
     { value: "Terminal (USA)", label: 'Terminal (USA)' },
     { value: "Transloader (Mex)", label: 'Transloader (Mex)' },
     { value: "Transloader (USA)", label: 'Transloader (USA)' },
+    { value: "Other", label: 'Other' },
   ],
   productCategory: [{
     value: "",
