@@ -17,24 +17,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import CircleChecked from '@material-ui/icons/CheckCircleOutline';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
-const vendorAcctGrp = [
-    {
-        value: "",
-        label: "None"
-    },
-    {
-        value: "10",
-        label: "Exporter"
-    },
-    {
-        value: "20",
-        label: "Importer"
-    },
-    {
-        value: "30",
-        label: "Refinery"
-    }
-];
+import {Common_JsonData} from '../_helpers';
 
 class TaxDetailForm extends React.Component {
     constructor(props) {
@@ -413,7 +396,7 @@ class TaxDetailForm extends React.Component {
                                             error={!this.state.controls.vendorAcctGrp.valid && this.state.controls.vendorAcctGrp.touched}
 
                                         >
-                                            {vendorAcctGrp.map(option => (
+                                            {Common_JsonData.vendorAcctGrp && Common_JsonData.vendorAcctGrp.map(option => (
                                                 <MenuItem key={option.value} value={option.value}>
                                                     {option.label}
                                                 </MenuItem>

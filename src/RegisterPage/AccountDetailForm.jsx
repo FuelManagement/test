@@ -11,39 +11,22 @@ import {
 } from '@material-ui/pickers';
 import {onboardActions} from '../_actions';
 import {Common_JsonData} from '../_helpers';
-const poCurrency = [
-  {
-      value: "",
-      label: "None"
-  },
-  {
-      value: "10",
-      label: "Ten"
-  },
-  {
-      value: "20",
-      label: "Twenty"
-  },
-  {
-      value: "30",
-      label: "Thirty"
-  }
-];
-const bankPartnerType = [
-  {
-      value: "",
-      label: "None"
-  },
-  {
-      value: "IMF",
-      label: "IMF"
-  },
-  {
-      value: "WB",
-      label: "WB"
-  },
  
-];
+// const bankPartnerType = [
+//   {
+//       value: "",
+//       label: "None"
+//   },
+//   {
+//       value: "IMF",
+//       label: "IMF"
+//   },
+//   {
+//       value: "WB",
+//       label: "WB"
+//   },
+ 
+// ];
 // const ddlCurr = [
 //   {
 //       value: "",
@@ -408,7 +391,7 @@ allowOnlynumbers(e) {
                 error={!this.state.controls.bankPartnerType.valid && this.state.controls.bankPartnerType.touched}
            
               >
-                {bankPartnerType.map(option => (
+                {Common_JsonData.bankPartnerType && Common_JsonData.bankPartnerType.map(option => (
                   <MenuItem key={option.value} value={option.value}>
                     {option.label}
                   </MenuItem>
