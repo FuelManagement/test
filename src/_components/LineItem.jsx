@@ -9,15 +9,15 @@ class LineItem extends React.Component {
       this.state = {
         selectedRow: null,
         columns: [
-          { title: 'Product', field: 'product', lookup: this.productLookup(props.products && props.products.products),},
-          { title: 'Category', field: 'category', editable: 'never' },
+          { title: 'Product', field: 'productName', lookup: this.productLookup(props.products && props.products.products),},
+          { title: 'Category', field: 'productCategory', editable: 'never' },
           { title: 'Sub Category', field: 'subCategory', editable: 'never' },
           { title: 'Measuring Units', field: 'msgUnits',editable: 'never'},
           { title: 'Quantity', field: 'quantity' },
           { title: 'Price', field: 'price' },
           { title: 'Price Adjustment', field: 'priceAdjustment', editable: 'never'},
         ],
-        products: []
+        products: props.selectedProducts || []
       }
     }
     productLookup(products = []){

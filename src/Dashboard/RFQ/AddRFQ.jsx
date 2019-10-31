@@ -108,7 +108,10 @@ class AddRFQ extends React.Component {
             <div className="mx-auto">
                 <div className="row brd-tp1px">
                     <div className='col-lg-9 add-rfq-main'>
-                        <h3><Link to="/rfq"> <FontAwesomeIcon icon="angle-left" /></Link> &nbsp;&nbsp;&nbsp;{this.state.selectedRfq ? "Update" : "Add"} RFQ</h3>
+                        <h3>
+                            <Link to="/rfq"> <FontAwesomeIcon icon="angle-left" /></Link>
+                            &nbsp;&nbsp;&nbsp;{this.state.selectedRfq ? "Update" : "Add"} RFQ
+                        </h3>
                         <hr />
                         <div className="col-12 col-md-12 form-wrapper">
                             <div className="row form-row">
@@ -237,8 +240,7 @@ class AddRFQ extends React.Component {
                                         name="activationTime"
                                         label="Activation Time"
                                         type="datetime-local"
-                                        defaultValue={this.state.formData.startTime || ""}
-                                        value={this.state.formData.startTime}
+                                        value={this.state.formData.startTime || ""}
                                         onChange={() => false}
                                         margin="dense"
                                         variant="outlined"
@@ -291,13 +293,19 @@ class AddRFQ extends React.Component {
                             </div>
                             <div className="row form-row mb-3">
                                 <div className="col-md-12">
-                                    <LineItem products={rfq.products} updateLineItems={this.updateLineItems} />
+                                    <LineItem 
+                                        products={rfq.products} 
+                                        updateLineItems={this.updateLineItems} 
+                                        selectedProducts={this.state.selectedRfq && this.state.selectedRfq.products}/>
                                 </div>
                             </div>
                             <div className="row form-row">
                                 <div className="col-md-7"></div>
                                 <div className="col-md-4 mb-3 ">
-                                    <button className="btn btn-success rfq-submit-btn float-right" onClick={(e) => this.postNewRfq()}>Submit</button>
+                                    <button className="btn btn-success rfq-submit-btn float-right"
+                                        onClick={(e) => this.postNewRfq()}>
+                                            Submit
+                                    </button>
                                 </div>
                             </div>
                         </div>
