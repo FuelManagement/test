@@ -281,7 +281,7 @@ allowOnlynumbers(e) {
   render() {
     return (
       <div className="mx-auto">
-        <h2 className="reg-heading">Account Details</h2>
+        <h2 className="reg-heading">Account Details<span style={{float:'right',verticalAlign:'bottom',fontSize:'13px',padding: '11px 0 0 0'}}>All fields are mandatory</span></h2>
         <div className="form-row">
         <div className="col-md-12 mb-3">
             <TextField
@@ -294,8 +294,8 @@ allowOnlynumbers(e) {
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankName.valid && this.state.controls.bankName.touched}
-              onKeyPress={this.allowOnlyletters.bind(this)}    
-              inputProps={{ maxLength: 50 }}
+                 
+               
             />
           </div>
         </div>
@@ -311,8 +311,8 @@ allowOnlynumbers(e) {
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankAccountName.valid && this.state.controls.bankAccountName.touched}
-              onKeyPress={this.allowOnlyletters.bind(this)}
-              inputProps={{ maxLength: 50 }}
+             
+               
             />
           </div>
           <div className="col-md-4 mb-3 ">
@@ -326,8 +326,8 @@ allowOnlynumbers(e) {
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankAccountNumber.valid && this.state.controls.bankAccountNumber.touched}
-              onKeyPress={this.allowOnlynumbers.bind(this)}
-              inputProps={{ maxLength: 50 }}
+             
+               
             />
           </div>
         </div>
@@ -343,7 +343,7 @@ allowOnlynumbers(e) {
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankControlKey.valid && this.state.controls.bankControlKey.touched}
-              inputProps={{ maxLength: 50 }}           
+                          
             />
           </div>
           <div className="col-md-4 mb-3 ">
@@ -357,7 +357,7 @@ allowOnlynumbers(e) {
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankCountryKey.valid && this.state.controls.bankCountryKey.touched}
-              inputProps={{ maxLength: 50 }}
+               
             />
           </div>
           <div className="col-md-4 mb-3 ">
@@ -371,7 +371,7 @@ allowOnlynumbers(e) {
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankKeys.valid && this.state.controls.bankKeys.touched}
-              inputProps={{ maxLength: 50 }}
+               
             />
           </div>
         </div>
@@ -410,7 +410,7 @@ allowOnlynumbers(e) {
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankReferencedetail.valid && this.state.controls.bankReferencedetail.touched}
-              inputProps={{ maxLength: 100 }}                  
+                           
             />
           </div>
           <div className="col-md-4">

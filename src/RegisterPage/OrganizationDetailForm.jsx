@@ -24,26 +24,9 @@ const businessRange = [
         value: "LLP",
         label: "LLP"
     },
-    {
-        value: "30",
-        label: "Thirty"
-    }
-],
-    entitryType = [{
-        value: "",
-        label: "None"
-    }, {
-        value: "Exporter",
-        label: "Exporter"
-    },
-    {
-        value: "Importer",
-        label: "Importer"
-    },
-    {
-        value: "Refinery",
-        label: "Refinery"
-    }];
+    
+];
+   
 class OrganizationDetailForm extends React.Component {
     constructor(props) {
         super(props);
@@ -51,7 +34,7 @@ class OrganizationDetailForm extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    
+        this.updateFormState = this.updateFormState.bind(this);
     }
     UNSAFE_componentWillReceiveProps(nextprops)
   {
@@ -91,7 +74,7 @@ class OrganizationDetailForm extends React.Component {
                     valid: this.props.onboard.isOrgFormValid?true:false,
                     validationRules: {
                         notEmpty: true,
-                        isName: true,
+                        //isName: true,
                         minLength: true,
                         maxLength: true
                     },
@@ -198,7 +181,7 @@ class OrganizationDetailForm extends React.Component {
                     placeholder: "Entity Type- Other",
                     touched: false,
                     visible: true,
-                    disable: false
+                    disable: true
                 },
                 registerId: {
                     value: props!==undefined && props.registerId!==undefined?props.registerId:'',
@@ -236,7 +219,6 @@ class OrganizationDetailForm extends React.Component {
     }
     handleChange(event) {
         let key = event.target.name, value = event.target.value;
-        
         let connectedValue = {
             domain: { minLength: 1, maxLength: 50 },
             companyCode: { minLength: 1, maxLength: 50 },
@@ -245,50 +227,18 @@ class OrganizationDetailForm extends React.Component {
             stateOfIncorporation: { minLength: 1, maxLength: 50 },
             numberOfYearsinBuisness: { minLength: 1, maxLength: 3 },
         };
-        this.setState(prevState => {
-            return {
-                controls: {
-                    ...prevState.controls,
-                    [key]: {
-                        ...prevState.controls[key],
-                        value: value,
-                        valid: validate(
-                            value,
-                            prevState.controls[key].validationRules,
-                            connectedValue,
-                            key
-                        ),
-                        touched: true
-                    }
-                }
-            };
-        });
-        this.props.dispatch(onboardActions.changeParticipant(key, value));
-        this.handleFormSubmit();
+        if(key==='participantType' && value.toLowerCase()==='other'){
+            this.updateFormState('entityTypeOther','',connectedValue,false);
+        }
+        else if(key==='participantType' && value.toLowerCase()!=='other'){
+            this.updateFormState('entityTypeOther','',connectedValue,true,false,false);
+        }
+        this.updateFormState(key,value,connectedValue);
+        
     }
     handleDateChange(date, key) {
-
         let connectedValue = {};
-        this.setState(prevState => {
-            return {
-                controls: {
-                    ...prevState.controls,
-                    [key]: {
-                        ...prevState.controls[key],
-                        value: date,
-                        valid: validate(
-                            dateutility.datefunction(date, formatutility.MMDDYYYY),
-                            prevState.controls[key].validationRules,
-                            connectedValue,
-                            key
-                        ),
-                        touched: true
-                    }
-                }
-            };
-        });
-        this.props.dispatch(onboardActions.changeParticipant(key, date));
-        this.handleFormSubmit();
+        this.updateFormState(key, dateutility.datefunction(date, formatutility.MMDDYYYY),connectedValue);
     }
     handleFormSubmit(){
         let isFormVaild=true;
@@ -303,6 +253,8 @@ class OrganizationDetailForm extends React.Component {
              else if(!value && touched && this.props.onboard.mode!=='create'){
               
               isFormVaild=false;
+             }else{
+                isFormVaild=true;
              }
              
            });
@@ -310,6 +262,30 @@ class OrganizationDetailForm extends React.Component {
        
         this.props.dispatch(onboardActions.changeFormState('isFormVaild',isFormVaild));
         this.props.dispatch(onboardActions.changeFormState('isOrgFormVaild',isFormVaild));
+    }
+    updateFormState(key, value,connectedValue,disable=false, touched=true,validCheck=true)
+    {
+        this.setState(prevState => {
+            return {
+                controls: {
+                    ...prevState.controls,
+                    [key]: {
+                        ...prevState.controls[key],
+                        value: value,
+                        valid: validCheck?validate(
+                            value,
+                            prevState.controls[key].validationRules,
+                            connectedValue,
+                            key
+                        ):true,
+                        disable:disable,
+                        touched: touched
+                    }
+                }
+            };
+        });
+        this.props.dispatch(onboardActions.changeParticipant(key, value));
+        this.handleFormSubmit();
     }
     //Allow only letters
     allowOnlyletters(e) {
@@ -341,7 +317,7 @@ class OrganizationDetailForm extends React.Component {
 
         return (
             <div className="mx-auto organization">
-                <h2 className="reg-heading">Organization Information</h2>
+                <h2 className="reg-heading">Organization Information<span style={{float:'right',verticalAlign:'bottom',fontSize:'13px',padding: '11px 0 0 0'}}>All fields are mandatory</span></h2> 
                 <div className="form-row">
                     <div className="col-md-4 mb-3">
                         <TextField
@@ -392,7 +368,7 @@ class OrganizationDetailForm extends React.Component {
                             className="form-control"
                             autoComplete="off"
                             margin="dense"
-                            onKeyPress={this.allowOnlynumbers.bind(this)}
+                           
                             error={!this.state.controls.numberOfYearsinBuisness.valid && this.state.controls.numberOfYearsinBuisness.touched}
 
                         />
@@ -427,7 +403,7 @@ class OrganizationDetailForm extends React.Component {
                             autoComplete="off"
                             margin="dense"
                             error={!this.state.controls.stateOfIncorporation.valid && this.state.controls.stateOfIncorporation.touched}
-                            onKeyPress={this.allowOnlyletters.bind(this)}
+                           
                         />
                     </div>
                     <div className="col-md-4 mb-3">
@@ -442,7 +418,7 @@ class OrganizationDetailForm extends React.Component {
                             autoComplete="off"
                             margin="dense"
                             error={!this.state.controls.countryOfIncorporation.valid && this.state.controls.countryOfIncorporation.touched}
-                            onKeyPress={this.allowOnlyletters.bind(this)}
+                           
                         />
                     </div>
                 </div>
@@ -476,13 +452,14 @@ class OrganizationDetailForm extends React.Component {
                             label="Entity Type - Other"
                             name="entityTypeOther"
                             value={this.state.controls.entityTypeOther.value}
+                            disabled={this.state.controls.entityTypeOther.disable}
                             onChange={this.handleChange}
                             variant="outlined"
                             className="form-control"
                             autoComplete="off"
                             margin="dense"
                             error={!this.state.controls.entityTypeOther.valid && this.state.controls.entityTypeOther.touched}
-                            onKeyPress={this.allowOnlyletters.bind(this)}
+                           
                         />
                     </div>
                     <div className="col-md-4 mb-3">

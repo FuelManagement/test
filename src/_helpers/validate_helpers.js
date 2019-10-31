@@ -89,7 +89,8 @@ export const validate = (val, rules, connectedValue,source) => {
     );
   };
   const minLengthValidator = (val, minLength) => {
-    return val.length >= minLength;
+    console.log(val.length,minLength,val.length >= minLength, val);
+    return val.length >=minLength;
   };
   const maxLengthValidator = (val, maxLength) => {
     return val.length <= maxLength;
