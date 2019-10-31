@@ -6,7 +6,8 @@ export const rfqService = {
     getAllRfq,
     postNewRfq,
     getAllProducts,
-    getAllParticipant
+    getAllParticipant,
+    getAllRfqToUser
 };
 
 function getAllRfq() {
@@ -23,6 +24,22 @@ function getAllRfq() {
         return [];
     })
 }
+
+function getAllRfqToUser() {
+    let user = JSON.parse(localStorage.getItem('user'));
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+    return fetch(config.apiUrl + '/product/getRFQListByToUserID?userID='+user.email, requestOptions)
+    .then(handleResponse)
+    .then(data=> data.rfqs)
+    .catch(err => {
+        // handleError(err)
+        return [];
+    })
+}
+
 function postNewRfq(formData){
     let user = JSON.parse(localStorage.getItem('user'));
     formData.userID = user.email;

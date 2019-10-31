@@ -30,7 +30,7 @@ class RFQ extends React.Component {
     }
     componentDidMount() {
         this.props.dispatch(rfqActions.getAllRfq());
-        
+        this.props.dispatch(rfqActions.getAllRfqToUSer());
         this.props.dispatch(rfqActions.getAllProducts());
     }
     handleSubmit(event) {
@@ -80,7 +80,7 @@ class RFQ extends React.Component {
                 <div className="clearDiv"></div>
                 <br />
                 <ReactTable
-                    data={rfq.rfqs || []}
+                    data={rfq.rfqsToUsers || []}
                     columns={Table_Config.CustomerRFQ.rfqs.columns({toggleRfqModal: this.toggleModal.bind(this)})}
                     {...Table_Config.CustomerRFQ.rfqs.options}
                 /> 

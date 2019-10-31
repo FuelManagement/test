@@ -5,6 +5,7 @@ import { history } from '../_helpers';
 
 export const rfqActions = {
     getAllRfq,
+    getAllRfqToUSer,
     postNewRfq,
     getAllProducts,
     getAllParticipant,
@@ -31,6 +32,29 @@ function getAllRfq() {
     function request() { return { type: rfqConstants.GETALL_REQUEST } }
     function success(rfqs) { return { type: rfqConstants.GETALL_SUCCESS, rfqs } }
     function failure(error) { return { type: rfqConstants.GETALL_FAILURE, error } }
+}
+
+function getAllRfqToUSer() {
+    return dispatch => {
+        dispatch(request());
+        dispatch(alertActions.loading());
+        rfqService.getAllRfqToUser()
+            .then(
+                rfqs => {
+                    dispatch(success(rfqs))
+                    dispatch(alertActions.clearLoading());
+                },
+                error => {
+                    dispatch(failure(error))
+                    dispatch(alertActions.error("Error loading list. Try Again."));
+                    dispatch(alertActions.clearLoading());
+                }
+            );
+    };
+
+    function request() { return { type: rfqConstants.GETALL_TO_USER_REQUEST } }
+    function success(rfqs) { return { type: rfqConstants.GETALL_TO_USER_SUCCESS, rfqs } }
+    function failure(error) { return { type: rfqConstants.GETALL_TO_USER_FAILURE, error } }
 }
 
 function postNewRfq(formData) {
