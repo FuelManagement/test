@@ -16,7 +16,6 @@ class AddRFQ extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleEntityChange = this.handleEntityChange.bind(this);
         this.postNewRfq = this.postNewRfq.bind(this);
-        this.handleLineItemChange = this.handleLineItemChange.bind(this);
         this.getEntityTypes = this.getEntityTypes.bind(this);
         this.filterParticipants = this.filterParticipants.bind(this);
         this.updateLineItems = this.updateLineItems.bind(this);
@@ -34,7 +33,7 @@ class AddRFQ extends React.Component {
     componentDidMount() {
         this.props.dispatch(rfqActions.getAllProducts());
         this.props.dispatch(rfqActions.getAllParticipant());
-        this.mapSelectedRfqFormData();
+        setTimeout(()=>this.mapSelectedRfqFormData(), 3000);
     }
     UNSAFE_componentWillReceiveProps() {
         if (this.props.rfq.participants && this.props.rfq.participants.length) {
@@ -44,24 +43,24 @@ class AddRFQ extends React.Component {
             });
         }
     }
+    _setParticipandId(participants, participantName){
+        let tmp = participants.filter(p=> participantName === p.domain)
+        return (tmp.length) ? tmp[0].registerId : false;
+    }
     mapSelectedRfqFormData() {
         if (!this.state.selectedRfq) return;
         let formData = this.state.formData; 
-        console.log("selectedRfq");
-        console.log(this.state.selectedRfq);
         formData.entityType = this.state.selectedRfq.entityType || formData.entityType;
+        let participants = this.filterParticipants(formData.entityType);
+
         formData.status = this.state.selectedRfq.status || formData.status;
         formData.startTime = this.state.selectedRfq.startTime || formData.startTime;
         formData.endTime = this.state.selectedRfq.endTime || formData.endTime;
-        formData.participantID = this.state.selectedRfq.participant_name || formData.participant_name;
+        formData.participantID = this._setParticipandId(participants, this.state.selectedRfq.participant_name) || formData.participantID;
         formData.projectDetails = this.state.selectedRfq.projectDetails || formData.projectDetails;
         formData.projectId = this.state.selectedRfq.projectID || formData.projectID;
         formData.currency = this.state.selectedRfq.currency || formData.currency;
-        console.log("formData123");
-        console.log(formData.participantID);
-
         this.setState({ formData });
-
     }
     postNewRfq() {
         let formData = this.state.formData; 
@@ -85,18 +84,16 @@ class AddRFQ extends React.Component {
         let participants = this.props.rfq && this.props.rfq.participants || [];
         participants = participants.filter(participant => participant.entityType === entityType);
         this.setState({ participants });
+        return participants;
     }
     handleChange(event) {
         let key = event.target.name,
             value = event.target.value;
-            if (event.target.name === "participantID") {
-                let formData = this.state.formData; 
-        let participantName = this.state.participants.find(f => f.registerId.toLowerCase() === event.target.value.toLowerCase()).domain;
-        
-        formData.participant_name =  participantName;
-        console.log("domain data");
-        console.log(formData.participant_name);
-            }
+        if (event.target.name === "participantID") {
+            let formData = this.state.formData;
+            let participantName = this.state.participants.find(f => f.registerId.toLowerCase() === event.target.value.toLowerCase()).domain;
+            formData.participant_name =  participantName;
+        }
         let formData = { ...this.state.formData };
         formData[key] = value;
         this.setState({ formData });
@@ -104,10 +101,6 @@ class AddRFQ extends React.Component {
     handleEntityChange(event) {
         this.handleChange(event);
         this.filterParticipants(event.target.value);
-    }
-    handleLineItemChange(product, index) {
-        let formData = { ...this.state.formData };
-        this.setState({ formData });
     }
     render() {
         const { mode = "edit", rfq = {} } = this.props;
