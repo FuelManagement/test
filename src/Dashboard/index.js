@@ -5,3 +5,4 @@ export * from './Product';
 export * from './RFQ';
 export * from './UserProfile';
 export * from './IndicativeOffer';
+export * from './OrderTracking';

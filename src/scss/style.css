@@ -388,3 +388,71 @@ header .pad-50{
 .onBoarding-action-row{
   margin: 0px;
 }
+.btn-track{
+  background-color: #464242;
+  font-weight: bold;
+  color: white;
+  border: none;
+}
+.btn-track:hover{
+  background-color: #464242;
+  font-weight: bold;
+  color: white;
+  border: none;
+}
+.order-track-cell{
+  display:'block';
+  text-align:'center';
+}
+.p0{
+  padding:0;
+}
+.set-left{
+  float:left;
+}
+.order-tracking-peper{
+  width: 30%;
+  margin-bottom: 15px;
+}
+.order-tracking-peper .MuiPaper-root{
+  border: 1px solid green;
+  border-radius: 15px;
+  padding:0 15px;
+} 
+.order-tracking-peper .MuiIconButton-root{
+  padding:5px;
+}
+.order-tracking-main .MuiTabs-flexContainer{
+  display: block;
+}
+.order-tracking-main .MuiTabs-root{
+  
+  border-radius: 5px 5px 
+
+}
+.order-tracking-main .MuiTab-textColorPrimary.Mui-selected{
+  color:white;
+  background:#716c6c;
+  margin:0 1px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  outline: none;
+}
+.order-tracking-main .MuiTab-textColorPrimary{
+  background: #868c86b5;
+  color: white;
+  margin:0 1px;
+  outline: none;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
+.order-tracking-main .MuiTab-root{
+  font-size: 20px;
+  text-transform: capitalize;
+}
+.order-tracking-main .MuiBox-root{
+  border: 1px solid #d2d0d0;
+}
+.order-tracking-main .MuiPaper-elevation1{
+  box-shadow: none;
+}
