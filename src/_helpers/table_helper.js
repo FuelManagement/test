@@ -904,6 +904,40 @@ let Table_Config = {
 			}]
 		}
 	},
+	OrderTrackingRecords: {
+		OrderTrackingRecord: {
+			options: { ...globalOptions },
+			columns: (props) => [{
+				Header: 'Order #',
+				accessor: 'orderid',
+				Cell: row => <span style={{ display:'block',textAlign:'center'}} title={row.original.orderid}>{row.original.orderid}</span>
+			}, {
+				Header: 'Product Name',
+				accessor: 'productName',
+				Cell: row => <span style={{ display:'block',textAlign:'center'}} title={row.original.productName}>{row.original.productName}</span>
+			}, {
+				Header: 'Customer Name',
+				accessor: 'customerName',
+				Cell: row => <span style={{ display:'block',textAlign:'center'}} title={row.original.customerName}>{row.original.customerName}</span>
+			}, {
+				Header: 'Status',
+				accessor: 'status',
+				Cell: row => <span style={{ display:'block',textAlign:'center'}} title={row.original.status}>{row.original.status}</span>
+			}, {
+				Header: 'Track Request',
+				accessor: 'trackRequest',
+				Cell: row => <div className="row">
+					<button
+						className="btn btn-outline-info btn-sm btn-track"
+						style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
+						onClick={e => { props.trackBtnClk(e, row.original, "track") }}>
+							Track
+						</button>
+					
+				</div>
+			}]
+		}
+	},
 }
 
 module.exports = { Table_Config };
