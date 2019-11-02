@@ -9,6 +9,7 @@ export const rfqActions = {
     postNewRfq,
     getAllProducts,
     getAllParticipant,
+    updateRfq
 };
 
 function getAllRfq() {
@@ -58,6 +59,7 @@ function getAllRfqToUSer() {
 }
 
 function postNewRfq(formData) {
+    console.log('1. I am in Create')
     return dispatch => {
         dispatch(request());
         dispatch(alertActions.loading());
@@ -79,6 +81,31 @@ function postNewRfq(formData) {
     function request() { return { type: rfqConstants.GETALL_REQUEST } }
     function success(rfqs) { return { type: rfqConstants.GETALL_SUCCESS, rfqs } }
     function failure(error) { return { type: rfqConstants.GETALL_FAILURE, error } }
+}
+
+function updateRfq(formData) {
+    console.log('2. I am in update')
+    return dispatch => {
+        dispatch(request());
+        dispatch(alertActions.loading());
+        rfqService.updateRfq(formData)
+            .then(
+                rfqs => {
+                    dispatch(success(rfqs))
+                    dispatch(alertActions.success('RFQ Created Successfully'));
+                    dispatch(alertActions.clearLoading());
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error("Error Creating RFQ."));
+                    dispatch(alertActions.clearLoading());
+                }
+            );
+    };
+
+    function request() { return { type: rfqConstants.UPDATE_RFQ_REQUEST } }
+    function success(rfqs) { return { type: rfqConstants.UPDATE_RFQ_SUCCESS, rfqs } }
+    function failure(error) { return { type: rfqConstants.UPDATE_RFQ_FAILURE, error } }
 }
 
 function getAllProducts() {

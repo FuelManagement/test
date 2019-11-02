@@ -3,6 +3,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './src/index.jsx',
+    mode: 'development',
+    devtool: 'source-map',
     output: {
         path: path.resolve(__dirname,'dist'),
         filename: 'bundle.js',
@@ -12,7 +14,7 @@ module.exports = {
         extensions: ['.js', '.jsx']
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/,

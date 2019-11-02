@@ -7,7 +7,8 @@ export const rfqService = {
     postNewRfq,
     getAllProducts,
     getAllParticipant,
-    getAllRfqToUser
+    getAllRfqToUser,
+    updateRfq
 };
 
 function getAllRfq() {
@@ -41,6 +42,7 @@ function getAllRfqToUser() {
 }
 
 function postNewRfq(formData){
+    console.log('3. I am in Create')
     let user = JSON.parse(localStorage.getItem('user'));
     formData.userID = user.email;
     formData.role = user.role;
@@ -64,4 +66,24 @@ function getAllProducts(){
 }
 function getAllParticipant(){
     return API_Helpers.getAllParticipant();
+}
+function updateRfq(formData){
+    console.log('3. I am in update')
+    let user = JSON.parse(localStorage.getItem('user'));
+    formData.userID = user.email;
+    formData.role = user.role;
+    formData.status = 'Updated';
+    formData.fromUserID=user.email;
+    const requestOptions = {
+        method: 'POST',
+        headers: authHeader(),
+        body: JSON.stringify(formData)
+    };
+    return fetch(config.apiUrl + '/product/editRFQ', requestOptions)
+    .then(handleResponse)
+    .then(()=> dummyData)
+    .catch(err => {
+        // handleError(err)
+        return dummyData;
+    })
 }
