@@ -159,8 +159,8 @@ class OrderTracking extends React.Component {
                                 <Paper className={OrderTrackingStyles.root}>
                                     <InputBase
                                         className={OrderTrackingStyles.input}
-                                        placeholder="Search by Order #"
-                                        inputProps={{ 'aria-label': 'Search by Order' }}
+                                        placeholder="Search by Order Date"
+                                        inputProps={{ 'aria-label': 'Search by Order Date' }}
                                     />
                                     <IconButton className={OrderTrackingStyles.iconButton} aria-label="search">
                                         <SearchIcon />
@@ -182,8 +182,8 @@ class OrderTracking extends React.Component {
                                 <Paper className={OrderTrackingStyles.root}>
                                     <InputBase
                                         className={OrderTrackingStyles.input}
-                                        placeholder="Search by Order #"
-                                        inputProps={{ 'aria-label': 'Search by Order' }}
+                                        placeholder="Search by Delivery Date"
+                                        inputProps={{ 'aria-label': 'Search by Delivery Date' }}
                                     />
                                     <IconButton className={OrderTrackingStyles.iconButton} aria-label="search">
                                         <SearchIcon />
