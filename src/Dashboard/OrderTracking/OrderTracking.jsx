@@ -16,6 +16,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import { OTPModel } from './OTPModel';
 window.jQuery = $; // hack
 window.$ = $;      // hack 
 import 'bootstrap';
@@ -79,26 +80,33 @@ class OrderTracking extends React.Component {
         super(props);
         this.state = {
             search: "",
-            rfqModal: false,
-            mode: 'view',
+            showModel: false,
             selectedRfq: {},
-            tabValue: 0
+            tabValue: 0,
+            OrderStatus: "otp-enabled",
+            //OrderStatus:"otp-disabled"
         }
         this.trackBtnClk = this.trackBtnClk.bind(this);
         this.tabChange = this.tabChange.bind(this);
+        this.closeModel = this.closeModel.bind(this);
+        this.getEnteredOTP = this.getEnteredOTP.bind(this);
     }
     componentDidMount() {
 
     }
-
-    trackBtnClk(event, data = {}, mode = "track") {
-        this.setState({ rfqModal: !this.state.rfqModal, mode, selectedRfq: data });
-        console.log("data");
-        console.log(data);
+    getEnteredOTP(OTPValue) {
+        console.log('OTP Submitted Successfully',OTPValue);
+        this.setState({ showModel: false });
+    }
+    trackBtnClk(event, showModel = true) {
+        this.setState({ showModel: true });
     }
     tabChange(event, newValue) {
         this.setState({ tabValue: newValue })
     };
+    closeModel() {
+        this.setState({ showModel: false })
+    }
     render() {
         const { rfq } = this.props;
         if (this.state.rfqModal) {
@@ -116,81 +124,86 @@ class OrderTracking extends React.Component {
                         textColor="primary"
                         centered
                     >
-                        <Tab label="Order id"/>
-                        <Tab label="Order Date"/>
-                        <Tab label="Delivery Date"/>
+                        <Tab label="Order id" />
+                        <Tab label="Order Date" />
+                        <Tab label="Delivery Date" />
                     </Tabs>
                     <TabPanel value={this.state.tabValue} index={0}>
-                    <div>
-                    <div className="clearDiv"></div>
-                    <br />
-                    <div className='col-md-12 p0 order-tracking-peper'>
-                        <Paper className={OrderTrackingStyles.root}>
-                            <InputBase
-                                className={OrderTrackingStyles.input}
-                                placeholder="Search by Order #"
-                                inputProps={{ 'aria-label': 'Search by Order' }}
+                        <div>
+                            <div className="clearDiv"></div>
+                            <br />
+                            <div className='col-md-12 p0 order-tracking-peper'>
+                                <Paper className={OrderTrackingStyles.root}>
+                                    <InputBase
+                                        className={OrderTrackingStyles.input}
+                                        placeholder="Search by Order #"
+                                        inputProps={{ 'aria-label': 'Search by Order' }}
+                                    />
+                                    <IconButton className={OrderTrackingStyles.iconButton} aria-label="search">
+                                        <SearchIcon />
+                                    </IconButton>
+                                </Paper>
+                            </div>
+                            <ReactTable
+                                data={recordsData || []}
+                                columns={Table_Config.OrderTrackingRecords.OrderTrackingRecord.columns({ trackBtnClk: this.trackBtnClk.bind(this) })}
+                                {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
                             />
-                            <IconButton className={OrderTrackingStyles.iconButton} aria-label="search">
-                                <SearchIcon />
-                            </IconButton>
-                        </Paper>
-                    </div>
-                    <ReactTable
-                        data={recordsData || []}
-                        columns={Table_Config.OrderTrackingRecords.OrderTrackingRecord.columns({ trackBtnClk: this.trackBtnClk.bind(this) })}
-                        {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
-                    />
-                </div>
-                     </TabPanel>
+                        </div>
+                    </TabPanel>
                     <TabPanel value={this.state.tabValue} index={1}>
-                    <div>
-                    <div className="clearDiv"></div>
-                    <br />
-                    <div className='col-md-12 p0 order-tracking-peper'>
-                        <Paper className={OrderTrackingStyles.root}>
-                            <InputBase
-                                className={OrderTrackingStyles.input}
-                                placeholder="Search by Order #"
-                                inputProps={{ 'aria-label': 'Search by Order' }}
+                        <div>
+                            <div className="clearDiv"></div>
+                            <br />
+                            <div className='col-md-12 p0 order-tracking-peper'>
+                                <Paper className={OrderTrackingStyles.root}>
+                                    <InputBase
+                                        className={OrderTrackingStyles.input}
+                                        placeholder="Search by Order Date"
+                                        inputProps={{ 'aria-label': 'Search by Order Date' }}
+                                    />
+                                    <IconButton className={OrderTrackingStyles.iconButton} aria-label="search">
+                                        <SearchIcon />
+                                    </IconButton>
+                                </Paper>
+                            </div>
+                            <ReactTable
+                                data={recordsData || []}
+                                columns={Table_Config.OrderTrackingRecords.OrderTrackingRecord.columns({ trackBtnClk: this.trackBtnClk.bind(this) })}
+                                {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
                             />
-                            <IconButton className={OrderTrackingStyles.iconButton} aria-label="search">
-                                <SearchIcon />
-                            </IconButton>
-                        </Paper>
-                    </div>
-                    <ReactTable
-                        data={recordsData || []}
-                        columns={Table_Config.OrderTrackingRecords.OrderTrackingRecord.columns({ trackBtnClk: this.trackBtnClk.bind(this) })}
-                        {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
-                    />
-                </div>
-                     </TabPanel>
+                        </div>
+                    </TabPanel>
                     <TabPanel value={this.state.tabValue} index={2}>
-                    <div>
-                    <div className="clearDiv"></div>
-                    <br />
-                    <div className='col-md-12 p0 order-tracking-peper'>
-                        <Paper className={OrderTrackingStyles.root}>
-                            <InputBase
-                                className={OrderTrackingStyles.input}
-                                placeholder="Search by Order #"
-                                inputProps={{ 'aria-label': 'Search by Order' }}
+                        <div>
+                            <div className="clearDiv"></div>
+                            <br />
+                            <div className='col-md-12 p0 order-tracking-peper'>
+                                <Paper className={OrderTrackingStyles.root}>
+                                    <InputBase
+                                        className={OrderTrackingStyles.input}
+                                        placeholder="Search by Delivery Date"
+                                        inputProps={{ 'aria-label': 'Search by Delivery Date' }}
+                                    />
+                                    <IconButton className={OrderTrackingStyles.iconButton} aria-label="search">
+                                        <SearchIcon />
+                                    </IconButton>
+                                </Paper>
+                            </div>
+                            <ReactTable
+                                data={recordsData || []}
+                                columns={Table_Config.OrderTrackingRecords.OrderTrackingRecord.columns({ trackBtnClk: this.trackBtnClk.bind(this) })}
+                                {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
                             />
-                            <IconButton className={OrderTrackingStyles.iconButton} aria-label="search">
-                                <SearchIcon />
-                            </IconButton>
-                        </Paper>
-                    </div>
-                    <ReactTable
-                        data={recordsData || []}
-                        columns={Table_Config.OrderTrackingRecords.OrderTrackingRecord.columns({ trackBtnClk: this.trackBtnClk.bind(this) })}
-                        {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
-                    />
-                </div>
-                     </TabPanel>
+                        </div>
+                    </TabPanel>
                 </Paper>
-               
+                <OTPModel showModel={this.state.showModel}
+                    closeModel={this.closeModel}
+                    getEnteredOTP={this.getEnteredOTP}
+                    OrderStatus={this.state.OrderStatus}
+                />
+
                 <div>
                 </div>
             </div>

@@ -456,3 +456,95 @@ header .pad-50{
 .order-tracking-main .MuiPaper-elevation1{
   box-shadow: none;
 }
+.order-tracking-main .ReactTable .rt-thead .rt-resizable-header-content{
+  padding:5px;
+}
+.order-tracking-otp-input{
+  padding-left: 15px;
+  letter-spacing: 42px;
+  border: 0;
+  background-image: linear-gradient(to left, black 70%, rgba(255, 255, 255, 0) 0%);
+  background-position: bottom;
+  background-size: 50px 1px;
+  background-repeat: repeat-x;
+  background-position-x: 35px;
+  
+}
+.MuiDialogContent-root,.MuiDialogContent-dividers{
+  border-top:none;
+  border-bottom: none;
+}
+.order-tracking-model-body{
+  padding:25px
+}
+.otp-form input {
+  margin: 0 5px;
+  text-align: center;
+  line-height: 35px;
+  font-size: 30px;
+  border: solid 3px #00ce1b;
+  box-shadow: 0 0 2px #00ce1b inset;
+  outline: none;
+  width: 17%;
+  transition: all .2s ease-in-out;
+  border-radius: 3px;
+}
+.otp-form {
+  max-width: 335px;
+  margin: 10px auto 0;
+  display: flex;
+}
+.order-tracking-opt-submit{
+  text-align: center;
+}
+.order-tracking-opt-submit button{
+  background: #00ce1b;
+  color:white;
+  font-weight: bold;
+  padding:10px 30px;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.otp-title{
+  color:#00ce1b;
+  width:58%;
+  text-align: center;
+  margin:0;
+  padding:0;
+}
+.otp-text-notif{
+  margin: 25px 156px 30px;
+  color: #00ce1b;
+  font-weight: 600;
+  font-size: 15px;
+  text-align: center;
+}
+.otp-text-notif a {
+  color: #842b2b;
+  font-weight: 700;
+}
+.m0{
+  margin: 0;
+}
+.order-tracking-otp-model .MuiDialog-paperWidthSm{
+  border:3px solid #00ce1b;
+  border-radius: 20px !important;
+}
+.otp-warning-msg{
+  color:red;
+}
+.otp-disabled{
+  opacity: 0.1;
+  pointer-events: none;
+}
+.otp-enabled{
+  opacity: 1;
+  pointer-events: all;
+}
+#customized-dialog-title .MuiSvgIcon-root{
+  fill: #00ce1b !important;
+}
+#customized-dialog-title .MuiIconButton-label{
+  border:2px solid #00ce1b;
+  border-radius: 50%;
+}
