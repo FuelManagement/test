@@ -10,9 +10,9 @@ class LineItem extends React.Component {
         selectedRow: null,
         columns: [
           { title: 'Product', field: 'productName', lookup: this.productLookup(props.products && props.products.products),},
-          { title: 'Category', field: 'productCategory', editable: 'never' },
-          { title: 'Sub Category', field: 'subCategory', editable: 'never' },
-          { title: 'Measuring Units', field: 'msgUnits',editable: 'never'},
+          { title: 'Category', field: 'productCategory', editable: 'never', },
+          { title: 'Sub Category', field: 'subCategory', editable: 'never', },
+          { title: 'Measuring Units', field: 'measuringUnit',editable: 'never'},
           { title: 'Quantity', field: 'quantity' },
           { title: 'Price', field: 'price' },
           { title: 'Price Adjustment', field: 'priceAdjustment', editable: 'never'},
@@ -27,6 +27,7 @@ class LineItem extends React.Component {
       })
       return lookup;
     }
+    
     UNSAFE_componentWillReceiveProps(){
       if(this.props.products && this.props.products.products && this.props.products.products.length){
         let columns = this.state.columns;
@@ -38,13 +39,13 @@ class LineItem extends React.Component {
       let lineItem = {...newData};
       for(let i=0; i<this.props.products.products.length; i++){
         let product = this.props.products.products[i];
-        if(product.productName === newData.product) {
+        if(product.productName === newData.productName) {
           lineItem = {
             ...lineItem,
             productName: product.productName,
             productCategory: product.productCategory,
             subCategory: product.subCategory,
-            quantityUnit: product.measuringUnit,
+            measuringUnit: product.measuringUnit,
             priceAdjustment : "0",
           }
           break;

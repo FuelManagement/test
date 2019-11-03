@@ -112,8 +112,7 @@ function updateParticipant(collection, Documentslist,downloadDocumentslist)
     let tokenObj = JSON.parse(localStorage.getItem('token'));
     return uploadFile(Documentslist)
         .then(uploadResponse => {
-            
-            collection.Documentslist = uploadResponse;
+            collection.Documentslist = downloadDocumentslist.concat(JSON.parse(uploadResponse));
             const requestOptions = {
                 method: 'POST',
                 headers: authHeader(),

@@ -15,28 +15,41 @@ export const fileUtility = {
   }
   function fileIcon(file) {
     let fileExtension=file.split('.').pop();
-   let icon='fa fa-file';
+   let icon='file';
    switch(fileExtension.toLowerCase()){
-    case 'txt':
-        icon='fa fa-file-text';
+    
+        case 'zip':
+            case 'rar':
+         icon='file-archive';
+         break;
+         case 'mp3':
+        icon='file-audio';	
         break;
-        // icon='fa fa-file-archive-o';
-        // icon='fa fa-file-audio-o';	
-        // icon='fa fa-file-code-o';
-        // icon='fa fa-file-excel-o';	
-        // icon='fa fa-file-image-o';	
-        // icon='fa fa-file-movie-o';	
-        // icon='fa fa-file-o';	
-        // icon='fa fa-file-pdf-o';	
-        // icon='fa fa-file-photo-o';	
-        // icon='fa fa-file-picture-o';	
-        // icon='fa fa-file-powerpoint-o';	
-        // icon='fa fa-file-text-o';
-        // icon='fa fa-file-video-o';	
-        // icon='fa fa-file-word-o';	
-        // icon='fa fa-file-zip-o';	
+        case 'xls':
+            case 'xlsx':
+         icon='file-excel';
+         break;	
+         case 'jpg':
+            case 'png':
+                case 'gif':
+         icon='file-image';	
+         break;
+         case 'pdf':
+       icon='file-pdf';	
+       break;
+       case 'ppt':
+         icon='file-powerpoint';	
+        break;
+        case 'doc':
+            case 'docx':
+         icon='file-word';
+        break;
+        default	:
+        icon='file';
+        break;
 
    }
+
    return icon;
   }
   function downloadDoc(data,type,filename) {

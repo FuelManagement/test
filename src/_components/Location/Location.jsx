@@ -45,6 +45,7 @@ class Locations extends React.Component {
   }
 
   render() {
+    console.log(this.props.location);
     let defaultProps = {
       center: {
         lat:

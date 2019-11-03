@@ -81,7 +81,7 @@ function createParticipant(collection,Documentslist)
                 else{
                     history.push('/');
                 }
-            
+                dispatch(getAllParticipant());
         })
             .catch(error => {
                 dispatch(failure(error))
@@ -105,7 +105,7 @@ function getParticipant(collection)
                    
                     dispatch(success(participant.find(f=>f.Documentslist!==undefined && f.Documentslist.length>0 && f._id==collection)));
                    dispatch(successDoc([]));
-                   dispatch(successDownloadabbleDoc(JSON.parse(participant.find(f=>f.Documentslist!==undefined && f.Documentslist.length>0 && f._id==collection).Documentslist)));
+                   dispatch(successDownloadabbleDoc(participant.find(f=>f.Documentslist!==undefined && f.Documentslist.length>0 && f._id==collection).Documentslist));
                    
                    dispatch(alertActions.clearLoading());
                 },
@@ -133,8 +133,10 @@ function updateParticipant(collection,Documentslist,downloadDocumentslist)
                 dispatch(alertActions.success(`Participant updated successfully !`));
                 let user = JSON.parse(localStorage.getItem('user'));
                 if(user!==undefined && user!==null){
+                    console.log('a')
                     history.push('/profile');
                 }
+                dispatch(getAllParticipant());
         })
             .catch(error => {
                 dispatch(failure(error))

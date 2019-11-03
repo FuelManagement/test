@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { onboardActions } from '../_actions';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {downloadFileService} from '../_services/downloadFile.service';
-import { authHeader, config, Utils } from '../_helpers';
+import { authHeader, config, Utils, fileUtility } from '../_helpers';
 
 class Upload extends React.Component {
     constructor(props) {
@@ -45,7 +45,9 @@ class Upload extends React.Component {
                 <div >
                     <ul className="fa-ul">
                     {this.props.onboard.downloadDocumentslist.map(item=>
-                    <li><span class="fa-li"><i class="fa fa-file"></i></span><a onClick={()=>this.download(item)} href="JavaScript:Void(0);">{item.originalname}</a></li>
+                    <li><span class="fa-li"> <FontAwesomeIcon icon={fileUtility.fileIcon(item.originalname)} size="1x"/> </span>
+                    <a onClick={()=>this.download(item)} href="JavaScript:Void(0);">{item.originalname}</a>
+                    <span > {fileUtility.bytesToSize(item.size)} </span> <span > <FontAwesomeIcon icon="trash" size="1x"/> </span></li>
                    )}
                        
                     </ul>

@@ -34,6 +34,7 @@ class OnBoard_Profile extends React.Component {
     componentDidMount() {
 
         this.props.dispatch(onboardActions.getAllParticipant());
+        this.setState({ createParticipantModal: false})
     }
 
     shouldComponentUpdate() {
@@ -125,8 +126,7 @@ class OnBoard_Profile extends React.Component {
                         </div>
                     </div> : null}
                 </div>
-               
-            </div>
+                </div>
         );
     }
 }
