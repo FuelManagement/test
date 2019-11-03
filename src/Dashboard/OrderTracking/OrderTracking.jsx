@@ -94,8 +94,8 @@ class OrderTracking extends React.Component {
     componentDidMount() {
 
     }
-    getEnteredOTP(e) {
-        console.log('OTP Submitted Successfully');
+    getEnteredOTP(OTPValue) {
+        console.log('OTP Submitted Successfully',OTPValue);
         this.setState({ showModel: false });
     }
     trackBtnClk(event, showModel = true) {

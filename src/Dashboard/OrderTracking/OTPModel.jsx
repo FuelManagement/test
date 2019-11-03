@@ -35,28 +35,32 @@ const DialogTitle = withStyles(styles)(props => {
         </MuiDialogTitle>
     );
 });
-
-const DialogContent = withStyles(theme => ({
-    root: {
-        padding: theme.spacing(2),
-    },
-}))(MuiDialogContent);
-
-
-
 class OTPModel extends React.Component {
     constructor(props) {
         super(props);
+        this.state={
+            "otp_1":'',
+            "otp_2":'',
+            "otp_3":'',
+            "otp_4":'',
+            "otp_5":'',
+            "otp_6":'',
+
+        }
         this.handleEnter = this.handleEnter.bind(this);
+        this.getEnteredOTP=this.getEnteredOTP.bind(this);
     }
     handleEnter(e) {
         const form = event.target.form;
         const index = Array.prototype.indexOf.call(form, event.target);
-        console.log('index--',index);
         if (index < 5) {
             form.elements[index + 1].focus();
         }
+        this.setState({[event.target.id]:event.target.value});
         event.preventDefault();
+    }
+    getEnteredOTP(){
+        this.props.getEnteredOTP(Object.values(this.state).toString().replace(/,/g, ''));
     }
     render() {
         const { showModel, OrderStatus } = { ...this.props };
@@ -73,12 +77,12 @@ class OTPModel extends React.Component {
                             <div>
                                 <h5 className='otp-title'>Enter OTP</h5>
                                 <form className="otp-form">
-                                    <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
-                                    <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
-                                    <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
-                                    <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
-                                    <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
-                                    <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
+                                    <input type="text" id='otp_1' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
+                                    <input type="text" id='otp_2' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
+                                    <input type="text" id='otp_3' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
+                                    <input type="text" id='otp_4' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
+                                    <input type="text" id='otp_5' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
+                                    <input type="text" id='otp_6' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
                                 </form>
                             </div>
                             <div className='otp-text-notif'>
@@ -86,7 +90,7 @@ class OTPModel extends React.Component {
                                 <a href='#'>click here to resend</a>
                             </div>
                             <div className='order-tracking-opt-submit'>
-                                <button className='btn btn-sucess' onClick={this.props.getEnteredOTP}>Submit</button>
+                                <button className='btn btn-sucess' onClick={this.getEnteredOTP}>Submit</button>
                             </div>
                         </div>
                     </div>
