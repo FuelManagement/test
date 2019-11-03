@@ -266,8 +266,8 @@ class TaxDetailForm extends React.Component {
         console.log(event)
         let key = event.target.name, value = event.target.value;
         let connectedValue = {};
-        this.setState(prevState => {
-            return {
+        this.setState(prevState => ({
+           
                 controls: {
                     ...prevState.controls,
                     [key]: {
@@ -281,15 +281,15 @@ class TaxDetailForm extends React.Component {
                         touched: true
                     }
                 }
-            };
-        });
+          
+        }),()=>this.handleFormSubmit());
         this.props.dispatch(onboardActions.changeParticipant(key, value));
-        this.handleFormSubmit();
+        
     }
     handleOnChange(key, value) {
         let connectedValue = {};
-        this.setState(prevState => {
-            return {
+        this.setState(prevState => ({
+           
                 controls: {
                     ...prevState.controls,
                     [key]: {
@@ -303,8 +303,8 @@ class TaxDetailForm extends React.Component {
                         touched: true
                     }
                 }
-            };
-        });
+          
+        }),()=>this.handleFormSubmit());
         this.props.dispatch(onboardActions.changeParticipant(key, value));
         this.handleFormSubmit();
     }

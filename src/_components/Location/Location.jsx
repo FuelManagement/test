@@ -62,7 +62,7 @@ class Locations extends React.Component {
       // Important! Always set the container height explicitly
       <div style={{ height: "300px", width: "100%" }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyBw9BKxX0NyafCnrRYeusCLrj_nzHZSPdE" }}
+          bootstrapURLKeys={{ key: "your key" }}
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
         >
@@ -71,7 +71,7 @@ class Locations extends React.Component {
               lat={loc.lat}
               lng={loc.lng}
               title="order"
-              text={"S" + (index + 1)}
+             
             />
           ))}
         </GoogleMapReact>

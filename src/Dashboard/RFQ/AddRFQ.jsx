@@ -61,10 +61,20 @@ class AddRFQ extends React.Component {
         formData.projectId = this.state.selectedRfq.projectID || formData.projectID;
         formData.currency = this.state.selectedRfq.currency || formData.currency;
         this.setState({ formData });
+        
+        
     }
     postNewRfq() {
-        let formData = this.state.formData; 
-        this.props.dispatch(rfqActions.postNewRfq(formData));
+        if(this.state.selectedRfq){
+            console.log('1. I am in update');
+            let formData = this.state.formData; 
+            this.props.dispatch(rfqActions.updateRfq(formData));
+        }
+        else{
+            console.log('1. I am in update');
+            let formData = this.state.formData; 
+            this.props.dispatch(rfqActions.postNewRfq(formData));
+        }
     }
     updateLineItems(lineItems) {
         let formData = this.state.formData;
@@ -103,14 +113,15 @@ class AddRFQ extends React.Component {
         this.filterParticipants(event.target.value);
     }
     render() {
-        const { mode = "edit", rfq = {} } = this.props;
+        //const { mode = "edit", rfq = {} } = this.props;
+        const { rfq = {} } = this.props;
         return (
             <div className="mx-auto">
                 <div className="row brd-tp1px">
                     <div className='col-lg-9 add-rfq-main'>
                         <h3>
                             <Link to="/rfq"> <FontAwesomeIcon icon="angle-left" /></Link>
-                            &nbsp;&nbsp;&nbsp;{this.state.selectedRfq ? "Update" : "Add"} RFQ
+                            &nbsp;&nbsp;&nbsp;{this.state.selectedRfq ? "Update" : "Create"} RFQ
                         </h3>
                         <hr />
                         <div className="col-12 col-md-12 form-wrapper">
@@ -304,7 +315,7 @@ class AddRFQ extends React.Component {
                                 <div className="col-md-4 mb-3 ">
                                     <button className="btn btn-success rfq-submit-btn float-right"
                                         onClick={(e) => this.postNewRfq()}>
-                                            Submit
+                                            {this.state.selectedRfq ? "Update" : "Submit"}
                                     </button>
                                 </div>
                             </div>

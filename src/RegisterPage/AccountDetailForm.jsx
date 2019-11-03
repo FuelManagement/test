@@ -211,8 +211,8 @@ class AccountDetailForm extends React.Component {
   handleChange(event) {
     let key = event.target.name, value = event.target.value;
     let connectedValue = {};
-    this.setState(prevState => {
-      return {
+    this.setState(prevState => ({
+     
         controls: {
           ...prevState.controls,
           [key]: {
@@ -227,10 +227,9 @@ class AccountDetailForm extends React.Component {
             touched: true
           }
         }
-      };
-    });
+    }),()=> this.handleFormSubmit());
     this.props.dispatch(onboardActions.changeParticipant(key,value));   
-    this.handleFormSubmit();
+    
   }
   handleFormSubmit(){
     let isFormVaild=true;

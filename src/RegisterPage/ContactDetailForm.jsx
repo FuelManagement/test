@@ -200,8 +200,7 @@ class ContactDetailForm extends React.Component {
   handleChange(event) {
     let key = event.target.name, value = event.target.value;
     let connectedValue = {streetAddress:{maxLength:50}};
-    this.setState(prevState => {
-      return {
+    this.setState(prevState => ({
         controls: {
           ...prevState.controls,
           [key]: {
@@ -216,16 +215,14 @@ class ContactDetailForm extends React.Component {
             touched: true
           }
         }
-      };
-    });
+    }),()=> this.handleFormSubmit());
     this.props.dispatch(onboardActions.changeParticipant(key, value));
-    this.handleFormSubmit();
+  
   }
   handleOnChange(value,key) {
-    console.log(value,key)
+
     let connectedValue = {};
-    this.setState(prevState => {
-      return {
+    this.setState(prevState => ({
         controls: {
           ...prevState.controls,
           [key]: {
@@ -240,10 +237,9 @@ class ContactDetailForm extends React.Component {
             touched: true
           }
         }
-      };
-    });
+    }),()=> this.handleFormSubmit());
     this.props.dispatch(onboardActions.changeParticipant(key, value));
-    this.handleFormSubmit();
+
   }
   handleFormSubmit(){
     let isFormVaild=true;

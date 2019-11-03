@@ -10,7 +10,7 @@ import {
     KeyboardDatePicker
 } from '@material-ui/pickers';
 import { onboardActions } from '../_actions';
-import {Common_JsonData} from '../_helpers'
+import { Common_JsonData } from '../_helpers'
 const businessRange = [
     {
         value: "",
@@ -24,9 +24,9 @@ const businessRange = [
         value: "LLP",
         label: "LLP"
     },
-    
+
 ];
-   
+
 class OrganizationDetailForm extends React.Component {
     constructor(props) {
         super(props);
@@ -36,33 +36,31 @@ class OrganizationDetailForm extends React.Component {
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.updateFormState = this.updateFormState.bind(this);
     }
-    UNSAFE_componentWillReceiveProps(nextprops)
-  {
-  if(JSON.stringify(this.props.onboard.participant)!==JSON.stringify(nextprops.onboard.participant))
-  {
-    ["domain","dateOfIncorporation","stateOfIncorporation","countryOfIncorporation","BuisnessType","participantType","entityTypeOther"
-    ,"numberOfYearsinBuisness","registerId","companyCode"].forEach(name => {
-      this.setState(prevState => {
-        return {
-          controls: {
-            ...prevState.controls,
-            [name]: {
-              ...prevState.controls[name],
-              value: (nextprops.onboard.participant[name]!==undefined?nextprops.onboard.participant[name]:''), 
-            
-            }
-          }
-        }
-    });
-});
-}
+    UNSAFE_componentWillReceiveProps(nextprops) {
+        if (JSON.stringify(this.props.onboard.participant) !== JSON.stringify(nextprops.onboard.participant)) {
+            ["domain", "dateOfIncorporation", "stateOfIncorporation", "countryOfIncorporation", "BuisnessType", "participantType", "entityTypeOther"
+                , "numberOfYearsinBuisness", "registerId", "companyCode"].forEach(name => {
+                    this.setState(prevState => {
+                        return {
+                            controls: {
+                                ...prevState.controls,
+                                [name]: {
+                                    ...prevState.controls[name],
+                                    value: (nextprops.onboard.participant[name] !== undefined ? nextprops.onboard.participant[name] : ''),
 
-  }
+                                }
+                            }
+                        }
+                    });
+                });
+        }
+
+    }
     componentDidMount() {
         if (this.props.onboard.participant === undefined) {
             this.props.dispatch(onboardActions.changeModeParticipant('create'));
         }
-       
+
     }
 
     initialState(mode, props) {
@@ -70,8 +68,8 @@ class OrganizationDetailForm extends React.Component {
         state = {
             controls: {
                 domain: {
-                    value: props!==undefined && props.domain!==undefined?props.domain:'',
-                    valid: this.props.onboard.isOrgFormValid?true:false,
+                    value: props !== undefined && props.domain !== undefined ? props.domain : '',
+                    valid: this.props.onboard.isOrgFormValid ? true : false,
                     validationRules: {
                         notEmpty: true,
                         //isName: true,
@@ -86,7 +84,7 @@ class OrganizationDetailForm extends React.Component {
                 },
                 BuisnessType: {
                     value: props !== undefined && props.BuisnessType !== undefined ? props.BuisnessType : '',
-                    valid: this.props.onboard.isOrgFormValid?true:false,
+                    valid: this.props.onboard.isOrgFormValid ? true : false,
                     validationRules: {
                         notEmpty: true,
                     },
@@ -99,11 +97,11 @@ class OrganizationDetailForm extends React.Component {
                 numberOfYearsinBuisness: {
                     value: props !== undefined && props.numberOfYearsinBuisness !== undefined ? props.numberOfYearsinBuisness : '',
 
-                    valid: this.props.onboard.isOrgFormValid?true:false,
+                    valid: this.props.onboard.isOrgFormValid ? true : false,
                     validationRules: {
                         notEmpty: true,
-                        minLength:true,
-                        maxLength:true
+                        minLength: true,
+                        maxLength: true
                     },
                     error: "Please enter number of years in business",
                     placeholder: "Number of Years in Business",
@@ -113,7 +111,7 @@ class OrganizationDetailForm extends React.Component {
                 },
                 dateOfIncorporation: {
                     value: props !== undefined && props.dateOfIncorporation !== undefined ? props.dateOfIncorporation : new Date(),
-                    valid: this.props.onboard.isOrgFormValid?true:false,
+                    valid: this.props.onboard.isOrgFormValid ? true : false,
                     validationRules: {
                         notEmpty: true,
                     },
@@ -127,11 +125,11 @@ class OrganizationDetailForm extends React.Component {
                 stateOfIncorporation: {
                     value: props !== undefined && props.stateOfIncorporation !== undefined ? props.stateOfIncorporation : '',
 
-                    valid: this.props.onboard.isOrgFormValid?true:false,
+                    valid: this.props.onboard.isOrgFormValid ? true : false,
                     validationRules: {
                         notEmpty: true,
-                        minLength:true,
-                        maxLength:true
+                        minLength: true,
+                        maxLength: true
                     },
                     error: "Please enter state of incorporation",
                     placeholder: "State of Incorporation",
@@ -142,11 +140,11 @@ class OrganizationDetailForm extends React.Component {
                 countryOfIncorporation: {
                     value: props !== undefined && props.countryOfIncorporation !== undefined ? props.countryOfIncorporation : '',
 
-                    valid: this.props.onboard.isOrgFormValid?true:false,
+                    valid: this.props.onboard.isOrgFormValid ? true : false,
                     validationRules: {
                         notEmpty: true,
-                        minLength:true,
-                        maxLength:true
+                        minLength: true,
+                        maxLength: true
                     },
                     error: "Please enter country of incorporation",
                     placeholder: "Country of Incorporation",
@@ -157,7 +155,7 @@ class OrganizationDetailForm extends React.Component {
                 participantType: {
                     value: props !== undefined && props.participantType !== undefined ? props.participantType : '',
 
-                    valid: this.props.onboard.isOrgFormValid?true:false,
+                    valid: this.props.onboard.isOrgFormValid ? true : false,
                     validationRules: {
                         notEmpty: true,
                     },
@@ -166,7 +164,7 @@ class OrganizationDetailForm extends React.Component {
                     touched: false,
                     visible: true,
                     disable: false
- 
+
                 },
                 entityTypeOther: {
                     value: props !== undefined && props.entityTypeOther !== undefined ? props.entityTypeOther : '',
@@ -174,8 +172,8 @@ class OrganizationDetailForm extends React.Component {
                     valid: true,
                     validationRules: {
                         notEmpty: false,
-                        minLength:true,
-                        maxLength:true
+                        minLength: true,
+                        maxLength: true
                     },
                     error: "Please enter entity type- other",
                     placeholder: "Entity Type- Other",
@@ -184,9 +182,9 @@ class OrganizationDetailForm extends React.Component {
                     disable: true
                 },
                 registerId: {
-                    value: props!==undefined && props.registerId!==undefined?props.registerId:'',
-                   
-                    valid: this.props.onboard.isOrgFormValid?true:false,
+                    value: props !== undefined && props.registerId !== undefined ? props.registerId : '',
+
+                    valid: this.props.onboard.isOrgFormValid ? true : false,
                     validationRules: {
                         notEmpty: true,
                         isEmail: true
@@ -200,11 +198,11 @@ class OrganizationDetailForm extends React.Component {
                 companyCode: {
                     value: props !== undefined && props.companyCode !== undefined ? props.companyCode : '',
 
-                    valid: this.props.onboard.isOrgFormValid?true:false,
+                    valid: this.props.onboard.isOrgFormValid ? true : false,
                     validationRules: {
                         notEmpty: true,
-                        minLength:true,
-                        maxLength:true
+                        minLength: true,
+                        maxLength: true
                     },
                     error: "Please enter company code",
                     placeholder: "Company Code",
@@ -227,66 +225,62 @@ class OrganizationDetailForm extends React.Component {
             stateOfIncorporation: { minLength: 1, maxLength: 50 },
             numberOfYearsinBuisness: { minLength: 1, maxLength: 3 },
         };
-        if(key==='participantType' && value.toLowerCase()==='other'){
-            this.updateFormState('entityTypeOther','',connectedValue,false);
+        if (key === 'participantType' && value.toLowerCase() === 'other') {
+            this.updateFormState('entityTypeOther', '', connectedValue, false);
         }
-        else if(key==='participantType' && value.toLowerCase()!=='other'){
-            this.updateFormState('entityTypeOther','',connectedValue,true,false,false);
+        else if (key === 'participantType' && value.toLowerCase() !== 'other') {
+            this.updateFormState('entityTypeOther', '', connectedValue, true, false, false);
         }
-        this.updateFormState(key,value,connectedValue);
-        
+        this.updateFormState(key, value, connectedValue);
+
     }
     handleDateChange(date, key) {
         let connectedValue = {};
-        this.updateFormState(key, dateutility.datefunction(date, formatutility.MMDDYYYY),connectedValue);
+        this.updateFormState(key, dateutility.datefunction(date, formatutility.MMDDYYYY), connectedValue);
     }
-    handleFormSubmit(){
-        let isFormVaild=true;
-       if (this.state.controls !== undefined) {
-        ["domain","dateOfIncorporation","stateOfIncorporation","countryOfIncorporation","BuisnessType","participantType","entityTypeOther"
-        ,"numberOfYearsinBuisness","registerId","companyCode"].forEach(name => {
-             let value = this.state.controls[name].valid, touched = this.state.controls[name].touched;
-             if (!value && this.props.onboard.mode==='create') {
-             
-              isFormVaild=false;
-             }
-             else if(!value && touched && this.props.onboard.mode!=='create'){
-              
-              isFormVaild=false;
-             }else{
-                isFormVaild=true;
-             }
-             
-           });
-        }
-       
-        this.props.dispatch(onboardActions.changeFormState('isFormVaild',isFormVaild));
-        this.props.dispatch(onboardActions.changeFormState('isOrgFormVaild',isFormVaild));
-    }
-    updateFormState(key, value,connectedValue,disable=false, touched=true,validCheck=true)
-    { 
-        debugger;
-        this.setState(prevState => {
-            return {
-                controls: {
-                    ...prevState.controls,
-                    [key]: {
-                        ...prevState.controls[key],
-                        value: value,
-                        valid: validCheck?validate(
-                            value,
-                            prevState.controls[key].validationRules,
-                            connectedValue,
-                            key
-                        ):true,
-                        disable:disable,
-                        touched: touched
+    handleFormSubmit() {
+        let isFormVaild = true;
+        if (this.state.controls !== undefined) {
+            ["domain", "dateOfIncorporation", "stateOfIncorporation", "countryOfIncorporation", "BuisnessType", "participantType", "entityTypeOther"
+                , "numberOfYearsinBuisness", "registerId", "companyCode"].forEach(name => {
+                    let value = this.state.controls[name].valid, touched = this.state.controls[name].touched;
+                    if (!value && this.props.onboard.mode === 'create') {
+
+                        isFormVaild = false;
                     }
+                    else if (!value && touched && this.props.onboard.mode !== 'create') {
+
+                        isFormVaild = false;
+                    } else {
+                        isFormVaild = true;
+                    }
+
+                });
+        }
+
+        this.props.dispatch(onboardActions.changeFormState('isFormVaild', isFormVaild));
+        this.props.dispatch(onboardActions.changeFormState('isOrgFormVaild', isFormVaild));
+    }
+    updateFormState(key, value, connectedValue, disable = false, touched = true, validCheck = true) {
+        this.setState(prevState => ({
+            controls: {
+                ...prevState.controls,
+                [key]: {
+                    ...prevState.controls[key],
+                    value: value,
+                    valid: validCheck ? validate(
+                        value,
+                        prevState.controls[key].validationRules,
+                        connectedValue,
+                        key
+                    ) : true,
+                    disable: disable,
+                    touched: touched
                 }
-            };
-        });
+            }
+        }),()=> this.handleFormSubmit());
         this.props.dispatch(onboardActions.changeParticipant(key, value));
-        this.handleFormSubmit();
+
     }
     //Allow only letters
     allowOnlyletters(e) {
@@ -318,7 +312,7 @@ class OrganizationDetailForm extends React.Component {
 
         return (
             <div className="mx-auto organization">
-                <h2 className="reg-heading">Organization Information<span style={{float:'right',verticalAlign:'bottom',fontSize:'13px',padding: '11px 0 0 0'}}>All fields are mandatory</span></h2> 
+                <h2 className="reg-heading">Organization Information<span style={{ float: 'right', verticalAlign: 'bottom', fontSize: '13px', padding: '11px 0 0 0' }}>All fields are mandatory</span></h2>
                 <div className="form-row">
                     <div className="col-md-4 mb-3">
                         <TextField
@@ -332,7 +326,7 @@ class OrganizationDetailForm extends React.Component {
                             autoComplete="off"
                             margin="dense"
                             error={!this.state.controls.domain.valid && this.state.controls.domain.touched}
-                                
+
                         />
                     </div>
                     <div className="col-md-4 mb-3">
@@ -369,7 +363,7 @@ class OrganizationDetailForm extends React.Component {
                             className="form-control"
                             autoComplete="off"
                             margin="dense"
-                           
+
                             error={!this.state.controls.numberOfYearsinBuisness.valid && this.state.controls.numberOfYearsinBuisness.touched}
 
                         />
@@ -404,7 +398,7 @@ class OrganizationDetailForm extends React.Component {
                             autoComplete="off"
                             margin="dense"
                             error={!this.state.controls.stateOfIncorporation.valid && this.state.controls.stateOfIncorporation.touched}
-                           
+
                         />
                     </div>
                     <div className="col-md-4 mb-3">
@@ -419,7 +413,7 @@ class OrganizationDetailForm extends React.Component {
                             autoComplete="off"
                             margin="dense"
                             error={!this.state.controls.countryOfIncorporation.valid && this.state.controls.countryOfIncorporation.touched}
-                           
+
                         />
                     </div>
                 </div>
@@ -460,7 +454,7 @@ class OrganizationDetailForm extends React.Component {
                             autoComplete="off"
                             margin="dense"
                             error={!this.state.controls.entityTypeOther.valid && this.state.controls.entityTypeOther.touched}
-                           
+
                         />
                     </div>
                     <div className="col-md-4 mb-3">
