@@ -264,7 +264,8 @@ class OrganizationDetailForm extends React.Component {
         this.props.dispatch(onboardActions.changeFormState('isOrgFormVaild',isFormVaild));
     }
     updateFormState(key, value,connectedValue,disable=false, touched=true,validCheck=true)
-    {
+    { 
+        debugger;
         this.setState(prevState => {
             return {
                 controls: {

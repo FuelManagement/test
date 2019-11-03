@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { TextField } from '@material-ui/core';
+import Locations from '../../_components/Location/Location';
 
 class OnBoard_Profile extends React.Component {
 
@@ -126,6 +127,7 @@ class OnBoard_Profile extends React.Component {
                         </div>
                     </div> : null}
                 </div>
+                <Locations location={[{ lat:59.955413, lng:30.337844},{ lat:59.955513, lng:30.337844}]} />
             </div>
         );
     }
