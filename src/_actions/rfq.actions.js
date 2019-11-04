@@ -92,7 +92,7 @@ function updateRfq(formData) {
             .then(
                 rfqs => {
                     dispatch(success(rfqs))
-                    dispatch(alertActions.success('RFQ Created Successfully'));
+                    dispatch(alertActions.success('RFQ Updated Successfully'));
                     dispatch(alertActions.clearLoading());
                 },
                 error => {

@@ -506,7 +506,7 @@ let Table_Config = {
 				Cell: row => <span title={formatMoney(row.original.price)}>{formatMoney(row.original.price)}</span>
 			}, {
 				Header: 'Measuring Unit',
-				accessor: 'measuringUnit',
+				accessor: 'quantityUnit',
 				Cell: row => <span title={row.original.measuringUnit}>{row.original.measuringUnit}</span>
 			}, {
 				Header: 'Currency',

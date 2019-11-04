@@ -79,8 +79,8 @@ class AddRFQ extends React.Component {
                     visible: true,
                     disable: false
                 },
-                projectid: {
-                    value: props !== undefined && props.projectid !== undefined ? props.projectid : '',
+                rfqID: {
+                    value: props !== undefined && props.rfqID !== undefined ? props.rfqID : '',
                     valid: false,
                     validationRules: {
                         notEmpty: true,
@@ -324,11 +324,11 @@ class AddRFQ extends React.Component {
                                 <div className="form-row">
                                     <div className="col-md-3 mb-3 m25">
                                         <TextField
-                                            id="projectid"
+                                            id="rfqID"
                                             label="Projet ID"
-                                            value={this.state.controls.projectid.value}
+                                            value={this.state.controls.rfqID.value}
                                             onChange={this.handleChange}
-                                            name="projectid"
+                                            name="rfqID"
                                             variant="outlined"
                                             className="form-control"
                                             autoComplete="off"
