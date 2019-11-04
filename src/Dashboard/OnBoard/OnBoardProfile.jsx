@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { API_Helpers, Utils, Table_Config } from '../../_helpers';
+import { API_Helpers, Utils, Table_Config, history } from '../../_helpers';
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
 import $ from 'jquery';
@@ -12,6 +12,7 @@ import RegisterationStepper from '../../RegisterPage/RegisterationStepper';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TextField } from '@material-ui/core';
 import Locations from '../../_components/Location/Location';
+import { Link } from 'react-router-dom';
 
 class OnBoard_Profile extends React.Component {
 
@@ -34,7 +35,7 @@ class OnBoard_Profile extends React.Component {
     componentDidMount() {
 
         this.props.dispatch(onboardActions.getAllParticipant());
-        this.setState({ createParticipantModal: false})
+        this.setState({ createParticipantModal: false })
     }
 
     shouldComponentUpdate() {
@@ -52,13 +53,15 @@ class OnBoard_Profile extends React.Component {
             $('#createParticipantModal input[type="text"]').val("");
         }
         this.props.dispatch(onboardActions.changeModeParticipant(mode));
-        this.props.dispatch(onboardActions.changeFormState('isOrgFormVaild',true));
-        this.props.dispatch(onboardActions.changeFormState('isAccountFormVaild',true));
-        this.props.dispatch(onboardActions.changeFormState('isTaxFormVaild',true));
-        this.props.dispatch(onboardActions.changeFormState('isContactFormVaild',true));
-        this.props.dispatch(onboardActions.changeFormState('isFormValid',true));
+        this.props.dispatch(onboardActions.changeFormState('isOrgFormVaild', true));
+        this.props.dispatch(onboardActions.changeFormState('isAccountFormVaild', true));
+        this.props.dispatch(onboardActions.changeFormState('isTaxFormVaild', true));
+        this.props.dispatch(onboardActions.changeFormState('isContactFormVaild', true));
+        this.props.dispatch(onboardActions.changeFormState('isFormValid', true));
         this.props.dispatch(onboardActions.getParticipant(data));
         this.setState({ createParticipantModal: !this.state.createParticipantModal });
+        history.push('/onboard/edit');
+
     }
     approveParticipant(e, data, action) {
         this.props.dispatch(onboardActions.approveParticipant(data, action));
@@ -78,10 +81,12 @@ class OnBoard_Profile extends React.Component {
 
                 <hr />
                 <div>
-
-                    <button name="btnAddParticipant" className="btn btn-outline btn-success" onClick={e => { this.toggleModal(e); this.props.dispatch(onboardActions.changeModeParticipant('create')); }}>
-                        <FontAwesomeIcon icon="plus" /> On-boarding Profile
+                    <Link to="/onboard/add">
+                        <button name="btnAddParticipant" className="btn btn-outline btn-success" >
+                            <FontAwesomeIcon icon="plus" /> On-boarding Profile
                     </button>
+                    </Link>
+
                     <TextField className="searchBox"
                         type="text" name="searc"
                         value={this.state.search}
@@ -110,7 +115,7 @@ class OnBoard_Profile extends React.Component {
                 <hr />
                 <br />
 
-                <div className="modal onboard-profile" id="createParticipantModal" tabIndex="-1" role="dialog">
+                {/* <div className="modal onboard-profile" id="createParticipantModal" tabIndex="-1" role="dialog">
                     {this.state.createParticipantModal ? <div className="modal-dialog " role="document">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -120,13 +125,12 @@ class OnBoard_Profile extends React.Component {
                                 </button>
                             </div>
                             <div className="modal-body">
-                                {/* <ProductForm mode={this.state.mode} closeModal={this.toggleModal}/> */}
-                                <RegisterationStepper />
+                                  <RegisterationStepper />
                             </div>
                         </div>
                     </div> : null}
-                </div>
-                </div>
+                </div> */}
+            </div>
         );
     }
 }

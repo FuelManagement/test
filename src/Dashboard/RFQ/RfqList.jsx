@@ -5,10 +5,7 @@ import { API_Helpers, Utils, Table_Config ,history} from '../../_helpers';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus } from "@fortawesome/free-solid-svg-icons"; 
-
-
 library.add(faPlus);
-
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import $ from 'jquery';
