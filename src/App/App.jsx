@@ -100,6 +100,7 @@ class App extends React.Component {
                                 <Route path="/indicative-offer/edit" exact component={Dashboard.IndicativeOfferEdit} />
                                 <Route path="/indicative-offer/view" exact component={Dashboard.IndicativeOfferEdit} />
                                 <Route path="/order-tracking" exact component={Dashboard.OrderTracking} />
+                                <Route path="/order-progress" exact component={Dashboard.OrderProgressBar} />
                             </React.Fragment>
                         </ Router>
                     </div>
