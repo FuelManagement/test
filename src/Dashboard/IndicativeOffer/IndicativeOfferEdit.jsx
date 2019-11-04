@@ -8,12 +8,7 @@ import { faAngleLeft, faPlus, faPlusSquare } from "@fortawesome/free-solid-svg-i
 import { LineItem } from '../../_components/LineItem';
 import { ioActions } from '../../_actions';
 library.add(faAngleLeft, faPlus);
-const currencytype = [
-    {value: "",label: "None"},
-    {value: "USD",label: "USD"},
-    {value: "CAN $",label: "CAN $"},
-    {value: "Mex $",label: "MEX $"}
-];
+
 class IndicativeOfferEdit extends React.Component {
     constructor(props) {
         super(props);
@@ -57,7 +52,7 @@ class IndicativeOfferEdit extends React.Component {
         formData.endTime = this.state.selectedRfq.endTime || formData.endTime;
         formData.participantID = this.state.selectedRfq.participantID || formData.participantID;
         formData.projectDetails = this.state.selectedRfq.projectDetails || formData.projectDetails;
-        formData.projectId = this.state.selectedRfq.projectID || formData.projectID;
+        formData.rfqId = this.state.selectedRfq.rfqID || formData.rfqID;
         formData.currency = this.state.selectedRfq.currency || formData.currency;
         console.log("formData");
         console.log(formData);
@@ -117,11 +112,11 @@ class IndicativeOfferEdit extends React.Component {
                             <div className="row form-row">
                                 <div className="col-md-4 mb-3  ">
                                     <TextField
-                                        id="projectId"
+                                        id="rfqID"
                                         label="Projet ID"
-                                        value={this.state.formData.projectId || ""}
+                                        value={this.state.formData.rfqID || ""}
                                         onChange={this.handleChange}
-                                        name="projectId"
+                                        name="rfqID"
                                         variant="outlined"
                                         className="form-control"
                                         autoComplete="off"

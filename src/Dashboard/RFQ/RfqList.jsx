@@ -71,14 +71,7 @@ class RFQ extends React.Component {
                 /> 
                 </div>
                 <div>
-                <h3 className="vendor-text">Customer's RFQ</h3>
-                <Link to="/rfq/add" className="addRFQ-link">
-                    <button className="btn btn-outline btn-success">
-                        <FontAwesomeIcon icon="plus"/> RFQ
-                    </button>
-                </Link>
-                <div className="clearDiv"></div>
-                <br />
+                 <br />
                 <ReactTable
                     data={rfq.rfqsToUsers || []}
                     columns={Table_Config.CustomerRFQ.rfqs.columns({toggleRfqModal: this.toggleModal.bind(this)})}
