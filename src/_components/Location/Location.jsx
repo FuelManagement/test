@@ -8,7 +8,7 @@ const AnyReactComponent = props => (
       data-for="Tooltiploc"
       data-tip={props.title}
       style={{
-       
+
         display: "inline-flex",
         textAlign: "center",
         alignItems: "center",
@@ -16,23 +16,23 @@ const AnyReactComponent = props => (
         //borderRadius: "100%",
         transform: "translate(-50%, -50%)"
       }}
-      
+
     >
-         <FontAwesomeIcon icon="truck-moving" size="3x"/> 
-        
+      <FontAwesomeIcon icon="truck-moving" size="3x"/>
+
       {/* {props.text} */}
     </div>
     <ReactTooltip
       id="Tooltiploc"
       getContent={dataTip => (
         <div className="user-info">
-        <span className="user-role">Order #: 1234 </span> <br />
-        <span className="user-role">Origin: Texas </span> <br />
-        <span className="user-role">Designation: Tuspan </span> <br />
-        <span className="user-role">License plate: I1234 </span> <br />
-        <span className="user-role">Driver Name: Tom </span> <br />
-        
-    </div>
+          <span className="user-role">Order #: 1234 </span> <br />
+          <span className="user-role">Origin: Texas </span> <br />
+          <span className="user-role">Designation: Tuspan </span> <br />
+          <span className="user-role">License plate: I1234 </span> <br />
+          <span className="user-role">Driver Name: Tom </span> <br />
+
+        </div>
       )}
       place="top" type="light" effect="float"
     />
@@ -67,12 +67,13 @@ class Locations extends React.Component {
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
         >
-          {this.props.location.map((loc, index) => (
+          {this.props.location && this.props.location.map((loc, index) => (
             <AnyReactComponent
+              key={index}
               lat={loc.lat}
               lng={loc.lng}
               title="order"
-             
+
             />
           ))}
         </GoogleMapReact>
@@ -81,4 +82,4 @@ class Locations extends React.Component {
   }
 }
 
-export default Locations;
+export { Locations };
