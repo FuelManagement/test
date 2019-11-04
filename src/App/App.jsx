@@ -6,7 +6,8 @@ import { alertActions } from '../_actions';
 import * as Components from '../_components';
 import * as Dashboard from '../Dashboard';
 import { LoginPage } from '../LoginPage';
-import { RegisterPage } from '../RegisterPage';
+import { RegisterPage } from '../RegisterPage';  
+
 import { LandingPage } from '../LandingPage';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -81,8 +82,10 @@ class App extends React.Component {
                                         component_exp={Dashboard.HomePage_Exporter}
                                         component_ref={Dashboard.HomePage_Refinery} 
                                         />
-                                <Route path="/onboard" component={Dashboard.OnBoard_Admin} />      
-                                <Route path="/profile" component={Dashboard.OnBoardProfile} />      
+                                <Route path="/onboard" exact component={Dashboard.OnBoard_Admin} />
+                                <Route path="/profile" exact component={Dashboard.OnBoardProfile} />      
+                                <Route path="/onboard/add" exact component={Dashboard.AddOnBoardProfile} />
+                                <Route path="/onboard/edit" exact component={Dashboard.AddOnBoardProfile} />
                                 <Route path="/product" component={Dashboard.Product} />  
                                 <Route path="/login" render={(props) => <LoginPage {...props} role={"importer"}/>} />
                                 <Route path="/register" component={RegisterPage} />
