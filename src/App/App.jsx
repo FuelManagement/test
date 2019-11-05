@@ -87,7 +87,7 @@ class App extends React.Component {
                                 <Route path="/onboard/add" exact component={Dashboard.AddOnBoardProfile} />
                                 <Route path="/onboard/edit" exact component={Dashboard.AddOnBoardProfile} />
                                 <Route path="/product" component={Dashboard.Product} />  
-                                <Route path="/login" render={(props) => <LoginPage {...props} role={"importer"}/>} />
+                                <Route path="/login" render={(props) => <LoginPage {...props} role = {""}/>} />
                                 <Route path="/register" component={RegisterPage} />
                                 <Route path="/home" component={LandingPage} />
                                
