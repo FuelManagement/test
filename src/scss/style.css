@@ -548,3 +548,107 @@ header .pad-50{
   border:2px solid #00ce1b;
   border-radius: 50%;
 }
+/* Progress bar css */
+ .progress-heading{
+  background-color: green; 
+  margin-bottom: 11px;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 500;
+  margin: 0px;
+}
+.progress-headText{
+  color: #887b7b;
+  font-size: 17px;
+  font-weight: 500;
+  margin: 0px;
+}
+.progress-main{ 
+  padding: 0px;
+}
+.tax-no{
+  border-bottom: 1px solid #fff;
+}
+.progress-main .MuiExpansionPanelDetails-root {
+  border: 1px solid #332233;
+}
+.transitionStep {
+  filter: grayscale(1);
+  color: white;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  background-color: rgba(211, 211, 211, 0.8);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.transitionStep.accomplished {
+  filter: grayscale(0);
+  background-color: green;
+} 
+.progress-bar {
+  background-color: unset !important;
+}
+
+.acomplished-text{
+  position: absolute;
+  top: 27px;
+  color: #343433;
+  width: 200px;
+  font-weight: 500;
+  font-size: 15px;
+}
+.MuiExpansionPanelSummary-root.Mui-expanded {
+  min-height: 49px !important;
+}
+.MuiExpansionPanelSummary-content.Mui-expanded {
+  margin: 10px 0 !important;
+}
+.text1{
+  left: -35px;
+}
+.text2,.text3{
+  left: -85px;
+}
+.text4{
+  /* left: 0px;
+   */
+   right: -60px;
+}
+.progress-bar{
+  width: 100%;
+  margin: 0px;
+  margin: 10px 0px;
+}
+.progress-bar .col-md-12{
+  padding: 0px;
+}
+.progress-main .MuiPaper-elevation1{
+  box-shadow: unset;
+  width: 100%;
+} 
+.progress-expand-pannel{
+  margin: 0px;
+} 
+.progress-main  .MuiExpansionPanelSummary-root{
+  width: 100%;
+  background-color: green; 
+  margin-bottom: 11px;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 500;
+  margin: 0px;
+}
+.gps-google-map{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 10px;
+  border: 1px solid #d6d2d2;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.order-track-status-map{
+  margin-bottom: 10px;
+}

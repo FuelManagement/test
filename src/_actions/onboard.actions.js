@@ -253,7 +253,8 @@ function approveParticipant(data, action){
             .then(participant => dispatch(success(participant)))
             .then(()=>
             {dispatch(alertActions.success(`Approved Sucessfully !`))
-            getAllParticipant();
+           dispatch( getAllParticipant());
+           
         
         })
             .catch(error => {

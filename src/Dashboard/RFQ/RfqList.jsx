@@ -5,10 +5,7 @@ import { API_Helpers, Utils, Table_Config ,history} from '../../_helpers';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus } from "@fortawesome/free-solid-svg-icons"; 
-
-
 library.add(faPlus);
-
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import $ from 'jquery';
@@ -71,14 +68,7 @@ class RFQ extends React.Component {
                 /> 
                 </div>
                 <div>
-                <h3 className="vendor-text">Customer's RFQ</h3>
-                <Link to="/rfq/add" className="addRFQ-link">
-                    <button className="btn btn-outline btn-success">
-                        <FontAwesomeIcon icon="plus"/> RFQ
-                    </button>
-                </Link>
-                <div className="clearDiv"></div>
-                <br />
+                 <br />
                 <ReactTable
                     data={rfq.rfqsToUsers || []}
                     columns={Table_Config.CustomerRFQ.rfqs.columns({toggleRfqModal: this.toggleModal.bind(this)})}

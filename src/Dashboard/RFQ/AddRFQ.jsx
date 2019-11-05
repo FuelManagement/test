@@ -17,9 +17,9 @@ class AddRFQ extends React.Component {
         this.handleEntityChange = this.handleEntityChange.bind(this);
         this.postNewRfq = this.postNewRfq.bind(this);
         this.getEntityTypes = this.getEntityTypes.bind(this);
-        this.filterParticipants = this.filterParticipants.bind(this);
-        this.updateLineItems = this.updateLineItems.bind(this);
+        this.filterParticipants = this.filterParticipants.bind(this);      
         this.mapSelectedRfqFormData = this.mapSelectedRfqFormData.bind(this);
+        this.updateLineItems = this.updateLineItems.bind(this);
         this.state = {
             formData: props.row && Object.keys(props.row).length ? props.row : {},
             participants: props.rfq.participants || [],
@@ -36,6 +36,7 @@ class AddRFQ extends React.Component {
         setTimeout(()=>this.mapSelectedRfqFormData(), 3000);
     }
     UNSAFE_componentWillReceiveProps() {
+        console.log(this.props.rfq.participants);
         if (this.props.rfq.participants && this.props.rfq.participants.length) {
             this.setState({
                 entityTypes: this.getEntityTypes(this.props.rfq.participants),
@@ -58,8 +59,10 @@ class AddRFQ extends React.Component {
         formData.endTime = this.state.selectedRfq.endTime || formData.endTime;
         formData.participantID = this._setParticipandId(participants, this.state.selectedRfq.participant_name) || formData.participantID;
         formData.projectDetails = this.state.selectedRfq.projectDetails || formData.projectDetails;
-        formData.projectId = this.state.selectedRfq.projectID || formData.projectID;
-        formData.currency = this.state.selectedRfq.currency || formData.currency;
+        formData.rfqID = this.state.selectedRfq.rfqID || formData.rfqID;
+        formData.currency = this.state.selectedRfq.currency || formData.currency;        
+        formData.participant_name =  this.state.selectedRfq.participant_name ||formData.participant_name ;
+        formData.products = this.state.selectedRfq.products;
         this.setState({ formData });
         
         
@@ -77,6 +80,7 @@ class AddRFQ extends React.Component {
         }
     }
     updateLineItems(lineItems) {
+        console.log('updateLineItems')
         let formData = this.state.formData;
         formData.products = lineItems;
         this.setState({ formData });
@@ -84,15 +88,15 @@ class AddRFQ extends React.Component {
     getEntityTypes(participants = []) {
         let entityTypes = {};
         participants.map(participant => {
-            if (participant.entityType)
-                entityTypes[participant.entityType] = participant.entityType;
+            if (participant.participantType)
+                entityTypes[participant.participantType] = participant.participantType;
         })
         let types = Object.keys(entityTypes).map(type => ({ value: type, label: type }));
         return types.length ? types : false;
     }
-    filterParticipants(entityType) {
+    filterParticipants(participantType) {
         let participants = this.props.rfq && this.props.rfq.participants || [];
-        participants = participants.filter(participant => participant.entityType === entityType);
+        participants = participants.filter(participant => participant.participantType === participantType);
         this.setState({ participants });
         return participants;
     }
@@ -128,11 +132,11 @@ class AddRFQ extends React.Component {
                             <div className="row form-row">
                                 <div className="col-md-4 mb-3  ">
                                     <TextField
-                                        id="projectId"
+                                        id="rfqID"
                                         label="Projet ID"
-                                        value={this.state.formData.projectId || ""}
+                                        value={this.state.formData.rfqID || ""}
                                         onChange={this.handleChange}
-                                        name="projectId"
+                                        name="rfqID"
                                         variant="outlined"
                                         className="form-control"
                                         autoComplete="off"
