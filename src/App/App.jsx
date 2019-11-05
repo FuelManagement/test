@@ -12,7 +12,12 @@ import OrderTracking from '../_components/OrderTracking/OrderTracking';
 import { LandingPage } from '../LandingPage';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import '../scss/style.css';
+import '../scss/style.css';   
+import { config } from '@fortawesome/fontawesome-svg-core';
+
+// Make sure this is before any other `fontawesome` API calls
+config.autoAddCss = false
+
 toast.configure({
     autoClose: 1000,
     draggable: false,
@@ -88,7 +93,7 @@ class App extends React.Component {
                                 <Route path="/onboard/add" exact component={Dashboard.AddOnBoardProfile} />
                                 <Route path="/onboard/edit" exact component={Dashboard.AddOnBoardProfile} />
                                 <Route path="/product" component={Dashboard.Product} />  
-                                <Route path="/login" render={(props) => <LoginPage {...props} role = {""}/>} />
+                                <Route path="/login" render={(props) => <LoginPage {...props} role = {"importer"}/>} />
                                 <Route path="/register" component={RegisterPage} />
                                 <Route path="/home" component={LandingPage} />
                                
