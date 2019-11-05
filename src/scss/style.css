@@ -415,7 +415,7 @@ header .pad-50{
   margin-bottom: 15px;
 }
 .order-tracking-peper .MuiPaper-root{
-  border: 1px solid green;
+  border: 1px solid #00ce1b;
   border-radius: 15px;
   padding:0 15px;
 } 
@@ -550,7 +550,7 @@ header .pad-50{
 }
 /* Progress bar css */
  .progress-heading{
-  background-color: green; 
+  background-color: #00ce1b; 
   margin-bottom: 11px;
   color: #fff;
   font-size: 17px;
@@ -570,7 +570,7 @@ header .pad-50{
   border-bottom: 1px solid #fff;
 }
 .progress-main .MuiExpansionPanelDetails-root {
-  border: 1px solid #332233;
+  border: 1px solid #716c6c;
 }
 .transitionStep {
   filter: grayscale(1);
@@ -587,7 +587,7 @@ header .pad-50{
 
 .transitionStep.accomplished {
   filter: grayscale(0);
-  background-color: green;
+  background-color: #00ce1b;
 } 
 .progress-bar {
   background-color: unset !important;
@@ -635,7 +635,7 @@ header .pad-50{
 } 
 .progress-main  .MuiExpansionPanelSummary-root{
   width: 100%;
-  background-color: green; 
+  background-color: #00ce1b; 
   margin-bottom: 11px;
   color: #fff;
   font-size: 17px;
@@ -651,4 +651,74 @@ header .pad-50{
 }
 .order-track-status-map{
   margin-bottom: 10px;
+}
+.RSPBprogressBar .RSPBprogression {
+  background: #00ce1b !important;
+}
+/* Table styling  */
+.table-heading{
+  background-color: #a9aaaa;
+  color: #000000;
+  cursor: pointer;
+  margin: 0px 0px 0px 0px;
+  padding: 10px 24px;
+  font-size: 20px;
+  border-radius: 25px 25px 0px 0px;
+}
+.table-heading:hover,.table-heading:active,.table-heading:focus{
+  background-color: #31353d;
+  color: #ffffff;
+
+}
+.table-data{
+  border: 1px solid #716c6c;
+  padding: 20px;
+}
+.mrg-tp40px{
+  margin-top: 40px;
+}
+.OTR-actions-row{
+  margin: 0px;
+  justify-content: center;
+}
+.OTR-actions { 
+  width: 80%;
+}
+.OTR-approve-btn{
+  background-color: #eaeaf0;
+  color: #00ce1b;
+  width: 80%;
+  outline: none;
+}
+.OTR-actions .MuiInput-formControl{
+  width: 100%;
+}
+/* Send Authenticaion component styles */
+.sendAuthenticaion-model .MuiDialog-paperWidthSm{
+  width: 300px;
+  border: 2px solid #00ce1b;
+}
+.sendAuthenticaion-hdg{
+    text-align: center;
+    font-size: 17px;
+    font-weight: 500;
+    color: #00ce1b;
+}
+.sendAuthenticaion-custhdg{
+  color: #00ce1b;
+  font-size: 15px;
+  font-weight: 100;
+}
+.sendAuthenticaion-custName{
+  color: #a9aaaa;
+}
+.sendAuthenticaion-formDiv{
+  margin: 30px 0px;
+}
+.sendAuthenticat-submit-row{
+  justify-content: center;
+}
+.sendAuthenticat-submit{
+  background-color: #00ce1b !important;
+  color: #fff !important;
 }

@@ -7,11 +7,17 @@ import * as Components from '../_components';
 import * as Dashboard from '../Dashboard';
 import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';  
+import OrderTracking from '../_components/OrderTracking/OrderTracking';
 
 import { LandingPage } from '../LandingPage';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import '../scss/style.css';
+import '../scss/style.css';   
+import { config } from '@fortawesome/fontawesome-svg-core';
+
+// Make sure this is before any other `fontawesome` API calls
+config.autoAddCss = false
+
 toast.configure({
     autoClose: 1000,
     draggable: false,
@@ -87,9 +93,10 @@ class App extends React.Component {
                                 <Route path="/onboard/add" exact component={Dashboard.AddOnBoardProfile} />
                                 <Route path="/onboard/edit" exact component={Dashboard.AddOnBoardProfile} />
                                 <Route path="/product" component={Dashboard.Product} />  
-                                <Route path="/login" render={(props) => <LoginPage {...props} role={"importer"}/>} />
+                                <Route path="/login" render={(props) => <LoginPage {...props} role = {"importer"}/>} />
                                 <Route path="/register" component={RegisterPage} />
-                                <Route path="/home" component={Dashboard.Dashboard_Importer} />
+                                <Route path="/home" component={LandingPage} />
+                               
                                 <Route path="/userProfile" exact component={Dashboard.UserProfile} />
                                 <Route path="/rfq" exact component={Dashboard.RFQ} />
 							    <Route path="/userProfile/add" exact component={Dashboard.AddUserProfile} /> 
@@ -101,6 +108,7 @@ class App extends React.Component {
                                 <Route path="/indicative-offer/view" exact component={Dashboard.IndicativeOfferEdit} />
                                 <Route path="/order-tracking" exact component={Dashboard.OrderTracking} />
                                 <Route path="/order-progress" exact component={Dashboard.OrderStatusWithMap} />
+                                <Route path="/orderTracking-request" exact component={Dashboard.OrderTrackingRequest} />
                             </React.Fragment>
                         </ Router>
                     </div>

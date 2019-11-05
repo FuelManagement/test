@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import {AppConfiguration} from "read-appsettings-json"
+import {AppConfiguration} from "read-appsettings-json";
+import './orderTracking.css';
 
 class OrderTracking extends React.Component{
 
@@ -94,7 +95,7 @@ class OrderTracking extends React.Component{
                 <td>{RequestTimings}</td>
                { Approve? 
 
-                    ( <td>{ApproveOrReject}</td> ) :
+                    ( <td>{ApproveORReject}</td> ) :
                     
                     (
                     <td>
@@ -126,8 +127,7 @@ class OrderTracking extends React.Component{
                   <h1 id="title">OrderTracking</h1>
                   <table id ="orders">
                    <tbody>
-                       <tr>{this.renderTableHeader()}
-                       <th>Approve/Reject</th>
+                       <tr>{this.renderTableHeader()} 
                        </tr>
                        
                        {this.renderOrderTrackTable()}
