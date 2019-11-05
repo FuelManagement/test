@@ -970,32 +970,34 @@ let Table_Config = {
 				Header: 'Approve/Reject',
 				accessor: 'Approvereject',
 				Cell: row => <div className="row OTR-actions-row">
-					{/* <button
-						className="btn btn-outline-info btn-sm btn-track"
-						style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
-						onClick={e => { props.trackBtnClk(e, row.original, "track") }}>
-							Track
-						</button> */}
-						{
-							row.original.Approvereject === "Approve" ?  (<button
-								className="btn OTR-approve-btn"
-								style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }} 
-								onClick={e => { props.approveSubmit(e, row.original, "track") }}>
-									Approve
-							</button>  ):(
-								 <FormControl className="OTR-actions" > 
-								 <Select
-									 labelId="demo-simple-select-label"
-									 id="demo-simple-select"
-									 value={ row.original.Approvereject}
-								 >
-									 <MenuItem value="Approve">Approve</MenuItem>
-									 <MenuItem value="Reject">Reject</MenuItem>  
-								 </Select>
-							 </FormControl> 
-							)
-						}
-					
+					{
+						row.original.Status === "AutoApproved" || row.original.Status === "Approved" ?
+						(<button
+							className="btn OTR-approve-btn"
+							disabled={true}
+							style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}>
+								Approve
+						</button>  )
+						: row.original.Status === "Rejected" ?
+						(<button
+							className="btn OTR-reject-btn"
+							disabled={true}
+							style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}>
+								Reject
+						</button>  )
+						: (
+								<FormControl className="OTR-actions" >
+								<Select
+									id="demo-simple-select"
+									value={ row.original.Approvereject }
+									onChange={(e)=>props.approveSubmit(e, row.original)}
+								>
+									<MenuItem value="Approve">Approve</MenuItem>
+									<MenuItem value="Reject">Reject</MenuItem>
+								</Select>
+							</FormControl>
+						)
+					}
 				</div>
 			}]
 		}

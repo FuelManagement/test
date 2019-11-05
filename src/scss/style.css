@@ -690,6 +690,12 @@ header .pad-50{
   width: 80%;
   outline: none;
 }
+.OTR-reject-btn{
+  background-color: #eaeaf0;
+  color: #ce0030;
+  width: 80%;
+  outline: none;
+}
 .OTR-actions .MuiInput-formControl{
   width: 100%;
 }
