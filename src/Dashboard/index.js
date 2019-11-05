@@ -6,3 +6,4 @@ export * from './RFQ';
 export * from './UserProfile';
 export * from './IndicativeOffer';
 export * from './OrderTracking';
+export * from './OrderTrackingRequest';
