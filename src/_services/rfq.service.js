@@ -49,6 +49,8 @@ function postNewRfq(formData){
     formData.role = user.role;
     formData.status = 'Created';
     formData.fromUserID=user.registerId;
+    formData.toUserId = formData.participantId;
+   
     const requestOptions = {
         method: 'POST',
         headers: authHeader(),
@@ -78,6 +80,7 @@ function updateRfq(formData){
     formData.role = user.role;
     formData.status = 'Updated';
     formData.fromUserID=user.registerId;
+    formData.toUserId = formData.participantId;
     const requestOptions = {
         method: 'POST',
         headers: authHeader(),
