@@ -201,12 +201,15 @@ class Sidebar extends React.Component {
                                         <i className="fa fa-shopping-cart"></i>
                                         <span>Order Tracking</span>
                                     </Link>
-                                </li>
-                                <li className="sidebar-dropdown">
-                                    <Link to="/orderTracking-request">
-                                        <i className="fa fa-shopping-cart"></i>
-                                        <span>Order Tracking Request</span>
-                                    </Link>
+                                    <div className="sidebar-submenu">
+                                        <ul>
+                                            <li className="sidebar-dropdown">
+                                                <Link to="/orderTracking-request">
+                                                    <span>Order Tracking Request</span>
+                                                </Link>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
