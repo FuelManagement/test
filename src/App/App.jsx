@@ -16,7 +16,7 @@ import '../scss/style.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 
 // Make sure this is before any other `fontawesome` API calls
-config.autoAddCss = false
+// config.autoAddCss = false
 
 toast.configure({
     autoClose: 1000,
