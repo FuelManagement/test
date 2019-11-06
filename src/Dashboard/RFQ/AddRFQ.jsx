@@ -57,7 +57,7 @@ class AddRFQ extends React.Component {
         formData.status = this.state.selectedRfq.status || formData.status;
         formData.startTime = this.state.selectedRfq.startTime || formData.startTime;
         formData.endTime = this.state.selectedRfq.endTime || formData.endTime;
-        formData.participantID = this._setParticipandId(participants, this.state.selectedRfq.participant_name) || formData.participantID;
+        formData.toUserId = this._setParticipandId(participants, this.state.selectedRfq.participant_name) || formData.participantID;
         formData.projectDetails = this.state.selectedRfq.projectDetails || formData.projectDetails;
         formData.rfqID = this.state.selectedRfq.rfqID || formData.rfqID;
         formData.currency = this.state.selectedRfq.currency || formData.currency;        
