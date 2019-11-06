@@ -61,7 +61,7 @@ class ManageGPSAuth extends React.Component {
                         notEmpty: true,
                     },
                     error: "Please select orderid",
-                    placeholder: "Order Id",
+                    placeholder: "Order #",
                     touched: false,
                     visible: true,
                     disable: false
@@ -90,13 +90,19 @@ class ManageGPSAuth extends React.Component {
                 label: "None"
             },
             {
+                value: 'All',
+                label: 'All'
+            },
+            {
                 value: '20133',
                 label: '20133'
-            },
+            },            
             {
                 value: '20134',
                 label: '20134'
-            }];
+            }
+        ];
+            
         const CustomerNames = [
             {
                 value: "",

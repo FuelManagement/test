@@ -921,13 +921,15 @@ let Table_Config = {
 				accessor: 'productName',
 				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.productName}>{row.original.productName}</span>
 			}, {
-				Header: 'Customer Name',
-				accessor: 'customerName',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.customerName}>{row.original.customerName}</span>
+				Header: 'Supplier Name',
+				accessor: 'supplierName',
+				Cell: row => <span style={{ display: 'block', textAlign: 'center'}} 				
+			    title={row.original.supplierName}>{row.original.supplierName}</span>
 			}, {
 				Header: 'Status',
 				accessor: 'status',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.status}>{row.original.status}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'center',
+				color:row.original.status === "Approved" ? 'Green':(row.original.status === "Rejected"?'red':'blue')  }} title={row.original.status}>{row.original.status}</span>
 			}, {
 				Header: 'Track Request',
 				accessor: 'trackRequest',
