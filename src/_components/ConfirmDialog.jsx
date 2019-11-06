@@ -59,28 +59,37 @@ class ConfirmDialog extends React.Component {
         const props = this.props;
         return (
             <div>
-                <Dialog onClose={this.props.handleClose} aria-labelledby="customized-dialog-title" open={this.props.open} className="sendAuthenticaion-model">
-                    <DialogTitle id="customized-dialog-title" onClose={this.props.handleClose}>
+                <Dialog
+                    onClose={props.handleClose}
+                    aria-labelledby="customized-dialog-title"
+                    open={props.open}
+                    className="sendAuthenticaion-model"
+                    fullWidth={props.fullWidth || false}
+                    maxWidth={props.maxWidth || false}>
+                    <DialogTitle id="customized-dialog-title" onClose={props.handleClose}>
+                        <p className="sendAuthenticaion-hdg">{props.header || "Confirm"}</p>
                     </DialogTitle>
-                    <DialogContent > 
-                       <p className="sendAuthenticaion-hdg">Confirm</p>
+                    <DialogContent>
                         <div className="sendAuthenticaion-formDiv">
-                            <p className="sendAuthenticaion-custhdg">{props.message || "Are you sure ?"}</p>
+                            {props.message?props.message:(<p className="sendAuthenticaion-custhdg">{"Are you sure ?"}</p>)}
                             <div className="sendAuthenticat-submit-row">
-                                <Button 
-                                    variant="contained" 
-                                    className="sendAuthenticat-submit" 
-                                    onClick={this.props.handleClose}
-                                    style={btnStyle.no}>
-                                    No
-                                </Button>
-                                <Button 
-                                    variant="contained" 
-                                    className="" 
-                                    onClick={props.confirmAction}
-                                    style={btnStyle.yes}>
-                                    Yes
-                                </Button>
+                                {props.decline == ""? "":
+                                    <Button
+                                        variant="contained"
+                                        className="sendAuthenticat-submit"
+                                        onClick={props.handleClose}
+                                        style={btnStyle.no}>
+                                        {props.decline || "No"}
+                                    </Button>
+                                }{ props.accept == ""? "":
+                                    <Button
+                                        variant="contained"
+                                        className=""
+                                        onClick={props.confirmAction}
+                                        style={btnStyle.yes}>
+                                        {props.accept || "Yes"}
+                                    </Button>
+                                }
                             </div>
                         </div>
                     </DialogContent>

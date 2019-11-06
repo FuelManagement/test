@@ -1031,6 +1031,40 @@ let Table_Config = {
 			}]
 		}
 	},
+	ProgressBar: {
+		ProgressBarRecords: {
+			options: { ...globalOptions },
+			columns: (props) => [{
+				Header: 'Device Id',
+				accessor: 'Device',
+			}, {
+				Header: 'TxnCode',
+				accessor: 'TxnCode',
+			}, {
+				Header: 'TxnId',
+				accessor: 'TxnId',
+			}, {
+				Header: 'Txn Hash',
+				accessor: 'TxnHash',
+			}, {
+				Header: 'Channel Id',
+				accessor: 'ChannelId',
+			}, {
+				Header: 'Block',
+				accessor: 'Block',
+			}, {
+				Header: 'Age',
+				accessor: 'Age',
+			}, {
+				Header: 'From',
+				accessor: 'From',
+			}, {
+				Header: 'To',
+				accessor: 'To',
+			}]
+		}
+	},
+
 }
 
 module.exports = { Table_Config };
