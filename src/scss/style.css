@@ -690,6 +690,12 @@ header .pad-50{
   width: 80%;
   outline: none;
 }
+.OTR-reject-btn{
+  background-color: #eaeaf0;
+  color: #ce0030;
+  width: 80%;
+  outline: none;
+}
 .OTR-actions .MuiInput-formControl{
   width: 100%;
 }
@@ -721,4 +727,31 @@ header .pad-50{
 .sendAuthenticat-submit{
   background-color: #00ce1b !important;
   color: #fff !important;
+}
+.manage-gps-auth .manage-gps-title{
+  font-weight: bold;
+  color: #545252;
+  font-size: 20px;
+}
+.manage-gps-auth .drop-down-sec{
+  border: 1px solid #dcdada;
+  border-radius: 5px;
+}
+.manage-gps-auth .set-center{
+  text-align: center;
+  margin:20px;
+}
+.manage-gps-auth .form-wrapper{
+  margin-top:50px;
+  
+}
+.manage-gps-auth .MuiFormControl-root label{
+  font-weight: bold;
+  font-size: 16px;
+}
+.manage-gps-auth .react-table-border{
+  border: 1px solid #dcdada;
+  padding:10px;
+  border-radius: 5px;
+
 }

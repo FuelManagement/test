@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table_Config } from '../../_helpers';
+import { ConfirmDialog } from '../../_components';
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 library.add(faPlus);
@@ -50,16 +51,26 @@ class OrderTrackingRequest extends React.Component {
                     Approvereject: "Reject"
                 }
             ],
-            isApprove:false
+            isApprove: false,
+            confirmDialog: false,
+            selectedRow: {}
         }
         this.approveSubmit = this.approveSubmit.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.confirmReject = this.confirmReject.bind(this);
     }
-    approveSubmit(event) {
-        this.setState({isApprove:true});
+    approveSubmit(event, rowData) {
+        if(event.target.value === "Approve")
+            this.setState({isApprove:true, confirmDialog:false, selectedRow:rowData});
+        else if(event.target.value === "Reject")
+            this.setState({isApprove:false, confirmDialog:true, selectedRow:rowData});
     }
     handleClose(){
-        this.setState({isApprove:false});
+        this.setState({isApprove:false, confirmDialog:false, selectedRow:{}});
+    }
+    confirmReject(){
+        console.log("todo reject selected row: ", this.state.selectedRow);
+        this.setState({isApprove:false, confirmDialog:false, selectedRow:{}});
     }
     render() {
         return (
@@ -80,6 +91,10 @@ class OrderTrackingRequest extends React.Component {
                     </div>
                 </div>
                 <SendAuthentication isApprove={this.state.isApprove} handleClose={this.handleClose} />
+                <ConfirmDialog
+                    open={this.state.confirmDialog}
+                    confirmAction={this.confirmReject}
+                    handleClose={this.handleClose} />
             </div>
         )
     }

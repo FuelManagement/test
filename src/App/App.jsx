@@ -16,7 +16,7 @@ import '../scss/style.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 
 // Make sure this is before any other `fontawesome` API calls
-config.autoAddCss = false
+// config.autoAddCss = false
 
 toast.configure({
     autoClose: 1000,
@@ -109,6 +109,7 @@ class App extends React.Component {
                                 <Route path="/order-tracking" exact component={Dashboard.OrderTracking} />
                                 <Route path="/order-progress" exact component={Dashboard.OrderStatusWithMap} />
                                 <Route path="/orderTracking-request" exact component={Dashboard.OrderTrackingRequest} />
+                                <Route path="/order-tracking/manage-gps-auth" exact component={Dashboard.ManageGPSAuth}/>
                             </React.Fragment>
                         </ Router>
                     </div>
