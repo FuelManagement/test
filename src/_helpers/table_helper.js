@@ -953,7 +953,7 @@ let Table_Config = {
 			}, {
 				Header: 'Requested By',
 				accessor: 'RequestedBy',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.productName}>{row.original.RequestedBy}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.productName}>{row.original.RequestedBy.replace(/([A-Z])/g, ' $1').trim()}</span>
 			}, {
 				Header: 'Owner',
 				accessor: 'Owner',
@@ -961,7 +961,9 @@ let Table_Config = {
 			}, {
 				Header: 'Status',
 				accessor: 'Status',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.Status}>{row.original.Status}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'center', fontWeight: 'bold', 
+				color:row.original.Status === "Approved" || row.original.Status === "AutoApproved"?'Green':(row.original.Status === "Rejected"?'red':'orange') }}
+				 title={row.original.Status.replace(/([A-Z])/g, ' $1').trim()}>{row.original.Status.replace(/([A-Z])/g, ' $1').trim()}</span>
 			}, {
 				Header: 'Request Timings',
 				accessor: 'RequestTimings',
@@ -978,18 +980,19 @@ let Table_Config = {
 							style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}>
 								Approve
 						</button>  )
-						: row.original.Status === "Rejected" ?
-						(<button
-							className="btn OTR-reject-btn"
-							disabled={true}
-							style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}>
-								Reject
-						</button>  )
+						// : row.original.Status === "Rejected" ?
+						// (<button
+						// 	className="btn OTR-reject-btn"
+						// 	disabled={true}
+						// 	style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}>
+						// 		Reject
+						// </button>  )
 						: (
 								<FormControl className="OTR-actions" >
 								<Select
 									id="demo-simple-select"
-									value={ row.original.Approvereject }
+									value={ row.original.Status==='Rejected'?'Reject':
+									(row.original.Status==='Approved'?'Approve':row.original.Approvereject) }
 									onChange={(e)=>props.approveSubmit(e, row.original)}
 								>
 									<MenuItem value="Approve">Approve</MenuItem>
