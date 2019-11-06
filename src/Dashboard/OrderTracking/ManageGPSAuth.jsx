@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextField, Select, InputLabel, MenuItem, FormControl } from '@material-ui/core';
-import { ManageGPSTable } from './ManageGPSTable'
+import { ManageGPSTable } from './ManageGPSTable';
+
 class ManageGPSAuth extends React.Component {
     constructor(props) {
         super(props);
@@ -16,6 +17,7 @@ class ManageGPSAuth extends React.Component {
         let key = event.target.name,
             value = event.target.value;
         this.setState(prevState => {
+            console.log(prevState.formData);
             return {
                 formData: {
                     ...prevState.formData,
@@ -32,45 +34,6 @@ class ManageGPSAuth extends React.Component {
         let state = {};
         state = {
             showTable: false,
-            Orders: [
-                {
-                    value: "",
-                    label: "None"
-                },
-                {
-                    value: '20133',
-                    label: '20133'
-                },
-                {
-                    value: '20134',
-                    label: '20134'
-                }],
-            CustomerNames: [
-                {
-                    value: "",
-                    label: "None"
-                },
-                {
-                    value: 'CFEnergia power',
-                    label: 'CFEnergia power'
-                },
-                {
-                    value: 'BP Gas station',
-                    label: 'BP Gas station'
-                }],
-            Actions: [
-
-                {
-                    value: 'Approve',
-                    label: 'Approve'
-                },
-                {
-                    value: 'Reject',
-                    label: 'Reject'
-                }],
-
-
-
             formData: {
                 customername: {
                     value: props !== undefined && props.customerName !== undefined ? props.customerName : '',
@@ -114,7 +77,42 @@ class ManageGPSAuth extends React.Component {
     }
 
     render() {
-
+        const Orders = [
+            {
+                value: "",
+                label: "None"
+            },
+            {
+                value: '20133',
+                label: '20133'
+            },
+            {
+                value: '20134',
+                label: '20134'
+            }];
+        const CustomerNames = [
+            {
+                value: "",
+                label: "None"
+            },
+            {
+                value: 'CFEnergia power',
+                label: 'CFEnergia power'
+            },
+            {
+                value: 'BP Gas station',
+                label: 'BP Gas station'
+            }];
+        const Actions = [
+        
+            {
+                value: 'Approve',
+                label: 'Approve'
+            },
+            {
+                value: 'Reject',
+                label: 'Reject'
+            }];
         return <div>
             <div className='col-lg-9 add-rfq-main progress-main manage-gps-auth'>
                 <p className='manage-gps-title'>Manage GPS Authorizations</p>
@@ -126,7 +124,7 @@ class ManageGPSAuth extends React.Component {
                                     select
                                     id="customername"
                                     label="Customer Name"
-                                    value={this.state.formData.customername || ""}
+                                    value={this.state.formData.customername.value}
                                     onChange={this.handleChange}
                                     name="customername"
                                     variant="outlined"
@@ -134,7 +132,7 @@ class ManageGPSAuth extends React.Component {
                                     autoComplete="off"
                                     margin="dense"
                                 >
-                                    {this.state.CustomerNames.map(option => (
+                                    {CustomerNames.map(option => (
                                         <MenuItem key={option.value} value={option.value}>
                                             {option.label}
                                         </MenuItem>
@@ -148,8 +146,9 @@ class ManageGPSAuth extends React.Component {
                                     select
                                     id="orderid"
                                     label="Order Id"
-                                    value={this.state.formData.orderid || ""}
-                                    onChange={this.handleEntityChange}
+                                    value={this.state.formData.orderid.value}
+                                    onChange={this.handleChange}
+                                    
                                     name="orderid"
                                     variant="outlined"
                                     className="form-control"
@@ -157,7 +156,7 @@ class ManageGPSAuth extends React.Component {
                                     margin="dense"
                                     disabled={false}
                                 >
-                                    {this.state.Orders.map(option => (
+                                    {Orders.map(option => (
                                         <MenuItem key={option.value} value={option.value}>
                                             {option.label}
                                         </MenuItem>
@@ -171,16 +170,17 @@ class ManageGPSAuth extends React.Component {
                                     variant="outlined"
                                     name='action'
                                     label="Action"
-                                    value={this.state.formData.action || ""}
+                                    value={this.state.formData.action.value || ""}
                                     className="form-control"
                                     onChange={this.handleChange}
                                     margin="dense"
                                 >
-                                    {this.state.Actions && this.state.Actions.map(option => (
-                                        <MenuItem key={option.value} value={option.value}>
-                                            {option.label}
-                                        </MenuItem>
-                                    ))}
+                                    
+                                    {Actions.map(option => (
+                                                <MenuItem key={option.value} value={option.value}>
+                                                    {option.label}
+                                                </MenuItem>
+                                            ))}
                                 </TextField>
                             </div>
                         </div>
