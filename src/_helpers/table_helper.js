@@ -937,8 +937,9 @@ let Table_Config = {
 					<button
 						className="btn btn-outline-info btn-sm btn-track"
 						style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
-						onClick={e => { props.trackBtnClk(e, row.original, "track") }}>
-						Track
+						disabled={row.original.status==='Approved'?false:(row.original.status===''?false:true)}
+						onClick={e => { props.trackBtnClk(e, row.original,row.original.status==='Approved'? "track":"'otp-disabled") }}>
+						{row.original.status===''?'Request Submitted':'Track'}
 						</button>
 
 				</div>
