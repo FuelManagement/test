@@ -1002,6 +1002,29 @@ let Table_Config = {
 			}]
 		}
 	},
+	ManageGPSTable: {
+		ManageGPSTableRecords: {
+			options: { ...globalOptions },
+			columns: (props) => [{
+				Header: 'Customer Name',
+				accessor: 'customerName',
+				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.customerName}>{row.original.customerName}</span>
+			}, {
+				Header: 'Order Id',
+				accessor: 'orderid',
+				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.orderid}>{row.original.orderid}</span>
+			}, 
+			 {
+				Header: 'Status',
+				accessor: 'status',
+				Cell: row => <span style={{ display: 'block', textAlign: 'center',fontWeight:'bold',color:'#00ce1b' }} title={row.original.status}>{row.original.status}</span>
+			}, {
+				Header: 'Date',
+				accessor: 'date',
+				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.date}>{row.original.date}</span>
+			}]
+		}
+	},
 }
 
 module.exports = { Table_Config };

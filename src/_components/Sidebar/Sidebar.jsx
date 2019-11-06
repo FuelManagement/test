@@ -4,7 +4,7 @@ import $ from 'jquery';
 window.jQuery = $; // hack
 window.$ = $;      // hack 
 
-import './sidebar.css'; 
+import './sidebar.css';
 class Sidebar extends React.Component {
     constructor(props) {
         super(props);
@@ -13,7 +13,7 @@ class Sidebar extends React.Component {
     componentDidMount() {
         jQuery(function ($) {
             $(".sidebar-dropdown > a").click(function () {
-               $(".sidebar-submenu").slideUp(200);
+                $(".sidebar-submenu").slideUp(200);
                 if ($(this).parent().hasClass("active")) {
                     $(".sidebar-dropdown").removeClass("active");
                     $(this).parent().removeClass("active");
@@ -68,23 +68,23 @@ class Sidebar extends React.Component {
                                         <span>Dashboard</span>
                                         {/* <span className="badge badge-pill badge-warning">New</span> */}
                                     </Link>
-                                    
-                                <div className="sidebar-submenu">
-                                    <ul>
-                                        <li>
-                                            <Link to="/">Dashboard 1
+
+                                    <div className="sidebar-submenu">
+                                        <ul>
+                                            <li>
+                                                <Link to="/">Dashboard 1
                                                 <span className="badge badge-pill badge-success">Pro</span>
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/">Dashboard 2</Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/">Dashboard 3</Link>
-                                        </li>
-                                    </ul>
-                                </div>
-                               
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/">Dashboard 2</Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/">Dashboard 3</Link>
+                                            </li>
+                                        </ul>
+                                    </div>
+
                                 </li>
                                 {/* <li className="sidebar-dropdown">
                                     <Link to="/orders">
@@ -203,11 +203,20 @@ class Sidebar extends React.Component {
                                     </Link>
                                     <div className="sidebar-submenu">
                                         <ul>
+                                            <li>
+                                                <Link to="/order-tracking/manage-gps-auth">
+                                                    <span>Manage GPS Authorizations</span></Link>
+                                            </li>
                                             <li className="sidebar-dropdown">
                                                 <Link to="/orderTracking-request">
                                                     <span>Order Tracking Request</span>
                                                 </Link>
                                             </li>
+                                        </ul>
+                                    </div>
+                                    <div className="sidebar-submenu">
+                                        <ul>
+
                                         </ul>
                                     </div>
                                 </li>
