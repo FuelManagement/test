@@ -31,12 +31,41 @@ const recordsData = [
 class ManageGPSTable extends React.Component{
     constructor(props){
         super(props);
-        this.state={};
+        this.state={recordsDataValue :[], randomId:null};
     }
+
+    static getDerivedStateFromProps(nextProps, prevState){
+        console.log("table props 1",nextProps);
+        //console.log("nextProps.randomId",nextProps.dataItem.randomId);
+        //console.log("prevState.randomId",prevState.randomId);
+        if(nextProps.dataItem.randomId != prevState.randomId){
+
+            var currentdate = new Date(); 
+            var datetime = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + "  "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+
+
+            let obj = {customerName:nextProps.dataItem.formData.customername.value,
+                orderid:nextProps.dataItem.formData.orderid.value,
+                status:nextProps.dataItem.formData.action.value,
+                date:datetime 
+                };
+
+            console.log("prev state",prevState);
+            return { recordsDataValue : [...prevState.recordsDataValue,obj], randomId : nextProps.dataItem.randomId}
+        }
+        
+        return null;
+    }
+
     render(){
         return <div className='row form-wrapper react-table-border'>
              <ReactTable
-                                data={recordsData || []}
+                                data={this.state.recordsDataValue || []}
                                 columns={Table_Config.ManageGPSTable.ManageGPSTableRecords.columns()}
                                 {...Table_Config.ManageGPSTable.ManageGPSTableRecords.options}
                             />

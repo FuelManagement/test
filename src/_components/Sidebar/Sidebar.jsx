@@ -207,7 +207,8 @@ class Sidebar extends React.Component {
                                                 <Link to="/order-tracking/manage-gps-auth">
                                                     <span>Manage GPS Authorizations</span></Link>
                                             </li>
-                                            <li className="sidebar-dropdown">
+                                            
+                                             <li>      {/*  className="sidebar-dropdown" */}
                                                 <Link to="/orderTracking-request">
                                                     <span>Order Tracking Request</span>
                                                 </Link>

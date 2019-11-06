@@ -8,9 +8,13 @@ class ManageGPSAuth extends React.Component {
         this.state = this.initialState(null, this.props);
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        console.log("states",this.state);
     }
     onSubmit() {
         this.setState({ showTable: true });
+        let randomVal = Math.random();
+        console.log(randomVal);
+        this.setState({ randomId: randomVal });
     }
     handleChange(event) {
         console.log(event.target.value, event.target.name);
@@ -29,11 +33,14 @@ class ManageGPSAuth extends React.Component {
                 }
             };
         });
+        this.setState
+     console.log("state",this.state)   
     }
     initialState(mode, props) {
         let state = {};
         state = {
             showTable: false,
+            randomId:null,
             formData: {
                 customername: {
                     value: props !== undefined && props.customerName !== undefined ? props.customerName : '',
@@ -191,7 +198,7 @@ class ManageGPSAuth extends React.Component {
                     </div>
                 </div>
                 <div className='react-table-sec'>
-                    {this.state.showTable && <ManageGPSTable />}
+                    {this.state.showTable && <ManageGPSTable dataItem={this.state} />}
                 </div>
 
             </div>
