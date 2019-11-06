@@ -309,7 +309,7 @@ class AddRFQ extends React.Component {
                             </div>
                             <div className="row form-row mb-3">
                                 <div className="col-md-12">
-                                    <ProductList/>
+                                    <ProductList products={[]} productDetailList={this.props.rfq.products.products} />
                                 </div>
                             </div>
                             <div className="row form-row">

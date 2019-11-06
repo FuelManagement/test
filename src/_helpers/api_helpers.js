@@ -65,11 +65,12 @@ export class API_Helpers {
     }
 
     static getAllProducts(){
+        let user = JSON.parse(localStorage.getItem('user'));
         const requestOptions = {
             method: 'GET',
             headers: authHeader()
         };
-        return fetch(config.apiUrl + '/product/getProductList?userID=admin@gmail.com', requestOptions)
+        return fetch(config.apiUrl + '/product/getProductList?userID=admin@geonet.com', requestOptions)
         .then(response => {
             if (response.ok) {
                 try{
