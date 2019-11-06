@@ -77,7 +77,7 @@ function updateRfq(formData){
     console.log('3. I am in update')
     let user = JSON.parse(localStorage.getItem('user'));
     formData.userID = user.registerId;
-    formData.role = user.role;
+    formData.role = user.role;git 
     formData.status = 'Updated';
     formData.fromUserID=user.registerId;
     formData.toUserId = formData.participantId;

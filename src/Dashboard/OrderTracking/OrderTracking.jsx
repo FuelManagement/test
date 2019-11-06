@@ -61,19 +61,27 @@ const recordsData = [
     {
         "orderid": 20133,
         "productName": "Oil",
-        "customerName": "CFEnergia power",
-        "status": "",
+        "supplierName": "Energroup",
+        "status": "Approved",
         "trackRequest": ""
 
     },
     {
         "orderid": 20134,
         "productName": "Gas",
-        "customerName": "CFEnergia power",
+        "supplierName": "Pemex",
+        "status": "Request Submitted",
+        "trackRequest": ""
+    },
+    {
+        "orderid": 20135,
+        "productName": "Gas",
+        "supplierName": "Pemex",
         "status": "",
         "trackRequest": ""
 
     }
+
 ]
 class OrderTracking extends React.Component {
     constructor(props) {
@@ -99,8 +107,9 @@ class OrderTracking extends React.Component {
         this.setState({ showModel: false });
         history.push('/order-progress');
     }
-    trackBtnClk(event, showModel = true) {
-        this.setState({ showModel: true });
+    trackBtnClk(event,data,status, showModel = true) {
+        this.setState({ showModel: true ,OrderStatus:status});
+        
     }
     tabChange(event, newValue) {
         this.setState({ tabValue: newValue })
