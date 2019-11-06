@@ -9,6 +9,7 @@ import { LineItem } from '../../_components/LineItem';
 import { rfqActions } from '../../_actions';
 library.add(faAngleLeft, faPlus); 
 import {Common_JsonData} from '../../_helpers';
+import ProductList from '../../_components/MapRFQProduct/productList';
 
 class AddRFQ extends React.Component {
     constructor(props) {
@@ -308,10 +309,7 @@ class AddRFQ extends React.Component {
                             </div>
                             <div className="row form-row mb-3">
                                 <div className="col-md-12">
-                                    <LineItem 
-                                        products={rfq.products} 
-                                        updateLineItems={this.updateLineItems} 
-                                        selectedProducts={this.state.selectedRfq && this.state.selectedRfq.products}/>
+                                    <ProductList/>
                                 </div>
                             </div>
                             <div className="row form-row">
