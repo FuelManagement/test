@@ -39,6 +39,7 @@ class OrderProgressBar extends React.Component {
                                         <span className="tax-no">{txno}</span></div>
                                     <div className="col-md-4">ETA:{eta}</div>
 
+
                                 </ExpansionPanelSummary>
                                 <ExpansionPanelDetails>
                                     {/* <Typography color="textSecondary"> */}
