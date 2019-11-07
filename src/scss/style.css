@@ -729,9 +729,9 @@ header .pad-50{
   color: #fff !important;
 }
 .manage-gps-auth .manage-gps-title{
-  font-weight: bold;
-  color: #545252;
-  font-size: 20px;
+  /* font-weight: bold;
+  color: #545252; */
+  font-size: 2rem;
 }
 .manage-gps-auth .drop-down-sec{
   border: 1px solid #dcdada;
@@ -754,4 +754,9 @@ header .pad-50{
   padding:10px;
   border-radius: 5px;
 
+}
+
+.manage-gps-auth .manage-submit-button{
+  margin: auto;
+  top: -7px;
 }
