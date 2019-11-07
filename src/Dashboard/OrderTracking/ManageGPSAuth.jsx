@@ -8,14 +8,58 @@ class ManageGPSAuth extends React.Component {
         this.state = this.initialState(null, this.props);
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        console.log("states",this.state);
+        this.getDataAddedCallback  = this.getDataAddedCallback.bind(this);
+        this.getClickedData = this.getClickedData.bind(this);
+        console.log("states", this.state);
     }
     onSubmit() {
-        this.setState({ showTable: true });
-        let randomVal = Math.random();
-        console.log(randomVal);
-        this.setState({ randomId: randomVal });
+        
+        let validate = false;
+        if(this.state.formData.customername.value == ""||undefined){
+            this.setState({customerError:true})
+            validate = true;
+        }
+        if(this.state.formData.orderid.value == ""||undefined){
+            this.setState({orderError:true})
+            validate = true;
+        }
+        if(this.state.formData.action.value == ""||undefined){
+            this.setState({actionError:true})
+            validate = true;
+        }
+
+        if(!validate){
+            this.setState({ showTable: true });
+            let randomVal = Math.random();
+            console.log(randomVal);
+            this.setState({ randomId: randomVal });
+            
+        }
+
     }
+
+    getDataAddedCallback(msg){
+        console.log("added data status",msg)
+        const { formData } = { ...this.state };
+        const currentState = formData;
+        currentState.customername.value = "";
+        currentState.orderid.value = "";
+        currentState.action.value = "";
+
+        this.setState({ formData: currentState },() => console.log("callback",this.state));
+    }
+
+    getClickedData(data){
+            console.log("clicked item",data);
+            const { formData } = { ...this.state };
+            const currentState = formData;
+            currentState.customername.value = data.customerName;
+            currentState.orderid.value = data.orderid;
+            currentState.action.value = data.status;
+    
+            this.setState({ formData: currentState },() => console.log("callback",this.state));
+    }
+
     handleChange(event) {
         console.log(event.target.value, event.target.name);
         let key = event.target.name,
@@ -33,14 +77,26 @@ class ManageGPSAuth extends React.Component {
                 }
             };
         });
-        this.setState
-     console.log("state",this.state)   
+        if(event.target.name == 'customername'){
+            this.setState({customerError:false})
+        }
+        if(event.target.name == 'orderid'){
+            this.setState({orderError:false})
+        }
+        if(event.target.name == 'action'){
+            this.setState({actionError:false})
+        }
+        
+        console.log("state", this.state)
     }
     initialState(mode, props) {
         let state = {};
         state = {
             showTable: false,
-            randomId:null,
+            randomId: null,
+            customerError:false,
+            orderError:false,
+            actionError:false,
             formData: {
                 customername: {
                     value: props !== undefined && props.customerName !== undefined ? props.customerName : '',
@@ -86,9 +142,10 @@ class ManageGPSAuth extends React.Component {
     render() {
         const Orders = [
             {
-                value: "",
-                label: "None"
+                value: '',
+                label: 'None'
             },
+            
             {
                 value: 'All',
                 label: 'All'
@@ -105,8 +162,8 @@ class ManageGPSAuth extends React.Component {
             
         const CustomerNames = [
             {
-                value: "",
-                label: "None"
+                value: '',
+                label: 'None'
             },
             {
                 value: 'CFEnergia power',
@@ -117,7 +174,11 @@ class ManageGPSAuth extends React.Component {
                 label: 'BP Gas station'
             }];
         const Actions = [
-        
+            {
+                value: '',
+                label: 'None'
+            },
+
             {
                 value: 'Approve',
                 label: 'Approve'
@@ -128,7 +189,7 @@ class ManageGPSAuth extends React.Component {
             }];
         return <div>
             <div className='col-lg-9 add-rfq-main progress-main manage-gps-auth'>
-                <p className='manage-gps-title'>Manage GPS Authorizations</p>
+                <h2 className='manage-gps-title'>Manage GPS Authorizations</h2>
                 <div className="row drop-down-sec">
                     <div className="col-12 col-md-12 form-wrapper">
                         <div className="row form-row">
@@ -144,6 +205,7 @@ class ManageGPSAuth extends React.Component {
                                     className="form-control"
                                     autoComplete="off"
                                     margin="dense"
+                                    error={this.state.customerError}
                                 >
                                     {CustomerNames.map(option => (
                                         <MenuItem key={option.value} value={option.value}>
@@ -161,13 +223,13 @@ class ManageGPSAuth extends React.Component {
                                     label="Order Id"
                                     value={this.state.formData.orderid.value}
                                     onChange={this.handleChange}
-                                    
                                     name="orderid"
                                     variant="outlined"
                                     className="form-control"
                                     autoComplete="off"
                                     margin="dense"
                                     disabled={false}
+                                    error={this.state.orderError}
                                 >
                                     {Orders.map(option => (
                                         <MenuItem key={option.value} value={option.value}>
@@ -187,15 +249,19 @@ class ManageGPSAuth extends React.Component {
                                     className="form-control"
                                     onChange={this.handleChange}
                                     margin="dense"
+                                    error={this.state.actionError}
                                 >
-                                    
+
                                     {Actions.map(option => (
-                                                <MenuItem key={option.value} value={option.value}>
-                                                    {option.label}
-                                                </MenuItem>
-                                            ))}
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
                                 </TextField>
                             </div>
+                            {/* <div className="col-md-3 manage-submit-button">
+                                <button type='button' onClick={this.onSubmit} className='btn btn-success'>Submit</button>
+                            </div> */}
                         </div>
 
                     </div>
@@ -204,7 +270,7 @@ class ManageGPSAuth extends React.Component {
                     </div>
                 </div>
                 <div className='react-table-sec'>
-                    {this.state.showTable && <ManageGPSTable dataItem={this.state} />}
+                    {this.state.showTable && <ManageGPSTable dataItem={this.state} getAddedCallback = {this.getDataAddedCallback} getClickedItem = {this.getClickedData}/>}
                 </div>
 
             </div>

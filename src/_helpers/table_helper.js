@@ -15,7 +15,7 @@ let globalOptions = {
 	showPagination: true,
 	showPaginationTop: false,
 	showPaginationBottom: true,
-	showPageSizeOptions: true,
+	showPageSizeOptions: false,
 	pageSizeOptions: [5, 10, 20, 25, 50, 100],
 	defaultPageSize: 5,
 	className: "table table-sm fixed_header",
@@ -914,21 +914,25 @@ let Table_Config = {
 			options: { ...globalOptions },
 			columns: (props) => [{
 				Header: 'Order #',
+				headerClassName:'react-table-header-style',
 				accessor: 'orderid',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.orderid}>{row.original.orderid}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.orderid}>{row.original.orderid}</span>
 			}, {
 				Header: 'Product Name',
+				headerClassName:'react-table-header-style',
 				accessor: 'productName',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.productName}>{row.original.productName}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.productName}>{row.original.productName}</span>
 			}, {
 				Header: 'Supplier Name',
+				headerClassName:'react-table-header-style',
 				accessor: 'supplierName',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center'}} 				
+				Cell: row => <span style={{ display: 'block', textAlign: 'left'}} 				
 			    title={row.original.supplierName}>{row.original.supplierName}</span>
 			}, {
 				Header: 'Status',
+				headerClassName:'react-table-header-style',
 				accessor: 'status',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left',
 				color:row.original.status === "Approved" ? 'Green':(row.original.status === "Rejected"?'red':'blue')  }} title={row.original.status}>{row.original.status}</span>
 			}, {
 				Header: 'Track Request',
@@ -1023,7 +1027,8 @@ let Table_Config = {
 			 {
 				Header: 'Status',
 				accessor: 'status',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center',fontWeight:'bold',color:'#00ce1b' }} title={row.original.status}>{row.original.status}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'center',fontWeight:'bold',color:
+				row.original.status === "Approve" ?'#00ce1b': 'red'  }} title={row.original.status}>{row.original.status}</span>
 			}, {
 				Header: 'Date',
 				accessor: 'date',
