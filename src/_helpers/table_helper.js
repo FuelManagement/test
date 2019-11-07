@@ -921,13 +921,15 @@ let Table_Config = {
 				accessor: 'productName',
 				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.productName}>{row.original.productName}</span>
 			}, {
-				Header: 'Customer Name',
-				accessor: 'customerName',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.customerName}>{row.original.customerName}</span>
+				Header: 'Supplier Name',
+				accessor: 'supplierName',
+				Cell: row => <span style={{ display: 'block', textAlign: 'center'}} 				
+			    title={row.original.supplierName}>{row.original.supplierName}</span>
 			}, {
 				Header: 'Status',
 				accessor: 'status',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.status}>{row.original.status}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'center',
+				color:row.original.status === "Approved" ? 'Green':(row.original.status === "Rejected"?'red':'blue')  }} title={row.original.status}>{row.original.status}</span>
 			}, {
 				Header: 'Track Request',
 				accessor: 'trackRequest',
@@ -935,8 +937,9 @@ let Table_Config = {
 					<button
 						className="btn btn-outline-info btn-sm btn-track"
 						style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
-						onClick={e => { props.trackBtnClk(e, row.original, "track") }}>
-						Track
+						disabled={row.original.status==='Approved'?false:(row.original.status===''?false:true)}
+						onClick={e => { props.trackBtnClk(e, row.original,row.original.status==='Approved'? "track":"otp-disabled") }}>
+						{row.original.status===''?'Submit':'Track'}
 						</button>
 
 				</div>
@@ -953,7 +956,7 @@ let Table_Config = {
 			}, {
 				Header: 'Requested By',
 				accessor: 'RequestedBy',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.productName}>{row.original.RequestedBy}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.productName}>{row.original.RequestedBy.replace(/([A-Z])/g, ' $1').trim()}</span>
 			}, {
 				Header: 'Owner',
 				accessor: 'Owner',
@@ -961,7 +964,9 @@ let Table_Config = {
 			}, {
 				Header: 'Status',
 				accessor: 'Status',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.Status}>{row.original.Status}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'center', fontWeight: 'bold', 
+				color:row.original.Status === "Approved" || row.original.Status === "AutoApproved"?'Green':(row.original.Status === "Rejected"?'red':'orange') }}
+				 title={row.original.Status.replace(/([A-Z])/g, ' $1').trim()}>{row.original.Status.replace(/([A-Z])/g, ' $1').trim()}</span>
 			}, {
 				Header: 'Request Timings',
 				accessor: 'RequestTimings',
@@ -978,18 +983,19 @@ let Table_Config = {
 							style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}>
 								Approve
 						</button>  )
-						: row.original.Status === "Rejected" ?
-						(<button
-							className="btn OTR-reject-btn"
-							disabled={true}
-							style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}>
-								Reject
-						</button>  )
+						// : row.original.Status === "Rejected" ?
+						// (<button
+						// 	className="btn OTR-reject-btn"
+						// 	disabled={true}
+						// 	style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}>
+						// 		Reject
+						// </button>  )
 						: (
 								<FormControl className="OTR-actions" >
 								<Select
 									id="demo-simple-select"
-									value={ row.original.Approvereject }
+									value={ row.original.Status==='Rejected'?'Reject':
+									(row.original.Status==='Approved'?'Approve':row.original.Approvereject) }
 									onChange={(e)=>props.approveSubmit(e, row.original)}
 								>
 									<MenuItem value="Approve">Approve</MenuItem>
@@ -1025,6 +1031,40 @@ let Table_Config = {
 			}]
 		}
 	},
+	ProgressBar: {
+		ProgressBarRecords: {
+			options: { ...globalOptions },
+			columns: (props) => [{
+				Header: 'Device Id',
+				accessor: 'Device',
+			}, {
+				Header: 'TxnCode',
+				accessor: 'TxnCode',
+			}, {
+				Header: 'TxnId',
+				accessor: 'TxnId',
+			}, {
+				Header: 'Txn Hash',
+				accessor: 'TxnHash',
+			}, {
+				Header: 'Channel Id',
+				accessor: 'ChannelId',
+			}, {
+				Header: 'Block',
+				accessor: 'Block',
+			}, {
+				Header: 'Age',
+				accessor: 'Age',
+			}, {
+				Header: 'From',
+				accessor: 'From',
+			}, {
+				Header: 'To',
+				accessor: 'To',
+			}]
+		}
+	},
+
 }
 
 module.exports = { Table_Config };
