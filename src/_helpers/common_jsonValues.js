@@ -99,35 +99,71 @@ let Common_JsonData = {
     value: "Gallon (US)",
     label: "Gallon (US)"
   },],
-  vendorAcctGrp : [
+  vendorAcctGrp: [
     {
-        value: "",
-        label: "None"
-    },
-    {
-        value: "10",
-        label: "Account Group1"
-    },
-    {
-        value: "20",
-        label: "Account Group2"
-    }
-],
-bankPartnerType : [
-  {
       value: "",
       label: "None"
-  },
-  {
+    },
+    {
+      value: "10",
+      label: "Account Group1"
+    },
+    {
+      value: "20",
+      label: "Account Group2"
+    }
+  ],
+  bankPartnerType: [
+    {
+      value: "",
+      label: "None"
+    },
+    {
       value: "IMF",
       label: "IMF"
-  },
-  {
+    },
+    {
       value: "WB",
       label: "WB"
-  },
- 
-], 
+    },
+
+  ],
+  orederTrackingRequestDetails: {
+    data: [
+      {
+        orderName: "CFEnergia power",
+        RequestedBy: "James Robert",
+        Owner: "yes",
+        Status: "AutoApproved",
+        RequestTimings: "08/20/2019 10:00 AM",
+        Approvereject: "Approve"
+      },
+      {
+        orderName: "BP Gas station",
+        RequestedBy: "JackJacob",
+        Owner: "No",
+        Status: "Rejected",
+        RequestTimings: "08/20/2019 10:10AM",
+        Approvereject: ""
+      },
+      {
+        orderName: "Pemex Gas station",
+        RequestedBy: "Thomas Noah",
+        Owner: "No",
+        Status: "Approved",
+        RequestTimings: "08/20/2019 11:00AM",
+        Approvereject: "Approve"
+      },
+      {
+        orderName: "CFEnergia power",
+        RequestedBy: "Michael William",
+        Owner: "No",
+        Status: "NewRequest",
+        RequestTimings: "08/20/2019 12:00 PM",
+        Approvereject: "Reject"
+      }
+    ]
+  }
 }
 
 module.exports = { Common_JsonData };
