@@ -141,6 +141,10 @@ class ManageGPSAuth extends React.Component {
 
     render() {
         const Orders = [
+            {
+                value: '',
+                label: 'None'
+            },
             
             {
                 value: 'All',
@@ -157,7 +161,10 @@ class ManageGPSAuth extends React.Component {
         ];
             
         const CustomerNames = [
-            
+            {
+                value: '',
+                label: 'None'
+            },
             {
                 value: 'CFEnergia power',
                 label: 'CFEnergia power'
@@ -167,6 +174,10 @@ class ManageGPSAuth extends React.Component {
                 label: 'BP Gas station'
             }];
         const Actions = [
+            {
+                value: '',
+                label: 'None'
+            },
 
             {
                 value: 'Approve',

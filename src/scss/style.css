@@ -323,7 +323,7 @@ header .pad-50{
 
 /* React table css   */
 .rt-resizable-header-content{
-  font-weight: bold;
+  font-weight: normal;
 } 
 
 /* Onboard profile add form Styles */
@@ -759,4 +759,8 @@ header .pad-50{
 .manage-gps-auth .manage-submit-button{
   margin: auto;
   top: -7px;
+}
+
+.react-table-header-style{
+  text-align:left;
 }
