@@ -1,4 +1,4 @@
-import { orderTrackingConst } from '../_constants';
+import { orderTrackingRequestConst } from '../_constants';
 
 export function orderTrackingRequest(state = {}, action) {
     switch (action.type) {

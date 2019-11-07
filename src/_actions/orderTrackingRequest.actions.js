@@ -1,6 +1,6 @@
-import { orderTrackingConst } from '../_constants';
-import { OrderTrackingService } from '../_services';
-import { alertActions } from './';
+import { orderTrackingRequest } from '../_constants';
+import { OrderTrackingRequestService } from '../_services';
+import { alertActions } from '.';
 export const orderTrackingReqActions = {
     getOrderTrackingReqDetails
 }
