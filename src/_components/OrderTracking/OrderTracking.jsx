@@ -18,7 +18,7 @@ class OrderTracking extends React.Component{
 
         if(AppConfiguration.Setting().orderTrackingLocalData){
             
-        axios.get(`http://www.mocky.io/v2/5dc0d7d233000099001a4d3d`)
+        axios.get(`http://www.mocky.io/v2/5dc0ed7f3300002f311a4d71`)
           .then(res => {
             const orders = res.data;
             this.setState({ orders });

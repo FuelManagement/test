@@ -81,6 +81,7 @@ class OrderProgressBar extends React.Component {
                                         <span className="tax-no">{txno}</span></div>
                                     <div className="col-md-4">ETA:{eta}</div>
 
+
                                 </ExpansionPanelSummary>
                                 <ExpansionPanelDetails>
                                     {/* <Typography color="textSecondary"> */}
@@ -161,4 +162,6 @@ let Table = (props) => (
         columns={Table_Config.ProgressBar.ProgressBarRecords.columns()}
         {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
     />
+
+    
 )
