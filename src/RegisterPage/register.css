@@ -102,3 +102,13 @@ header.headerDiv{
     border-bottom: solid 2px #333;
     background: #ffffff;
 }
+
+
+.property-tab{
+  width:30%;
+  cursor: pointer;
+}
+
+.tab-container{
+  display: flex;
+}
