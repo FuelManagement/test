@@ -2,43 +2,44 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Locations } from '../../_components/Location/Location';
 import { OrderProgressBar } from './ProgressBar';
-import { orderTrackingReqActions } from '../../_actions';
+import { orderTrackingActions } from '../../_actions';
 
 class OrderStatusWithMap extends React.Component {
     constructor(props) {
         super(props);
     }
     componentDidMount(){
-        this.props.dispatch(orderTrackingReqActions.getOrderTrackingProgress());
+        this.props.dispatch(orderTrackingActions.getOrderTrackingProgress());
     }
 
     UNSAFE_componentWillReceiveProps() {
-        if (this.props.orderTrackingReqDetails.orders && this.props.orderTrackingReqDetails.orders.length) {
+        if (this.props.orderTrackingDetails.orders && this.props.orderTrackingDetails.orders.length) {
             this.setState({orders});
         }
     }
 
     render() {
-        const orders = [
-            {
-                "orderno": 201333,
-                "txno": "1756422245648721",
-                "eta": "08/20/219 04:00 PM",
-                "orderPercentage":45
-            },
-            {
-                "orderno": 201334,
-                "txno": "1756422245648722",
-                "eta": "12/20/219 09:00 AM",
-                "orderPercentage":78
-            },
-            {
-                "orderno": 201335,
-                "txno": "1756422245648723",
-                "eta": "09/20/219 11:00 AM",
-                "orderPercentage":65
+               
+        // const orders = [
+        //     {
+        //         "orderno": 201333,
+        //         "txno": "1756422245648721",
+        //         "eta": "08/20/219 04:00 PM",
+        //         "orderPercentage":45
+        //     },
+        //     {
+        //         "orderno": 201334,
+        //         "txno": "1756422245648722",
+        //         "eta": "12/20/219 09:00 AM",
+        //         "orderPercentage":78
+        //     },
+        //     {
+        //         "orderno": 201335,
+        //         "txno": "1756422245648723",
+        //         "eta": "09/20/219 11:00 AM",
+        //         "orderPercentage":65
 
-            }]
+        //     }]
         return <div>
             <div className='col-lg-9 add-rfq-main progress-main'>
                 <div className="row order-track-status-map">
@@ -55,7 +56,8 @@ class OrderStatusWithMap extends React.Component {
                 </div>
 
             </div>
-            {orders.map((order, idx) => (
+            
+            {OrderStatusWithMap.map((order, idx) => (
                 <React.Fragment key={idx}>
                     <br />
                     <OrderProgressBar order={order} />
@@ -66,8 +68,8 @@ class OrderStatusWithMap extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { orderTrackingReqDetails={} } = state;
-    return { orderTrackingReqDetails };
+    const { OrderStatusWithMap={} } = state;
+    return { OrderStatusWithMap };
 }
 
 const connectedHomePage = connect(mapStateToProps)(OrderStatusWithMap);

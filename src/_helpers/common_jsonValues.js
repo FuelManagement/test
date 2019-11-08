@@ -170,19 +170,19 @@ let Common_JsonData = {
           "orderno": 201333,
           "txno": "1756422245648721",
           "eta": "08/20/219 04:00 PM",
-          "orderPercentage":45
+          "orderPercentage":25
       },
       {
           "orderno": 201334,
           "txno": "1756422245648722",
           "eta": "12/20/219 09:00 AM",
-          "orderPercentage":78
+          "orderPercentage":50
       },
       {
-          "orderno": 201335,
+          "orderno": 201339,
           "txno": "1756422245648723",
           "eta": "09/20/219 11:00 AM",
-          "orderPercentage":65
+          "orderPercentage":95
 
       }]
   }

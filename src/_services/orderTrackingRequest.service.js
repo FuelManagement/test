@@ -2,7 +2,8 @@ import { authHeader, config, Utils,Common_JsonData } from '../_helpers';
 const { handleError, handleResponse } = Utils;
 import $ from 'jquery';
 const OrderReqDetails=Common_JsonData.orederTrackingRequestDetails;
-export const OrderTrackingService= {
+
+export const OrderTrackingRequestService= {
     getOTRDetailsBysupplier
 }
 function getOTRDetailsBysupplier() {

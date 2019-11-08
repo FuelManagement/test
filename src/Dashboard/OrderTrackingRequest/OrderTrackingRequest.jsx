@@ -11,7 +11,7 @@ import $ from 'jquery';
 window.jQuery = $; // hack
 window.$ = $;      // hack 
 import 'bootstrap';
-import { orderTrackingReqActions } from '../../_actions';
+import { orderTrackingRequestActions } from '../../_actions';
 
 import {SendAuthentication} from './SendAuthentication';
  
@@ -41,7 +41,7 @@ class OrderTrackingRequest extends React.Component {
         this.setState({isApprove:false, confirmDialog:false, selectedRow:{}});
     }
     componentDidMount() {
-        this.props.dispatch(orderTrackingReqActions.getOrderTrackingReqDetails());
+        this.props.dispatch(orderTrackingRequestActions.getOTRDetailsBysupplier());
        
     }
    render() {
@@ -54,7 +54,7 @@ class OrderTrackingRequest extends React.Component {
                             <div className="table-data">
                                 <div className="clearDiv"></div>
                                 <ReactTable
-                                    data={this.props.orderTrackingRequest.orderTrackingReqDetails || []}
+                                    data={this.props.orderTrackingRequest.orderTrackingDetails || []}
                                     columns={Table_Config.OrderTrackingRequestRecords.OrderTrackingRequestRecord.columns({ approveSubmit: this.approveSubmit.bind(this) })}
                                     {...Table_Config.OrderTrackingRequestRecords.OrderTrackingRequestRecord.options}
                                 />
