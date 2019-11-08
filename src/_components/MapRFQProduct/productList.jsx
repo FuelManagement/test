@@ -16,7 +16,7 @@ export default class ProductList extends React.Component {
         super(props);
         this.state = {
                         products:this.props.products!==undefined?this.props.products:[],
-                        showAddProduct:true,
+                        showAddProduct:true, showEditProduct:true,
                         selectedProduct:{}
                   };
        this.handleAddProduct=this.handleAddProduct.bind(this);
@@ -54,28 +54,50 @@ export default class ProductList extends React.Component {
     };
     this.setState(prevState => ({
         products: [...prevState.products, product]
-      }),()=>{ this.setState({showAddProduct:false})});
+      }),()=>{ this.setState({showAddProduct:false,showEditProduct:false})});
    
     }
-    handleEditProduct(){
-        let product=this.state.products.find(f=>f.rowAction.add===true || f.rowAction.edit===true);
-        this.setState({selectedProduct:product});
+    handleEditProduct(item){
+        this.setState({selectedProduct:JSON.parse(JSON.stringify(item))});
+        this.setState({showAddProduct:false,showEditProduct:false});
+        var array = [...this.state.products]; // make a separate copy of the array
+        var index = array.indexOf(item)
+        if (index !== -1) {
+          array.splice(index, 1);
+        }
+        item.rowAction.edit=true;
+        array=[...array,item];
+        this.setState({products:array})
     }
-    handleDeleteProduct(){
+    handleDeleteProduct(item){
+        var r = confirm("Are you sure, you want to remove this product?");
+if (r == true) {
+    var array = [...this.state.products]; // make a separate copy of the array
+    var index = array.indexOf(item)
+    if (index !== -1) {
+      array.splice(index, 1);
+    }
+    
+    array=[...array];
+    this.setState({products:array});
+    this.props.productCallback(array);
+} else {
+ 
+}
         
     }
-    handleChange(event){
+    handleChange(event,product){
         
-        let product=this.state.products.find(f=>f.rowAction.add===true || f.rowAction.edit===true);
         
         var array = [...this.state.products]; // make a separate copy of the array
         var index = array.indexOf(product)
         if (index !== -1) {
           array.splice(index, 1);
+          
         }
         let key=event.target.name,value=event.target.value;
         if(key==='productName'){
-        let productDetail=(this.props.productDetailList ||[]).find(f=>f.productName=event.target.value);
+        let productDetail=([...this.props.productDetailList] ||[]).find(f=>f.productName===event.target.value);
         product.productCategory=productDetail.productCategory;
         product.productName=productDetail.productName;
         product.subCategory=productDetail.subCategory;
@@ -86,32 +108,31 @@ export default class ProductList extends React.Component {
         array=[...array,product];
         this.setState({products:array})
     }
-    handleSave(){
+    handleSave(item){
         
-        let product=this.state.products.find(f=>f.rowAction.add===true || f.rowAction.edit===true);
         var array = [...this.state.products]; // make a separate copy of the array
-        var index = array.indexOf(product)
+        var index = array.indexOf(item)
         if (index !== -1) {
           array.splice(index, 1);
         }
-        product.rowAction.add=false;
-        product.rowAction.edit=false;
-        product.rowAction.delete=false;
-        array=[...array,product];
-        this.setState({products:array,showAddProduct:true,selectedProduct:{}})
+        item.rowAction.add=false;
+        item.rowAction.edit=false;
+        item.rowAction.delete=false;
+        array=[...array,item];
+        this.setState({products:array,showAddProduct:true,showEditProduct:true,selectedProduct:{}})
+        this.props.productCallback(array);
     }
-    handleReset(){
-        
-        let product=this.state.products.find(f=>f.rowAction.add===true || f.rowAction.edit===true);
+    handleReset(item){
+    
         var array = [...this.state.products]; // make a separate copy of the array
-        var index = array.indexOf(product)
+        var index = array.indexOf(item)
         if (index !== -1) {
           array.splice(index, 1);
         }
-        if(product.rowAction.edit){
+        if(item.rowAction.edit){
         array=[...array,this.state.selectedProduct];
         }
-        this.setState({products:array,showAddProduct:true,selectedProduct:{}})
+        this.setState({products:array,showAddProduct:true,showEditProduct:true,selectedProduct:{}})
     }
     attachActions(product){
         if(product.rowAction===undefined || product.rowAction===null){
@@ -149,12 +170,12 @@ export default class ProductList extends React.Component {
                             label='Product Name'
                             value={row.original.productName}
                             className="form-control"
-                            onChange={(e)=>this.handleChange(e)}
+                            onChange={(e)=>this.handleChange(e,row.original)}
                             margin="dense"
                            
                         >
-                            {(this.props.productDetailList || []).map(option => (
-                                    <MenuItem key={option.productName} value={option.productName}>
+                            {this.props.productDetailList!==undefined && this.props.productDetailList.length>0 && this.props.productDetailList.map(option => (
+                                    <MenuItem key={option.productID} value={option.productName}>
                                         {option.productName}
                                     </MenuItem>
                                 ))}
@@ -185,7 +206,7 @@ export default class ProductList extends React.Component {
                             label='Quantity'
                             value={row.original.quantity}
                             className="form-control"
-                            onChange={(e)=>this.handleChange(e)}
+                            onChange={(e)=>this.handleChange(e,row.original)}
                             margin="dense"
                            
                         >
@@ -205,7 +226,7 @@ export default class ProductList extends React.Component {
                             label='Price'
                             value={row.original.price}
                             className="form-control"
-                            onChange={(e)=>this.handleChange(e)}
+                            onChange={(e)=>this.handleChange(e,row.original)}
                             margin="dense"
                            
                         >
@@ -220,10 +241,10 @@ export default class ProductList extends React.Component {
                         Header: 'Action',
                         accessor: 'productName',
                         Cell: row => (row.original.rowAction.add || row.original.rowAction.edit || row.original.rowAction.delete?
-                            <span><span onClick={()=>this.handleSave()}><FontAwesomeIcon icon="check" /></span>
-                            <span onClick={()=>this.handleReset()}><FontAwesomeIcon icon="times" /></span></span> 
-                            :<span> <span><FontAwesomeIcon icon="edit" /></span>
-                            <span><FontAwesomeIcon icon="trash" /></span></span>
+                            <span><button onClick={()=>this.handleSave(row.original)}><FontAwesomeIcon icon="check" /></button>
+                            <button onClick={()=>this.handleReset(row.original)}><FontAwesomeIcon icon="times" /></button></span> 
+                            :<span> <button disabled={!this.state.showEditProduct} onClick={()=>this.handleEditProduct(row.original)}><FontAwesomeIcon  icon="edit" /></button>
+                            <button disabled={!this.state.showEditProduct}  onClick={()=>this.handleDeleteProduct(row.original)}><FontAwesomeIcon  icon="trash" /></button></span>
                             )
                     }]}
                     {...Table_Config.Product.products.options}
