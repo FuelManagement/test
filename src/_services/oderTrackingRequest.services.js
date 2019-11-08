@@ -1,12 +1,12 @@
 import { authHeader, config, Utils,Common_JsonData } from '../_helpers';
 const { handleError, handleResponse } = Utils;
 import $ from 'jquery';
+const OrderReqDetails=Common_JsonData.orederTrackingRequestDetails;
 export const OrderTrackingService= {
-    getOTRDetailsBysupplier,
-    getOrderTrackingProgress
+    getOTRDetailsBysupplier
 }
 function getOTRDetailsBysupplier() {
-    const OrderReqDetails = Common_JsonData.orederTrackingRequestDetails;
+    console.log('req',OrderReqDetails.data);
     return OrderReqDetails;
     // let user = JSON.parse(localStorage.getItem('user'));
     // const requestOptions = {
@@ -14,9 +14,4 @@ function getOTRDetailsBysupplier() {
     //     headers: authHeader()
     // };
     //return data;//fetch(config.apiUrl + '/ordertracking/getOTRDetailsBysupplier', requestOptions).then(handleResponse)
-}
-
-function getOrderTrackingProgress(){
-    return Promise.resolve(Common_JsonData.orderTrackingDetails);
-    //ToDo: Add API to fetch order tracking details
 }

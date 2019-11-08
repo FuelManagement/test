@@ -291,8 +291,9 @@ header .pad-50{
   font-size: 17px !important;
 }
 .rt-thead{
-  background:#00ce1b;
+  background:#29AD01;
   color: #fff;
+
 }
 .filepond--root .filepond--drop-label {
   min-height: 3.25em;
@@ -763,4 +764,11 @@ header .pad-50{
 
 .react-table-header-style{
   text-align:left;
+   padding: 5px 12px !important;
+}
+
+.react-table-row-content-align-left{
+   display: block !important;
+   text-align: left !important;
+   padding: 5px 12px !important;
 }

@@ -1,14 +1,25 @@
-
+import React from 'react';
+import { connect } from 'react-redux';
 import { Locations } from '../../_components/Location/Location';
 import { OrderProgressBar } from './ProgressBar';
-import React from 'react';
+import { orderTrackingReqActions } from '../../_actions';
 
 class OrderStatusWithMap extends React.Component {
     constructor(props) {
         super(props);
     }
+    componentDidMount(){
+        this.props.dispatch(orderTrackingReqActions.getOrderTrackingProgress());
+    }
+
+    UNSAFE_componentWillReceiveProps() {
+        if (this.props.orderTrackingReqDetails.orders && this.props.orderTrackingReqDetails.orders.length) {
+            this.setState({orders});
+        }
+    }
+
     render() {
-        const order = [
+        const orders = [
             {
                 "orderno": 201333,
                 "txno": "1756422245648721",
@@ -44,13 +55,20 @@ class OrderStatusWithMap extends React.Component {
                 </div>
 
             </div>
-            <OrderProgressBar order={order[0]} /><br />
-            <OrderProgressBar order={order[1]}/><br />
-            <OrderProgressBar order={order[2]}/>
-
+            {orders.map((order, idx) => (
+                <React.Fragment key={idx}>
+                    <br />
+                    <OrderProgressBar order={order} />
+                </React.Fragment>
+            ))}
         </div>
-
-
     }
 }
-export { OrderStatusWithMap };
+
+function mapStateToProps(state) {
+    const { orderTrackingReqDetails={} } = state;
+    return { orderTrackingReqDetails };
+}
+
+const connectedHomePage = connect(mapStateToProps)(OrderStatusWithMap);
+export { connectedHomePage as OrderStatusWithMap };

@@ -163,6 +163,28 @@ let Common_JsonData = {
         Approvereject: "Reject"
       }
     ]
+  },
+  orderTrackingDetails: {
+    data: [
+      {
+          "orderno": 201333,
+          "txno": "1756422245648721",
+          "eta": "08/20/219 04:00 PM",
+          "orderPercentage":45
+      },
+      {
+          "orderno": 201334,
+          "txno": "1756422245648722",
+          "eta": "12/20/219 09:00 AM",
+          "orderPercentage":78
+      },
+      {
+          "orderno": 201335,
+          "txno": "1756422245648723",
+          "eta": "09/20/219 11:00 AM",
+          "orderPercentage":65
+
+      }]
   }
 }
 
