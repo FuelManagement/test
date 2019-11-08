@@ -122,13 +122,15 @@ class Sidebar extends React.Component {
                                     </Link>
                                     <div className="sidebar-submenu">
                                         <ul>
-                                            <li><Link to="/userProfile">Profile Setup for User</Link></li>
+                                        <i className="fa fa-shopping-cart"></i>
+                                            <li><Link to="/userProfile"> User Profile</Link></li>
+                                            <li><Link to="#">SetUp Roles </Link></li>
+                                            <li><Link to="#"> Assign Privilleges</Link></li>
                                         </ul>
                                     </div>
                                 </li>
                                 <li className="sidebar-dropdown">
                                     <Link to="/">
-                                        <i className="fa fa-shopping-cart"></i>
                                         <span>Management</span>
                                     </Link>
                                     <div className="sidebar-submenu">
