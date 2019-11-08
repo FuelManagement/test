@@ -91,10 +91,15 @@ class OrderTracking extends React.Component {
         this.setState({ showModel: false });
         history.push('/order-progress');
     }
+
     trackBtnClk(event,data,status, showModel = true) {
-        this.setState({ showModel: true ,OrderStatus:status});
-        
+        if(data.status === "Approved"){
+            this.setState({ showModel: true ,OrderStatus:status});
+        } else if(data.status === ""){
+            this.props.dispatch(orderTrackingActions.submitTrackRequest(data));
+        }
     }
+
     tabChange(event, newValue) {
         this.setState({ tabValue: newValue })
     };
