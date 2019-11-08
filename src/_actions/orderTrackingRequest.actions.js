@@ -1,9 +1,8 @@
-import {  } from '../_constants';
+import { orderTrackingRequestConst } from '../_constants';
 import { OrderTrackingRequestService } from '../_services';
 import { alertActions } from '.';
 export const orderTrackingRequestActions = {
     getOTRDetailsBysupplier
-   
 }
 
 function getOTRDetailsBysupplier() {
@@ -22,10 +21,8 @@ function getOTRDetailsBysupplier() {
         );
     };
 
-
-
-    function request() { return { type: orderTrackingConst.ORDER_TRACKING_REQ_ONLOAD } }
-    function success(orderTrackingReqDetails) {return { type: orderTrackingConst.ORDER_TRACKING_REQ_ONLOAD_SUCCESS, orderTrackingReqDetails } }
-    function failure(error) { return { type: orderTrackingConst.ORDER_TRACKING_REQ_ONLOAD_ERROR, error } }
+    function request() { return { type: orderTrackingRequestConst.ORDER_TRACKING_REQ_ONLOAD } }
+    function success(orderTrackingReqDetails) {return { type: orderTrackingRequestConst.ORDER_TRACKING_REQ_ONLOAD_SUCCESS, orderTrackingReqDetails } }
+    function failure(error) { return { type: orderTrackingRequestConst.ORDER_TRACKING_REQ_ONLOAD_ERROR, error } }
 }
 

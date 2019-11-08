@@ -165,25 +165,48 @@ let Common_JsonData = {
     ]
   },
   orderTrackingDetails: {
-    data: [
+    list: [
       {
-          "orderno": 201333,
-          "txno": "1756422245648721",
-          "eta": "08/20/219 04:00 PM",
-          "orderPercentage":25
-      },
-      {
-          "orderno": 201334,
-          "txno": "1756422245648722",
-          "eta": "12/20/219 09:00 AM",
-          "orderPercentage":50
-      },
-      {
-          "orderno": 201339,
-          "txno": "1756422245648723",
-          "eta": "09/20/219 11:00 AM",
-          "orderPercentage":95
+        "orderid": 20133,
+        "productName": "Oil",
+        "supplierName": "Energroup",
+        "status": "Approved",
+        "trackRequest": ""
 
+      },
+      {
+        "orderid": 20134,
+        "productName": "Gas",
+        "supplierName": "Pemex",
+        "status": "Request Submitted",
+        "trackRequest": ""
+      },
+      {
+        "orderid": 20135,
+        "productName": "Gas",
+        "supplierName": "Pemex",
+        "status": "",
+        "trackRequest": ""
+      }
+    ],
+    progressData: [
+      {
+        "orderno": 201333,
+        "txno": "1756422245648721",
+        "eta": "08/20/219 04:00 PM",
+        "orderPercentage": 25
+      },
+      {
+        "orderno": 201334,
+        "txno": "1756422245648722",
+        "eta": "12/20/219 09:00 AM",
+        "orderPercentage": 50
+      },
+      {
+        "orderno": 201339,
+        "txno": "1756422245648723",
+        "eta": "09/20/219 11:00 AM",
+        "orderPercentage": 95
       }]
   }
 }

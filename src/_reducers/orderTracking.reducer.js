@@ -1,24 +1,24 @@
 import { orderTrackingConst } from '../_constants';
 
-export function orderTrackingRequest(state = {}, action) {
+export function orderTracking(state = {}, action) {
     switch (action.type) {
-        case orderTrackingConst.ORDER_TRACKING_REQ_ONLOAD:
+        case orderTrackingConst.ORDER_TRACKING_LIST_REQUEST:
         case orderTrackingConst.ORDER_TRACKING_PROGRESSBAR_REQUEST:
             return {
                 ...state,
                 loading: true
             };
-        case orderTrackingConst.ORDER_TRACKING_ONLOAD_ERROR:
+        case orderTrackingConst.ORDER_TRACKING_LIST_ERROR:
         case orderTrackingConst.ORDER_TRACKING_PROGRESSBAR_ERROR:        
             return {
                 ...state,
                 loading: false,
                 error: action.error
             };
-        case orderTrackingConst.ORDER_TRACKING_REQ_ONLOAD_SUCCESS:
+        case orderTrackingConst.ORDER_TRACKING_LIST_SUCCESS:
             return {
                 ...state,
-                orderTrackingDetails: action.orderTrackingDetails.data
+                orderTrackingList: action.data
             }
         case orderTrackingConst.ORDER_TRACKING_PROGRESSBAR_SUCCESS:
             return {
