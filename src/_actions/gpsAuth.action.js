@@ -5,7 +5,8 @@ import { gpsAuthService } from '../_services';
 
 export const gpsAuthActions = {
     getCustomerByCarrierId,
-    otrGpsAuthForCustomer
+    otrGpsAuthForCustomer,
+    getCustomerOrders
 }
 
 function getCustomerByCarrierId() {
@@ -36,5 +37,26 @@ function otrGpsAuthForCustomer() {
     function success(data) { return { type: gpsAuthConstants.GPSAUTHFORCUSTOMERSUCCESS, data } }
     function failure(error) { return { type: gpsAuthConstants.GPSAUTHFORCUSTOMERFAILURE, error } }
 
+}
+
+function getCustomerOrders(data){
+    return dispatch => {
+        dispatch(alertActions.loading());
+        gpsAuthService.getCustomerOrders(data)
+        .then(
+            orders => {
+                dispatch(success(orders));
+                dispatch(alertActions.clearLoading());
+            },
+            error => {
+                dispatch(failure(error))
+                dispatch(alertActions.clearLoading());
+            }
+        );
+    };
+
+    function request() { return { type: gpsAuthConstants.GET_CUSTOMER_ORDERS_REQUEST } }
+    function success(customerOrders) { return { type: gpsAuthConstants.GET_CUSTOMER_ORDERS_SUCCESS, customerOrders } }
+    function failure(error) { return { type: gpsAuthConstants.GET_CUSTOMER_ORDERS_FAILURE, error } }
 }
 

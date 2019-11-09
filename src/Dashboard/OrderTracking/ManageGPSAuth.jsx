@@ -68,13 +68,14 @@ class ManageGPSAuth extends React.Component {
                 }
             };
         });
-        if (event.target.name == 'customername') {
+        if (key == 'customername') {
+            this.props.dispatch(gpsAuthActions.getCustomerOrders(value));
             this.setState({ customerError: false })
         }
-        if (event.target.name == 'orderid') {
+        if (key == 'orderid') {
             this.setState({ orderError: false })
         }
-        if (event.target.name == 'action') {
+        if (key == 'action') {
             this.setState({ actionError: false })
         }
     }
@@ -132,34 +133,13 @@ class ManageGPSAuth extends React.Component {
     componentDidMount(){
         this.props.dispatch(gpsAuthActions.getCustomerByCarrierId());
     }
-    
+
     render() {
-        const Orders = [
-            {
-                value: '',
-                label: 'None'
-            },
-
-            {
-                value: 'All',
-                label: 'All'
-            },
-            {
-                value: '20133',
-                label: '20133'
-            },
-            {
-                value: '20134',
-                label: '20134'
-            }
-        ];
-
         const Actions = [
             {
                 value: '',
                 label: 'None'
             },
-
             {
                 value: 'Approve',
                 label: 'Approve'
@@ -188,13 +168,9 @@ class ManageGPSAuth extends React.Component {
                                     margin="dense"
                                     error={this.state.customerError}
                                 >
-                                    <MenuItem value={false}>
-                                        None
-                                    </MenuItem>
+                                    <MenuItem value={false}>None</MenuItem>
                                     {this.props.gpsAuth.customers && this.props.gpsAuth.customers.map(option => (
-                                        <MenuItem key={option.value} value={option.value}>
-                                            {option.label}
-                                        </MenuItem>
+                                        <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
                                     ))}
                                 </TextField>
                             </div>
@@ -213,11 +189,11 @@ class ManageGPSAuth extends React.Component {
                                     disabled={false}
                                     error={this.state.orderError}
                                 >
-                                    {Orders.map(option => (
-                                        <MenuItem key={option.value} value={option.value}>
-                                            {option.label}
-                                        </MenuItem>
-                                    ))}
+                                    <MenuItem value={false}>None</MenuItem>
+                                    {this.props.gpsAuth.customerOrders?<MenuItem value="All">All</MenuItem>:""}
+                                    {this.props.gpsAuth.customerOrders && this.props.gpsAuth.customerOrders.map(option => 
+                                        {return !option.status?<MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>:""}
+                                    )}
                                 </TextField>
                             </div>
                             <div className="col-md-4  ">
