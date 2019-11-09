@@ -12,10 +12,8 @@ class ManageGPSAuth extends React.Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.getDataAddedCallback = this.getDataAddedCallback.bind(this);
         this.getClickedData = this.getClickedData.bind(this);
-        console.log("states", this.state);
     }
     onSubmit() {
-
         let validate = false;
         if (this.state.formData.customername.value == "" || undefined) {
             this.setState({ customerError: true })
@@ -29,30 +27,23 @@ class ManageGPSAuth extends React.Component {
             this.setState({ actionError: true })
             validate = true;
         }
-
         if (!validate) {
             this.setState({ showTable: true });
             let randomVal = Math.random();
-            console.log(randomVal);
             this.setState({ randomId: randomVal });
-
         }
-
     }
 
     getDataAddedCallback(msg) {
-        console.log("added data status", msg)
         const { formData } = { ...this.state };
         const currentState = formData;
         currentState.customername.value = "";
         currentState.orderid.value = "";
         currentState.action.value = "";
-
         this.setState({ formData: currentState }, () => console.log("callback", this.state));
     }
 
     getClickedData(data) {
-        console.log("clicked item", data);
         const { formData } = { ...this.state };
         const currentState = formData;
         currentState.customername.value = data.customerName;
@@ -63,11 +54,9 @@ class ManageGPSAuth extends React.Component {
     }
 
     handleChange(event) {
-        console.log(event.target.value, event.target.name);
         let key = event.target.name,
             value = event.target.value;
         this.setState(prevState => {
-            console.log(prevState.formData);
             return {
                 formData: {
                     ...prevState.formData,
@@ -88,8 +77,6 @@ class ManageGPSAuth extends React.Component {
         if (event.target.name == 'action') {
             this.setState({ actionError: false })
         }
-
-        console.log("state", this.state)
     }
     initialState(mode, props) {
         let state = {};
@@ -136,7 +123,8 @@ class ManageGPSAuth extends React.Component {
                     visible: true,
                     disable: false
                 }
-            }
+            },
+            customers: []
         }
         return state;
     }
@@ -144,7 +132,7 @@ class ManageGPSAuth extends React.Component {
     componentDidMount(){
         this.props.dispatch(gpsAuthActions.getCustomerByCarrierId());
     }
-
+    
     render() {
         const Orders = [
             {
@@ -166,19 +154,6 @@ class ManageGPSAuth extends React.Component {
             }
         ];
 
-        const CustomerNames = [
-            {
-                value: '',
-                label: 'None'
-            },
-            {
-                value: 'CFEnergia power',
-                label: 'CFEnergia power'
-            },
-            {
-                value: 'BP Gas station',
-                label: 'BP Gas station'
-            }];
         const Actions = [
             {
                 value: '',
@@ -213,7 +188,10 @@ class ManageGPSAuth extends React.Component {
                                     margin="dense"
                                     error={this.state.customerError}
                                 >
-                                    {CustomerNames.map(option => (
+                                    <MenuItem value={false}>
+                                        None
+                                    </MenuItem>
+                                    {this.props.gpsAuth.customers && this.props.gpsAuth.customers.map(option => (
                                         <MenuItem key={option.value} value={option.value}>
                                             {option.label}
                                         </MenuItem>

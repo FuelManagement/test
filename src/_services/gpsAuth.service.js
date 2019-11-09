@@ -8,7 +8,14 @@ export const gpsAuthService = {
 }
 
 function getCustomerByCarrierId() {
-
+    const CustomerNames = [{
+        value: 'CFEnergia power',
+        label: 'CFEnergia power'
+    },{
+        value: 'BP Gas station',
+        label: 'BP Gas station'
+    }];
+    return Promise.resolve(CustomerNames);
 }
 
 function otrGpsAuthForCustomer() {

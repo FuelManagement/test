@@ -1,23 +1,32 @@
 import { gpsAuthConstants } from '../_constants';
 import { alertActions } from './';
+import { gpsAuthService } from '../_services';
+
 
 export const gpsAuthActions = {
     getCustomerByCarrierId,
     otrGpsAuthForCustomer
 }
 
-
 function getCustomerByCarrierId() {
-
-    console.log("Get Auth Dispatched");
-
     return dispatch => {
-        success("Received");
-    }
+        dispatch(alertActions.loading());
+        gpsAuthService.getCustomerByCarrierId()
+        .then(
+            customerNames => {
+                dispatch(success(customerNames));
+                dispatch(alertActions.clearLoading());
+            },
+            error => {
+                dispatch(failure(error))
+                dispatch(alertActions.clearLoading());
+            }
+        );
+    };
 
-    function request() { return { type: gpsAuthConstants.GETCUSTOMEREQUEST } }
-    function success(data) { return { type: gpsAuthConstants.GETCUSTOMERSUCCESS, data } }
-    function failure(error) { return { type: gpsAuthConstants.GETCUSTOMERFAILURE, error } }
+    function request() { return { type: gpsAuthConstants.GET_CUSTOMER_REQUEST } }
+    function success(customerNames) { return { type: gpsAuthConstants.GET_CUSTOMER_SUCCESS, customerNames } }
+    function failure(error) { return { type: gpsAuthConstants.GET_CUSTOMER_FAILURE, error } }
 }
 
 function otrGpsAuthForCustomer() {

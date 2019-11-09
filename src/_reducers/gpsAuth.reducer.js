@@ -1,23 +1,20 @@
 import { gpsAuthConstants } from '../_constants';
 
-
 export function gpsAuth(state = {}, action) {
 
     switch (action.type) {
-
-        case gpsAuthConstants.GETCUSTOMEREQUEST:
+        case gpsAuthConstants.GET_CUSTOMER_REQUEST:
             return {
                 ...state,
                 loading: true
             };
-        case gpsAuthConstants.GETCUSTOMERSUCCESS:
+        case gpsAuthConstants.GET_CUSTOMER_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                customerAndOrderList: action.data,
+                customers: action.customerNames,
             };
-
-        case gpsAuthConstants.GETCUSTOMERFAILURE:
+        case gpsAuthConstants.GET_CUSTOMER_FAILURE:
             return {
                 ...state,
                 error: action.error
