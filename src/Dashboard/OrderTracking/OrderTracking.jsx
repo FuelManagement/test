@@ -112,7 +112,7 @@ class OrderTracking extends React.Component {
     }
 
     tabChange(event, newValue) {
-        this.setState({ tabValue: newValue })
+        this.setState({ tabValue: newValue,selectedOrderDate: new Date(),search:'' })
     };
     closeModel() {
         this.setState({ showModel: false })
@@ -158,6 +158,8 @@ class OrderTracking extends React.Component {
                                     className="form-control"
                                     autoComplete="off"
                                     margin="dense"
+                                    value={this.state.search} 
+                                     onChange={e => this.setState({search:e.target.value})} 
                                     // endAdornment={<InputAdornment position="end">Kg</InputAdornment>}
                                     InputProps={{
                                         endAdornment: (
@@ -171,7 +173,13 @@ class OrderTracking extends React.Component {
                                 {/* </Paper> */}
                             </div>
                             <ReactTable
-                                data={this.state.orderList || []}
+                                data={this.state.search.trim() !== ""?(this.state.orderList || []).filter(
+                                    f => f.projectID!==undefined &&
+                                      f.projectID.toSting()
+                                        .toLowerCase()
+                                        .includes(
+                                          this.state.search.toLowerCase()
+                                        )):(this.state.orderList || [])}
                                 columns={Table_Config.OrderTrackingRecords.OrderTrackingRecord.columns({ trackBtnClk: this.trackBtnClk.bind(this) })}
                                 {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
                             />
@@ -209,7 +217,13 @@ class OrderTracking extends React.Component {
                                 </MuiPickersUtilsProvider>
                             </div>
                             <ReactTable
-                                data={this.state.orderList || []}
+                                data={this.state.selectedOrderDate.toString().trim() !== ""?(this.state.orderList || []).filter(
+                                    f =>f.isssueDate!==undefined &&
+                                      f.isssueDate.toSting()
+                                        .toLowerCase()
+                                        .includes(
+                                          this.state.selectedOrderDate.toString().toLowerCase()
+                                        )):(this.state.orderList || [])}
                                 columns={Table_Config.OrderTrackingRecords.OrderTrackingRecord.columns({ trackBtnClk: this.trackBtnClk.bind(this) })}
                                 {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
                             />
@@ -247,7 +261,13 @@ class OrderTracking extends React.Component {
                                 </MuiPickersUtilsProvider>
                             </div>
                             <ReactTable
-                                data={this.state.orderList || []}
+                                data={this.state.selectedOrderDate.toString().trim() !== ""?(this.state.orderList || []).filter(
+                                    f =>f.reqDelivaryDate!==undefined &&
+                                      f.reqDelivaryDate.toSting()
+                                        .toLowerCase()
+                                        .includes(
+                                          this.state.selectedOrderDate.toString().toLowerCase()
+                                        )):(this.state.orderList || [])}
                                 columns={Table_Config.OrderTrackingRecords.OrderTrackingRecord.columns({ trackBtnClk: this.trackBtnClk.bind(this) })}
                                 {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
                             />
