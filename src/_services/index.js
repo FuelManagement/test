@@ -9,3 +9,4 @@ export * from './userProfile.service';
 export * from './io.service';
 export * from './orderTracking.service';
 export * from './orderTrackingRequest.service';
+export * from './gpsAuth.service';

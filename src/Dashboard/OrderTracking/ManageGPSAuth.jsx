@@ -1,6 +1,8 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import { TextField, Select, InputLabel, MenuItem, FormControl } from '@material-ui/core';
 import { ManageGPSTable } from './ManageGPSTable';
+import { gpsAuthActions } from '../../_actions';
 
 class ManageGPSAuth extends React.Component {
     constructor(props) {
@@ -137,6 +139,10 @@ class ManageGPSAuth extends React.Component {
             }
         }
         return state;
+    }
+
+    componentDidMount(){
+        this.props.dispatch(gpsAuthActions.getCustomerByCarrierId());
     }
 
     render() {
@@ -279,4 +285,13 @@ class ManageGPSAuth extends React.Component {
 
     }
 }
-export { ManageGPSAuth };
+
+function mapStateToProps(state) {
+    const { gpsAuth } = state;
+    return { gpsAuth };
+
+}
+
+const connectedGpsAuthRequest = connect(mapStateToProps)(ManageGPSAuth);
+
+export { connectedGpsAuthRequest as ManageGPSAuth };

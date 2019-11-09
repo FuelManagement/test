@@ -3,15 +3,26 @@ const { handleError, handleResponse } = Utils;
 import $ from 'jquery';
 
 export const OrderTrackingRequestService= {
-    getOTRDetailsBysupplier
+    getOTRDetailsBysupplier,
+    postOTRAuthDetailsForCustomer
 }
 function getOTRDetailsBysupplier() {
-    const OrderReqDetails=Common_JsonData.orederTrackingRequestDetails;
-    return Promise.resolve(OrderReqDetails);
-    // let user = JSON.parse(localStorage.getItem('user'));
-    // const requestOptions = {
-    //     method: 'GET',
-    //     headers: authHeader()
-    // };
-    //return data;//fetch(config.apiUrl + '/ordertracking/getOTRDetailsBysupplier', requestOptions).then(handleResponse)
+   
+    let user = JSON.parse(localStorage.getItem('user'));
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+    return fetch(config.apiUrl + '/otr/GetOTRDetailsBysupplier?supplierID='+user.participantID, requestOptions).then(handleResponse)
+}
+function postOTRAuthDetailsForCustomer(data) {
+    let user = JSON.parse(localStorage.getItem('user'));
+    data.CreatedBy=user.email;
+    const requestOptions = {
+        method: 'POST',
+        headers: authHeader(),
+        body: JSON.stringify(data)
+    };
+
+    return fetch(config.apiUrl + '/otr/postOTRAuthDetailsForCustomer', requestOptions).then(handleResponse, handleError);
 }

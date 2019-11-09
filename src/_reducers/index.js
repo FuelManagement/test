@@ -12,8 +12,9 @@ import { product } from './product.reducer';
 import { rfq } from './rfq.reducer';
 import {userProfile} from './userProfile.reducer';
 import {io} from './io.reducer';
-import {orderTrackingRequest} from './orderTrackingRequest.reducer'
-import { orderTracking } from './orderTracking.reducer'
+import {orderTrackingRequest} from './orderTrackingRequest.reducer';
+import { orderTracking } from './orderTracking.reducer';
+import { gpsAuth } from './gpsAuth.reducer';
 const rootReducer = combineReducers({
   authentication,
   registration,
@@ -28,7 +29,8 @@ const rootReducer = combineReducers({
   io,
   userProfile,
   orderTrackingRequest,
-  orderTracking
+  orderTracking,
+  gpsAuth
 });
 
 export default rootReducer;

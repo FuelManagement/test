@@ -10,3 +10,4 @@ export * from './userProfile.actions';
 export * from './io.actions';
 export * from './orderTrackingRequest.actions'
 export * from './orderTracking.actions';
+export * from './gpsAuth.action';

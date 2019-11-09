@@ -177,7 +177,7 @@ let Common_JsonData = {
       {
         "orderid": 20134,
         "productName": "Gas",
-        "supplierName": "Pemex",
+        "supplierName": "Pmurali",
         "status": "Request Submitted",
         "trackRequest": ""
       },
