@@ -7,13 +7,13 @@ export const orderTrackingActions = {
     submitTrackRequest
 }
 
-function listOrderTracking(){
+function listOrderTracking(participantID){
     return dispatch => {
         dispatch(alertActions.loading());
-        OrderTrackingService.listOrderTracking()
+        OrderTrackingService.listOrderTracking(participantID)
         .then(
             orderTrackingList => {
-                dispatch(success(orderTrackingList));
+                dispatch(success(orderTrackingList.pos));
                 dispatch(alertActions.clearLoading());
             },
             error => {

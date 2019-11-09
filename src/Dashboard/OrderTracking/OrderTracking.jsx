@@ -77,7 +77,7 @@ class OrderTracking extends React.Component {
         this.getEnteredOTP = this.getEnteredOTP.bind(this);
     }
     componentDidMount() {
-        this.props.dispatch(orderTrackingActions.listOrderTracking());
+        this.props.dispatch(orderTrackingActions.listOrderTracking('tarunkathuria.info@gmail.com'));
     }
 
     UNSAFE_componentWillReceiveProps(){

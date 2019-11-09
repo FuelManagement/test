@@ -12,9 +12,14 @@ function getOrderTrackingProgress(){
     //ToDo: Add API to fetch order tracking details
 }
 
-function listOrderTracking(){
-    return Promise.resolve(Common_JsonData.orderTrackingDetails.list);
-    //ToDo: Add API to fetch order tracking details
+function listOrderTracking(participantID){
+    let user = JSON.parse(localStorage.getItem('user'));
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+    return fetch(config.apiUrl + '/product/getPOByParticipantID?participantID='+participantID+'&userID='+user.email, requestOptions)
+    .then(handleResponse)
 }
 
 function submitTrackRequest(data){
