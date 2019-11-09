@@ -102,7 +102,11 @@ class OrderTracking extends React.Component {
     trackBtnClk(event, data, status, showModel = true) {
         if (data.status === "Approved") {
             this.setState({ showModel: true, OrderStatus: status });
-        } else if (data.status === "") {
+        } 
+        else if (data.status === "Request Submitted") {
+            this.setState({ showModel: true, OrderStatus: status });
+        }
+        else if (data.status === "") {
             this.props.dispatch(orderTrackingActions.submitTrackRequest(data));
         }
     }
