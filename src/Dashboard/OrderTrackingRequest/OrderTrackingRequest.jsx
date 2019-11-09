@@ -28,15 +28,31 @@ class OrderTrackingRequest extends React.Component {
         this.confirmReject = this.confirmReject.bind(this);
     }
     approveSubmit(event, rowData) {
-        if(event.target.value === "Approve")
-            this.setState({isApprove:true, confirmDialog:false, selectedRow:rowData});
-        else if(event.target.value === "Reject")
+        
+        if(event.target.value === "Approve"){
+            this.setState({isApprove:true, confirmDialog:false, selectedRow:rowData}); 
+            let collection={};
+        collection.customerParticipantID=rowData.customerParticipantID;
+        collection.customerID=rowData.customerID;
+        collection.status="Approve";
+        collection.CreatedOn=new Date();
+        this.props.dispatch(orderTrackingRequestActions.postOTRAuthDetailsForCustomer(collection));          
+        }
+        else if(event.target.value === "Reject"){
             this.setState({isApprove:false, confirmDialog:true, selectedRow:rowData});
-    }
+        }
+        }
     handleClose(){
         this.setState({isApprove:false, confirmDialog:false, selectedRow:{}});
     }
     confirmReject(){
+        let collection={};
+        collection.customerParticipantID=this.selectedRow.customerParticipantID;
+        collection.customerID=this.selectedRow.customerID;
+        collection.status="Reject";
+        collection.CreatedOn=new Date();
+        this.props.dispatch(orderTrackingRequestActions.postOTRAuthDetailsForCustomer(collection));
+   
         console.log("todo reject selected row: ", this.state.selectedRow);
         this.setState({isApprove:false, confirmDialog:false, selectedRow:{}});
     }
