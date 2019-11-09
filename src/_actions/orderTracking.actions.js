@@ -1,19 +1,21 @@
 import { orderTrackingConst } from '../_constants';
 import { OrderTrackingService } from '../_services';
 import { alertActions } from './';
+import { history } from '../_helpers';
 export const orderTrackingActions = {
     listOrderTracking,
     getOrderTrackingProgress,
-    submitTrackRequest
+    submitTrackRequest,
+    submitOTPRequest
 }
 
-function listOrderTracking(participantID){
+function listOrderTracking(){
     return dispatch => {
         dispatch(alertActions.loading());
-        OrderTrackingService.listOrderTracking(participantID)
+        OrderTrackingService.listOrderTracking()
         .then(
             orderTrackingList => {
-                dispatch(success(orderTrackingList.pos));
+                dispatch(success(orderTrackingList));
                 dispatch(alertActions.clearLoading());
             },
             error => {
@@ -52,7 +54,7 @@ function getOrderTrackingProgress(){
 function submitTrackRequest(data){
     return dispatch => {
         dispatch(alertActions.loading());
-        OrderTrackingService.submitTrackRequest()
+        OrderTrackingService.submitTrackRequest(data)
         .then(
             response => {
                 dispatch(success(response));
@@ -69,4 +71,32 @@ function submitTrackRequest(data){
     function request() { return { type: orderTrackingConst.ORDER_TRACKING_CREATE_REQUEST } }
     function success(data) {return { type: orderTrackingConst.ORDER_TRACKING_CREATE_SUCCESS, data } }
     function failure(error) { return { type: orderTrackingConst.ORDER_TRACKING_CREATE_ERROR, error } }
+}
+function submitOTPRequest(data){
+    return dispatch => {
+        dispatch(alertActions.loading());
+        OrderTrackingService.submitOTPRequest(data)
+        .then(
+            orderTrackingList => {
+                if(orderTrackingList.statusCode===200){
+                dispatch(alertActions.success(orderTrackingList.message));
+                dispatch(getOrderTrackingProgress());
+                history.push('/order-progress');
+                }else{
+                    dispatch(alertActions.error(orderTrackingList.message)); 
+                   
+                }
+                dispatch(alertActions.clearLoading());
+               
+            },
+            error => {
+                dispatch(alertActions.error(error.message));
+                dispatch(alertActions.clearLoading());
+            }
+        );
+    };
+
+    //function request() { return { type: orderTrackingConst.ORDER_TRACKING_OTP_SUBMIT_REQUEST } }
+    //function success(data) {return { type: orderTrackingConst.ORDER_TRACKING_OTP_SUBMIT_SUCCESS, data } }
+   // function failure(error) { return { type: orderTrackingConst.ORDER_TRACKING_OTP_SUBMIT_ERROR, error } }
 }

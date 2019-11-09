@@ -77,7 +77,7 @@ class OrderTracking extends React.Component {
         this.getEnteredOTP = this.getEnteredOTP.bind(this);
     }
     componentDidMount() {
-        this.props.dispatch(orderTrackingActions.listOrderTracking('tarunkathuria.info@gmail.com'));
+        this.props.dispatch(orderTrackingActions.listOrderTracking());
     }
 
     UNSAFE_componentWillReceiveProps(){
@@ -87,9 +87,10 @@ class OrderTracking extends React.Component {
     }
 
     getEnteredOTP(OTPValue) {
-        console.log('OTP Submitted Successfully',OTPValue);
+        let collection={};
+        collection.OTP=OTPValue;
+        this.props.dispatch(orderTrackingActions.submitOTPRequest(collection));
         this.setState({ showModel: false });
-        history.push('/order-progress');
     }
 
     trackBtnClk(event,data,status, showModel = true) {
