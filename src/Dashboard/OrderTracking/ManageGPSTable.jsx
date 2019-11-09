@@ -10,24 +10,7 @@ import $ from 'jquery';
 window.jQuery = $; // hack
 window.$ = $;      // hack 
 import 'bootstrap';
-const recordsData = [
-    {
-        "orderid": 20133,
-        "productName": "Oil",
-        "customerName": "CFEnergia power",
-        "status": "Approved",
-        "date": "21/10/2019 03:00 PM"
 
-    },
-    {
-        "orderid": 20134,
-        "productName": "Gas",
-        "customerName": "CFEnergia power",
-        "status": "Approved",
-        "date": "08/10/2019 10:00 AM"
-
-    }
-]
 class ManageGPSTable extends React.Component{
     constructor(props){
         super(props);

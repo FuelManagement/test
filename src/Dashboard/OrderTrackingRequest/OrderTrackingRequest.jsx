@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import { Table_Config } from '../../_helpers';
 import { ConfirmDialog } from '../../_components';
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -10,6 +11,7 @@ import $ from 'jquery';
 window.jQuery = $; // hack
 window.$ = $;      // hack 
 import 'bootstrap';
+import { orderTrackingRequestActions } from '../../_actions';
 
 import {SendAuthentication} from './SendAuthentication';
  
@@ -17,40 +19,6 @@ class OrderTrackingRequest extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [
-                {
-                    orderName: "CFEnergia power",
-                    RequestedBy: "James Robert",
-                    Owner: "yes",
-                    Status: "AutoApproved",
-                    RequestTimings: "08/20/2019 10:00 AM",
-                    Approvereject: "Approve"
-                },
-                {
-                    orderName: "BP Gas station",
-                    RequestedBy: "JackJacob",
-                    Owner: "No",
-                    Status: "Rejected",
-                    RequestTimings: "08/20/2019 10:10AM",
-                    Approvereject: ""
-                },
-                {
-                    orderName: "Pemex Gas station",
-                    RequestedBy: "Thomas Noah",
-                    Owner: "No",
-                    Status: "Approved",
-                    RequestTimings: "08/20/2019 11:00AM",
-                    Approvereject: "Approve"
-                },
-                {
-                    orderName: "CFEnergia power",
-                    RequestedBy: "Michael William",
-                    Owner: "No",
-                    Status: "NewRequest",
-                    RequestTimings: "08/20/2019 12:00 PM",
-                    Approvereject: "Reject"
-                }
-            ],
             isApprove: false,
             confirmDialog: false,
             selectedRow: {}
@@ -72,8 +40,12 @@ class OrderTrackingRequest extends React.Component {
         console.log("todo reject selected row: ", this.state.selectedRow);
         this.setState({isApprove:false, confirmDialog:false, selectedRow:{}});
     }
-    render() {
-        return (
+    componentDidMount() {
+        this.props.dispatch(orderTrackingRequestActions.getOTRDetailsBysupplier());
+       
+    }
+   render() {
+       return (
             <div>
                 <div className="mx-auto">
                     <div className="row mrg-tp40px">
@@ -82,7 +54,7 @@ class OrderTrackingRequest extends React.Component {
                             <div className="table-data">
                                 <div className="clearDiv"></div>
                                 <ReactTable
-                                    data={this.state.data || []}
+                                    data={this.props.orderTrackingRequest.orderTrackingDetails || []}
                                     columns={Table_Config.OrderTrackingRequestRecords.OrderTrackingRequestRecord.columns({ approveSubmit: this.approveSubmit.bind(this) })}
                                     {...Table_Config.OrderTrackingRequestRecords.OrderTrackingRequestRecord.options}
                                 />
@@ -99,4 +71,10 @@ class OrderTrackingRequest extends React.Component {
         )
     }
 }
-export { OrderTrackingRequest };
+
+function mapStateToProps(state) {
+    const { orderTrackingRequest } = state;
+    return { orderTrackingRequest };
+}
+const connectedOrderTrackingRequest = connect(mapStateToProps)(OrderTrackingRequest);
+export { connectedOrderTrackingRequest as OrderTrackingRequest };

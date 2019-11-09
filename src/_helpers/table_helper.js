@@ -15,7 +15,7 @@ let globalOptions = {
 	showPagination: true,
 	showPaginationTop: false,
 	showPaginationBottom: true,
-	showPageSizeOptions: true,
+	showPageSizeOptions: false,
 	pageSizeOptions: [5, 10, 20, 25, 50, 100],
 	defaultPageSize: 5,
 	className: "table table-sm fixed_header",
@@ -23,6 +23,7 @@ let globalOptions = {
 	resizable: true,
 	defaultSortDesc: false,
 	rowsText: "",
+	className:"-striped -highlight",
 	defaultSortMethod: (a, b, desc) => {
 		// force null and undefined to the bottom
 		a = a === null || a === undefined ? "" : a;
@@ -914,21 +915,25 @@ let Table_Config = {
 			options: { ...globalOptions },
 			columns: (props) => [{
 				Header: 'Order #',
+				headerClassName:'react-table-header-style',
 				accessor: 'orderid',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.orderid}>{row.original.orderid}</span>
+				Cell: row => <span className="react-table-row-content-align-left" title={row.original.orderid}>{row.original.orderid}</span>
 			}, {
 				Header: 'Product Name',
+				headerClassName:'react-table-header-style',
 				accessor: 'productName',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.productName}>{row.original.productName}</span>
+				Cell: row => <span className="react-table-row-content-align-left" title={row.original.productName}>{row.original.productName}</span>
 			}, {
 				Header: 'Supplier Name',
+				headerClassName:'react-table-header-style',
 				accessor: 'supplierName',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center'}} 				
+				Cell: row => <span className="react-table-row-content-align-left"			
 			    title={row.original.supplierName}>{row.original.supplierName}</span>
 			}, {
 				Header: 'Status',
+				headerClassName:'react-table-header-style',
 				accessor: 'status',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center',
+				Cell: row => <span className="react-table-row-content-align-left" style={{ fontWeight: 'normal',
 				color:row.original.status === "Approved" ? 'Green':(row.original.status === "Rejected"?'red':'blue')  }} title={row.original.status}>{row.original.status}</span>
 			}, {
 				Header: 'Track Request',
@@ -938,9 +943,10 @@ let Table_Config = {
 						className="btn btn-outline-info btn-sm btn-track"
 						style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
 						disabled={row.original.status==='Approved'?false:(row.original.status===''?false:true)}
-						onClick={e => { props.trackBtnClk(e, row.original,row.original.status==='Approved'? "track":"otp-disabled") }}>
+						onClick={e => { props.trackBtnClk(e, row.original,row.original.status==='Approved'? "track":"otp-disabled") }}
+					>
 						{row.original.status===''?'Submit':'Track'}
-						</button>
+					</button>
 
 				</div>
 			}]
@@ -952,28 +958,35 @@ let Table_Config = {
 			columns: (props) => [{
 				Header: 'Customer Name',
 				accessor: 'CustomerName',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.orderName}>{row.original.orderName}</span>
+				headerClassName:'react-table-header-style',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.orderName}>{row.original.orderName}</span>
 			}, {
 				Header: 'Requested By',
 				accessor: 'RequestedBy',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.productName}>{row.original.RequestedBy.replace(/([A-Z])/g, ' $1').trim()}</span>
+				headerClassName:'react-table-header-style',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.productName}>{row.original.RequestedBy.replace(/([A-Z])/g, ' $1').trim()}</span>
 			}, {
 				Header: 'Owner',
 				accessor: 'Owner',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.customerName}>{row.original.Owner}</span>
+				headerClassName:'react-table-header-style',
+				maxWidth: 100,
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.customerName}>{row.original.Owner}</span>
 			}, {
 				Header: 'Status',
 				accessor: 'Status',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center', fontWeight: 'bold', 
+				headerClassName:'react-table-header-style',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left', fontWeight: 'bold',
 				color:row.original.Status === "Approved" || row.original.Status === "AutoApproved"?'Green':(row.original.Status === "Rejected"?'red':'orange') }}
 				 title={row.original.Status.replace(/([A-Z])/g, ' $1').trim()}>{row.original.Status.replace(/([A-Z])/g, ' $1').trim()}</span>
 			}, {
 				Header: 'Request Timings',
 				accessor: 'RequestTimings',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.RequestTimings}>{row.original.RequestTimings}</span>
+				headerClassName:'react-table-header-style',				
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.RequestTimings}>{row.original.RequestTimings}</span>
 			}, {
 				Header: 'Approve/Reject',
 				accessor: 'Approvereject',
+				headerClassName:'react-table-header-style',
 				Cell: row => <div className="row OTR-actions-row">
 					{
 						row.original.Status === "AutoApproved" || row.original.Status === "Approved" ?
@@ -1014,16 +1027,17 @@ let Table_Config = {
 			columns: (props) => [{
 				Header: 'Customer Name',
 				accessor: 'customerName',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.customerName}>{row.original.customerName}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.customerName}>{row.original.customerName}</span>
 			}, {
-				Header: 'Order Id',
+				Header: 'Order #',
 				accessor: 'orderid',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center' }} title={row.original.orderid}>{row.original.orderid}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.orderid}>{row.original.orderid}</span>
 			}, 
 			 {
 				Header: 'Status',
 				accessor: 'status',
-				Cell: row => <span style={{ display: 'block', textAlign: 'center',fontWeight:'bold',color:'#00ce1b' }} title={row.original.status}>{row.original.status}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'center',fontWeight: 'bold'  ,color:
+				row.original.status === "Approve" ?'#29AD01': 'red'  }} title={row.original.status}>{row.original.status}</span>
 			}, {
 				Header: 'Date',
 				accessor: 'date',

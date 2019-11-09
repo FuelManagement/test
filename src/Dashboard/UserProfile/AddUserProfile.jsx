@@ -457,7 +457,7 @@ class AddUserProfile extends React.Component {
                                         id='participantID'
                                         variant="outlined"
                                         name='participantID'
-                                        label="Organisation Name"
+                                        label="Organisation"
                                         value={this.state.controls.participantID.value}
                                         className="form-control"
                                         onChange={this.handleChange}
@@ -476,7 +476,7 @@ class AddUserProfile extends React.Component {
                                         id='role'
                                         variant="outlined"
                                         name='role'
-                                        label="Role"
+                                        label="User Role"
                                         value={this.state.controls.role.value}
                                         className="form-control"
                                         // onChange={this.handleChange}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { API_Helpers, Utils, Table_Config, history } from '../../_helpers';
+import { Table_Config, history } from '../../_helpers';
+import { orderTrackingActions } from '../../_actions'
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 library.add(faPlus);
@@ -20,9 +21,9 @@ import { OTPModel } from './OTPModel';
 window.jQuery = $; // hack
 window.$ = $;      // hack 
 import 'bootstrap';
+
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-
     return (
         <Typography
             component="div"
@@ -57,32 +58,7 @@ const OrderTrackingStyles = makeStyles(theme => ({
         margin: 4,
     },
 }));
-const recordsData = [
-    {
-        "orderid": 20133,
-        "productName": "Oil",
-        "supplierName": "Energroup",
-        "status": "Approved",
-        "trackRequest": ""
 
-    },
-    {
-        "orderid": 20134,
-        "productName": "Gas",
-        "supplierName": "Pemex",
-        "status": "Request Submitted",
-        "trackRequest": ""
-    },
-    {
-        "orderid": 20135,
-        "productName": "Gas",
-        "supplierName": "Pemex",
-        "status": "",
-        "trackRequest": ""
-
-    }
-
-]
 class OrderTracking extends React.Component {
     constructor(props) {
         super(props);
@@ -93,6 +69,7 @@ class OrderTracking extends React.Component {
             tabValue: 0,
             OrderStatus: "otp-enabled",
             //OrderStatus:"otp-disabled"
+            orderList : []
         }
         this.trackBtnClk = this.trackBtnClk.bind(this);
         this.tabChange = this.tabChange.bind(this);
@@ -100,17 +77,29 @@ class OrderTracking extends React.Component {
         this.getEnteredOTP = this.getEnteredOTP.bind(this);
     }
     componentDidMount() {
-
+        this.props.dispatch(orderTrackingActions.listOrderTracking('tarunkathuria.info@gmail.com'));
     }
+
+    UNSAFE_componentWillReceiveProps(){
+        if(this.props.orderTracking.orderTrackingList && this.props.orderTracking.orderTrackingList && this.props.orderTracking.orderTrackingList.length){
+            this.setState({orderList:this.props.orderTracking.orderTrackingList})
+        }
+    }
+
     getEnteredOTP(OTPValue) {
         console.log('OTP Submitted Successfully',OTPValue);
         this.setState({ showModel: false });
         history.push('/order-progress');
     }
+
     trackBtnClk(event,data,status, showModel = true) {
-        this.setState({ showModel: true ,OrderStatus:status});
-        
+        if(data.status === "Approved"){
+            this.setState({ showModel: true ,OrderStatus:status});
+        } else if(data.status === ""){
+            this.props.dispatch(orderTrackingActions.submitTrackRequest(data));
+        }
     }
+
     tabChange(event, newValue) {
         this.setState({ tabValue: newValue })
     };
@@ -155,7 +144,7 @@ class OrderTracking extends React.Component {
                                 </Paper>
                             </div>
                             <ReactTable
-                                data={recordsData || []}
+                                data={this.state.orderList || []}
                                 columns={Table_Config.OrderTrackingRecords.OrderTrackingRecord.columns({ trackBtnClk: this.trackBtnClk.bind(this) })}
                                 {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
                             />
@@ -178,7 +167,7 @@ class OrderTracking extends React.Component {
                                 </Paper>
                             </div>
                             <ReactTable
-                                data={recordsData || []}
+                                data={this.state.orderList || []}
                                 columns={Table_Config.OrderTrackingRecords.OrderTrackingRecord.columns({ trackBtnClk: this.trackBtnClk.bind(this) })}
                                 {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
                             />
@@ -201,7 +190,7 @@ class OrderTracking extends React.Component {
                                 </Paper>
                             </div>
                             <ReactTable
-                                data={recordsData || []}
+                                data={this.state.orderList || []}
                                 columns={Table_Config.OrderTrackingRecords.OrderTrackingRecord.columns({ trackBtnClk: this.trackBtnClk.bind(this) })}
                                 {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
                             />
@@ -222,8 +211,8 @@ class OrderTracking extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { rfq } = state;
-    return { rfq };
+    const { orderTracking } = state;
+    return { orderTracking };
 }
 
 const connectedOrderTracking = connect(mapStateToProps)(OrderTracking);
