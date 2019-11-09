@@ -934,9 +934,10 @@ let Table_Config = {
 				headerClassName:'react-table-header-style',
 				accessor: 'status',
 				Cell: row => <span className="react-table-row-content-align-left" style={{ fontWeight: 'normal',
-				color:row.original.status === "Approved" ? 'Green':(row.original.status === "Rejected"?'red':'blue')  }} title={row.original.status}>{row.original.status}</span>
+				color:row.original.status === "Approved" ? 'Green':(row.original.status === "Rejected"?'red':'#17da38')  }} title={row.original.status}>{row.original.status}</span>
 			}, {
 				Header: 'Track Request',
+				headerClassName:'react-table-header-style',
 				accessor: 'trackRequest',
 				Cell: row => <div className="row">
 					<button
@@ -959,7 +960,7 @@ let Table_Config = {
 				Header: 'Customer Name',
 				accessor: 'CustomerName',
 				headerClassName:'react-table-header-style',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.orderName}>{row.original.orderName}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.orderName}>{row.original.CustomerName}</span>
 			}, {
 				Header: 'Requested By',
 				accessor: 'RequestedBy',

@@ -21,7 +21,10 @@ class OrderTrackingRequest extends React.Component {
         this.state = {
             isApprove: false,
             confirmDialog: false,
-            selectedRow: {}
+            selectedRow: {},
+            data:[
+                {CustomerName:'1',RequestedBy:'123',Owner:'533',Status:'55',RequestTimings:"55"}
+            ]
         }
         this.approveSubmit = this.approveSubmit.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -51,10 +54,10 @@ class OrderTrackingRequest extends React.Component {
                     <div className="row mrg-tp40px">
                         <div className='col-lg-9 add-rfq-main'>
                             <h2 style={{ display: "inline-block" }} className="table-heading">Order Tracking Request</h2>
-                            <div className="table-data">
+                            <div className="table-data order-request-table">
                                 <div className="clearDiv"></div>
                                 <ReactTable
-                                    data={this.props.orderTrackingRequest.orderTrackingDetails || []}
+                                    data={this.state.data || []}
                                     columns={Table_Config.OrderTrackingRequestRecords.OrderTrackingRequestRecord.columns({ approveSubmit: this.approveSubmit.bind(this) })}
                                     {...Table_Config.OrderTrackingRequestRecords.OrderTrackingRequestRecord.options}
                                 />

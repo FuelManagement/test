@@ -59,6 +59,7 @@ class SendAuthentication extends Component {
                     valid: true,
                     validationRules: {
                         notEmpty: true,
+                        isEmail:true
                     },
                     error: "",
                     touched: false,
@@ -80,7 +81,8 @@ class SendAuthentication extends Component {
         }
         return state;
     }
-    handleChange(value, key) {
+    handleChange(event) {
+        let key=event.target.name,value=event.target.value;
         console.log("key");
         console.log(key);
         let connectedValue = {};
@@ -93,7 +95,7 @@ class SendAuthentication extends Component {
                         value: value,
                         valid: validate(
                             value,
-                            // prevState.controls[key].validationRules,
+                            prevState.controls[key].validationRules,
                             connectedValue,
                             key
                         ),
