@@ -12,8 +12,8 @@ function getOTRDetailsBysupplier() {
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
-    };
-    return fetch(config.apiUrl + '/otr/GetOTRDetailsBysupplier?supplierID='+user.participantID, requestOptions).then(handleResponse)
+    };                                              //+user.participantID
+    return fetch(config.apiUrl + '/otr/GetOTRDetailsBysupplier?supplierId=nand@sieplinc.com', requestOptions).then(handleResponse)
 }
 function postOTRAuthDetailsForCustomer(data) {
     let user = JSON.parse(localStorage.getItem('user'));
