@@ -1,6 +1,6 @@
 import { gpsAuthConstants } from '../_constants';
 
-export function gpsAuth(state = {}, action) {
+export function gpsAuth(state = {customers:[],customerOrders:[]}, action) {
 
     switch (action.type) {
         case gpsAuthConstants.GET_CUSTOMER_REQUEST:

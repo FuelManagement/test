@@ -23,7 +23,7 @@ class OrderTrackingRequest extends React.Component {
             confirmDialog: false,
             selectedRow: {},
             data:[
-                {CustomerName:'BP Gas Station',RequestedBy:'Dan Nelson',Owner:'Yes',Status:'New Request',RequestTimings:"10/08/2019 10:15AM"}
+                // {CustomerName:'BP Gas Station',RequestedBy:'Dan Nelson',Owner:'Yes',Status:'New Request',RequestTimings:"10/08/2019 10:15AM"}
             ]
         }
         this.approveSubmit = this.approveSubmit.bind(this);
@@ -64,6 +64,8 @@ class OrderTrackingRequest extends React.Component {
        
     }
    render() {
+       let orderTrackingReqDetails = this.props.orderTrackingRequest.orderTrackingReqDetails;
+       //let orderTrackingReqDetails = [];
        return (
             <div>
                 <div className="mx-auto">
@@ -73,7 +75,7 @@ class OrderTrackingRequest extends React.Component {
                             <div className="table-data order-request-table">
                                 <div className="clearDiv"></div>
                                 <ReactTable
-                                    data={this.state.data || []}
+                                    data={orderTrackingReqDetails || []}
                                     columns={Table_Config.OrderTrackingRequestRecords.OrderTrackingRequestRecord.columns({ approveSubmit: this.approveSubmit.bind(this) })}
                                     {...Table_Config.OrderTrackingRequestRecords.OrderTrackingRequestRecord.options}
                                 />
@@ -93,6 +95,7 @@ class OrderTrackingRequest extends React.Component {
 
 function mapStateToProps(state) {
     const { orderTrackingRequest } = state;
+    console.log("orderTrackingRequest",orderTrackingRequest);
     return { orderTrackingRequest };
 }
 const connectedOrderTrackingRequest = connect(mapStateToProps)(OrderTrackingRequest);

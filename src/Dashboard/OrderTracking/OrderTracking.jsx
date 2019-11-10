@@ -70,7 +70,9 @@ class OrderTracking extends React.Component {
             OrderStatus: "otp-enabled",
             requestId:"",
             orderList: [],
-            selectedOrderDate: new Date()
+            selectedOrderDate: ""
+            //selectedOrderDate: new Date()
+            
         }
         this.trackBtnClk = this.trackBtnClk.bind(this);
         this.tabChange = this.tabChange.bind(this);
@@ -78,9 +80,7 @@ class OrderTracking extends React.Component {
         this.getEnteredOTP = this.getEnteredOTP.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
     }
-    componentDidMount() {
-        console.log("orderTracking data");
-        console.log(this.props.orderTracking.data); 
+    componentDidMount() { 
         this.props.dispatch(orderTrackingActions.listOrderTracking());
     }
 
@@ -90,6 +90,10 @@ class OrderTracking extends React.Component {
         }
     }
     handleDateChange(date) {
+        console.log("date val",date);
+        if(date == null){
+            date = "";
+        }
         this.setState({ selectedOrderDate: date });
     }
 
@@ -116,7 +120,8 @@ class OrderTracking extends React.Component {
     }
 
     tabChange(event, newValue) {
-        this.setState({ tabValue: newValue,selectedOrderDate: new Date(),search:'' })
+        //this.setState({ tabValue: newValue,selectedOrderDate: new Date(),search:'' })
+        this.setState({ tabValue: newValue,selectedOrderDate: "",search:'' })
     };
     closeModel() {
         this.setState({ showModel: false,requestId:""})

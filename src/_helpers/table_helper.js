@@ -961,39 +961,39 @@ let Table_Config = {
 			options: { ...globalOptions },
 			columns: (props) => [{
 				Header: 'Customer Name',
-				accessor: 'CustomerName',
+				accessor: 'customerParticipantID',
 				headerClassName:'react-table-header-style',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.orderName}>{row.original.CustomerName}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.customerParticipantID}>{row.original.customerParticipantID}</span>
 			}, {
 				Header: 'Requested By',
-				accessor: 'RequestedBy',
+				accessor: 'CustomerName',
 				headerClassName:'react-table-header-style',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.productName}>{row.original.RequestedBy.replace(/([A-Z])/g, ' $1').trim()}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.CustomerName}>{row.original.CustomerName.replace(/([A-Z])/g, ' $1').trim()}</span>
 			}, {
 				Header: 'Owner',
-				accessor: 'Owner',
+				accessor: 'userRole',
 				headerClassName:'react-table-header-style',
 				maxWidth: 100,
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.customerName}>{row.original.Owner}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.userRole}>{row.original.userRole}</span>
 			}, {
 				Header: 'Status',
-				accessor: 'Status',
+				accessor: 'status',
 				headerClassName:'react-table-header-style',
 				Cell: row => <span style={{ display: 'block', textAlign: 'left', fontWeight: 'bold',
-				color:row.original.Status === "Approved" || row.original.Status === "AutoApproved"?'Green':(row.original.Status === "Rejected"?'red':'orange') }}
-				 title={row.original.Status.replace(/([A-Z])/g, ' $1').trim()}>{row.original.Status.replace(/([A-Z])/g, ' $1').trim()}</span>
+				color:row.original.status === "Approved" || row.original.status === "AutoApproved"?'Green':(row.original.status === "Rejected"?'red':'orange') }}
+				 title={row.original.status.replace(/([A-Z])/g, ' $1').trim()}>{row.original.status.replace(/([A-Z])/g, ' $1').trim()}</span>
 			}, {
 				Header: 'Request Timings',
-				accessor: 'RequestTimings',
+				accessor: 'createdOn',
 				headerClassName:'react-table-header-style',				
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.RequestTimings}>{row.original.RequestTimings}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.createdOn}>{row.original.createdOn}</span>
 			}, {
 				Header: 'Approve/Reject',
 				accessor: 'Approvereject',
 				headerClassName:'react-table-header-style',
 				Cell: row => <div className="row OTR-actions-row">
 					{
-						row.original.Status === "AutoApproved" || row.original.Status === "Approved" ?
+						row.original.status === "AutoApproved" || row.original.status === "Approved" ?
 						(<button
 							className="btn OTR-approve-btn"
 							disabled={true}
@@ -1011,8 +1011,8 @@ let Table_Config = {
 								<FormControl className="OTR-actions" >
 								<Select
 									id="demo-simple-select"
-									value={ row.original.Status==='Rejected'?'Reject':
-									(row.original.Status==='Approved'?'Approve':row.original.Approvereject) }
+									value={ row.original.status==='Rejected'?'Reject':
+									(row.original.status==='Approved'?'Approve':row.original.Approvereject) }
 									onChange={(e)=>props.approveSubmit(e, row.original)}
 								>
 									<MenuItem value="Approve">Approve</MenuItem>
