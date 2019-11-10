@@ -149,6 +149,20 @@ export const dateutility = {
           ":" +
           millisec
         );
+        case "MM/dd/yyyy hh:mm:ss":
+        return (
+          strmonth +
+          "/" +
+          strdate +
+          "/" +
+          year +
+          " " +
+          strhour +
+          ":" +
+          strminutes +
+          ":" +
+          strseconds 
+        );
       default:
         return strmonth + "/" + strdate + "/" + year;
     }

@@ -5,6 +5,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { dateutility } from './date_helpers';
+import { formatutility } from './format_helpers';
 // import { library } from "@fortawesome/fontawesome-svg-core";
 // import { faEye, faEdit, faCheckSquare } from "@fortawesome/free-solid-svg-icons";
 
@@ -1042,7 +1044,7 @@ let Table_Config = {
 			}, {
 				Header: 'Date',
 				accessor: 'date',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.date}>{row.original.date}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.date}>{dateutility.datefunction(row.original.date,formatutility.MMDDYYYYHHMMSS)}</span>
 			}]
 		}
 	},

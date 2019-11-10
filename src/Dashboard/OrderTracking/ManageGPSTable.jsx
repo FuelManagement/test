@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { API_Helpers, Utils, Table_Config, history } from '../../_helpers';
+import { API_Helpers, Utils, Table_Config, history, formatutility } from '../../_helpers';
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 library.add(faPlus);
@@ -24,26 +24,27 @@ class ManageGPSTable extends React.Component {
         if (nextProps.dataItem.randomId != prevState.randomId) {
 
             var currentdate = new Date();
-            var datetime = currentdate.getDate() + "/"
-                + (currentdate.getMonth() + 1) + "/"
-                + currentdate.getFullYear() + "  "
-                + currentdate.getHours() + ":"
-                + currentdate.getMinutes() + ":"
-                + currentdate.getSeconds();
-
-
+           
             let obj = {
                 customerName: nextProps.dataItem.formData.customername.value,
                 orderid: nextProps.dataItem.formData.orderid.value,
                 status: nextProps.dataItem.formData.action.value,
-                date: datetime,
+                date: currentdate,
                 id: nextProps.dataItem.randomId
             };
 
             nextProps.getAddedCallback("added data successfully");
 
-            console.log("prev state", prevState);
-            return { recordsDataValue: [...prevState.recordsDataValue, obj], randomId: nextProps.dataItem.randomId }
+            let array=[...prevState.recordsDataValue];
+            if(formatutility.isEmpty(array.find(f=>f.orderid===obj.orderid && f.customerName===obj.customerName))){
+             
+            array.push(obj);
+           }
+           else{
+            array.find(f=>f.orderid===obj.orderid && f.customerName===obj.customerName).status=obj.status;
+            array.find(f=>f.orderid===obj.orderid && f.customerName===obj.customerName).date=obj.date;
+           }
+            return { recordsDataValue:array, randomId: nextProps.dataItem.randomId }
         }
 
         return null;

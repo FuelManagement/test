@@ -7,6 +7,12 @@ export const formatutility = {
     DDMMYYYY: "dd/mm/yyyy",
     YYYYMMDD: "yyyy/mm/dd",
     MMDDYYYYHHMMSSMS: "MM/dd/yyyy hh:mm:ss:ms",
-  
+    MMDDYYYYHHMMSS:"MM/dd/yyyy hh:mm:ss",
+    isEmpty
   };
-  
+  function isEmpty(obj) {
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) return false;
+    }
+    return true;
+  }
