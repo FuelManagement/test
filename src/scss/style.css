@@ -729,6 +729,7 @@ header .pad-50{
 .sendAuthenticat-submit{
   background-color: #00ce1b !important;
   color: #fff !important;
+  opacity: 0.8;
 }
 .manage-gps-auth .manage-gps-title{
   font-size: 2rem;
@@ -817,4 +818,9 @@ header .pad-50{
 }
 .sendAuthenticaion-model .MuiDialog-paperWidthFalse{
   width: 250px;
-}  
+}   
+.xyx{
+  height: '250px';
+  stroke: '#0098d1';
+  fill: '#0098d1';
+}

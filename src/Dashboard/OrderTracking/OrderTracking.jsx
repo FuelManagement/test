@@ -80,9 +80,7 @@ class OrderTracking extends React.Component {
         this.getEnteredOTP = this.getEnteredOTP.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
     }
-    componentDidMount() {
-        console.log("orderTracking data");
-        console.log(this.props.orderTracking.data); 
+    componentDidMount() { 
         this.props.dispatch(orderTrackingActions.listOrderTracking());
     }
 
