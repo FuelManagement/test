@@ -8,5 +8,5 @@ export * from './validate_helpers';
 export * from './format_helpers';
 export * from './date_helpers';
 export * from './file_helpers';
-export { Table_Config } from './table_helper';
+export * from './table_helper';
 export {Common_JsonData} from './common_jsonValues'; 

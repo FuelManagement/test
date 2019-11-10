@@ -46,15 +46,15 @@ export function product(state = {}, action) {
               };
 
                    
-                          case productConstants.PRODUCT_CHANGE:
-                                return {
-                                    ...state,
-                                    product: {
-                                        ...state.product,
-                                        [action.collection.key]: 
-                                       action.collection.value
-                                      }
-                                      };
+              case productConstants.PRODUCT_CHANGE:
+                    return {
+                        ...state,
+                        product: {
+                            ...state.product,
+                            [action.collection.key]: 
+                            action.collection.value
+                          }
+                          };
       default:
         return {
             ...state

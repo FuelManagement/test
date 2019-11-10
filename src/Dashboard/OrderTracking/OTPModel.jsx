@@ -50,7 +50,7 @@ class OTPModel extends React.Component {
         this.handleEnter = this.handleEnter.bind(this);
         this.getEnteredOTP=this.getEnteredOTP.bind(this);
     }
-    handleEnter(e) {
+    handleEnter(e) { 
         const form = event.target.form;
         const index = Array.prototype.indexOf.call(form, event.target);
         if (index < 5) {
@@ -62,6 +62,19 @@ class OTPModel extends React.Component {
     getEnteredOTP(){
         this.props.getEnteredOTP(Object.values(this.state).toString().replace(/,/g, ''));
     }
+    //Allow only numbers 
+allowOnlynumbers(e) {
+    var regex = new RegExp(/^[0-9\b]+$/);
+  
+    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+    if (regex.test(str)) {
+        return true;
+    }
+    else {
+        e.preventDefault();
+        return false;
+    }
+  }
     render() {
         const { showModel, OrderStatus } = { ...this.props };
         return (
@@ -77,12 +90,12 @@ class OTPModel extends React.Component {
                             <div>
                                 <h5 className='otp-title'>Enter OTP</h5>
                                 <form className="otp-form">
-                                    <input type="text" id='otp_1' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
-                                    <input type="text" id='otp_2' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
-                                    <input type="text" id='otp_3' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
-                                    <input type="text" id='otp_4' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
-                                    <input type="text" id='otp_5' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
-                                    <input type="text" id='otp_6' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
+                                    <input type="text" id='otp_1' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} onKeyPress={this.allowOnlynumbers} autoComplete="off" />
+                                    <input type="text" id='otp_2' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} onKeyPress={this.allowOnlynumbers} autoComplete="off" />
+                                    <input type="text" id='otp_3' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} onKeyPress={this.allowOnlynumbers} autoComplete="off" />
+                                    <input type="text" id='otp_4' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} onKeyPress={this.allowOnlynumbers} autoComplete="off" />
+                                    <input type="text" id='otp_5' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} onKeyPress={this.allowOnlynumbers} autoComplete="off" />
+                                    <input type="text" id='otp_6' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} onKeyPress={this.allowOnlynumbers} autoComplete="off" />
                                 </form>
                             </div>
                             <div className='otp-text-notif'>

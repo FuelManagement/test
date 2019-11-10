@@ -9,45 +9,7 @@ class OrderTracking extends React.Component{
         super(props)
         this.state={
             orders:[],
-            // orders:[
-            //     {
-            //     orderName: "CFEnergia power", 
-            //     RequestedBy:"James Robert",
-            //     Owner:"yes",
-            //     Status:"AutoApproved",
-            //     RequestTimings:"08/20/2019 10:00 AM",
-            //     'Approve/Reject':"Approve"
-            // },
-            // {
-            //     orderName: "BP Gas station", 
-            //     RequestedBy:"JackJacob",
-            //     Owner:"No",
-            //     Status:"Rejected",
-            //     RequestTimings:"08/20/2019 10:10AM",
-            //     'Approve/Reject':"Approve"
-            // },
-            // {
-            //     orderName: "Pemex Gas station", 
-            //     RequestedBy:"Thomas Noah",
-            //     Owner:"No",
-            //     Status:"Approved",
-            //     RequestTimings:"08/20/2019 11:00AM",
-            //     'Approve/Reject':"Approve"
-            // },
-            // {
-            //     orderName: "CFEnergia power", 
-            //     RequestedBy:"Michael William",
-            //     Owner:"No",
-            //     Status:"NewRequest",
-            //     RequestTimings:"08/20/2019 12:00 PM",
-            //     'Approve/Reject':"Approve"
-            // }
-                
-            // ]
         }
-
-        
-
     }  
 
     componentDidMount() {
@@ -56,7 +18,7 @@ class OrderTracking extends React.Component{
 
         if(AppConfiguration.Setting().orderTrackingLocalData){
             
-        axios.get(`http://www.mocky.io/v2/5dc0d7d233000099001a4d3d`)
+        axios.get(`http://www.mocky.io/v2/5dc0ed7f3300002f311a4d71`)
           .then(res => {
             const orders = res.data;
             this.setState({ orders });

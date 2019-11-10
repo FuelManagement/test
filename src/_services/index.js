@@ -7,4 +7,9 @@ export * from './product.service';
 export * from './rfq.service';
 export * from './userProfile.service';
 export * from './io.service';
+<<<<<<< HEAD
+=======
+export * from './orderTracking.service';
+export * from './orderTrackingRequest.service';
+>>>>>>> 12cc4a0c5fd8062edd3589a4c3bdd54527abb84f
 export * from './gpsAuth.service';

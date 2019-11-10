@@ -111,8 +111,7 @@ class OnBoard_Profile extends React.Component {
                     })}
                     {...Table_Config.Participant.participants.options}
                 />
-
-                <hr />
+ 
                 <br />
 
                 {/* <div className="modal onboard-profile" id="createParticipantModal" tabIndex="-1" role="dialog">
