@@ -36,12 +36,29 @@ function listOrderTracking(){
 
 function submitTrackRequest(data){
    // return Promise.resolve("Submitted");
+   /*
+   "paticipentId":"tarunkathuria.info@gmail.com",
+	"userId":"nand@sieplinc.com",
+	"supplierId":"SupplierId",
+	"poNumber":"21034",
+    "requestOwner":"SupplierName"
+    */
+  
    let user = JSON.parse(localStorage.getItem('user'));
-    data.userId=user.email;
+
+   let payload = {
+    "paticipentId":"tarunkathuria.info@gmail.com",
+	"userId":"nand@sieplinc.com",
+	"supplierId":data.supplierId,
+	"poNumber":data.poNumber,
+    "requestOwner":data.supplierName,
+                   
+   }
+  
     const requestOptions = {
         method: 'POST',
         headers: authHeader(),
-        body: JSON.stringify(data)
+        body: JSON.stringify(payload)
     };
 
     return fetch(config.apiUrl + '/otr/postOTRForUserId', requestOptions).then(handleResponse, handleError);
@@ -49,13 +66,14 @@ function submitTrackRequest(data){
 }
 function submitOTPRequest(data){
     let user = JSON.parse(localStorage.getItem('user'));
-    data.userid=user.email;
+  //  data.userid="user.email";
+    data.userId="nand@sieplinc.com";
     const requestOptions = {
         method: 'POST',
         headers: authHeader(),
         body: JSON.stringify(data)
     };
 
-    return fetch(config.apiUrl + '/otr/post2FAForOTRByUserid', requestOptions).then(handleResponse, handleError);
+    return fetch(config.apiUrl + '/otr/post2FAForOTRByUserId', requestOptions).then(handleResponse, handleError);
 
 }

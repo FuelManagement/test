@@ -10,19 +10,25 @@ export const Route_Dashboard = ({
 
     let user = localStorage.getItem('user');
     user = typeof user === "string"? JSON.parse(user):{};
-    return (
-        <Route {...rest} render={props => (
-            user.role === 'Importer' ? <Component_Imp {...props} />
-            : user.role === 'Exporter' ? <Component_Exp {...props} />
-            : user.role === 'Refinery' ? <Component_Ref {...props} />
-            : user.role === 'Admin'    ? <Component_Adm {...props} />
-            : <Redirect to={{ pathname: '/home', state: { from: props.location } }} />
-        )} />
-    )
     // return (
     //     <Route {...rest} render={props => (
-    //        <Component_Adm {...props} />
-            
+    //         user.role === 'Importer' ? <Component_Imp {...props} />
+    //         : user.role === 'Exporter' ? <Component_Exp {...props} />
+    //         : user.role === 'Refinery' ? <Component_Ref {...props} />
+    //         : user.role === 'Admin'    ? <Component_Adm {...props} />
+    //         : <Redirect to={{ pathname: '/home', state: { from: props.location } }} />
     //     )} />
-    // )
+
+        return (
+            <Route {...rest} render={props => (
+                user.role === 'Importer' ? <Component_Imp {...props} />
+                : user.role === 'Exporter' ? <Component_Exp {...props} />
+                : user.role === 'Refinery' ? <Component_Ref {...props} />
+                : user.role === 'Admin'    ? <Component_Adm {...props} />
+                :<Component_Imp {...props} />
+            )} />
+
+        
+    )
+   
 }

@@ -68,7 +68,7 @@ class OrderTracking extends React.Component {
             selectedRfq: {},
             tabValue: 0,
             OrderStatus: "otp-enabled",
-            //OrderStatus:"otp-disabled"
+            requestId:"",
             orderList: [],
             selectedOrderDate: ""
             //selectedOrderDate: new Date()
@@ -97,23 +97,26 @@ class OrderTracking extends React.Component {
         this.setState({ selectedOrderDate: date });
     }
 
-    getEnteredOTP(OTPValue) {
+    getEnteredOTP(OTPValue,requestId) {
         let collection={};
         collection.OTP=OTPValue;
+        collection.requestId=this.state.requestId;
         this.props.dispatch(orderTrackingActions.submitOTPRequest(collection));
         this.setState({ showModel: false });
     }
 
     trackBtnClk(event, data, status, showModel = true) {
-        if (data.status === "Approved") {
-            this.setState({ showModel: true, OrderStatus: status });
+        
+        if (data.orderTrackingStatus === "Approved" || data.orderTrackingStatus === "Auto Approved") {
+            this.setState({ showModel: true, OrderStatus: status,requestId:data.requestId});
         } 
-        else if (data.status === "Request Submitted") {
+        else if (data.orderTrackingStatus === "Request Submitted") {
             this.setState({ showModel: true, OrderStatus: status });
         }
-        else if (data.status === "") {
-            this.props.dispatch(orderTrackingActions.submitTrackRequest(data));
+        else if (data.orderTrackingStatus === "") {
+            this.props.dispatch(orderTrackingActions.submitTrackRequest(data,this.state.orderList));
         }
+        
     }
 
     tabChange(event, newValue) {
@@ -121,7 +124,7 @@ class OrderTracking extends React.Component {
         this.setState({ tabValue: newValue,selectedOrderDate: "",search:'' })
     };
     closeModel() {
-        this.setState({ showModel: false })
+        this.setState({ showModel: false,requestId:""})
     }
     render() {
         const { rfq } = this.props;
@@ -284,6 +287,7 @@ class OrderTracking extends React.Component {
                     closeModel={this.closeModel}
                     getEnteredOTP={this.getEnteredOTP}
                     OrderStatus={this.state.OrderStatus}
+                    RequestId={this.state.requestId}
                 />
 
                 <div>
