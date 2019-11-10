@@ -29,11 +29,14 @@ const DialogContent = withStyles(theme => ({
 const btnStyle = {
     yes: {
         float: "right", 
-        backgroundColor: "#00ce1b"
+        backgroundColor: "#00ce1b",
+        color:"#ffffff"
+
     },
     no: {
-        backgroundColor: "#ce0030",
-        float: "left"
+        backgroundColor: "#31353D",
+        float: "left",
+        color:"#ffffff"
     }
 }
 
@@ -72,7 +75,7 @@ class ConfirmDialog extends React.Component {
                     </DialogTitle>
                     <DialogContent>
                         <div className="sendAuthenticaion-formDiv">
-                            {props.message?props.message:(<p className="sendAuthenticaion-custhdg">{"Are you sure you want Reject ?"}</p>)}
+                            {props.message?props.message:(<p className="sendAuthenticaion-custhdg">{"Are you sure you want to Reject ?"}</p>)}
                             <div className="sendAuthenticat-submit-row">
                                 {props.decline == ""? "":
                                     <Button
