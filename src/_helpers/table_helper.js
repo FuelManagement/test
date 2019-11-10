@@ -979,7 +979,7 @@ let Table_Config = {
 				Header: 'Status',
 				accessor: 'status',
 				headerClassName:'react-table-header-style',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left', fontWeight: 'bold',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left',
 				color:row.original.status === "Approved" || row.original.status === "Auto Approved"?'Green':(row.original.status === "Rejected"?'red':'orange') }}
 				 title={row.original.status.replace(/([A-Z])/g, ' $1').trim()}>{row.original.status.replace(/([A-Z])/g, ' $1').trim()}</span>
 			}, {
