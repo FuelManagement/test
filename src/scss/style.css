@@ -660,7 +660,7 @@ header .pad-50{
 /* Table styling  */
 .table-heading{
   background-color: #a9aaaa;
-  color: #000000;
+  color: #fff;
   cursor: pointer;
   margin: 0px 0px 0px 0px;
   padding: 10px 24px;
@@ -668,7 +668,7 @@ header .pad-50{
   border-radius: 10px 10px 0px 0px;
 }
 .table-heading:hover,.table-heading:active,.table-heading:focus{
-  background-color: #31353d;
+  background-color: #716c6c;
   color: #ffffff;
 
 }
@@ -691,6 +691,7 @@ header .pad-50{
   color: #00ce1b;
   width: 80%;
   outline: none;
+  padding: 0rem 0.7rem;
 }
 .OTR-reject-btn{
   background-color: #eaeaf0;
@@ -731,8 +732,12 @@ header .pad-50{
   color: #fff !important;
   opacity: 0.8;
 }
-.manage-gps-auth .manage-gps-title{
-  font-size: 2rem;
+ .table-main-heading{
+  font-size: 22px;
+  font-weight: 600;
+  color: gray;
+  font-family: Roboto, 'Segoe UI', Tahoma, sans-serif;
+  display: inline-block;
 }
 .manage-gps-auth .drop-down-sec{
   border: 1px solid #dcdada;

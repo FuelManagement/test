@@ -72,7 +72,7 @@ class Product extends React.Component {
         }
         return (
             <div className="col-md-8 offset-md-3 contentDiv">
-                <h2 style={{display:"inline-block"}}>
+                <h2 style={{display:"inline-block"}} className="table-main-heading">
                     Product
                 </h2>
                 

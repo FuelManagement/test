@@ -979,7 +979,7 @@ let Table_Config = {
 				accessor: 'status',
 				headerClassName:'react-table-header-style',
 				Cell: row => <span style={{ display: 'block', textAlign: 'left', fontWeight: 'bold',
-				color:row.original.status === "Approved" || row.original.status === "AutoApproved"?'Green':(row.original.status === "Rejected"?'red':'orange') }}
+				color:row.original.status === "Approved" || row.original.status === "Auto Approved"?'Green':(row.original.status === "Rejected"?'red':'orange') }}
 				 title={row.original.status.replace(/([A-Z])/g, ' $1').trim()}>{row.original.status.replace(/([A-Z])/g, ' $1').trim()}</span>
 			}, {
 				Header: 'Request Timings',
@@ -992,7 +992,7 @@ let Table_Config = {
 				headerClassName:'react-table-header-style',
 				Cell: row => <div className="row OTR-actions-row">
 					{
-						row.original.status === "AutoApproved" || row.original.status === "Approved" ?
+						row.original.status === "Auto Approved" ?
 						(<button
 							className="btn OTR-approve-btn"
 							disabled={true}
@@ -1010,8 +1010,8 @@ let Table_Config = {
 								<FormControl className="OTR-actions" >
 								<Select
 									id="demo-simple-select"
-									value={ row.original.status==='Rejected'?'Reject':
-									(row.original.status==='Approved'?'Approve':row.original.Approvereject) }
+									value={ row.original.status ==='Rejected'?'Reject':
+									(row.original .status==='Approved'?'Approve':row.original.Approvereject) }
 									onChange={(e)=>props.approveSubmit(e, row.original)}
 								>
 									<MenuItem value="Approve">Approve</MenuItem>

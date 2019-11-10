@@ -51,10 +51,10 @@ class IndicativeOffer extends React.Component {
         }
         return (
             <div className="col-md-9 offset-md-3 contentDiv">
-                <h2 style={{ display: "inline-block" }}>Indicative Offer</h2>
+                {/* <h2 style={{ display: "inline-block" }} className="table-main-heading">Indicative Offer</h2> */}
                 <hr />
                 <div>
-                <h3 className="vendor-text">Indicative Offer To Customer</h3> 
+                <h3 className="vendor-text" className="table-main-heading">Indicative Offer To Customer</h3> 
                 <div className="clearDiv"></div>
                 <br />
                 <ReactTable
