@@ -986,7 +986,8 @@ let Table_Config = {
 				Header: 'Request Timings',
 				accessor: 'createdOn',
 				headerClassName:'react-table-header-style',				
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.createdOn}>{row.original.createdOn}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={dateutility.datefunction(row.original.createdOn,formatutility.MMDDYYYYHHMMSS)}>
+					{dateutility.datefunction(row.original.createdOn,formatutility.MMDDYYYYHHMMSS)}</span>
 			}, {
 				Header: 'Approve/Reject',
 				accessor: 'Approvereject',

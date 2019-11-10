@@ -50,6 +50,7 @@ class SendAuthentication extends Component {
         super(props);
         this.state = this.initialState(this.props.userProfile.mode, this.props.userProfile.userProfile);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit=this.handleSubmit.bind(this);
     }
     initialState(props) {
         let state = {};
@@ -128,6 +129,10 @@ class SendAuthentication extends Component {
         }) ); 
         this.props.dispatch(userProfileActions.changeUserProfile(key, value)); 
       } 
+      handleSubmit(){
+          this.props.sendAuth(this.state.controls.sendAuthenticationEmail.value,this.state.controls.cellPhone.value);
+      }
+    
     render() {
         return (
             <div>
@@ -183,7 +188,7 @@ class SendAuthentication extends Component {
                                 </div>
                             </div>
                             <div className="row sendAuthenticat-submit-row">
-                                <Button variant="contained" className="sendAuthenticat-submit">
+                                <Button variant="contained" onClick={this.handleSubmit} className="sendAuthenticat-submit">
                                     Submit
                                 </Button>
                             </div>

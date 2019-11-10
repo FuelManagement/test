@@ -17,7 +17,7 @@ function getOTRDetailsBysupplier() {
 }
 function postOTRAuthDetailsForCustomer(data) {
     let user = JSON.parse(localStorage.getItem('user'));
-    data.CreatedBy=user.email;
+    data.loginUserId=user.email;
     const requestOptions = {
         method: 'POST',
         headers: authHeader(),
