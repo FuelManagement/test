@@ -15,7 +15,7 @@ function listOrderTracking(){
         OrderTrackingService.listOrderTracking()
         .then(
             orderTrackingList => {
-                dispatch(success(orderTrackingList.pos));
+                dispatch(success(orderTrackingList.message));
                 dispatch(alertActions.clearLoading());
             },
             error => {

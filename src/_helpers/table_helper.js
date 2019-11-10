@@ -918,8 +918,8 @@ let Table_Config = {
 			columns: (props) => [{
 				Header: 'Order #',
 				headerClassName:'react-table-header-style',
-				accessor: 'orderid',
-				Cell: row => <span className="react-table-row-content-align-left" title={row.original.orderid}>{row.original.orderid}</span>
+				accessor: 'poNumber',
+				Cell: row => <span className="react-table-row-content-align-left" title={row.original.poNumber}>{row.original.poNumber}</span>
 			}, {
 				Header: 'Product Name',
 				headerClassName:'react-table-header-style',
@@ -934,21 +934,21 @@ let Table_Config = {
 			}, {
 				Header: 'Status',
 				headerClassName:'react-table-header-style',
-				accessor: 'status',
+				accessor: 'orderTrackingStatus',
 				Cell: row => <span className="react-table-row-content-align-left" style={{ fontWeight: 'normal',
-				color:row.original.status === "Approved" ? 'Green':(row.original.status === "Rejected"?'red':'#17da38')  }} title={row.original.status}>{row.original.status}</span>
+				color:row.original.orderTrackingStatus === "Approved" ? 'Green':(row.original.orderTrackingStatus === "Rejected"?'red':'#17da38')  }} title={row.original.orderTrackingStatus}>{row.original.orderTrackingStatus}</span>
 			}, {
 				Header: 'Track Request',
 				headerClassName:'react-table-header-style',
-				accessor: 'trackRequest',
+				accessor: 'orderTrackingStatus',
 				Cell: row => <div className="row">
 					<button
 						className="btn btn-outline-info btn-sm btn-track"
 						style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
 						// disabled={row.original.status==='Approved'?false:(row.original.status===''?false:true)}
-						onClick={e => { props.trackBtnClk(e, row.original,row.original.status==='Approved'? "track":"otp-disabled") }}
+						onClick={e => { props.trackBtnClk(e, row.original,row.original.orderTrackingStatus==='Approved'? "track":"otp-disabled") }}
 					>
-						{row.original.status===''?'Track':'Track'}
+						{row.original.orderTrackingStatus===''?'Track':'Track'}
 					</button>
 
 				</div>

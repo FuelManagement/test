@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Table_Config, history } from '../../_helpers';
+import { Table_Config, history, dateutility, formatutility } from '../../_helpers';
 import { orderTrackingActions } from '../../_actions'
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -174,8 +174,8 @@ class OrderTracking extends React.Component {
                             </div>
                             <ReactTable
                                 data={this.state.search.trim() !== ""?(this.state.orderList || []).filter(
-                                    f => f.projectID!==undefined &&
-                                      f.projectID.toSting()
+                                    f => f.poNumber!==undefined &&
+                                      f.poNumber.toString()
                                         .toLowerCase()
                                         .includes(
                                           this.state.search.toLowerCase()
@@ -218,11 +218,11 @@ class OrderTracking extends React.Component {
                             </div>
                             <ReactTable
                                 data={this.state.selectedOrderDate.toString().trim() !== ""?(this.state.orderList || []).filter(
-                                    f =>f.isssueDate!==undefined &&
-                                      f.isssueDate.toSting()
+                                    f =>f.poDate!==undefined &&
+                                      dateutility.datefunction(f.poDate,formatutility.MMDDYYYY).toString()
                                         .toLowerCase()
                                         .includes(
-                                          this.state.selectedOrderDate.toString().toLowerCase()
+                                            dateutility.datefunction(this.state.selectedOrderDate,formatutility.MMDDYYYY).toString().toLowerCase()
                                         )):(this.state.orderList || [])}
                                 columns={Table_Config.OrderTrackingRecords.OrderTrackingRecord.columns({ trackBtnClk: this.trackBtnClk.bind(this) })}
                                 {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
@@ -262,11 +262,11 @@ class OrderTracking extends React.Component {
                             </div>
                             <ReactTable
                                 data={this.state.selectedOrderDate.toString().trim() !== ""?(this.state.orderList || []).filter(
-                                    f =>f.reqDelivaryDate!==undefined &&
-                                      f.reqDelivaryDate.toSting()
+                                    f =>f.deliveryDate!==undefined &&
+                                    dateutility.datefunction(f.deliveryDate,formatutility.MMDDYYYY).toString()
                                         .toLowerCase()
                                         .includes(
-                                          this.state.selectedOrderDate.toString().toLowerCase()
+                                            dateutility.datefunction(this.state.selectedOrderDate,formatutility.MMDDYYYY).toString().toLowerCase()
                                         )):(this.state.orderList || [])}
                                 columns={Table_Config.OrderTrackingRecords.OrderTrackingRecord.columns({ trackBtnClk: this.trackBtnClk.bind(this) })}
                                 {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
