@@ -17,8 +17,7 @@ window.$ = $;      // hack
 import 'bootstrap';
 import { TextField, Typography, Tab, IconButton, Tabs, InputBase, Paper, InputAdornment } from '@material-ui/core';
 import {
-    MuiPickersUtilsProvider,
-    KeyboardTimePicker,
+    MuiPickersUtilsProvider, 
     KeyboardDatePicker,
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
@@ -80,6 +79,8 @@ class OrderTracking extends React.Component {
         this.handleDateChange = this.handleDateChange.bind(this);
     }
     componentDidMount() {
+        console.log("orderTracking data");
+        console.log(this.props.orderTracking.data); 
         this.props.dispatch(orderTrackingActions.listOrderTracking());
     }
 

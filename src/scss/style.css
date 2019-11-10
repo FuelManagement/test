@@ -757,7 +757,7 @@ header .pad-50{
   font-weight: normal;
 } 
 .order-tracking-main .ReactTable .rt-thead .rt-resizable-header-content{
-  padding:5px;
+  padding:5px 0px;
 }
 .ReactTable .rt-thead .rt-tr{
   text-align: left !important;
@@ -777,7 +777,7 @@ header .pad-50{
 .react-table-row-content-align-left{
    display: block !important;
    text-align: left !important;
-   padding: 0px 12px !important;
+   
 }
 .ReactTable .rt-tbody .rt-tr-group{
   border-bottom: solid 1px #fff;
@@ -812,9 +812,9 @@ header .pad-50{
 .order-request-table .rt-resizable-header-content{
   padding: 5px 0px;
 }
-.order-request-table .rt-td{
+.order-request-table .rt-td,.ReactTable .rt-td {
   padding: 5px 12px;
 }
 .sendAuthenticaion-model .MuiDialog-paperWidthFalse{
   width: 250px;
-}
+}  
