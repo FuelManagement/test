@@ -5,6 +5,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { dateutility } from './date_helpers';
+import { formatutility } from './format_helpers';
 // import { library } from "@fortawesome/fontawesome-svg-core";
 // import { faEye, faEdit, faCheckSquare } from "@fortawesome/free-solid-svg-icons";
 
@@ -916,8 +918,8 @@ let Table_Config = {
 			columns: (props) => [{
 				Header: 'Order #',
 				headerClassName:'react-table-header-style',
-				accessor: 'orderid',
-				Cell: row => <span className="react-table-row-content-align-left" title={row.original.orderid}>{row.original.orderid}</span>
+				accessor: 'poNumber',
+				Cell: row => <span className="react-table-row-content-align-left" title={row.original.poNumber}>{row.original.poNumber}</span>
 			}, {
 				Header: 'Product Name',
 				headerClassName:'react-table-header-style',
@@ -932,21 +934,21 @@ let Table_Config = {
 			}, {
 				Header: 'Status',
 				headerClassName:'react-table-header-style',
-				accessor: 'status',
+				accessor: 'orderTrackingStatus',
 				Cell: row => <span className="react-table-row-content-align-left" style={{ fontWeight: 'normal',
-				color:row.original.status === "Approved" ? 'Green':(row.original.status === "Rejected"?'red':'#17da38')  }} title={row.original.status}>{row.original.status}</span>
+				color:row.original.orderTrackingStatus === "Approved" ? 'Green':(row.original.orderTrackingStatus === "Rejected"?'red':'#17da38')  }} title={row.original.orderTrackingStatus}>{row.original.orderTrackingStatus}</span>
 			}, {
 				Header: 'Track Request',
 				headerClassName:'react-table-header-style',
-				accessor: 'trackRequest',
+				accessor: 'orderTrackingStatus',
 				Cell: row => <div className="row">
 					<button
 						className="btn btn-outline-info btn-sm btn-track"
 						style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
-						disabled={row.original.status==='Approved'?false:(row.original.status===''?false:true)}
-						onClick={e => { props.trackBtnClk(e, row.original,row.original.status==='Approved'? "track":"otp-disabled") }}
+						// disabled={row.original.status==='Approved'?false:(row.original.status===''?false:true)}
+						onClick={e => { props.trackBtnClk(e, row.original,row.original.orderTrackingStatus==='Approved'? "track":"otp-disabled") }}
 					>
-						{row.original.status===''?'Submit':'Track'}
+						{row.original.orderTrackingStatus===''?'Track':'Track'}
 					</button>
 
 				</div>
@@ -1042,7 +1044,7 @@ let Table_Config = {
 			}, {
 				Header: 'Date',
 				accessor: 'date',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.date}>{row.original.date}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.date}>{dateutility.datefunction(row.original.date,formatutility.MMDDYYYYHHMMSS)}</span>
 			}]
 		}
 	},

@@ -22,14 +22,16 @@ function getOrderTrackingProgress(){
 }
 
 function listOrderTracking(){
-    return Promise.resolve(Common_JsonData.orderTrackingDetails.list);
-    // let user = JSON.parse(localStorage.getItem('user'));
-    // const requestOptions = {
-    //     method: 'GET',
-    //     headers: authHeader()
-    // };
+    //return Promise.resolve(Common_JsonData.orderTrackingDetails.list);
+    let user = JSON.parse(localStorage.getItem('user'));
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
     // return fetch(config.apiUrl + '/product/getPOByParticipantID?participantID='+user.participantID+'&userID='+user.email, requestOptions)
     // .then(handleResponse)
+    return fetch(config.apiUrl + '/otr/getOTRByParticipantId?participantID=tarunkathuria.info@gmail.com&userID=sureshboddu90@gmail.com', requestOptions)
+    .then(handleResponse)
 }
 
 function submitTrackRequest(data){

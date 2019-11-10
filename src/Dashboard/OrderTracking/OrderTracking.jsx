@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Table_Config, history } from '../../_helpers';
+import { Table_Config, history, dateutility, formatutility } from '../../_helpers';
 import { orderTrackingActions } from '../../_actions'
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -103,13 +103,17 @@ class OrderTracking extends React.Component {
     trackBtnClk(event, data, status, showModel = true) {
         if (data.status === "Approved") {
             this.setState({ showModel: true, OrderStatus: status });
-        } else if (data.status === "") {
+        } 
+        else if (data.status === "Request Submitted") {
+            this.setState({ showModel: true, OrderStatus: status });
+        }
+        else if (data.status === "") {
             this.props.dispatch(orderTrackingActions.submitTrackRequest(data));
         }
     }
 
     tabChange(event, newValue) {
-        this.setState({ tabValue: newValue })
+        this.setState({ tabValue: newValue,selectedOrderDate: new Date(),search:'' })
     };
     closeModel() {
         this.setState({ showModel: false })
@@ -155,6 +159,8 @@ class OrderTracking extends React.Component {
                                     className="form-control"
                                     autoComplete="off"
                                     margin="dense"
+                                    value={this.state.search} 
+                                     onChange={e => this.setState({search:e.target.value})} 
                                     // endAdornment={<InputAdornment position="end">Kg</InputAdornment>}
                                     InputProps={{
                                         endAdornment: (
@@ -168,7 +174,13 @@ class OrderTracking extends React.Component {
                                 {/* </Paper> */}
                             </div>
                             <ReactTable
-                                data={this.state.orderList || []}
+                                data={this.state.search.trim() !== ""?(this.state.orderList || []).filter(
+                                    f => f.poNumber!==undefined &&
+                                      f.poNumber.toString()
+                                        .toLowerCase()
+                                        .includes(
+                                          this.state.search.toLowerCase()
+                                        )):(this.state.orderList || [])}
                                 columns={Table_Config.OrderTrackingRecords.OrderTrackingRecord.columns({ trackBtnClk: this.trackBtnClk.bind(this) })}
                                 {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
                             />
@@ -206,7 +218,13 @@ class OrderTracking extends React.Component {
                                 </MuiPickersUtilsProvider>
                             </div>
                             <ReactTable
-                                data={this.state.orderList || []}
+                                data={this.state.selectedOrderDate.toString().trim() !== ""?(this.state.orderList || []).filter(
+                                    f =>f.poDate!==undefined &&
+                                      dateutility.datefunction(f.poDate,formatutility.MMDDYYYY).toString()
+                                        .toLowerCase()
+                                        .includes(
+                                            dateutility.datefunction(this.state.selectedOrderDate,formatutility.MMDDYYYY).toString().toLowerCase()
+                                        )):(this.state.orderList || [])}
                                 columns={Table_Config.OrderTrackingRecords.OrderTrackingRecord.columns({ trackBtnClk: this.trackBtnClk.bind(this) })}
                                 {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
                             />
@@ -244,7 +262,13 @@ class OrderTracking extends React.Component {
                                 </MuiPickersUtilsProvider>
                             </div>
                             <ReactTable
-                                data={this.state.orderList || []}
+                                data={this.state.selectedOrderDate.toString().trim() !== ""?(this.state.orderList || []).filter(
+                                    f =>f.deliveryDate!==undefined &&
+                                    dateutility.datefunction(f.deliveryDate,formatutility.MMDDYYYY).toString()
+                                        .toLowerCase()
+                                        .includes(
+                                            dateutility.datefunction(this.state.selectedOrderDate,formatutility.MMDDYYYY).toString().toLowerCase()
+                                        )):(this.state.orderList || [])}
                                 columns={Table_Config.OrderTrackingRecords.OrderTrackingRecord.columns({ trackBtnClk: this.trackBtnClk.bind(this) })}
                                 {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
                             />

@@ -23,7 +23,7 @@ class OrderTrackingRequest extends React.Component {
             confirmDialog: false,
             selectedRow: {},
             data:[
-                {CustomerName:'1',RequestedBy:'123',Owner:'533',Status:'55',RequestTimings:"55"}
+                {CustomerName:'BP Gas Station',RequestedBy:'Dan Nelson',Owner:'Yes',Status:'New Request',RequestTimings:"10/08/2019 10:15AM"}
             ]
         }
         this.approveSubmit = this.approveSubmit.bind(this);
