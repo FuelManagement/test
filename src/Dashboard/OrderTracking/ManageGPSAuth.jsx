@@ -136,10 +136,7 @@ class ManageGPSAuth extends React.Component {
 
     render() {
         const Actions = [
-            {
-                value: '',
-                label: 'None'
-            },
+            
             {
                 value: 'Approve',
                 label: 'Approve'
@@ -169,8 +166,8 @@ class ManageGPSAuth extends React.Component {
                                     error={this.state.customerError}
                                 >
                                     <MenuItem value={false}>None</MenuItem>
-                                    {this.props.gpsAuth.customers && this.props.gpsAuth.customers.map(option => (
-                                        <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                                    {this.props.gpsAuth.customers.data && this.props.gpsAuth.customers.data.map(option => (
+                                        <MenuItem key={option.customerParticipantName} value={option.customerParticipantName}>{option.customerParticipantName}</MenuItem>
                                     ))}
                                 </TextField>
                             </div>
@@ -190,10 +187,10 @@ class ManageGPSAuth extends React.Component {
                                     error={this.state.orderError}
                                 >
                                     <MenuItem value={false}>None</MenuItem>
-                                    {this.props.gpsAuth.customerOrders?<MenuItem value="All">All</MenuItem>:""}
-                                    {this.props.gpsAuth.customerOrders && this.props.gpsAuth.customerOrders.map(option => 
-                                        {return !option.status?<MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>:""}
-                                    )}
+                                    {/* {this.props.gpsAuth.customerOrders?<MenuItem value="All">All</MenuItem>:""} */}
+                                    {this.props.gpsAuth.customers.data && this.props.gpsAuth.customers.data.map(option => (
+                                        <MenuItem key={option.poNumber} value={option.poNumber}>{option.poNumber}</MenuItem>
+                                    ))}
                                 </TextField>
                             </div>
                             <div className="col-md-4  ">
@@ -242,6 +239,7 @@ class ManageGPSAuth extends React.Component {
 
 function mapStateToProps(state) {
     const { gpsAuth } = state;
+    console.log("gpsAuth data",gpsAuth);
     return { gpsAuth };
 
 }
