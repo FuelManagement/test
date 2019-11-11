@@ -49,6 +49,7 @@ class OTPModel extends React.Component {
         }
         this.handleEnter = this.handleEnter.bind(this);
         this.getEnteredOTP=this.getEnteredOTP.bind(this);
+        this.reSendOTP=this.reSendOTP.bind(this);
     }
     handleEnter(e) { 
         const form = event.target.form;
@@ -61,6 +62,10 @@ class OTPModel extends React.Component {
     }
     getEnteredOTP(){
         this.props.getEnteredOTP(Object.values(this.state).toString().replace(/,/g, ''),this.props.RequestId);
+    }
+    reSendOTP(){
+        this.props.getReSendOTP(this.props.RequestId);
+
     }
     //Allow only numbers 
 allowOnlynumbers(e) {
@@ -99,8 +104,8 @@ allowOnlynumbers(e) {
                                 </form>
                             </div>
                             <div className='otp-text-notif'>
-                                <p className='m0'>Did you receive the code ? if not,</p>
-                                <a href='#'>click here to resend</a>
+                                <p className='m0'>Did you receive the code ? if not,</p> 
+                                <button className="reSend-otp" onClick={this.reSendOTP}>click here to resend</button>
                             </div>
                             <div className='order-tracking-opt-submit'>
                                 <button className='btn btn-sucess' onClick={this.getEnteredOTP}>Submit</button>

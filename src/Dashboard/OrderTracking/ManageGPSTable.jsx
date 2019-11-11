@@ -15,7 +15,7 @@ class ManageGPSTable extends React.Component {
     constructor(props) {
         super(props);
         this.onClickItem = this.onClickItem.bind(this);
-        this.state = { recordsDataValue: [], randomId: null, clickedItem: this.props.getClickedItem };
+        this.state = { recordsDataValue: [], randomId: null, clickedItem: this.props.getClickedItem,bgColor:'unset',selected:null };
     }
 
 
@@ -24,7 +24,7 @@ class ManageGPSTable extends React.Component {
         if (nextProps.dataItem.randomId != prevState.randomId) {
 
             var currentdate = new Date();
-           
+
             let obj = {
                 customerName: nextProps.dataItem.formData.customername.value,
                 orderId: nextProps.dataItem.formData.orderId.value,
@@ -35,23 +35,23 @@ class ManageGPSTable extends React.Component {
 
             nextProps.getAddedCallback("added data successfully");
 
-            let array=[...prevState.recordsDataValue];
-            if(formatutility.isEmpty(array.find(f=>f.orderId===obj.orderId && f.customerName===obj.customerName))){
-             
-            array.push(obj);
-           }
-           else{
-            array.find(f=>f.orderId===obj.orderId && f.customerName===obj.customerName).status=obj.status;
-            array.find(f=>f.orderId===obj.orderId && f.customerName===obj.customerName).date=obj.date;
-           }
-            return { recordsDataValue:array, randomId: nextProps.dataItem.randomId }
+            let array = [...prevState.recordsDataValue];
+            if (formatutility.isEmpty(array.find(f => f.orderId === obj.orderId && f.customerName === obj.customerName))) {
+
+                array.push(obj);
+            }
+            else {
+                array.find(f => f.orderId === obj.orderId && f.customerName === obj.customerName).status = obj.status;
+                array.find(f => f.orderId === obj.orderId && f.customerName === obj.customerName).date = obj.date;
+            }
+            return { recordsDataValue: array, randomId: nextProps.dataItem.randomId }
         }
 
         return null;
     }
 
     onClickItem(e, t, rowInfo) {
-        console.log("rowItem", rowInfo.original);
+        console.log("rowItem", rowInfo.index); 
         this.state.clickedItem(rowInfo.original);
     }
 
@@ -61,12 +61,21 @@ class ManageGPSTable extends React.Component {
                 <ReactTable
                     data={this.state.recordsDataValue || []}
                     columns={Table_Config.ManageGPSTable.ManageGPSTableRecords.columns()}
-                    {...Table_Config.ManageGPSTable.ManageGPSTableRecords.options}
-                    getTrProps={(state, rowInfo, column) => {
-                        return {
-                            onClick: (e, t) => { this.onClickItem(e, t, rowInfo) },
-
-                        }
+                    {...Table_Config.ManageGPSTable.ManageGPSTableRecords.options} 
+                    getTrProps={(state, rowInfo,column) => {
+                        if (rowInfo && rowInfo.row) {
+                            return {
+                          
+                                onClick: (e, t) => { 
+                                    this.onClickItem(e, t, rowInfo);
+                                    this.setState({selected:rowInfo.index})
+                                 },
+                                  style: {
+                                       background:  rowInfo.index === this.state.selected  ? '#31353D' : 'unset', color: rowInfo.index === this.state.selected ? 'white' : 'black'
+                                       
+                                    }
+                            }
+                        } else { return {} }
                     }}
                 />
             </div>
