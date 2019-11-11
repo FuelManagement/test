@@ -31,10 +31,10 @@ function listOrderTracking(){
     function failure(error) { return { type: orderTrackingConst.ORDER_TRACKING_LIST_ERROR, error } }
 }
 
-function getOrderTrackingProgress(){
+function getOrderTrackingProgress(data){
     return dispatch => {
         dispatch(alertActions.loading());
-        OrderTrackingService.getOrderTrackingProgress()
+        OrderTrackingService.getOrderTrackingProgress(data)
         .then(
             orderTrackingDetails => {
                 dispatch(success(orderTrackingDetails));
@@ -91,18 +91,22 @@ function submitOTPRequest(data){
             orderTrackingList => {
                 if(orderTrackingList.statusCode===200){
                 dispatch(alertActions.success(orderTrackingList.message));
-                dispatch(getOrderTrackingProgress());
+                dispatch(getOrderTrackingProgress(data));
                 history.push('/order-progress');
                 }else{
                     dispatch(alertActions.error(orderTrackingList.message)); 
+                    dispatch(getOrderTrackingProgress(data));
+                    history.push('/order-progress');
                    
                 }
                 dispatch(alertActions.clearLoading());
                
             },
             error => {
-                dispatch(alertActions.error(error.message));
-                dispatch(alertActions.clearLoading());
+                // dispatch(alertActions.error(error.message));
+                // dispatch(alertActions.clearLoading());
+                dispatch(getOrderTrackingProgress(data));
+                history.push('/order-progress');
             }
         );
     };
