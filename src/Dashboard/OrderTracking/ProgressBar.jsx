@@ -72,7 +72,7 @@ class OrderProgressBar extends React.Component {
                 <div className="">
                     <div className='col-lg-9 add-rfq-main progress-main'>
                        <div className="progress-expand-pannel">
-                            <ExpansionPanel  >
+                            <ExpansionPanel defaultExpanded={true}>
                                 <ExpansionPanelSummary
                                     expandIcon={<ExpandMoreIcon />}
                                     aria-label="Expand"
