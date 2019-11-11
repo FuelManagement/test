@@ -27,7 +27,7 @@ class ManageGPSTable extends React.Component {
            
             let obj = {
                 customerName: nextProps.dataItem.formData.customername.value,
-                orderid: nextProps.dataItem.formData.orderid.value,
+                orderId: nextProps.dataItem.formData.orderId.value,
                 status: nextProps.dataItem.formData.action.value,
                 date: currentdate,
                 id: nextProps.dataItem.randomId
@@ -36,13 +36,13 @@ class ManageGPSTable extends React.Component {
             nextProps.getAddedCallback("added data successfully");
 
             let array=[...prevState.recordsDataValue];
-            if(formatutility.isEmpty(array.find(f=>f.orderid===obj.orderid && f.customerName===obj.customerName))){
+            if(formatutility.isEmpty(array.find(f=>f.orderId===obj.orderId && f.customerName===obj.customerName))){
              
             array.push(obj);
            }
            else{
-            array.find(f=>f.orderid===obj.orderid && f.customerName===obj.customerName).status=obj.status;
-            array.find(f=>f.orderid===obj.orderid && f.customerName===obj.customerName).date=obj.date;
+            array.find(f=>f.orderId===obj.orderId && f.customerName===obj.customerName).status=obj.status;
+            array.find(f=>f.orderId===obj.orderId && f.customerName===obj.customerName).date=obj.date;
            }
             return { recordsDataValue:array, randomId: nextProps.dataItem.randomId }
         }
