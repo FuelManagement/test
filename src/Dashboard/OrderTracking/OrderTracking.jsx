@@ -70,7 +70,7 @@ class OrderTracking extends React.Component {
             OrderStatus: "otp-enabled",
             OTRStatusId:"",
             orderList: [],
-            selectedOrderDate: ""
+            selectedOrderDate: new Date()
             //selectedOrderDate: new Date()
             
         }
@@ -93,7 +93,7 @@ class OrderTracking extends React.Component {
     handleDateChange(date) {
         console.log("date val",date);
         if(date == null){
-            date = "";
+            date =  new Date();
         }
         this.setState({ selectedOrderDate: date });
     }
@@ -222,7 +222,7 @@ class OrderTracking extends React.Component {
                                         id="date-picker-dialog"
                                         label="Search by Order Date"
                                         format="MM/dd/yyyy"
-                                        value={this.state.selectedOrderDate}
+                                        value={dateutility.datefunction(this.state.selectedOrderDate,formatutility.MMDDYYYY)}
                                         onChange={this.handleDateChange}
                                         clearable
                                         inputVariant="outlined"
@@ -266,7 +266,7 @@ class OrderTracking extends React.Component {
                                         id="date-picker-dialog"
                                         label="Search by Delivery Date"
                                         format="MM/dd/yyyy"
-                                        value={this.state.selectedOrderDate}
+                                        value={new Date(this.state.selectedOrderDate)}
                                         onChange={this.handleDateChange}
                                         clearable
                                         inputVariant="outlined"

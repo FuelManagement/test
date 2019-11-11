@@ -76,10 +76,10 @@ class OrderProgressBar extends React.Component {
                                     aria-controls="additional-actions1-content"
                                     id="additional-actions1-header"
                                 >
-                                    <div className="col-md-4">Order No: {orderno} </div>
-                                    <div className="col-md-4" onClick={this.openModal}>Tx No #:
+                                    <div className="col-md-4">Order No: {this.props.order.poID} </div>
+                                    <div className="col-md-4" >Tx No #:
                                         <span className="tax-no">{txno}</span></div>
-                                    <div className="col-md-4">ETA:{eta}</div>
+                                    <div className="col-md-4">ETA:{ dateutility.datefunction(this.props.order.reqDelivaryDate,formatutility.MMDDYYYY)}</div>
 
 
                                 </ExpansionPanelSummary>
@@ -89,7 +89,7 @@ class OrderProgressBar extends React.Component {
                                         <div className="col-md-12">
                                             <ProgressBar
                                                 filledBackground="linear-gradient(to right, green, green)"
-                                                percent={orderPercentage}
+                                                percent={0}
                                             >
                                                 <Step transition="scale">
                                                     {({ accomplished, index }) => (
@@ -155,7 +155,7 @@ class OrderProgressBar extends React.Component {
 export { OrderProgressBar };
 
 
-import { Table_Config } from '../../_helpers';
+import { Table_Config, dateutility, formatutility } from '../../_helpers';
 let Table = (props) => (
     <ReactTable
         data={props.data || []}

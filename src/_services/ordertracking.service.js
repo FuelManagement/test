@@ -15,7 +15,7 @@ function getOrderTrackingProgress(data){
     let user = JSON.parse(localStorage.getItem('user'));
     const requestOptions = {
         method: 'GET',
-        headers: authHeader()
+        headers: authHeader() 
     };
     //  return fetch(config.apiUrl + '/otr/GetOTDetailsByUserId?userID'+user.regesterid+'@ID='+data.OTRStatusId, requestOptions)
     //  .then(handleResponse)

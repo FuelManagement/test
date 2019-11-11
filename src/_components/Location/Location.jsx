@@ -2,6 +2,7 @@ import React from "react";
 import GoogleMapReact from "google-map-react";
 import ReactTooltip from "react-tooltip";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { formatutility } from '../../_helpers';
 const AnyReactComponent = props => (
   <div>
     <div
@@ -26,11 +27,11 @@ const AnyReactComponent = props => (
       id="Tooltiploc"
       getContent={dataTip => (
         <div className="user-info">
-          <span className="user-role">Order #: 1234 </span> <br />
-          <span className="user-role">Origin: Texas </span> <br />
-          <span className="user-role">Designation: Tuspan </span> <br />
-          <span className="user-role">License plate: I1234 </span> <br />
-          <span className="user-role">Driver Name: Tom </span> <br />
+          <span className="user-role">Order #: {props.orderId} </span> <br />
+          <span className="user-role">Origin: Louisiana </span> <br />
+          <span className="user-role">Destination: Mexico City </span> <br />
+          <span className="user-role">License plate: {props.licensePlate} </span> <br />
+          <span className="user-role">Driver Name: {props.driverName} </span> <br />
 
         </div>
       )}
@@ -42,20 +43,23 @@ const AnyReactComponent = props => (
 class Locations extends React.Component {
   constructor(props) {
     super(props);
+    this.state={location:this.props.location,orderId:this.props.orderId}
   }
-
+  UNSAFE_componentWillReceiveProps(prevProps) {
+    if(!formatutility.isEmpty(prevProps.location) && JSON.stringify(prevProps.location)!==JSON.stringify(this.state.location))
+ {
+     this.setState({location:prevProps.location,orderId:prevProps.orderId})
+ }
+ }
+ shouldComponentUpdate(){
+   return true;
+ }
   render() {
-    console.log(this.props.location);
+   
     let defaultProps = {
       center: {
-        lat:
-          this.props.location !== undefined && this.props.location.length > 0
-            ? this.props.location[0].lat
-            : 40.73061,
-        lng:
-          this.props.location !== undefined && this.props.location.length > 0
-            ? this.props.location[0].lng
-            : -73.935242
+        lat: 40.73061,
+        lng: -73.935242
       },
       zoom: 11
     };
@@ -67,15 +71,19 @@ class Locations extends React.Component {
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
         >
-          {this.props.location && this.props.location.map((loc, index) => (
+         
             <AnyReactComponent
-              key={index}
-              lat={loc.lat}
-              lng={loc.lng}
+              
+              lat={40.73061}
+              lng={-73.935242}
               title="order"
-
+              driverName={this.state.location!==undefined && this.state.location.driverName!==undefined?this.state.location.driverName:''}
+              licensePlate={this.state.location!==undefined && this.state.location.licensePlate!==undefined?this.state.location.licensePlate:''}
+              transportMode={this.state.location!==undefined && this.state.location.transportMode!==undefined?this.state.location.transportMode:''}
+              status={this.state.location!==undefined && this.state.location.status!==undefined?this.state.location.status:''}
+              orderId={this.state.orderId}
             />
-          ))}
+        
         </GoogleMapReact>
       </div>
     );
