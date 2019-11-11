@@ -60,7 +60,7 @@ class OTPModel extends React.Component {
         event.preventDefault();
     }
     getEnteredOTP(){
-        this.props.getEnteredOTP(Object.values(this.state).toString().replace(/,/g, ''),this.props.RequestId);
+        this.props.getEnteredOTP(Object.values(this.state).toString().replace(/,/g, ''),this.props.OTRStatusId);
     }
     //Allow only numbers 
 allowOnlynumbers(e) {

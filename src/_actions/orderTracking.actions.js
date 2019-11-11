@@ -60,7 +60,7 @@ function submitTrackRequest(data,orderList){
             response => {
                 if(response.statusCode===200){
                     orderList.find(f=>f.poNumber===response.data.orderId).orderTrackingStatus=response.data.status;
-                    orderList.find(f=>f.poNumber===response.data.orderId).requestId=response.data.requestId;
+                    orderList.find(f=>f.poNumber===response.data.orderId).OTRStatusId=response.data.OTRStatusId;
                     dispatch(successOrderList(orderList));
                     dispatch(alertActions.success("Your request has been submitted.Please check your mail for OTP."));
                 }

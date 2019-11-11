@@ -961,7 +961,7 @@ let Table_Config = {
 			options: { ...globalOptions },
 			columns: (props) => [{
 				Header: 'Customer Name',
-				accessor: 'customerParticipantID',
+				accessor: 'CustomerParticipantName',
 				headerClassName:'react-table-header-style',
 				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.customerParticipantID}>{row.original.customerParticipantID}</span>
 			}, {

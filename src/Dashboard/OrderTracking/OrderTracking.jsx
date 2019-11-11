@@ -68,7 +68,7 @@ class OrderTracking extends React.Component {
             selectedRfq: {},
             tabValue: 0,
             OrderStatus: "otp-enabled",
-            requestId:"",
+            OTRStatusId:"",
             orderList: [],
             selectedOrderDate: ""
             //selectedOrderDate: new Date()
@@ -97,10 +97,10 @@ class OrderTracking extends React.Component {
         this.setState({ selectedOrderDate: date });
     }
 
-    getEnteredOTP(OTPValue,requestId) {
+    getEnteredOTP(OTPValue,OTRStatusId) {
         let collection={};
         collection.OTP=OTPValue;
-        collection.requestId=this.state.requestId;
+        collection.requestId=this.state.OTRStatusId;
         this.props.dispatch(orderTrackingActions.submitOTPRequest(collection));
         this.setState({ showModel: false });
     }
@@ -108,7 +108,7 @@ class OrderTracking extends React.Component {
     trackBtnClk(event, data, status, showModel = true) {
         
         if (data.orderTrackingStatus === "Approved" || data.orderTrackingStatus === "Auto Approved") {
-            this.setState({ showModel: true, OrderStatus: status,requestId:data.requestId});
+            this.setState({ showModel: true, OrderStatus: status,OTRStatusId:data.OTRStatusId});
         } 
         else if (data.orderTrackingStatus === "Request Submitted") {
             this.setState({ showModel: true, OrderStatus: status });
@@ -124,7 +124,7 @@ class OrderTracking extends React.Component {
         this.setState({ tabValue: newValue,selectedOrderDate: "",search:'' })
     };
     closeModel() {
-        this.setState({ showModel: false,requestId:""})
+        this.setState({ showModel: false,OTRStatusId:""})
     }
     render() {
         const { rfq } = this.props;
@@ -287,7 +287,7 @@ class OrderTracking extends React.Component {
                     closeModel={this.closeModel}
                     getEnteredOTP={this.getEnteredOTP}
                     OrderStatus={this.state.OrderStatus}
-                    RequestId={this.state.requestId}
+                    OTRStatusId={this.state.OTRStatusId}
                 />
 
                 <div>

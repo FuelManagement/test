@@ -17,7 +17,7 @@ function getOrderTrackingProgress(data){
         method: 'GET',
         headers: authHeader()
     };
-    //  return fetch(config.apiUrl + '/otr/GetOTDetailsByUserId?userID'+user.regesterid+'@ID='+data.requestId, requestOptions)
+    //  return fetch(config.apiUrl + '/otr/GetOTDetailsByUserId?userID'+user.regesterid+'@ID='+data.OTRStatusId, requestOptions)
     //  .then(handleResponse)
     return fetch(config.apiUrl + '/product/getGPSDetailsByReqId?userID=tarun@gmail.com&ID=k2u8xme4', requestOptions)
      .then(handleResponse)
@@ -31,10 +31,10 @@ function listOrderTracking(){
         method: 'GET',
         headers: authHeader()
     };
-    // return fetch(config.apiUrl + '/product/getPOByParticipantID?participantID='+user.participantID+'&userID='+user.email, requestOptions)
-    // .then(handleResponse)
-    return fetch(config.apiUrl + '/otr/getOTRByParticipantId?participantID=tarunkathuria.info@gmail.com&userID=sureshboddu90@gmail.com', requestOptions)
-    .then(handleResponse)
+ //   return fetch(config.apiUrl + '/product/getPOByParticipantID?participantID='+user.particpantId+'&userID='+user.email, requestOptions)
+  //   .then(handleResponse)
+   return fetch(config.apiUrl + '/otr/getOTRByParticipantId?participantID=tarunkathuria.info@gmail.com&userID=nand@sieplinc.com', requestOptions)
+   .then(handleResponse)
 }
 
 function submitTrackRequest(data){
@@ -70,11 +70,17 @@ function submitTrackRequest(data){
 function submitOTPRequest(data){
     let user = JSON.parse(localStorage.getItem('user'));
   //  data.userid="user.email";
+    let payload =
+    {
+        "OTP" : data.OTP ,
+        "requestId" : data.requestId,
+         "userId" : "nand@sieplinc.com"
+    }
     data.userId="nand@sieplinc.com";
     const requestOptions = {
         method: 'POST',
         headers: authHeader(),
-        body: JSON.stringify(data)
+        body: JSON.stringify(payload)
     };
 
     return fetch(config.apiUrl + '/otr/post2FAForOTRByUserId', requestOptions).then(handleResponse, handleError);
