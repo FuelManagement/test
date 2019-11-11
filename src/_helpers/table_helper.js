@@ -1036,7 +1036,7 @@ let Table_Config = {
 			}, {
 				Header: 'Order #',
 				accessor: 'orderId',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.orderid}>{row.original.orderid}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.orderId}>{row.original.orderId}</span>
 			}, 
 			 {
 				Header: 'Status',
