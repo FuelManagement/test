@@ -3,73 +3,63 @@ import { connect } from 'react-redux';
 import { Locations } from '../../_components/Location/Location';
 import { OrderProgressBar } from './ProgressBar';
 import { orderTrackingActions } from '../../_actions';
+import { formatutility } from '../../_helpers';
 
 class OrderStatusWithMap extends React.Component {
     constructor(props) {
         super(props);
-    }
-    componentDidMount(){
-        this.props.dispatch(orderTrackingActions.getOrderTrackingProgress());
-    }
-
-    UNSAFE_componentWillReceiveProps() {
-        if (this.props.orderTrackingDetails.orders && this.props.orderTrackingDetails.orders.length) {
-            this.setState({orders});
+        this.state={
+            orders:{
+                gps: formatutility.isEmpty(this.props.orderTracking.orders)?{}:this.props.orderTracking.orders.gps_details,
+                po_details: formatutility.isEmpty(this.props.orderTracking.orders)?{}:this.props.orderTracking.orders.po_details,
+                requestId:formatutility.isEmpty(this.props.orderTracking.orders)?{}:this.props.orderTracking.orders.requestId
+            }
         }
     }
+    componentDidMount(){
+       
+       this.props.dispatch(orderTrackingActions.getOrderTrackingProgress());
+    }
+    UNSAFE_componentWillReceiveProps(prevProps) {
+       if(!formatutility.isEmpty(prevProps.orderTracking.orders) && JSON.stringify(prevProps.orderTracking.orders)!==JSON.stringify(this.props.orderTracking.orders))
+    {
+        this.setState({orders:{
+            gps: prevProps.orderTracking.orders.gps_details,
+            po_details: prevProps.orderTracking.orders.po_details,
+            requestId:prevProps.orderTracking.orders.requestId
+        
+        }})
+    }
+    }
+    
 
     render() {
-               
-        // const orders = [
-        //     {
-        //         "orderno": 201333,
-        //         "txno": "1756422245648721",
-        //         "eta": "08/20/219 04:00 PM",
-        //         "orderPercentage":45
-        //     },
-        //     {
-        //         "orderno": 201334,
-        //         "txno": "1756422245648722",
-        //         "eta": "12/20/219 09:00 AM",
-        //         "orderPercentage":78
-        //     },
-        //     {
-        //         "orderno": 201335,
-        //         "txno": "1756422245648723",
-        //         "eta": "09/20/219 11:00 AM",
-        //         "orderPercentage":65
-
-        //     }]
         return <div>
             <div className='col-lg-9 add-rfq-main progress-main'>
                 <div className="row order-track-status-map">
                     <div className="col-md-4">
-                        <p className="progress-headText">Customer: </p>
+                        <p className="progress-headText">Customer: {this.state.orders['po_details'].supplierName!==undefined?this.state.orders['po_details'].supplierName:''} </p>
                     </div>
                     <div className="col-md-4"></div>
                     <div className="col-md-4">
-                        <p className="progress-headText ">Order #: </p>
+                        <p className="progress-headText ">Order #: {this.state.orders['po_details'].poID!==undefined?this.state.orders['po_details'].poID:''}</p>
                     </div>
                 </div>
                 <div className='gps-google-map'>
-                    <Locations />
+                   <Locations location={this.state.orders['gps_details']} orderID={this.state.orders['po_details'].poID!==undefined?this.state.orders['po_details'].poID:''}/> 
                 </div>
-
             </div>
-            
-            {orderTrackingDetails.map((order, idx) => (
-                <React.Fragment key={idx}>
-                    <br />
-                    <OrderProgressBar order={order} />
-                </React.Fragment>
-            ))}
+            <React.Fragment>
+                <br />
+                <OrderProgressBar order={this.state.orders['po_details']} />
+            </React.Fragment>
         </div>
     }
 }
 
 function mapStateToProps(state) {
-    const { OrderStatusWithMap={} } = state;
-    return { OrderStatusWithMap };
+    console.log(state.orderTracking);
+    return { orderTracking:state.orderTracking };
 }
 
 const connectedHomePage = connect(mapStateToProps)(OrderStatusWithMap);
