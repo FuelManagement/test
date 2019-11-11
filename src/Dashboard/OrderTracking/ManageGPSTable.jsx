@@ -21,30 +21,36 @@ class ManageGPSTable extends React.Component {
 
     static getDerivedStateFromProps(nextProps, prevState) {
         console.log("table props 1", nextProps);
-        if (nextProps.dataItem.randomId != prevState.randomId) {
+        // if (nextProps.dataItem.randomId != prevState.randomId) {
+        if (nextProps.dataItem != undefined && nextProps.dataItem.length > 0) {
 
-            var currentdate = new Date();
+            //let array = [...prevState.recordsDataValue];
+            let array = [];
+            nextProps.dataItem.filter(option => option.status != "")
+            .map(option => {
+                var currentdate = new Date();
 
-            let obj = {
-                customerName: nextProps.dataItem.formData.customername.value,
-                orderId: nextProps.dataItem.formData.orderId.value,
-                status: nextProps.dataItem.formData.action.value,
-                date: currentdate,
-                id: nextProps.dataItem.randomId
-            };
-
-            nextProps.getAddedCallback("added data successfully");
-
-            let array = [...prevState.recordsDataValue];
-            if (formatutility.isEmpty(array.find(f => f.orderId === obj.orderId && f.customerName === obj.customerName))) {
-
-                array.push(obj);
-            }
-            else {
-                array.find(f => f.orderId === obj.orderId && f.customerName === obj.customerName).status = obj.status;
-                array.find(f => f.orderId === obj.orderId && f.customerName === obj.customerName).date = obj.date;
-            }
-            return { recordsDataValue: array, randomId: nextProps.dataItem.randomId }
+                let obj = {
+                    customerName: option.customerParticipantName,
+                    orderId: option.orderId,
+                    status: option.status,
+                    date: currentdate,
+                    id: "nextProps.dataItem.randomId"
+                };
+                //nextProps.getAddedCallback("added data successfully");
+    
+                
+                if (formatutility.isEmpty(array.find(f => f.orderId === obj.orderId && f.customerName === obj.customerName))) {
+    
+                    array.push(obj);
+                }
+                else {
+                    array.find(f => f.orderId === obj.orderId && f.customerName === obj.customerName).status = obj.status;
+                    array.find(f => f.orderId === obj.orderId && f.customerName === obj.customerName).date = obj.date;
+                }
+            })
+            console.log("Array filtered data",array)            
+            return { recordsDataValue: array, randomId: "nextProps.dataItem.randomId" }
         }
 
         return null;

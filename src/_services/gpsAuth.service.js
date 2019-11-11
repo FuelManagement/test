@@ -24,8 +24,18 @@ function getCustomerByCarrierId() {
     return fetch(config.apiUrl + '/otr/getCustomersByCarrierID?carrierId=energroup.com', requestOptions).then(handleResponse)
 }
 
-function otrGpsAuthForCustomer() {
-
+function otrGpsAuthForCustomer(customerDetail) {
+    
+    let user = JSON.parse(localStorage.getItem('user'));
+    customerDetail["carrierId"] = user.participantID;
+    
+      const requestOptions = {
+          method: 'POST',
+          headers: authHeader(),
+          body: JSON.stringify(customerDetail)
+      };
+  
+      return fetch(config.apiUrl + '/otr/postOTRGPSAuthForCustomer', requestOptions).then(handleResponse, handleError);
 }
 
 function getCustomerOrders(data){

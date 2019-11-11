@@ -1036,13 +1036,13 @@ let Table_Config = {
 			}, {
 				Header: 'Order #',
 				accessor: 'orderId',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.orderid}>{row.original.orderid}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.orderId}>{row.original.orderId}</span>
 			}, 
 			 {
 				Header: 'Status',
 				accessor: 'status',
 				Cell: row => <span style={{ display: 'block', textAlign: 'left',fontWeight: 'bold'  ,color:
-				row.original.status === "Approve" ?'#29AD01': 'red'  }} title={row.original.status}>{row.original.status}</span>
+				row.original.status === "Approved" ?'#29AD01': 'red'  }} title={row.original.status}>{row.original.status}</span>
 			}, {
 				Header: 'Date',
 				accessor: 'date',
