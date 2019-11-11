@@ -7,3 +7,4 @@ export * from './UserProfile';
 export * from './IndicativeOffer';
 export * from './OrderTracking';
 export * from './OrderTrackingRequest';
+export * from './Volumetric';

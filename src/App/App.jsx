@@ -110,6 +110,7 @@ class App extends React.Component {
                                 <Route path="/order-progress" exact component={Dashboard.OrderStatusWithMap} />
                                 <Route path="/orderTracking-request" exact component={Dashboard.OrderTrackingRequest} />
                                 <Route path="/order-tracking/manage-gps-auth" exact component={Dashboard.ManageGPSAuth}/>
+                                <Route path="/volumetric" exact component={Dashboard.Volumetric}/>
                             </React.Fragment>
                         </ Router>
                     </div>

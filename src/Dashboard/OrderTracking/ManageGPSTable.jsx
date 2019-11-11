@@ -15,7 +15,7 @@ class ManageGPSTable extends React.Component {
     constructor(props) {
         super(props);
         this.onClickItem = this.onClickItem.bind(this);
-        this.state = { recordsDataValue: [], randomId: null, clickedItem: this.props.getClickedItem };
+        this.state = { recordsDataValue: [], randomId: null, clickedItem: this.props.getClickedItem,bgColor:'unset',selected:null };
     }
 
 
@@ -57,7 +57,7 @@ class ManageGPSTable extends React.Component {
     }
 
     onClickItem(e, t, rowInfo) {
-        console.log("rowItem", rowInfo.original);
+        console.log("rowItem", rowInfo.index); 
         this.state.clickedItem(rowInfo.original);
     }
 
@@ -67,12 +67,21 @@ class ManageGPSTable extends React.Component {
                 <ReactTable
                     data={this.state.recordsDataValue || []}
                     columns={Table_Config.ManageGPSTable.ManageGPSTableRecords.columns()}
-                    {...Table_Config.ManageGPSTable.ManageGPSTableRecords.options}
-                    getTrProps={(state, rowInfo, column) => {
-                        return {
-                            onClick: (e, t) => { this.onClickItem(e, t, rowInfo) },
-
-                        }
+                    {...Table_Config.ManageGPSTable.ManageGPSTableRecords.options} 
+                    getTrProps={(state, rowInfo,column) => {
+                        if (rowInfo && rowInfo.row) {
+                            return {
+                          
+                                onClick: (e, t) => { 
+                                    this.onClickItem(e, t, rowInfo);
+                                    this.setState({selected:rowInfo.index})
+                                 },
+                                  style: {
+                                       background:  rowInfo.index === this.state.selected  ? '#31353D' : 'unset', color: rowInfo.index === this.state.selected ? 'white' : 'black'
+                                       
+                                    }
+                            }
+                        } else { return {} }
                     }}
                 />
             </div>
