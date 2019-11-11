@@ -963,7 +963,7 @@ let Table_Config = {
 				Header: 'Customer Name',
 				accessor: 'CustomerParticipantName',
 				headerClassName:'react-table-header-style',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.customerParticipantID}>{row.original.customerParticipantID}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.CustomerParticipantName}>{row.original.CustomerParticipantName}</span>
 			}, {
 				Header: 'Requested By',
 				accessor: 'CustomerName',
@@ -974,7 +974,8 @@ let Table_Config = {
 				accessor: 'userRole',
 				headerClassName:'react-table-header-style',
 				maxWidth: 100,
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.userRole}>{row.original.userRole}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.userRole}>
+					{row.original.userRole === "Admin" ? "Yes":"No"}</span>
 			}, {
 				Header: 'Status',
 				accessor: 'status',
