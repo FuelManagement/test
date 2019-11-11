@@ -19,7 +19,7 @@ class ManageGPSAuth extends React.Component {
             this.setState({ customerError: true })
             validate = true;
         }
-        if (this.state.formData.orderid.value == "" || undefined) {
+        if (this.state.formData.orderId.value == "" || undefined) {
             this.setState({ orderError: true })
             validate = true;
         }
@@ -38,7 +38,7 @@ class ManageGPSAuth extends React.Component {
         const { formData } = { ...this.state };
         const currentState = formData;
         currentState.customername.value = "";
-        currentState.orderid.value = "";
+        currentState.orderId.value = "";
         currentState.action.value = "";
         this.setState({ formData: currentState }, () => console.log("callback", this.state));
     }
@@ -47,7 +47,7 @@ class ManageGPSAuth extends React.Component {
         const { formData } = { ...this.state };
         const currentState = formData;
         currentState.customername.value = data.customerName;
-        currentState.orderid.value = data.orderid;
+        currentState.orderId.value = data.orderId;
         currentState.action.value = data.status;
 
         this.setState({ formData: currentState }, () => console.log("callback", this.state));
@@ -72,7 +72,7 @@ class ManageGPSAuth extends React.Component {
             this.props.dispatch(gpsAuthActions.getCustomerOrders(value));
             this.setState({ customerError: false })
         }
-        if (key == 'orderid') {
+        if (key == 'orderId') {
             this.setState({ orderError: false })
         }
         if (key == 'action') {
@@ -100,13 +100,13 @@ class ManageGPSAuth extends React.Component {
                     visible: true,
                     disable: false
                 },
-                orderid: {
-                    value: props !== undefined && props.orderid !== undefined ? props.orderid : '',
+                orderId: {
+                    value: props !== undefined && props.orderId !== undefined ? props.orderId : '',
                     valid: false,
                     validationRules: {
                         notEmpty: true,
                     },
-                    error: "Please select orderid",
+                    error: "Please select order #",
                     placeholder: "Order #",
                     touched: false,
                     visible: true,
@@ -174,11 +174,11 @@ class ManageGPSAuth extends React.Component {
                             <div className="col-md-4  ">
                                 <TextField
                                     select
-                                    id="orderid"
+                                    id="orderId"
                                     label="Order #"
-                                    value={this.state.formData.orderid.value}
+                                    value={this.state.formData.orderId.value}
                                     onChange={this.handleChange}
-                                    name="orderid"
+                                    name="orderId"
                                     variant="outlined"
                                     className="form-control"
                                     autoComplete="off"

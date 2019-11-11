@@ -21,7 +21,7 @@ function getCustomerByCarrierId() {
         method: 'GET',
         headers: authHeader()
     };
-    return fetch(config.apiUrl + '/otr/getCustomersByCarrierID?carrierId=123456', requestOptions).then(handleResponse)
+    return fetch(config.apiUrl + '/otr/getCustomersByCarrierID?carrierId=energroup.com', requestOptions).then(handleResponse)
 }
 
 function otrGpsAuthForCustomer() {

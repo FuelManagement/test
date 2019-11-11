@@ -1031,11 +1031,11 @@ let Table_Config = {
 			options: { ...globalOptions },
 			columns: (props) => [{
 				Header: 'Customer Name',
-				accessor: 'customerName',
+				accessor: 'customerParticipantName',
 				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.customerName}>{row.original.customerName}</span>
 			}, {
 				Header: 'Order #',
-				accessor: 'orderid',
+				accessor: 'orderId',
 				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.orderid}>{row.original.orderid}</span>
 			}, 
 			 {
