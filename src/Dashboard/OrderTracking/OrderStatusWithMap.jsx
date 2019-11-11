@@ -57,7 +57,7 @@ class OrderStatusWithMap extends React.Component {
 
             </div>
             
-            {OrderStatusWithMap.map((order, idx) => (
+            {orderTrackingDetails.map((order, idx) => (
                 <React.Fragment key={idx}>
                     <br />
                     <OrderProgressBar order={order} />

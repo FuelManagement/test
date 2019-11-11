@@ -94,19 +94,15 @@ function submitOTPRequest(data){
                 dispatch(getOrderTrackingProgress(data));
                 history.push('/order-progress');
                 }else{
-                    dispatch(alertActions.error(orderTrackingList.message)); 
-                    dispatch(getOrderTrackingProgress(data));
-                    history.push('/order-progress');
-                   
+                    dispatch(alertActions.error(orderTrackingList.message));
                 }
                 dispatch(alertActions.clearLoading());
                
             },
             error => {
-                // dispatch(alertActions.error(error.message));
-                // dispatch(alertActions.clearLoading());
-                dispatch(getOrderTrackingProgress(data));
-                history.push('/order-progress');
+                dispatch(alertActions.error(error.message));
+                dispatch(alertActions.clearLoading());
+              
             }
         );
     };
