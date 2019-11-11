@@ -9,7 +9,7 @@ export const OrderTrackingService= {
      
 }
 
-function getOrderTrackingProgress(){
+function getOrderTrackingProgress(data){
     //return Promise.resolve(Common_JsonData.orderTrackingDetails.progressData);
     //ToDo: Add API to fetch order tracking details
     let user = JSON.parse(localStorage.getItem('user'));
@@ -17,8 +17,11 @@ function getOrderTrackingProgress(){
         method: 'GET',
         headers: authHeader()
     };
-    return fetch(config.apiUrl + '/otr/GetOTDetailsByUserId', requestOptions)
-    .then(handleResponse)
+    //  return fetch(config.apiUrl + '/otr/GetOTDetailsByUserId?userID'+user.regesterid+'@ID='+data.requestId, requestOptions)
+    //  .then(handleResponse)
+    return fetch(config.apiUrl + '/product/getGPSDetailsByReqId?userID=tarun@gmail.com&ID=k2u8xme4', requestOptions)
+     .then(handleResponse)
+     
 }
 
 function listOrderTracking(){

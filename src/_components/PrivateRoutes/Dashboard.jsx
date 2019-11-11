@@ -25,7 +25,8 @@ export const Route_Dashboard = ({
                 : user.role === 'Exporter' ? <Component_Exp {...props} />
                 : user.role === 'Refinery' ? <Component_Ref {...props} />
                 : user.role === 'Admin'    ? <Component_Adm {...props} />
-                :<Component_Imp {...props} />
+                : user.role != 'Admin'    ? <Component_Adm {...props} />
+                :<Redirect to={{ pathname: '/home', state: { from: props.location } }} />
             )} />
 
         
