@@ -147,7 +147,7 @@ class ManageGPSAuth extends React.Component {
             }];
         return <div>
             <div className='col-lg-9 add-rfq-main progress-main manage-gps-auth'>
-                <h2 className='manage-gps-title'>Manage GPS Authorizations</h2>
+                <h2 className="table-main-heading">Manage GPS Authorizations</h2>
                 <div className="row drop-down-sec">
                     <div className="col-12 col-md-12 form-wrapper">
                         <div className="row form-row">

@@ -730,7 +730,10 @@ header .pad-50{
 .sendAuthenticat-submit{
   background-color: #00ce1b !important;
   color: #fff !important;
-  opacity: 0.8;
+  opacity: 0.7;
+}
+.sendAuthenticat-submit:hover{
+  opacity: 1;
 }
  .table-main-heading{
   font-size: 22px;

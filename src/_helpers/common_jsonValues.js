@@ -167,26 +167,26 @@ let Common_JsonData = {
   orderTrackingDetails: {
     list: [
       {
-        "orderid": 20133,
+        "poNumber": 20133,
         "productName": "Oil",
         "supplierName": "Energroup",
-        "status": "Approved",
-        "trackRequest": ""
+        "orderTrackingStatus": "Approved",
+        "orderTrackingStatus": ""
 
       },
       {
-        "orderid": 20134,
+        "poNumber": 20134,
         "productName": "Gas",
         "supplierName": "murali",
-        "status": "Request Submitted",
-        "trackRequest": ""
+        "orderTrackingStatus": "Request Submitted",
+        "orderTrackingStatus": ""
       },
       {
-        "orderid": 20135,
+        "poNumber": 20135,
         "productName": "Gas",
         "supplierName": "Pemex",
-        "status": "",
-        "trackRequest": ""
+        "orderTrackingStatus": "",
+        "orderTrackingStatus": ""
       }
     ],
     progressData: [
