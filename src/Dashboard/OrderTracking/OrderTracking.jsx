@@ -291,7 +291,8 @@ class OrderTracking extends React.Component {
                         </div>
                     </TabPanel>
                 </Paper>
-                <OTPModel showModel={this.state.showModel}
+                <OTPModel
+                    showModel={this.state.showModel}
                     closeModel={this.closeModel}
                     getEnteredOTP={this.getEnteredOTP}
                     OrderStatus={this.state.OrderStatus}

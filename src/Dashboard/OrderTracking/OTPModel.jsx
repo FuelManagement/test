@@ -45,7 +45,6 @@ class OTPModel extends React.Component {
             "otp_4":'',
             "otp_5":'',
             "otp_6":'',
-
         }
         this.handleEnter = this.handleEnter.bind(this);
         this.getEnteredOTP=this.getEnteredOTP.bind(this);
@@ -62,26 +61,45 @@ class OTPModel extends React.Component {
     }
     getEnteredOTP(){
         this.props.getEnteredOTP(Object.values(this.state).toString().replace(/,/g, ''),this.props.OTRStatusId);
+        let state = {
+            "otp_1":'',
+            "otp_2":'',
+            "otp_3":'',
+            "otp_4":'',
+            "otp_5":'',
+            "otp_6":'',
+        }
+        this.setState({...state});
     }
     reSendOTP(){
         this.props.getReSendOTP(this.props.RequestId);
-
     }
     //Allow only numbers 
-allowOnlynumbers(e) {
-    var regex = new RegExp(/^[0-9\b]+$/);
-  
-    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-    if (regex.test(str)) {
-        return true;
+    allowOnlynumbers(e) {
+        var regex = new RegExp(/^[0-9\b]+$/);
+        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (regex.test(str)) {
+            return true;
+        }
+        else {
+            e.preventDefault();
+            return false;
+        }
     }
-    else {
-        e.preventDefault();
-        return false;
-    }
-  }
     render() {
         const { showModel, OrderStatus } = { ...this.props };
+        let btnDisabled = showModel;
+        if (   !this.state.otp_1.length
+            || !this.state.otp_2.length
+            || !this.state.otp_3.length
+            || !this.state.otp_4.length
+            || !this.state.otp_5.length
+            || !this.state.otp_6.length
+        ){
+            btnDisabled = true;
+        } else {
+            btnDisabled = false;
+        }
         return (
             <div>
                 <Dialog onClose={this.props.closeModel} className='order-tracking-otp-model' aria-labelledby="customized-dialog-title" open={showModel}>
@@ -108,7 +126,7 @@ allowOnlynumbers(e) {
                                 <button className="reSend-otp" onClick={this.reSendOTP}>click here to resend</button>
                             </div>
                             <div className='order-tracking-opt-submit'>
-                                <button className='btn btn-sucess' onClick={this.getEnteredOTP}>Submit</button>
+                                <button className='btn btn-sucess' onClick={this.getEnteredOTP} disabled={btnDisabled}>Submit</button>
                             </div>
                         </div>
                     </div>
