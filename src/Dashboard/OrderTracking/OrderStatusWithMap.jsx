@@ -34,7 +34,6 @@ class OrderStatusWithMap extends React.Component {
     
 
     render() {
-        
         return <div>
             <div className='col-lg-9 add-rfq-main progress-main'>
                 <div className="row order-track-status-map">
@@ -49,15 +48,11 @@ class OrderStatusWithMap extends React.Component {
                 <div className='gps-google-map'>
                    <Locations location={this.state.orders['gps_details']} orderID={this.state.orders['po_details'].poID!==undefined?this.state.orders['po_details'].poID:''}/> 
                 </div>
-
             </div>
-            
-          
-                <React.Fragment>
-                    <br />
-                    <OrderProgressBar order={this.state.orders['po_details']} /> 
-                </React.Fragment>
-            
+            <React.Fragment>
+                <br />
+                <OrderProgressBar order={this.state.orders['po_details']} />
+            </React.Fragment>
         </div>
     }
 }

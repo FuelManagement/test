@@ -62,8 +62,11 @@ class OrderProgressBar extends React.Component {
     }
 
     render() {
-        const{orderno,txno,eta,orderPercentage}={...this.props.order};
-
+        const { txno } = { ...this.props.order };
+        let progressPercent = this.props.order === "Dispatched" ? 40
+                                : this.props.order === "In-Transit" ? 60
+                                : this.props.order === "Delivered" ? 100
+                                : 0;
         return (
             <div className="mx-auto">
                 <div className="">
@@ -89,7 +92,7 @@ class OrderProgressBar extends React.Component {
                                         <div className="col-md-12">
                                             <ProgressBar
                                                 filledBackground="linear-gradient(to right, green, green)"
-                                                percent={0}
+                                                percent={progressPercent}
                                             >
                                                 <Step transition="scale">
                                                     {({ accomplished, index }) => (
