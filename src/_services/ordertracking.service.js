@@ -27,14 +27,16 @@ function getOrderTrackingProgress(data){
 function listOrderTracking(){
     //return Promise.resolve(Common_JsonData.orderTrackingDetails.list);
     let user = JSON.parse(localStorage.getItem('user'));
+    let participantId = user.participantId === undefined ? user.registerId : user.participantId;
+    let email = user.participantId === undefined ? user.registerId : user.email;
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
     };
- //   return fetch(config.apiUrl + '/product/getPOByParticipantID?participantID='+user.particpantId+'&userID='+user.email, requestOptions)
-  //   .then(handleResponse)
-   return fetch(config.apiUrl + '/otr/getOTRByParticipantId?participantID=tarunkathuria.info@gmail.com&userID=nand@sieplinc.com', requestOptions)
-   .then(handleResponse)
+   return fetch(config.apiUrl + '/otr/getOTRByParticipantId?participantID='+participantId+'&userID='+email, requestOptions)
+    .then(handleResponse)
+//    return fetch(config.apiUrl + '/otr/getOTRByParticipantId?participantID=tarunkathuria.info@gmail.com&userID=nand@sieplinc.com', requestOptions)
+//    .then(handleResponse)
 }
 
 function submitTrackRequest(data){
@@ -48,10 +50,10 @@ function submitTrackRequest(data){
     */
   
    let user = JSON.parse(localStorage.getItem('user'));
-
+   let email = user.participantId === undefined ? user.registerId : user.email;
    let payload = {
-    "paticipentId":"tarunkathuria.info@gmail.com",
-	"userId":"nand@sieplinc.com",
+    "paticipentId":data.participantId,
+	"userId":email,
 	"supplierId":data.supplierId,
 	"poNumber":data.poNumber,
     "requestOwner":data.supplierName,

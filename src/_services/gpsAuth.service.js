@@ -27,7 +27,16 @@ function getCustomerByCarrierId() {
 function otrGpsAuthForCustomer(customerDetail) {
     
     let user = JSON.parse(localStorage.getItem('user'));
-    customerDetail["carrierId"] = user.participantID;
+   // customerDetail["carrierId"] = user.participantID;
+   if(user.participantID != undefined)
+   {
+        customerDetail.carrierId = user.participantID;
+   }
+   else
+   {
+        customerDetail.carrierId = user.registerId;  
+   }
+
     
       const requestOptions = {
           method: 'POST',

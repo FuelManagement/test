@@ -66,7 +66,7 @@ class OrderProgressBar extends React.Component {
         let progressPercent = this.props.order === "Dispatched" ? 40
                                 : this.props.order === "In-Transit" ? 60
                                 : this.props.order === "Delivered" ? 100
-                                : 0;
+                                : 80;
         return (
             <div className="mx-auto">
                 <div className="">

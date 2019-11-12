@@ -879,7 +879,7 @@ let Table_Config = {
 			columns: (props) => [{
 				Header: 'Name',
 				accessor: 'first_Name',
-				Cell: row => <span title={row.original.first_Name + ' ' + row.original.middle_Name + ' ' + row.original.last_Name}>{row.original.first_Name + ' ' + row.original.middle_Name + ' ' + row.original.last_Name}</span>
+				Cell: row => <span title={row.original.first_Name + ' '  + row.original.last_Name}>{row.original.first_Name + ' ' +  row.original.last_Name}</span>
 			}, {
 				Header: 'Organization Name',
 				accessor: 'participantName',
@@ -891,7 +891,7 @@ let Table_Config = {
 			}, {
 				Header: 'Email ID',
 				accessor: 'email',
-				Cell: row => <span title={row.original.email}>{row.original.email}</span>
+				Cell: row => <span title={row.original.email}>{row.original.email === "admin@certum.com" ? " ":row.original.email}</span>
 			}, {
 				Header: 'Actions',
 				accessor: 'participantID',
@@ -963,7 +963,7 @@ let Table_Config = {
 				Header: 'Customer Name',
 				accessor: 'CustomerParticipantName',
 				headerClassName:'react-table-header-style',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.customerParticipantID}>{row.original.customerParticipantID}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.CustomerParticipantName}>{row.original.CustomerParticipantName}</span>
 			}, {
 				Header: 'Requested By',
 				accessor: 'CustomerName',
@@ -974,7 +974,8 @@ let Table_Config = {
 				accessor: 'userRole',
 				headerClassName:'react-table-header-style',
 				maxWidth: 100,
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.userRole}>{row.original.userRole}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.userRole}>
+					{row.original.userRole === "Admin" ? "Yes":"No"}</span>
 			}, {
 				Header: 'Status',
 				accessor: 'status',
