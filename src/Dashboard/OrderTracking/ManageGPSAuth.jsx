@@ -66,8 +66,8 @@ class ManageGPSAuth extends React.Component {
         currentState.customername.value = data.customerName;
         currentState.orderId.value = data.orderId;
         currentState.action.value = data.status;
-
-        this.setState({ formData: currentState }, () => console.log("callback", this.state));
+        let orderData = this.state.dataItem.filter(option => option.customerParticipantName == data.customerName && option.status == "");
+        this.setState({ formData: currentState, orderData }, () => console.log("callback", this.state));
     }
 
     handleChange(event) {
