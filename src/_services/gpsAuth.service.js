@@ -36,6 +36,7 @@ function otrGpsAuthForCustomer(customerDetail) {
    {
         customerDetail.carrierId = user.registerId;  
    }
+
     
       const requestOptions = {
           method: 'POST',

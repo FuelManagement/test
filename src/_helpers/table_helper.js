@@ -879,7 +879,7 @@ let Table_Config = {
 			columns: (props) => [{
 				Header: 'Name',
 				accessor: 'first_Name',
-				Cell: row => <span title={row.original.first_Name + ' ' + row.original.middle_Name + ' ' + row.original.last_Name}>{row.original.first_Name + ' ' + row.original.middle_Name + ' ' + row.original.last_Name}</span>
+				Cell: row => <span title={row.original.first_Name + ' '  + row.original.last_Name}>{row.original.first_Name + ' ' +  row.original.last_Name}</span>
 			}, {
 				Header: 'Organization Name',
 				accessor: 'participantName',
@@ -891,7 +891,7 @@ let Table_Config = {
 			}, {
 				Header: 'Email ID',
 				accessor: 'email',
-				Cell: row => <span title={row.original.email}>{row.original.email}</span>
+				Cell: row => <span title={row.original.email}>{row.original.email === "admin@certum.com" ? " ":row.original.email}</span>
 			}, {
 				Header: 'Actions',
 				accessor: 'participantID',
