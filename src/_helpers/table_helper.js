@@ -1084,7 +1084,54 @@ let Table_Config = {
 			}]
 		}
 	},
+	PurchaseOrder: {
+		PurchaseOrders: {
+			options: { ...globalOptions },
+			columns: (props) => [{
+				Header: 'Entity ID',
+				accessor: 'EntityID',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.customerName}>{row.original.customerName}</span>
+			}, {
+				Header: 'Product ID',
+				accessor: 'ProductID',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.orderId}>{row.original.orderId}</span>
+			}, 
+			 {
+				Header: 'Product Name',
+				accessor: 'ProductName',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left',fontWeight: 'bold'  ,color:
+				row.original.status === "Approved" ?'#29AD01': 'red'  }} title={row.original.ProductName}>{row.original.ProductName}</span>
+			}, {
+				Header: 'Product Price',
+				accessor: 'ProductPrice',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.ProductPrice}>{row.original.ProductPrice} </span>
+			},{
+				Header: 'Qty',
+				accessor: 'Qty',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.Qty}> {row.original.Qty}</span>
+			},{
+				Header: 'Amount',
+				accessor: 'Amount',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.Amount}> {row.original.Amount}</span>
+			},{
+				Header: 'Sub Total',
+				accessor: 'SubTotal',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.SubTotal}> {row.original.SubTotal}</span>
+			},
+			{
+				Header: 'Sales Tax',
+				accessor: 'SalesTax',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.SalesTax}> {row.original.SalesTax}</span>
+			},{
+				Header: 'Total',
+				accessor: 'Total',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.Total}> {row.original.Total}</span>
+			},
+		]
+		}
+	},
 
 }
+
 
 module.exports = { Table_Config };

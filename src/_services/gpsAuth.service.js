@@ -17,11 +17,21 @@ function getCustomerByCarrierId() {
     //     label: 'BP Gas station'
     // }];
     // return Promise.resolve(CustomerNames);
+    let user = JSON.parse(localStorage.getItem('user'));
+    let carrierId ='';
+    if(user.participantID != undefined)
+   {
+      carrierId = user.participantID;
+   }
+   else
+   {
+        carrierId = user.registerId;  
+   }
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
     };
-    return fetch(config.apiUrl + '/otr/getCustomersByCarrierID?carrierId=energroup.com', requestOptions).then(handleResponse)
+    return fetch(config.apiUrl + '/otr/getCustomersByCarrierID?carrierId='+carrierId, requestOptions).then(handleResponse)
 }
 
 function otrGpsAuthForCustomer(customerDetail) {

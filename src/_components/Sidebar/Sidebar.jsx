@@ -145,7 +145,7 @@ class Sidebar extends React.Component {
                                                 </Link>
                                             </li>
                                             <li className="sidebar-dropdown">
-                                                <Link to="/">
+                                                <Link to="/rfq">
                                                     <span>Proposal Management</span>
                                                 </Link>
                                                 <div className="sidebar-dropdown">
@@ -161,6 +161,27 @@ class Sidebar extends React.Component {
                                                         <li>
                                                             <Link to="/contract">
                                                                 Contract</Link>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li className="sidebar-dropdown">
+                                                <Link to="/purchaseOrder">
+                                                    <span>Order Management</span>
+                                                </Link>
+                                                <div className="sidebar-dropdown">
+                                                    <ul>
+                                                        <li>
+                                                            <Link to="/purchaseOrder">
+                                                            Purchase Order </Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link to="/salesOrder">
+                                                            Sales Order</Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link to="/dispatchOrder">
+                                                            Dispatch Order</Link>
                                                         </li>
                                                     </ul>
                                                 </div>
