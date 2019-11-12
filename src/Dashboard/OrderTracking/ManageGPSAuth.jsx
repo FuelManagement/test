@@ -46,8 +46,8 @@ class ManageGPSAuth extends React.Component {
                 poNumber : poNumber,
                 status : this.state.formData.action.value
             }
-            this.props.dispatch(gpsAuthActions.otrGpsAuthForCustomer(obj));
-            
+            this.props.dispatch(gpsAuthActions.otrGpsAuthForCustomer(obj))
+            .then(this.getDataAddedCallback);
         }
     }
 
@@ -86,18 +86,11 @@ class ManageGPSAuth extends React.Component {
             };
         });
         if (key == 'customername') {
-            //this.props.dispatch(gpsAuthActions.getCustomerOrders(value));
-            this.setState({ customerError: false })
-
             let orderData = this.state.dataItem.filter(option => option.customerParticipantName == value && option.status == "");
-            console.log("filtered order data",orderData);
-            this.setState({orderData:orderData});
-            
-        }
-        if (key == 'orderId') {
+            this.setState({orderData, customerError:false});
+        } else if (key == 'orderId') {
             this.setState({ orderError: false })
-        }
-        if (key == 'action') {
+        } else if (key == 'action') {
             this.setState({ actionError: false })
         }
     }
@@ -156,34 +149,27 @@ class ManageGPSAuth extends React.Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        console.log("getDerivedStateFromProps Manage Gps Auth",nextProps);
         let dataItem = nextProps.gpsAuth.customers.data;  
         let addedDataItem = nextProps.gpsAuth.addedData.data;
-        if(dataItem == undefined)
-            return null;
-         let dataItemWithoutDuplicate = [];
-
-             dataItemWithoutDuplicate = [
+        if(dataItem == undefined) return null;
+        let dataItemWithoutDuplicate = [];
+            dataItemWithoutDuplicate = [
                 ...new Set(
                     dataItem.map((item) => { return item.customerParticipantName; })
                 ),
-              ];
-          if(addedDataItem != undefined){
-                console.log("addedDataItem",addedDataItem);
-                let obj = {
-                    customerParticipantId: addedDataItem.customerParticipantId,
-                    customerParticipantName : addedDataItem.customerParticipantName,
-                    orderId : addedDataItem.poNumber,
-                    status : addedDataItem.status
-                }
-
-             let objIndex = dataItem.findIndex((obj => obj.orderId == addedDataItem.poNumber));
-             dataItem[objIndex].status = addedDataItem.status;
-                let dataVal = {data:[]};
-                
-            }    
+            ];
+        if(addedDataItem != undefined){
+            let obj = {
+                customerParticipantId: addedDataItem.customerParticipantId,
+                customerParticipantName : addedDataItem.customerParticipantName,
+                orderId : addedDataItem.poNumber,
+                status : addedDataItem.status
+            }
+            let objIndex = dataItem.findIndex((obj => obj.orderId == addedDataItem.poNumber));
+            dataItem[objIndex].status = addedDataItem.status;
+            let dataVal = {data:[]};
+        }    
         return {dataItem:dataItem,dataItemWithoutDuplicate:dataItemWithoutDuplicate}; 
-
     }
 
     componentDidMount(){
@@ -191,18 +177,14 @@ class ManageGPSAuth extends React.Component {
     }
 
     render() {
-        const Actions = [
-            
-            {
-                value: 'Approve',
-                label: 'Approve'
-            },
-            {
-                value: 'Reject',
-                label: 'Reject'
-            }];
+        const Actions = [{
+            value: 'Approve',
+            label: 'Approve'
+        },{
+            value: 'Reject',
+            label: 'Reject'
+        }];
  
-
         return <div>
             <div className='col-lg-9 add-rfq-main progress-main manage-gps-auth'>
                 <h2 className="table-main-heading">Manage GPS Authorizations</h2>
@@ -289,13 +271,8 @@ class ManageGPSAuth extends React.Component {
                 <div className='react-table-sec'>
                     {this.state.showTable && <ManageGPSTable dataItem={this.state.dataItem} getAddedCallback={this.getDataAddedCallback} getClickedItem={this.getClickedData} />}
                 </div>
-
             </div>
-
-
         </div>
-
-
     }
 }
 

@@ -34,7 +34,7 @@ function otrGpsAuthForCustomer(customerDetail) {
 
     return dispatch => {
         dispatch(alertActions.loading());
-        gpsAuthService.otrGpsAuthForCustomer(customerDetail)
+        return gpsAuthService.otrGpsAuthForCustomer(customerDetail)
         .then(
             customerNames => {
                 dispatch(success(customerNames));
