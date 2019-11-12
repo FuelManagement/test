@@ -163,22 +163,21 @@
   }
   
   .sidebar-wrapper .sidebar-header .user-pic {
-    float: left;
-    width: 60px;
-    padding: 2px;
-    border-radius: 12px;
-    margin-right: 15px;
+    padding: 0px 15px 15px 15px;  
     overflow: hidden;
+    display: flex;
+    justify-content: center;
   }
   
   .sidebar-wrapper .sidebar-header .user-pic img {
-    object-fit: cover;
-    height: 100%;
-    width: 100%;
+    width: 58px;
+    border-radius: 20px;
   }
   
   .sidebar-wrapper .sidebar-header .user-info {
-    float: left;
+    display: block;
+    width: 100%;
+    text-align: center;
   }
   
   .sidebar-wrapper .sidebar-header .user-info > span {

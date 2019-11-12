@@ -45,15 +45,16 @@ class Sidebar extends React.Component {
                                     src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
                                     alt="User picture" />
                             </div>
-                            <div className="user-info">
+                            <div className="user-info" >
+                            <span className="user-status">
+                                    <i className="fa fa-circle"></i>
+                                    <span>Online</span>
+                                </span>
                                 <span className="user-name">{user.first_name}
                                     <strong> {user.last_name}</strong>
                                 </span>
                                 <span className="user-role">{user.role}</span>
-                                <span className="user-status">
-                                    <i className="fa fa-circle"></i>
-                                    <span>Online</span>
-                                </span>
+                                
                             </div>
                         </div>
                         {/* <!-- sidebar-header  --> */}
@@ -115,6 +116,8 @@ class Sidebar extends React.Component {
                                         </ul>
                                     </div>
                                 </li>
+                                { user.role =! "Admin" ?( 
+                                    <div>
                                 <li className="sidebar-dropdown">
                                     <Link to="/userProfile">
                                         <i className="fa fa-shopping-cart"></i>
@@ -223,7 +226,8 @@ class Sidebar extends React.Component {
                                         </ul>
                                     </div>
                                 </li>
-                            </ul>
+                                </div>):null}
+                           </ul>
                         </div>
                         {/* <!-- sidebar-menu  --> */}
                     </div>
