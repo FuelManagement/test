@@ -71,15 +71,13 @@ class ManageGPSTable extends React.Component {
                     getTrProps={(state, rowInfo,column) => {
                         if (rowInfo && rowInfo.row) {
                             return {
-                          
                                 onClick: (e, t) => { 
                                     this.onClickItem(e, t, rowInfo);
                                     this.setState({selected:rowInfo.index})
-                                 },
-                                  style: {
-                                       background:  rowInfo.index === this.state.selected  ? '#31353D' : 'unset', color: rowInfo.index === this.state.selected ? 'white' : 'black'
-                                       
-                                    }
+                                },
+                                style: {
+                                    background:  rowInfo.index === this.state.selected  ? '#31353D' : 'unset', color: rowInfo.index === this.state.selected ? 'white' : 'black'
+                                }
                             }
                         } else { return {} }
                     }}

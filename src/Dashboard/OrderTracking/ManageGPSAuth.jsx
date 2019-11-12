@@ -47,6 +47,7 @@ class ManageGPSAuth extends React.Component {
                 status : this.state.formData.action.value
             }
             this.props.dispatch(gpsAuthActions.otrGpsAuthForCustomer(obj))
+            .then(()=>this.props.dispatch(gpsAuthActions.getCustomerByCarrierId()))
             .then(this.getDataAddedCallback);
         }
     }
@@ -178,10 +179,10 @@ class ManageGPSAuth extends React.Component {
 
     render() {
         const Actions = [{
-            value: 'Approve',
+            value: 'Approved',
             label: 'Approve'
         },{
-            value: 'Reject',
+            value: 'Rejected',
             label: 'Reject'
         }];
  
