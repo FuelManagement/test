@@ -9,11 +9,12 @@ export const OrderTrackingRequestService= {
 function getOTRDetailsBysupplier() {
    
     let user = JSON.parse(localStorage.getItem('user'));
+    let participantId = user.participantID === undefined ? user.registerId : user.participantID;
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
     };                                              //+user.participantID
-    return fetch(config.apiUrl + '/otr/GetOTRDetailsBysupplier?supplierId=nand@sieplinc.com', requestOptions).then(handleResponse)
+    return fetch(config.apiUrl + '/otr/GetOTRDetailsBysupplier?supplierId='+participantId, requestOptions).then(handleResponse)
 }
 function postOTRAuthDetailsForCustomer(data) {
     let user = JSON.parse(localStorage.getItem('user'));

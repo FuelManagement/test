@@ -60,7 +60,7 @@ function submitTrackRequest(data,orderList){
             response => {
                 if(response.statusCode===200){
                     orderList.find(f=>f.poNumber===response.data.orderId).orderTrackingStatus=response.data.status;
-                    orderList.find(f=>f.poNumber===response.data.orderId).OTRStatusId=response.data.OTRStatusId;
+                    orderList.find(f=>f.poNumber===response.data.orderId).OTRStatusId=response.data.requestId;
                     dispatch(successOrderList(orderList));
                     dispatch(alertActions.success("Your request has been submitted.Please check your mail for OTP."));
                 }
@@ -100,7 +100,9 @@ function submitOTPRequest(data){
                
             },
             error => {
-                dispatch(alertActions.error(error.message));
+                let obj = JSON.parse(error);
+                dispatch(alertActions.error(obj.message));
+                 
                 dispatch(alertActions.clearLoading());
               
             }

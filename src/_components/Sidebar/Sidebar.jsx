@@ -47,13 +47,13 @@ class Sidebar extends React.Component {
                             </div>
                             <div className="user-info" >
                             <span className="user-status">
-                                    <i className="fa fa-circle"></i>
-                                    <span>Online</span>
+                                    {/* <i className="fa fa-circle"></i>
+                                    <span>Online</span> */}
                                 </span>
-                                <span className="user-name">{user.first_name}
-                                    <strong> {user.last_name}</strong>
+                                <span className="user-name">{user.registerId}{user.first_Name}{user.first_name}{user.last_Name}
+                                    
                                 </span>
-                                <span className="user-role">{user.role}</span>
+                                <span className="user-role">{user.role != undefined ? user.role :user.participantType}{' : '}{user.domain}{user.participantName}</span>
                                 
                             </div>
                         </div>
@@ -116,7 +116,7 @@ class Sidebar extends React.Component {
                                         </ul>
                                     </div>
                                 </li>
-                                { user.role =! "Admin" ?( 
+                                { user.role != 'Admin' ?( 
                                     <div>
                                 <li className="sidebar-dropdown">
                                     <Link to="/userProfile">
