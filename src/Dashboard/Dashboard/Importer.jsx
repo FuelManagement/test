@@ -9,7 +9,9 @@ class Dashboard_Importer extends React.Component {
     render() {
         return (
             <div className="col-md-10 offset-md-2 contentDiv">
-                <img src={require('../../../assets/img/Dashboard.jpg')} alt="Dashboard Image" className="dasboardStatic"/>
+                {this.props.user?(
+                    <img src={require('../../../assets/img/Dashboard.jpg')} alt="Dashboard Image" className="dasboardStatic"/>
+                ):""}
             </div>
         );
     }
