@@ -8,3 +8,6 @@ export * from './IndicativeOffer';
 export * from './OrderTracking';
 export * from './OrderTrackingRequest';
 export * from './Volumetric';
+export * from './PurchaseOrder';
+export * from './SalesOrder';
+export * from './DispatchOrder';
