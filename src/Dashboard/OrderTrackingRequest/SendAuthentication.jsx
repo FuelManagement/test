@@ -58,7 +58,7 @@ class SendAuthentication extends Component {
             controls: {
                 sendAuthenticationEmail: {
                     value: props !== undefined && props.sendAuthenticationEmail !== undefined ? props.sendAuthenticationEmail : '',
-                    valid: true,
+                    valid: false,
                     validationRules: {
                         notEmpty: true,
                         isEmail: true
@@ -70,7 +70,7 @@ class SendAuthentication extends Component {
                 },
                 cellPhone: {
                     value: props !== undefined && props.sendAuthenticationEmail !== undefined ? props.sendAuthenticationEmail : '',
-                    valid: true,
+                    valid: false,
                     validationRules: {
                         notEmpty: true,
                     },
@@ -130,7 +130,12 @@ class SendAuthentication extends Component {
         this.props.dispatch(userProfileActions.changeUserProfile(key, value)); 
       } 
       handleSubmit(){
+          if(this.state.controls['sendAuthenticationEmail'].valid || this.state.controls['cellPhone'].valid){
           this.props.sendAuth(this.state.controls.sendAuthenticationEmail.value,this.state.controls.cellPhone.value);
+          }
+          else{
+              this.props.dispatch(alertActions.error('Atleast provide email or phone to proceed further'));
+          }
       }
     
     render() {
