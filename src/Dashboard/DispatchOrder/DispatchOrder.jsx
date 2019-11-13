@@ -44,7 +44,15 @@ class DispatchOrder extends React.Component {
                     <br />
                     <ReactTable
                         data={this.state.data || []}
-                        columns={Table_Config.PurchaseOrder.PurchaseOrders.columns({ toggleRfqModal: this.toggleModal.bind(this)})}
+                        columns={Table_Config.Refinery.dispatchedOrders.columns({ toggleRfqModal: this.toggleModal.bind(this)})}
+                        {...Table_Config.PurchaseOrder.PurchaseOrders.options}
+                    />
+                    </div>
+                    <div>
+                    <br/>
+                    <ReactTable
+                        data={this.state.data || []}
+                        columns={Table_Config.Refinery.dispatchedOrders.columns({ toggleRfqModal: this.toggleModal.bind(this)})}
                         {...Table_Config.PurchaseOrder.PurchaseOrders.options}
                     />
                 </div> 
