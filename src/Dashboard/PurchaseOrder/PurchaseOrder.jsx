@@ -30,6 +30,7 @@ class PurchaseOrder extends React.Component {
         history.push('/rfq/edit', {data});
     }
     render() {
+        let AllPOList=this.props.AllPOList;
         return (
             <div className="col-md-8 offset-md-3 contentDiv">
                 <h3 className="vendor-text" className="table-main-heading"> Purchase Orders</h3>
@@ -43,7 +44,7 @@ class PurchaseOrder extends React.Component {
                     <div className="clearDiv"></div>
                     <br />
                     <ReactTable
-                        data={this.state.data || []}
+                        data={AllPOList || []}
                         columns={Table_Config.PurchaseOrder.PurchaseOrders.columns({ toggleRfqModal: this.toggleModal.bind(this)})}
                         {...Table_Config.PurchaseOrder.PurchaseOrders.options}
                     />
@@ -53,7 +54,9 @@ class PurchaseOrder extends React.Component {
     }
 }
 function mapStateToProps(state) { 
-    return { state };
+    const { AllPOList } = state;
+    console.log("POList",AllPOList);
+    return { AllPOList };
 }
 
 const connectedRfq = connect(mapStateToProps)(PurchaseOrder);
