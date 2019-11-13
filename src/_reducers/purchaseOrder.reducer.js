@@ -8,12 +8,12 @@ export function purchaseOrder(state = {}, action) {
                 loading: true
             };
 
-        case productConstants.GET_PO_LIST_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                polist: action.pos
-            };
+        // case productConstants.GET_PO_LIST_SUCCESS:
+        //     return {
+        //         ...state,
+        //         loading: false,
+        //         polist: action.pos
+        //     };
 
         default:
             return {

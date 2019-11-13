@@ -18,7 +18,7 @@ class OrderStatusWithMap extends React.Component {
     }
     componentDidMount(){
        
-       this.props.dispatch(orderTrackingActions.getOrderTrackingProgress());
+       //this.props.dispatch(orderTrackingActions.getOrderTrackingProgress());
     }
     UNSAFE_componentWillReceiveProps(prevProps) {
        if(!formatutility.isEmpty(prevProps.orderTracking.orders) && JSON.stringify(prevProps.orderTracking.orders)!==JSON.stringify(this.props.orderTracking.orders))
@@ -34,11 +34,13 @@ class OrderStatusWithMap extends React.Component {
     
 
     render() {
+        console.log("location gps details");
+        console.log(this.state);
         return <div>
             <div className='col-lg-9 add-rfq-main progress-main'>
                 <div className="row order-track-status-map">
                     <div className="col-md-4">
-                        <p className="progress-headText">Customer: {this.state.orders['po_details'].supplierName!==undefined?this.state.orders['po_details'].supplierName:''} </p>
+                        <p className="progress-headText">Supplier: {this.state.orders['po_details'].supplierName!==undefined?this.state.orders['po_details'].supplierName:''} </p>
                     </div>
                     <div className="col-md-4"></div>
                     <div className="col-md-4">
@@ -46,12 +48,12 @@ class OrderStatusWithMap extends React.Component {
                     </div>
                 </div>
                 <div className='gps-google-map'>
-                   <Locations location={this.state.orders['gps_details']} orderID={this.state.orders['po_details'].poID!==undefined?this.state.orders['po_details'].poID:''}/> 
+                   <Locations location={this.state.orders['gps']} /> 
                 </div>
             </div>
             <React.Fragment>
                 <br />
-                <OrderProgressBar order={this.state.orders['po_details']} />
+                <OrderProgressBar order={this.state.orders['po_details']} gps={this.state.orders['gps']} />
             </React.Fragment>
         </div>
     }

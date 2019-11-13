@@ -50,7 +50,7 @@ class Sidebar extends React.Component {
                                     {/* <i className="fa fa-circle"></i>
                                     <span>Online</span> */}
                                 </span>
-                                <span className="user-name">{user.registerId}{user.first_Name}{user.first_name}{user.last_Name}
+                                <span className="user-name">{user.registerId}{user.first_Name}{' '}{user.last_Name}{user.first_name}{' '}{user.last_name}
                                     
                                 </span>
                                 <span className="user-role">{user.role != undefined ? user.role :user.participantType}{' : '}{user.domain}{user.participantName}</span>

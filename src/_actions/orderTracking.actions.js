@@ -101,8 +101,7 @@ function submitOTPRequest(data){
             },
             error => {
                 let obj = JSON.parse(error);
-                dispatch(alertActions.error(obj.message));
-                 
+                dispatch(alertActions.error(obj.message));                 
                 dispatch(alertActions.clearLoading());
               
             }

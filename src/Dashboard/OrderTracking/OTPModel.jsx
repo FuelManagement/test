@@ -106,7 +106,7 @@ class OTPModel extends React.Component {
                     <DialogTitle id="customized-dialog-title" onClose={this.props.closeModel} />
                     <div className='order-tracking-model-body'>
                         {OrderStatus === 'otp-disabled' && <Typography gutterBottom>
-                            <p style={{color:"blue"}}>Your request has been submitted. <br/> Please wait until it is approved and an OTP is received.</p>
+                            <p style={{color:"Orange"}}>Your request has been submitted. Please wait until it is approved and an OTP is received.</p>
                         </Typography>
                         }
                         <div className={OrderStatus}>

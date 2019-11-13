@@ -13,14 +13,16 @@ function getOrderTrackingProgress(data){
     //return Promise.resolve(Common_JsonData.orderTrackingDetails.progressData);
     //ToDo: Add API to fetch order tracking details
     let user = JSON.parse(localStorage.getItem('user'));
+    let requestId = data.requestId;
     const requestOptions = {
         method: 'GET',
         headers: authHeader() 
     };
-    //  return fetch(config.apiUrl + '/otr/GetOTDetailsByUserId?userID'+user.regesterid+'@ID='+data.OTRStatusId, requestOptions)
-    //  .then(handleResponse)
-    return fetch(config.apiUrl + '/product/getGPSDetailsByReqId?userID=tarun@gmail.com&ID=k2u8xme4', requestOptions)
+    let email = user.participantID === undefined ? user.registerId : user.email;
+     return fetch(config.apiUrl + '/product/getGPSDetailsByReqId?userID='+email+'&ID='+requestId, requestOptions)
      .then(handleResponse)
+    // return fetch(config.apiUrl + '/product/getGPSDetailsByReqId?userID='+tarun@gmail.com&ID=k2u8xme4', requestOptions)
+    //  .then(handleResponse)
      
 }
 

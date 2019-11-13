@@ -62,11 +62,12 @@ class OrderProgressBar extends React.Component {
     }
 
     render() {
+        console.log("progress bar",this.props);
         const { txno } = { ...this.props.order };
-        let progressPercent = this.props.order === "Dispatched" ? 40
-                                : this.props.order === "In-Transit" ? 60
-                                : this.props.order === "Delivered" ? 100
-                                : 80;
+        let progressPercent = this.props.gps.status === "Dispatched" ? 40
+                                : this.props.gps.status === "In Transit" ? 66.5
+                                : this.props.gps.status === "Delivered" ? 100
+                                : 0;
         return (
             <div className="mx-auto">
                 <div className="">
@@ -79,10 +80,10 @@ class OrderProgressBar extends React.Component {
                                     aria-controls="additional-actions1-content"
                                     id="additional-actions1-header"
                                 >
-                                    <div className="col-md-4">Order No: {this.props.order.poID} </div>
+                                    <div className="col-md-4">Order #: {this.props.order.poID} </div>
                                     <div className="col-md-4" >Tx No #:
                                         <span className="tax-no">{txno}</span></div>
-                                    <div className="col-md-4">ETA:{ dateutility.datefunction(this.props.order.reqDelivaryDate,formatutility.MMDDYYYY)}</div>
+                                    <div className="col-md-4">ETA :{ dateutility.datefunction(this.props.order.reqDelivaryDate,formatutility.MMDDYYYYHHMMSS)}</div>
 
 
                                 </ExpansionPanelSummary>
