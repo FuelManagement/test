@@ -48,7 +48,7 @@ class OrderStatusWithMap extends React.Component {
                     </div>
                 </div>
                 <div className='gps-google-map'>
-                   <Locations location={this.state.orders['gps']} /> 
+                  {!formatutility.isEmpty(this.state.orders['gps'])? <Locations location={this.state.orders['gps']} /> :null}
                 </div>
             </div>
             <React.Fragment>
