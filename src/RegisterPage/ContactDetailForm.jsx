@@ -33,8 +33,8 @@ class ContactDetailForm extends React.Component {
      }
   UNSAFE_componentWillReceiveProps(nextprops) {
     if (JSON.stringify(this.props.onboard.participant) !== JSON.stringify(nextprops.onboard.participant)) {
-      ["streetAddress", "postalCode", "city", "faxNumber", "firstContactNumber", "firstContactNumberType", "state"
-        ,"country", "secondContactNumber", "SecondContactNumberType"].forEach(name => {
+      ["streetAddress", "streetAddress2", "streetAddress3", "postalCode", "city", "faxNumber", "firstContactNumber", "firstContactNumberExt", "firstContactNumberType", "state"
+        ,"country", "secondContactNumber", "secondContactNumberExt","SecondContactNumberType"].forEach(name => {
           this.setState(prevState => {
             return {
               controls: {
@@ -51,7 +51,7 @@ class ContactDetailForm extends React.Component {
 
     }
   }
-  
+
   initialState(mode, props) {
     let state = {};
     state = {
@@ -67,6 +67,36 @@ class ContactDetailForm extends React.Component {
           },
           error: "Please enter street Address",
           placeholder: "Street Address",
+          touched: false,
+          visible: true,
+          disable: false
+        },
+        streetAddress2: {
+          value: props !== undefined && props.streetAddress2 !== undefined ? props.streetAddress2 : '',
+
+          valid: this.props.onboard.isContactFormValid?true:false,
+          validationRules: {
+            notEmpty: true,
+            maxLength:true, // for validation check make value true else false.
+           // isName:true
+          },
+          error: "Please enter street Address",
+          placeholder: "Street Address2",
+          touched: false,
+          visible: true,
+          disable: false
+        },
+        streetAddress3: {
+          value: props !== undefined && props.streetAddress3 !== undefined ? props.streetAddress3 : '',
+
+          valid: this.props.onboard.isContactFormValid?true:false,
+          validationRules: {
+            notEmpty: true,
+            maxLength:true, // for validation check make value true else false.
+           // isName:true
+          },
+          error: "Please enter street Address",
+          placeholder: "Street Address3",
           touched: false,
           visible: true,
           disable: false
@@ -151,6 +181,19 @@ class ContactDetailForm extends React.Component {
           visible: true,
           disable: false
         },
+        firstContactNumberExt: {
+          value: props !== undefined && props.firstContactNumberExt !== undefined ? props.firstContactNumberExt : '',
+
+          validationRules: {
+            notEmpty: true,
+
+          },
+          error: "Please enter Extension telephone number",
+          placeholder: "EXT",
+          touched: false,
+          visible: true,
+          disable: false
+        },
         firstContactNumberType: {
           value: props !== undefined && props.firstContactNumberType !== undefined ? props.firstContactNumberType : 'mobile',
 
@@ -179,6 +222,19 @@ class ContactDetailForm extends React.Component {
           visible: true,
           disable: true
         },
+        secondContactNumberExt: {
+          value: props !== undefined && props.secondContactNumberExt !== undefined ? props.secondContactNumberExt : '',
+
+          validationRules: {
+            notEmpty: true,
+
+          },
+          error: "Please enter Extension telephone number",
+          placeholder: "EXT",
+          touched: false,
+          visible: true,
+          disable: false
+        },
         SecondContactNumberType: {
           value: props !== undefined && props.SecondContactNumberType !== undefined ? props.SecondContactNumberType : 'telephone',
 
@@ -199,7 +255,7 @@ class ContactDetailForm extends React.Component {
   }
   handleChange(event) {
     let key = event.target.name, value = event.target.value;
-    let connectedValue = {streetAddress:{maxLength:50}};
+    let connectedValue = {streetAddress:{maxLength:50}, streetAddress2:{maxLength:50}, streetAddress3:{maxLength:50}};
     this.setState(prevState => ({
         controls: {
           ...prevState.controls,
@@ -217,7 +273,7 @@ class ContactDetailForm extends React.Component {
         }
     }),()=> this.handleFormSubmit());
     this.props.dispatch(onboardActions.changeParticipant(key, value));
-  
+
   }
   handleOnChange(value,key) {
 
@@ -244,18 +300,18 @@ class ContactDetailForm extends React.Component {
   handleFormSubmit(){
     let isFormVaild=true;
    if (this.state.controls !== undefined) {
-    ["streetAddress", "postalCode", "city", "faxNumber", "firstContactNumber", "firstContactNumberType", "state"
+    ["streetAddress", "streetAddress2", "streetAddress3", "postalCode", "city", "faxNumber", "firstContactNumber", "firstContactNumberExt", "firstContactNumberType", "state"
         , "secondContactNumber", "SecondContactNumberType"].forEach(name => {
          let value = this.state.controls[name].valid, touched = this.state.controls[name].touched;
          if (!value && this.props.onboard.mode==='create') {
-         
+
           isFormVaild=false;
          }
          else if(!value && touched && this.props.onboard.mode!=='create'){
-         
+
           isFormVaild=false;
          }
-         
+
        });
     }
     this.props.dispatch(onboardActions.changeFormState('isContactFormVaild',isFormVaild));
@@ -274,7 +330,7 @@ allowOnlyletters(e) {
       return false;
   }
 }
-//Allow only numbers 
+//Allow only numbers
 allowOnlynumbers(e) {
   var regex = new RegExp(/^[0-9\b]+$/);
 
@@ -292,10 +348,10 @@ allowOnlynumbers(e) {
       <div className="mx-auto">
         <h2 className="reg-heading">Contact Information<span style={{float:'right',verticalAlign:'bottom',fontSize:'13px',padding: '11px 0 0 0'}}>All fields are mandatory</span></h2>
         <div className="form-row">
-          <div className="col-md-12 mb-3">
+          <div className="col-md-4 mb-3">
             <TextField
               id="streetAddress"
-              label="Street Address"
+              label="Street 1"
               name="streetAddress"
               value={this.state.controls.streetAddress.value}
               onChange={this.handleChange}
@@ -303,9 +359,41 @@ allowOnlynumbers(e) {
               className="form-control"
               autoComplete="off"
               margin="dense"
-              
+
               error={!this.state.controls.streetAddress.valid && this.state.controls.streetAddress.touched}
-                            
+
+            />
+          </div>
+          <div className="col-md-4 mb-3">
+            <TextField
+              id="streetAddress2"
+              label="Street 2"
+              name="streetAddress2"
+              value={this.state.controls.streetAddress2.value}
+              onChange={this.handleChange}
+              variant="outlined"
+              className="form-control"
+              autoComplete="off"
+              margin="dense"
+
+              error={!this.state.controls.streetAddress2.valid && this.state.controls.streetAddress2.touched}
+
+            />
+          </div>
+          <div className="col-md-4 mb-3">
+            <TextField
+              id="streetAddress3"
+              label="Street 3"
+              name="streetAddress3"
+              value={this.state.controls.streetAddress3.value}
+              onChange={this.handleChange}
+              variant="outlined"
+              className="form-control"
+              autoComplete="off"
+              margin="dense"
+
+              error={!this.state.controls.streetAddress3.valid && this.state.controls.streetAddress3.touched}
+
             />
           </div>
         </div>
@@ -322,8 +410,8 @@ allowOnlynumbers(e) {
               variant="outlined"
               autoComplete="off"
               margin="dense"
-              error={!this.state.controls.city.valid && this.state.controls.city.touched} 
-               
+              error={!this.state.controls.city.valid && this.state.controls.city.touched}
+
             />
           </div>
         </div>
@@ -341,8 +429,8 @@ allowOnlynumbers(e) {
               autoComplete="off"
               margin="dense"
               error={!this.state.controls.postalCode.valid && this.state.controls.postalCode.touched}
-              
-               
+
+
               />
           </div>
           <div className="col-md-4 mb-3">
@@ -358,8 +446,8 @@ allowOnlynumbers(e) {
               autoComplete="off"
               margin="dense"
               error={!this.state.controls.state.valid && this.state.controls.state.touched}
-             
-               
+
+
             />
           </div>
           <div className="col-md-4 md-3">
@@ -375,23 +463,23 @@ allowOnlynumbers(e) {
               autoComplete="off"
               margin="dense"
               error={!this.state.controls.country.valid && this.state.controls.country.touched}
-             
-               
+
+
             />
           </div>
         </div>
         <div className="form-row">
-          <div className="col-md-4 md-3">
+          <div className="col-md-3 md-3">
             <MuiPhoneInput
                defaultCountry='us'
               margin="dense"
               variant="outlined"
-              label="First Telephone Number"
-              name="firstContactNumber" 
+              label="Primary Telephone Number"
+              name="firstContactNumber"
               value={this.state.controls.firstContactNumber.value}
               onChange={val=>this.handleOnChange(val,'firstContactNumber')}
               error={!this.state.controls.firstContactNumber.valid && this.state.controls.firstContactNumber.touched}
-            /> 
+            />
             <FormControl component="fieldset" >
               <RadioGroup aria-label="firstContactNumberType" name="firstContactNumberType" value={this.state.controls.firstContactNumberType.value} onChange={this.handleChange} row>
                 <FormControlLabel
@@ -408,20 +496,30 @@ allowOnlynumbers(e) {
                 />
               </RadioGroup></FormControl>
           </div>
-          <div className="col-md-4 md-3">
-            
+          <div className="col-md-1 md-1">
+            <TextField
+              label="Ext"
+              name="firstContactNumberExt"
+              value={this.state.controls.firstContactNumberExt.value}
+              onChange={this.handleChange}
+
+            />
+          </div>
+
+          <div className="col-md-3 md-3">
+
             <MuiPhoneInput
                defaultCountry='us'
               //  regions={['north-america']}
               margin="dense"
               variant="outlined"
-              label="Second Telephone Number"
-              name="secondContactNumber" 
+              label="Alternate Telephone Number"
+              name="secondContactNumber"
               value={this.state.controls.secondContactNumber.value}
               onChange={val=>this.handleOnChange(val,'secondContactNumber')}
               error={!this.state.controls.secondContactNumber.valid && this.state.controls.secondContactNumber.touched}
-           
-            /> 
+
+            />
             <FormControl component="fieldset" >
               <RadioGroup aria-label="SecondContactNumberType" name="SecondContactNumberType" value={this.state.controls.SecondContactNumberType.value} onChange={this.handleChange} row>
                 <FormControlLabel
@@ -439,18 +537,28 @@ allowOnlynumbers(e) {
               </RadioGroup>
             </FormControl>
           </div>
-          <div className="col-md-4 md-3">      
+          <div className="col-md-1 md-1">
+            <TextField
+              label="Ext"
+              name="secondContactNumberExt"
+              value={this.state.controls.secondContactNumberExt.value}
+              onChange={this.handleChange}
+
+            />
+          </div>
+
+          <div className="col-md-4 md-3">
             <MuiPhoneInput
                defaultCountry='us'
               //  regions={['north-america']}
               margin="dense"
               variant="outlined"
               label="Fax Number"
-              name="faxNumber" 
+              name="faxNumber"
               value={this.state.controls.faxNumber.value}
               onChange={val=>this.handleOnChange(val,'faxNumber')}
-              error={!this.state.controls.faxNumber.valid && this.state.controls.faxNumber.touched}     
-            /> 
+              error={!this.state.controls.faxNumber.valid && this.state.controls.faxNumber.touched}
+            />
           </div>
         </div>
       </div>

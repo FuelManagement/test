@@ -819,21 +819,23 @@ let Table_Config = {
 					Cell: row => <span title={row.original.domain}>{row.original.domain}</span>
 				},
 				{
-					Header: 'Email Id',
-					accessor: 'registerId',
-					Cell: row => <span title={row.original.registerId}>{row.original.registerId}</span>
-				},
-				{
 					Header: 'Business type ',
 					accessor: 'BuisnessType',
 					Cell: row => <span title={row.original.BuisnessType}>{row.original.BuisnessType}</span>
 				},
-
 				{
-					Header: 'Entity Type',
+					Header: 'Participant Type',
 					accessor: 'participantType',
 					Cell: row => <span title={row.original.participantType}>{row.original.participantType}</span>
-				}, {
+				},
+				{
+					Header: 'Email Id',
+					accessor: 'registerId',
+					Cell: row => <span title={row.original.registerId}>{row.original.registerId}</span>
+				},
+
+
+				 {
 					Header: 'Status',
 					accessor: 'status',
 					Cell: row => <span title={row.original.status !== 0 ? 'Approved' : 'Pending'}>{row.original.status !== 0 ? 'Approved' : 'Pending'}</span>
@@ -929,7 +931,7 @@ let Table_Config = {
 				Header: 'Supplier Name',
 				headerClassName:'react-table-header-style',
 				accessor: 'supplierName',
-				Cell: row => <span className="react-table-row-content-align-left"			
+				Cell: row => <span className="react-table-row-content-align-left"
 			    title={row.original.supplierName}>{row.original.supplierName}</span>
 			}, {
 				Header: 'Status',
@@ -986,7 +988,7 @@ let Table_Config = {
 			}, {
 				Header: 'Request Timings',
 				accessor: 'createdOn',
-				headerClassName:'react-table-header-style',				
+				headerClassName:'react-table-header-style',
 				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={dateutility.datefunction(row.original.createdOn,formatutility.MMDDYYYYHHMMSS)}>
 					{dateutility.datefunction(row.original.createdOn,formatutility.MMDDYYYYHHMMSS)}</span>
 			}, {
@@ -1038,7 +1040,7 @@ let Table_Config = {
 				Header: 'Order #',
 				accessor: 'orderId',
 				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.orderId}>{row.original.orderId}</span>
-			}, 
+			},
 			 {
 				Header: 'Status',
 				accessor: 'status',
@@ -1095,7 +1097,7 @@ let Table_Config = {
 				Header: 'Product ID',
 				accessor: 'ProductID',
 				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.orderId}>{row.original.orderId}</span>
-			}, 
+			},
 			 {
 				Header: 'Product Name',
 				accessor: 'ProductName',

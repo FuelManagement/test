@@ -11,7 +11,7 @@ import {
 } from '@material-ui/pickers';
 import {onboardActions} from '../_actions';
 import {Common_JsonData} from '../_helpers';
- 
+
 // const bankPartnerType = [
 //   {
 //       value: "",
@@ -25,7 +25,7 @@ import {Common_JsonData} from '../_helpers';
 //       value: "WB",
 //       label: "WB"
 //   },
- 
+
 // ];
 // const ddlCurr = [
 //   {
@@ -44,7 +44,7 @@ import {Common_JsonData} from '../_helpers';
 //       value: "MEX$",
 //       label: "MEX $"
 //   },
-  
+
 // ];
 
 class AccountDetailForm extends React.Component {
@@ -58,31 +58,31 @@ class AccountDetailForm extends React.Component {
   {
   if(JSON.stringify(this.props.onboard.participant)!==JSON.stringify(nextprops.onboard.participant))
   {
-    ["bankName","bankAccountName","bankAccountNumber","bankControlKey","bankCountryKey","bankKeys","bankPartnerType"
-    ,"bankReferencedetail","poCurrency"].forEach(name => {
+    ["bankName","bankAccountName","bankAccountNumber","bankControlKey"
+    ,"poCurrency"].forEach(name => {
       this.setState(prevState => {
         return {
           controls: {
             ...prevState.controls,
             [name]: {
               ...prevState.controls[name],
-              value: name ==='productStatus'?!(nextprops.onboard.participant[name]=='true'?true:false):(nextprops.onboard.participant[name]!==undefined?nextprops.onboard.participant[name]:''), 
-            
+              value: name ==='productStatus'?!(nextprops.onboard.participant[name]=='true'?true:false):(nextprops.onboard.participant[name]!==undefined?nextprops.onboard.participant[name]:''),
+
             }
           }
         }
       });
     });
-  
+
   }}
-  
+
   initialState(mode, props) {
     let state = {};
     state = {
       controls: {
         bankName: {
           value: props!==undefined && props.bankName!==undefined?props.bankName:'',
-                   
+
           valid: this.props.onboard.isAccountFormValid?true:false,
           validationRules: {
             notEmpty: true,
@@ -96,7 +96,7 @@ class AccountDetailForm extends React.Component {
         },
         bankAccountName: {
           value: props!==undefined && props.bankAccountName!==undefined?props.bankAccountName:'',
-                   
+
           valid: this.props.onboard.isAccountFormValid?true:false,
           validationRules: {
             notEmpty: true,
@@ -110,7 +110,7 @@ class AccountDetailForm extends React.Component {
         },
         bankAccountNumber: {
           value: props!==undefined && props.bankAccountNumber!==undefined?props.bankAccountNumber:'',
-                   
+
           valid: this.props.onboard.isAccountFormValid?true:false,
           validationRules: {
             notEmpty: true,
@@ -125,59 +125,20 @@ class AccountDetailForm extends React.Component {
 
         bankControlKey: {
           value: props!==undefined && props.bankControlKey!==undefined?props.bankControlKey:'',
-                   
+
           valid: this.props.onboard.isAccountFormValid?true:false,
           validationRules: {
             notEmpty: true,
           },
-          error: "Please enter bank control key",
-          placeholder: "Bank Control Key",
-          touched: false,
-          visible: true,
-          disable: false
-        },
-        bankCountryKey: {
-          value: props!==undefined && props.bankCountryKey!==undefined?props.bankCountryKey:'',
-                   
-          valid: this.props.onboard.isAccountFormValid?true:false,
-          validationRules: {
-            notEmpty: true,
-          },
-          error: "Please enter bank country key",
-          placeholder: "Bank Country Key",
-          touched: false,
-          visible: true,
-          disable: false
-        },
-        bankKeys: {
-          value: props!==undefined && props.bankKeys!==undefined?props.bankKeys:'',
-                   
-          valid: this.props.onboard.isAccountFormValid?true:false,
-          validationRules: {
-            notEmpty: true,
-          },
-          error: "Please enter bank key",
-          placeholder: "Bank Key",
-          touched: false,
-          visible: true,
-          disable: false
-        },
-        bankReferencedetail: {
-          value: props!==undefined && props.bankReferencedetail!==undefined?props.bankReferencedetail:'',
-                   
-          valid: this.props.onboard.isAccountFormValid?true:false,
-          validationRules: {
-            notEmpty: true,
-          },
-          error: "Please enter reference specifications for bank details",
-          placeholder: "Reference specifications for bank details",
+          error: "Please enter bank routing number",
+          placeholder: "Bank Routing Number",
           touched: false,
           visible: true,
           disable: false
         },
         poCurrency: {
           value: props!==undefined && props.poCurrency!==undefined?props.poCurrency:'',
-                   
+
           valid: this.props.onboard.isAccountFormValid?true:false,
           validationRules: {
             notEmpty: true,
@@ -189,20 +150,6 @@ class AccountDetailForm extends React.Component {
           visible: true,
           disable: false
         },
-        bankPartnerType: {
-          value: props!==undefined && props.bankPartnerType!==undefined?props.bankPartnerType:'',
-                   
-          valid: this.props.onboard.isAccountFormValid?true:false,
-          validationRules: {
-            notEmpty: true,
-          },
-          error: "Please enter partner bank type",
-          placeholder: "Partner Bank Type",
-          touched: false,
-          visible: true,
-          disable: false
-        },
-
       },
       errors: {}
     };
@@ -212,7 +159,7 @@ class AccountDetailForm extends React.Component {
     let key = event.target.name, value = event.target.value;
     let connectedValue = {};
     this.setState(prevState => ({
-     
+
         controls: {
           ...prevState.controls,
           [key]: {
@@ -228,24 +175,24 @@ class AccountDetailForm extends React.Component {
           }
         }
     }),()=> this.handleFormSubmit());
-    this.props.dispatch(onboardActions.changeParticipant(key,value));   
-    
+    this.props.dispatch(onboardActions.changeParticipant(key,value));
+
   }
   handleFormSubmit(){
     let isFormVaild=true;
    if (this.state.controls !== undefined) {
-    ["bankName","bankAccountName","bankAccountNumber","bankControlKey","bankCountryKey","bankKeys","bankPartnerType"
-    ,"bankReferencedetail","poCurrency"].forEach(name => {
+    ["bankName","bankAccountName","bankAccountNumber","bankControlKey"
+    ,"poCurrency"].forEach(name => {
          let value = this.state.controls[name].valid, touched = this.state.controls[name].touched;
          if (!value && this.props.onboard.mode==='create') {
-         
+
           isFormVaild=false;
          }
          else if(!value && touched && this.props.onboard.mode!=='create'){
-         
+
           isFormVaild=false;
          }
-         
+
        });
     }
     this.props.dispatch(onboardActions.changeFormState('isAccountFormVaild',isFormVaild));
@@ -264,7 +211,7 @@ allowOnlyletters(e) {
       return false;
   }
 }
-//Allow only numbers 
+//Allow only numbers
 allowOnlynumbers(e) {
   var regex = new RegExp(/^[0-9\b]+$/);
 
@@ -293,12 +240,12 @@ allowOnlynumbers(e) {
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankName.valid && this.state.controls.bankName.touched}
-                 
-               
+
+
             />
           </div>
         </div>
-        <div className="form-row">   
+        <div className="form-row">
           <div className="col-md-8 mb-3 ">
             <TextField
               id="bankAccountName"
@@ -310,8 +257,8 @@ allowOnlynumbers(e) {
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankAccountName.valid && this.state.controls.bankAccountName.touched}
-             
-               
+
+
             />
           </div>
           <div className="col-md-4 mb-3 ">
@@ -325,8 +272,8 @@ allowOnlynumbers(e) {
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankAccountNumber.valid && this.state.controls.bankAccountNumber.touched}
-             
-               
+
+
             />
           </div>
         </div>
@@ -335,85 +282,20 @@ allowOnlynumbers(e) {
             <TextField
               id="bankControlKey"
               name="bankControlKey"
-              label="Bank Control Key"
+              label="Bank Routing Number"
               value={this.state.controls.bankControlKey.value}
               onChange={this.handleChange}
               className="form-control"
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankControlKey.valid && this.state.controls.bankControlKey.touched}
-                          
-            />
-          </div>
-          <div className="col-md-4 mb-3 ">
-            <TextField
-              id="bankCountryKey"
-              name="bankCountryKey"
-              label="Bank country key"
-              className="form-control"
-              value={this.state.controls.bankCountryKey.value}
-              onChange={this.handleChange}
-              margin="dense"
-              variant="outlined"
-              error={!this.state.controls.bankCountryKey.valid && this.state.controls.bankCountryKey.touched}
-               
-            />
-          </div>
-          <div className="col-md-4 mb-3 ">
-            <TextField
-              id="bankKeys"
-              name="bankKeys"
-              label="Bank key"
-              value={this.state.controls.bankKeys.value}
-              onChange={this.handleChange}
-              className="form-control"
-              margin="dense"
-              variant="outlined"
-              error={!this.state.controls.bankKeys.valid && this.state.controls.bankKeys.touched}
-               
+
             />
           </div>
         </div>
         <div className="form-row">
-          <div className="col-md-4 mb-3 ">
-            <FormControl style={{ width: '100%'}}> 
-              <TextField
-                select
-                id='bankPartnerType'
-                variant="outlined"
-                name='bankPartnerType'
-                label="Partner Bank Type"
-                className="form-control"
-                value={this.state.controls.bankPartnerType.value}
-                onChange={this.handleChange}
-                margin="dense"
-                error={!this.state.controls.bankPartnerType.valid && this.state.controls.bankPartnerType.touched}
-           
-              >
-                {Common_JsonData.bankPartnerType && Common_JsonData.bankPartnerType.map(option => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </FormControl>
-          </div>
-          <div className="col-md-8 mb-3 ">
-            <TextField
-              id="bankReferencedetail"
-              name="bankReferencedetail"
-              label="Reference specifications for bank"
-              value={this.state.controls.bankReferencedetail.value}
-              onChange={this.handleChange}
-              className="form-control"
-              margin="dense"
-              variant="outlined"
-              error={!this.state.controls.bankReferencedetail.valid && this.state.controls.bankReferencedetail.touched}
-                           
-            />
-          </div>
           <div className="col-md-4">
-            <FormControl style={{ width: '100%'}}> 
+            <FormControl style={{ width: '100%'}}>
               <TextField
                 select
                 id='poCurrency'
@@ -442,10 +324,10 @@ allowOnlynumbers(e) {
 
 function mapStateToProps(state) {
   const { onboard } = state;
-   
+
     return {
         onboard
-      
+
     };
 }
 
