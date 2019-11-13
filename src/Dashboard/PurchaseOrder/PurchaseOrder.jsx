@@ -12,7 +12,7 @@ import $ from 'jquery';
 window.jQuery = $; // hack
 window.$ = $;      // hack 
 import 'bootstrap';
-import { rfqActions } from '../../_actions'; 
+import { purchaseOrdeActions } from '../../_actions'; 
 
 class PurchaseOrder extends React.Component {
     constructor(props) {
@@ -29,8 +29,12 @@ class PurchaseOrder extends React.Component {
         console.log(data);
         history.push('/rfq/edit', {data});
     }
+    componentDidMount(){
+        this.props.dispatch(purchaseOrdeActions.getAllPOList())
+    }
     render() {
-        let AllPOList=this.props.AllPOList;
+        let AllPOList=this.props.purchaseOrder.polist;
+   
         return (
             <div className="col-md-8 offset-md-3 contentDiv">
                 <h3 className="vendor-text" className="table-main-heading"> Purchase Orders</h3>
@@ -54,9 +58,8 @@ class PurchaseOrder extends React.Component {
     }
 }
 function mapStateToProps(state) { 
-    const { AllPOList } = state;
-    console.log("POList",AllPOList);
-    return { AllPOList };
+    const { purchaseOrder } = {...state};
+    return { purchaseOrder };
 }
 
 const connectedRfq = connect(mapStateToProps)(PurchaseOrder);

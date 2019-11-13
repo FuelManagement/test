@@ -6,7 +6,7 @@ export const purchaseOrdeActions = {
     getAllPOList
 }
 function getAllPOList() {
-    return dispatch => {
+   return dispatch => {
         dispatch(alertActions.loading());
         dispatch(request());
         purchaseOrderService.getAllPOList()

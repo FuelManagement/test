@@ -1124,47 +1124,68 @@ let Table_Config = {
 			options: { ...globalOptions },
 			columns: (props) => [{
 				Header: 'Entity ID',
-				accessor: 'EntityID',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.customerName}>{row.original.customerName}</span>
+				accessor: 'participantID',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.participantID}>{row.original.participantID}</span>
 			}, {
 				Header: 'Product ID',
 				accessor: 'ProductID',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.orderId}>{row.original.orderId}</span>
+				Cell: props =>props.original.products.map((product,index)=>{
+					return <span key={index} style={{ display: 'block', textAlign: 'left' }}
+					title={product.productID}>
+					{product.productID}
+				</span>
+				})
+					
 			},
-			 {
+			{
 				Header: 'Product Name',
 				accessor: 'ProductName',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left',fontWeight: 'bold'  ,color:
-				row.original.status === "Approved" ?'#29AD01': 'red'  }} title={row.original.ProductName}>{row.original.ProductName}</span>
+				Cell: props =>props.original.products.map((product,index)=>{
+					return <span key={index} style={{ display: 'block', textAlign: 'left' }}
+					title={product.productName}>
+					{product.productName}
+				</span>
+				})
 			}, {
 				Header: 'Product Price',
 				accessor: 'ProductPrice',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.ProductPrice}>{row.original.ProductPrice} </span>
-			},{
+				Cell: props =>props.original.products.map((product,index)=>{
+					return <span key={index} style={{ display: 'block', textAlign: 'left' }}
+					title={product.unitPrice}>
+					{product.unitPrice}
+				</span>
+				})
+			}, {
 				Header: 'Qty',
 				accessor: 'Qty',
 				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.Qty}> {row.original.Qty}</span>
-			},{
+			}, {
 				Header: 'Amount',
 				accessor: 'Amount',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.Amount}> {row.original.Amount}</span>
-			},{
+				Cell: props =>props.original.products.map((product,index)=>{
+					return <span key={index} style={{ display: 'block', textAlign: 'left' }}
+					title={product.totalAmount}>
+					{product.totalAmount}
+				</span>
+				})
+			}, {
 				Header: 'Sub Total',
-				accessor: 'SubTotal',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.SubTotal}> {row.original.SubTotal}</span>
+				accessor: 'subTotal',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.subTotal}> {row.original.subTotal}</span>
 			},
 			{
 				Header: 'Sales Tax',
-				accessor: 'SalesTax',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.SalesTax}> {row.original.SalesTax}</span>
-			},{
+				accessor: 'salesTax',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.salesTax}> {row.original.salesTax}</span>
+			}, {
 				Header: 'Total',
-				accessor: 'Total',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.Total}> {row.original.Total}</span>
+				accessor: 'total',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.total}> {row.original.total}</span>
 			},
-		]
+			]
 		}
 	},
+
 
 }
 
