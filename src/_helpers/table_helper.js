@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import InputLabel from '@material-ui/core/InputLabel';
+import InputLabel from '@material-ui/core/InputLabel';          
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
@@ -416,47 +416,76 @@ let Table_Config = {
 		dispatchedOrders: {
 			options: { ...globalOptions },
 			columns: (props) => [{
-				Header: 'Customer PO #',
+				Header: 'Order #',
 				accessor: 'PONumber',
 				style: { textAlign: 'right' },
 				Cell: row => <span title={row.original.PONumber} style={{ textAlign: 'right' }}>{row.original.PONumber}</span>
 			}, {
-				Header: 'Date',
-				accessor: 'timestamp',
-				Cell: row => <span title={row.original.timestamp.slice(0, 10)}>{row.original.timestamp.slice(0, 10)}</span>
+				Header: 'DO #',
+				accessor: 'PONumber',
+				style: { textAlign: 'right' },
+				Cell: row => <span title={row.original.PONumber} style={{ textAlign: 'right' }}>{row.original.PONumber}</span>
 			}, {
-				Header: 'Name',
+				Header: 'CustomerName',
 				accessor: 'User_ID',
 				Cell: row => <span title={row.original.User_ID}>{row.original.User_ID}</span>
-			}, {
-				Header: 'Product',
+			},{
+				Header: 'Vehicle Type',
 				accessor: 'product',
 				Cell: row => <span title={row.original.product}>{row.original.product}</span>
-			}, {
-				Header: 'Quantity',
-				accessor: 'quantity',
-				style: { textAlign: 'right' },
-				Cell: row => <span style={{ textAlign: 'right' }} title={row.original.quantity}>{row.original.quantity}</span>
-			}, {
-				Header: 'Price',
-				accessor: 'price',
-				style: { textAlign: 'right' },
-				Cell: row => <span style={{ textAlign: 'right' }} title={formatMoney(row.original.price)}>{formatMoney(row.original.price)}</span>
-			}, {
-				Header: 'Documents',
-				accessor: 'documents',
-				Cell: row => {
-					if (row.row.documents && row.row.documents.length) {
-						return <button
-							className="btn btn-success btn-sm button-style"
-							style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
-							onClick={e => { props.toggleDocumentModal(e, row.row, true) }}>
-							View
-							</button>
-					}
-					else return "No Documents"
-				}
-			}]
+			},{
+				Header: 'License Plate ID',
+				accessor: 'User_ID',
+				Cell: row => <span title={row.original.User_ID}>{row.original.User_ID}</span>
+			},{
+				Header: 'Origin Destination',
+				accessor: 'User_ID',
+				Cell: row => <span title={row.original.User_ID}>{row.original.User_ID}</span>
+			},
+			{
+				Header: 'Shipping Date',
+				accessor: 'timestamp',
+				Cell: row => <span title={row.original.timestamp.slice(0, 10)}>{row.original.timestamp.slice(0, 10)}</span>
+			},{
+				Header: 'Delivery Date',
+				accessor: 'timestamp',
+				Cell: row => <span title={row.original.timestamp.slice(0, 10)}>{row.original.timestamp.slice(0, 10)}</span>
+			},{
+				Header: 'Carrier Name',
+				accessor: 'User_ID',
+				Cell: row => <span title={row.original.User_ID}>{row.original.User_ID}</span>
+			},{
+				Header: 'Driver Name',
+				accessor: 'User_ID',
+				Cell: row => <span title={row.original.User_ID}>{row.original.User_ID}</span>
+			 }
+			//  {
+			// 	Header: 'Quantity',
+			// 	accessor: 'quantity',
+			// 	style: { textAlign: 'right' },
+			// 	Cell: row => <span style={{ textAlign: 'right' }} title={row.original.quantity}>{row.original.quantity}</span>
+			// }, {
+			// 	Header: 'Price',
+			// 	accessor: 'price',
+			// 	style: { textAlign: 'right' },
+			// 	Cell: row => <span style={{ textAlign: 'right' }} title={formatMoney(row.original.price)}>{formatMoney(row.original.price)}</span>
+			// }, 
+			// {
+			// 	Header: 'Documents',
+			// 	accessor: 'documents',
+			// 	Cell: row => {
+			// 		if (row.row.documents && row.row.documents.length) {
+			// 			return <button
+			// 				className="btn btn-success btn-sm button-style"
+			// 				style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
+			// 				onClick={e => { props.toggleDocumentModal(e, row.row, true) }}>
+			// 				View
+			// 				</button>
+			// 		}
+			// 		else return "No Documents"
+			// 	}
+			// }
+			]
 		}
 	},
 	Boarder: {
