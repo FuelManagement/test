@@ -2,12 +2,13 @@ import { orderTrackingConst } from '../_constants';
 import { OrderTrackingService } from '../_services';
 import { alertActions } from './';
 import { history } from '../_helpers';
-import { orderTrackingRequest } from '../_reducers/orderTrackingRequest.reducer';
+//import { orderTrackingRequest } from '../_reducers/orderTrackingRequest.reducer';
 export const orderTrackingActions = {
     listOrderTracking,
     getOrderTrackingProgress,
     submitTrackRequest,
-    submitOTPRequest
+    submitOTPRequest,
+    postOTPResendRequest
 }
 
 function listOrderTracking(){
@@ -111,4 +112,32 @@ function submitOTPRequest(data){
     //function request() { return { type: orderTrackingConst.ORDER_TRACKING_OTP_SUBMIT_REQUEST } }
     //function success(data) {return { type: orderTrackingConst.ORDER_TRACKING_OTP_SUBMIT_SUCCESS, data } }
    // function failure(error) { return { type: orderTrackingConst.ORDER_TRACKING_OTP_SUBMIT_ERROR, error } }
+}
+
+function postOTPResendRequest(data){
+    return dispatch => {
+        dispatch(alertActions.loading());
+        OrderTrackingService.postOTPResendRequest(data)
+        .then(
+            response => {
+                if(response.statusCode===200){
+                    dispatch(alertActions.success("Your request has been submitted.Please check your mail for OTP."));
+                }
+                else{
+                    dispatch(alertActions.success("Track request submitted"));
+                }
+                dispatch(success(response));
+               
+                dispatch(alertActions.clearLoading());
+            },
+            error => {
+                dispatch(failure(error))
+                dispatch(alertActions.clearLoading());
+            }
+        );
+    };
+
+    function request() { return { type: orderTrackingConst.ORDER_TRACKING_OTP_RESEND_REQUEST } }
+    function success(data) {return { type: orderTrackingConst.ORDER_TRACKING_OTP_RESEND_SUCCESS, data } }
+    function failure(error) { return { type: orderTrackingConst.ORDER_TRACKING_OTP_RESEND_ERROR, error } }
 }

@@ -42,9 +42,9 @@ class OrderStatusWithMap extends React.Component {
                     <div className="col-md-4">
                         <p className="progress-headText">Supplier: {this.state.orders['po_details'].supplierName!==undefined?this.state.orders['po_details'].supplierName:''} </p>
                     </div>
-                    <div className="col-md-4"></div>
-                    <div className="col-md-4">
-                        <p className="progress-headText ">Order #: {this.state.orders['po_details'].poID!==undefined?this.state.orders['po_details'].poID:''}</p>
+                    <div className="col-md-3"></div>
+                    <div className="col-md-3" >
+                        <p className="progress-headText" style={{float:"right"}}>Order #: {this.state.orders['po_details'].poID!==undefined?this.state.orders['po_details'].poID:''}</p>
                     </div>
                 </div>
                 <div className='gps-google-map'>
@@ -53,7 +53,8 @@ class OrderStatusWithMap extends React.Component {
             </div>
             <React.Fragment>
                 <br />
-                <OrderProgressBar order={this.state.orders['po_details']} gps={this.state.orders['gps']} />
+                <OrderProgressBar order={this.state.orders['po_details']} //gps={this.state.orders['gps']}
+                />
             </React.Fragment>
         </div>
     }

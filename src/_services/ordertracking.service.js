@@ -6,6 +6,8 @@ export const OrderTrackingService= {
      listOrderTracking,
      submitTrackRequest,
      submitOTPRequest,
+     OrderTrackingService,
+     postOTPResendRequest
      
 }
 
@@ -90,5 +92,28 @@ function submitOTPRequest(data){
     };
 
     return fetch(config.apiUrl + '/otr/post2FAForOTRByUserId', requestOptions).then(handleResponse, handleError);
+
+}
+
+function postOTPResendRequest(data){
+    //return Promise.resolve(Common_JsonData.orderTrackingDetails.progressData);
+    //ToDo: Add API to fetch order tracking details
+    let user = JSON.parse(localStorage.getItem('user'));
+    let requestId = data;
+    let userId = user.participantID === undefined ? user.registerId : user.email;
+    let payload =
+    {
+         "requestId" : data,
+         "userId" : userId
+    }
+    const requestOptions = {
+        method: 'POST',
+        headers: authHeader(),
+        body: JSON.stringify(payload)
+    };
+    
+      return fetch(config.apiUrl + '/otr/PostOTPResendforUser', requestOptions)
+      .then(handleResponse)
+    
 
 }

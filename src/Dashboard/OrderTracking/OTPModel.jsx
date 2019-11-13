@@ -72,7 +72,7 @@ class OTPModel extends React.Component {
         this.setState({...state});
     }
     reSendOTP(){
-        this.props.getReSendOTP(this.props.RequestId);
+        this.props.postReSendOTP();
     }
     //Allow only numbers 
     allowOnlynumbers(e) {

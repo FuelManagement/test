@@ -64,9 +64,10 @@ class OrderProgressBar extends React.Component {
     render() {
         console.log("progress bar",this.props);
         const { txno } = { ...this.props.order };
-        let progressPercent = this.props.gps.status === "Dispatched" ? 40
-                                : this.props.gps.status === "In Transit" ? 66.5
-                                : this.props.gps.status === "Delivered" ? 100
+        let progressPercent = this.props.order.status === "Dispatched" ? 34
+                                : this.props.order.status === "In transit" ? 66.5
+                                : this.props.order.status === "In Transit" ? 66.5
+                                : this.props.order.status === "Delivered" ? 100
                                 : 0;
         return (
             <div className="mx-auto">

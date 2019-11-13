@@ -103,7 +103,7 @@ class Sidebar extends React.Component {
                                 </div>
                                
                                 </li> */}
-
+                                { user.role == 'Admin' ?(
                                 <li className="sidebar-dropdown">
                                     <Link to="/profile">
                                         <i className="fa fa-shopping-cart"></i>
@@ -115,7 +115,8 @@ class Sidebar extends React.Component {
                                             <li><Link to="/profile">Profile</Link></li>
                                         </ul>
                                     </div>
-                                </li>
+                                </li>):null
+                                }
                                 { user.role != 'Admin' ?( 
                                     <div>
                                 <li className="sidebar-dropdown">

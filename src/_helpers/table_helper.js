@@ -967,7 +967,11 @@ let Table_Config = {
 				headerClassName:'react-table-header-style',
 				accessor: 'orderTrackingStatus',
 				Cell: row => <span className="react-table-row-content-align-left" style={{ fontWeight: 'normal',
-				color:row.original.orderTrackingStatus === "Approved" ? 'Green':(row.original.orderTrackingStatus === "Rejected"?'red':'#17da38')  }} title={row.original.orderTrackingStatus}>{row.original.orderTrackingStatus}</span>
+				color:row.original.orderTrackingStatus === "Approved" ? 
+				'Green':row.original.orderTrackingStatus === "Rejected"?
+				'red':row.original.orderTrackingStatus === "Request Submitted"? 
+				'blue':row.original.orderTrackingStatus === "New Request" ? 'blue':'green'  }} 
+				title={row.original.orderTrackingStatus}>{row.original.orderTrackingStatus === 'New Request' ? 'Request Submitted' : row.original.orderTrackingStatus}</span>
 			}, {
 				Header: 'Track Request',
 				headerClassName:'react-table-header-style',

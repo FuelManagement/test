@@ -78,7 +78,7 @@ class OrderTracking extends React.Component {
         this.tabChange = this.tabChange.bind(this);
         this.closeModel = this.closeModel.bind(this);
         this.getEnteredOTP = this.getEnteredOTP.bind(this);
-        this.reSendOTP=this.reSendOTP.bind(this);
+        this.postReSendOTP=this.postReSendOTP.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
     }
     componentDidMount() { 
@@ -105,9 +105,10 @@ class OrderTracking extends React.Component {
         this.props.dispatch(orderTrackingActions.submitOTPRequest(collection));
         this.setState({ showModel: false });
     }
-    reSendOTP(requestId){
+    postReSendOTP(){
         console.log("requestId");
-        console.log(requestId);
+        console.log(this.state.OTRStatusId);
+        this.props.dispatch(orderTrackingActions.postOTPResendRequest(this.state.OTRStatusId));
         // let data={
         // }
         // this.props.dispatch(orderTrackingActions.submitTrackRequest(data,this.state.orderList));
@@ -297,6 +298,7 @@ class OrderTracking extends React.Component {
                     getEnteredOTP={this.getEnteredOTP}
                     OrderStatus={this.state.OrderStatus}
                     OTRStatusId={this.state.OTRStatusId}
+                    postReSendOTP={this.postReSendOTP}
                 />
 
                 <div>
