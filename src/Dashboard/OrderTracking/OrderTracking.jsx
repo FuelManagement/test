@@ -119,7 +119,7 @@ class OrderTracking extends React.Component {
         if (data.orderTrackingStatus === "Approved" || data.orderTrackingStatus === "Auto Approved") {
             this.setState({ showModel: true, OrderStatus: status,OTRStatusId:data.OTRStatusId});
         } 
-        else if (data.orderTrackingStatus === "Request Submitted") {
+        else if ((data.orderTrackingStatus === "Request Submitted") || (data.orderTrackingStatus === "New Request") ) {
             this.setState({ showModel: true, OrderStatus: status });
         }
         else if (data.orderTrackingStatus === "") {

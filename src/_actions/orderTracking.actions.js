@@ -63,7 +63,14 @@ function submitTrackRequest(data,orderList){
                     orderList.find(f=>f.poNumber===response.data.orderId).orderTrackingStatus=response.data.status;
                     orderList.find(f=>f.poNumber===response.data.orderId).OTRStatusId=response.data.requestId;
                     dispatch(successOrderList(orderList));
-                    dispatch(alertActions.success("Your request has been submitted.Please check your mail for OTP."));
+                    if(response.data.status==="Auto Approved")
+                    {
+                        dispatch(alertActions.success(response.message));
+                    }
+                    else{
+                        dispatch(alertActions.success("Your request has been submitted. Please wait for Approval"));   
+                    }
+                    
                 }
                 else{
                     dispatch(alertActions.success("Track request submitted"));
