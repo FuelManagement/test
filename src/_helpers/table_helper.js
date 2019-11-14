@@ -1091,7 +1091,7 @@ let Table_Config = {
 			options: { ...globalOptions },
 			columns: (props) => [{
 				Header: 'Device Id',
-				accessor: 'Device',
+				accessor: 'DeviceID',
 			}, {
 				Header: 'TxnCode',
 				accessor: 'TxnCode',
@@ -1103,10 +1103,13 @@ let Table_Config = {
 				accessor: 'TxnHash',
 			}, {
 				Header: 'Channel Id',
-				accessor: 'ChannelId',
+				accessor: 'ChannellID',
 			}, {
 				Header: 'Block',
-				accessor: 'Block',
+				accessor: 'BlockNo',
+			},{
+				Header: 'Create Time',
+				accessor: 'Createtime',
 			}, {
 				Header: 'Age',
 				accessor: 'Age',

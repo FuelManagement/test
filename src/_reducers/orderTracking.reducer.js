@@ -34,6 +34,12 @@ export function orderTracking(state = {}, action) {
                 ...state,
                 loading: false
             }
+            case orderTrackingConst.ORDER_TRACKING_SHOW_LEDGER_GET_BLOCKCHAIN_SUCCESS:
+                console.log('redu---->',action);
+                return{
+                    ...state,
+                    showLedgerBlockChainDetails:action.data
+                }
         default: return { ...state };
 
     }
