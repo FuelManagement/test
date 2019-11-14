@@ -98,29 +98,29 @@ export const dateutility = {
     } else {
       strseconds = seconds.toString();
     }
-    // if (hour < 10) {
-    //   strhour = zero + hour.toString();
-    // } else {
-    //   strhour = hour.toString();
-    // }
+    if (hour < 10) {
+      strhour = zero + hour.toString();
+    } else {
+      strhour = hour.toString();
+    }
     if (minutes < 10) {
       strminutes = zero + minutes.toString();
     } else {
       strminutes = minutes.toString();
     }
-    if(hour > 12) {
-      strhour =  (hour > 12) ? (hour-12 < 10) ?  zero + (hour-12).toString() : (hour-12 < 10).toString :'' ;
-      strminutesAMPM = strminutes + ' '+ 'PM';
-    } 
-    else
-    {
-      if (hour < 10) {
-          strhour = zero + hour.toString();
-        } else {
-          strhour = hour.toString();
-        }
-        strminutesAMPM = strminutes + ' ' +'AM';
-    }
+    // if(hour > 12) {
+    //   strhour =  (hour > 12) ? (hour-12 < 10) ?  zero + (hour-12).toString() : (hour-12).toString :'' ;
+    //   strminutesAMPM = strminutes + ' '+ 'PM';
+    // } 
+    // else
+    // {
+    //   if (hour < 10) {
+    //       strhour = zero + hour.toString();
+    //     } else {
+    //       strhour = hour.toString();
+    //     }
+    //     strminutesAMPM = strminutes + ' ' +'AM';
+    // }
   
     switch (type) {
       case "MMM dd YYYY":
@@ -176,7 +176,9 @@ export const dateutility = {
           ":" +
           strseconds 
         );
-        case "MM/dd/yyyy hh:mm":
+        case "MM/dd/yyyy hh:mm tt":
+          let tthour=hour>12?(hour-12):hour;
+          let tt=hour>12?'PM':'AM'
           return (
             strmonth +
             "/" +
@@ -184,9 +186,11 @@ export const dateutility = {
             "/" +
             year +
             " " +
-            strhour  +
+            tthour+
             ":" +
-            strminutesAMPM 
+            strminutes +" "+tt
+         
+           
            
           );
       default:

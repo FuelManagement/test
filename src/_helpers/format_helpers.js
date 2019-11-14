@@ -9,7 +9,7 @@ export const formatutility = {
     MMDDYYYYHHMMSS:"MM/dd/yyyy hh:mm:ss",
     MMDDYYYYHHMMSSMS: "MM/dd/yyyy hh:mm:ss:ms",
     MMDDYYYYHHMMSS:"MM/dd/yyyy hh:mm:ss",
-    MMDDYYYYHHMM:"MM/dd/yyyy hh:mm",
+    MMDDYYYYHHMMTT:"MM/dd/yyyy hh:mm tt",
     isEmpty
   };
   function isEmpty(obj) {
