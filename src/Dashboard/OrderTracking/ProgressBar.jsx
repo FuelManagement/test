@@ -84,7 +84,7 @@ class OrderProgressBar extends React.Component {
                                     <div className="col-md-4">Order #: {this.props.order.poID} </div>
                                     <div className="col-md-4" >Tx No #:
                                         <span className="tax-no">{txno}</span></div>
-                                    <div className="col-md-4">ETA :{ dateutility.datefunction(this.props.order.reqDelivaryDate,formatutility.MMDDYYYYHHMMSS)}</div>
+                                    <div className="col-md-4">ETA :{ dateutility.datefunction(this.props.order.reqDelivaryDate,formatutility.MMDDYYYYHHMM)}</div>
 
 
                                 </ExpansionPanelSummary>
@@ -139,6 +139,17 @@ class OrderProgressBar extends React.Component {
                                     {/* </Typography> */}
                                 </ExpansionPanelDetails>
                             </ExpansionPanel>
+                            {/* <div className="row">
+                            <div className="col-md-4" >Invoice </div>
+                            <div className="col-md-5"></div>
+                            <div className="col-md-3" style={{paddingLeft: '15%'}}>Invoice link </div>
+                            </div>
+                         
+                            <div className="row">
+                            <div className="col-md-4">Bill Of Lading </div>
+                            <div className="col-md-5"></div>
+                            <div className="col-md-3" style={{paddingLeft: '15%'}}>bol link </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

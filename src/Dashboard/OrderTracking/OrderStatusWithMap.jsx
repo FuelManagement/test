@@ -53,7 +53,7 @@ class OrderStatusWithMap extends React.Component {
             </div>
             <React.Fragment>
                 <br />
-                <OrderProgressBar order={this.state.orders['po_details']} //gps={this.state.orders['gps']}
+                <OrderProgressBar order={this.state.orders['po_details']} gps={this.state.orders['gps']}
                 />
             </React.Fragment>
         </div>

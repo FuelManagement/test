@@ -6,8 +6,10 @@ export const formatutility = {
     MMDDYYYY: "mm/dd/yyyy",
     DDMMYYYY: "dd/mm/yyyy",
     YYYYMMDD: "yyyy/mm/dd",
+    MMDDYYYYHHMMSS:"MM/dd/yyyy hh:mm:ss",
     MMDDYYYYHHMMSSMS: "MM/dd/yyyy hh:mm:ss:ms",
     MMDDYYYYHHMMSS:"MM/dd/yyyy hh:mm:ss",
+    MMDDYYYYHHMM:"MM/dd/yyyy hh:mm",
     isEmpty
   };
   function isEmpty(obj) {

@@ -1022,8 +1022,8 @@ let Table_Config = {
 				Header: 'Request Timings',
 				accessor: 'createdOn',
 				headerClassName:'react-table-header-style',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={dateutility.datefunction(row.original.createdOn,formatutility.MMDDYYYYHHMMSS)}>
-					{dateutility.datefunction(row.original.createdOn,formatutility.MMDDYYYYHHMMSS)}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={dateutility.datefunction(row.original.createdOn,formatutility.MMDDYYYYHHMM)}>
+					{dateutility.datefunction(row.original.createdOn,formatutility.MMDDYYYYHHMM)}</span>
 			}, {
 				Header: 'Approve/Reject',
 				accessor: 'Approvereject',
@@ -1082,7 +1082,7 @@ let Table_Config = {
 			}, {
 				Header: 'Date',
 				accessor: 'date',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.date}>{dateutility.datefunction(row.original.date,formatutility.MMDDYYYYHHMMSS)}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.date}>{dateutility.datefunction(row.original.date,formatutility.MMDDYYYYHHMM)}</span>
 			}]
 		}
 	},
