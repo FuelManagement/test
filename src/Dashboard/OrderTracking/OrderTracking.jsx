@@ -72,7 +72,8 @@ class OrderTracking extends React.Component {
             OTRStatusId: "",
             orderList: [],
             selectedOrderDate: new Date(),
-            showLedgerPopUp: false
+            showLedgerPopUp: false,
+            ConnectWord:'Connect'
         }
         this.trackBtnClk = this.trackBtnClk.bind(this);
         this.tabChange = this.tabChange.bind(this);
@@ -82,6 +83,7 @@ class OrderTracking extends React.Component {
         this.handleDateChange = this.handleDateChange.bind(this);
         this.showLedgerTransHistory = this.showLedgerTransHistory.bind(this);
         this.showLedgerPopUpClose=this.showLedgerPopUpClose.bind(this);
+        this.changeWordConnect=this.changeWordConnect.bind(this);
     }
     componentDidMount() {
         this.props.dispatch(orderTrackingActions.listOrderTracking());
@@ -95,6 +97,9 @@ class OrderTracking extends React.Component {
     showLedgerTransHistory(type) {
         console.log(type);
         this.setState({ showLedgerPopUp: true });
+    }
+    changeWordConnect(){
+        this.setState({ConnectWord:'Connected'});
     }
     handleDateChange(date) {
         if (date == null) {
@@ -154,7 +159,7 @@ class OrderTracking extends React.Component {
             <div className="col-md-8 offset-md-3 contentDiv order-tracking-main">
                 <div className='float-right legend-icons'>
                     <span><i className="material-icons show-history-legends">speaker_phone</i>
-                        <span className='text-under'>Connect</span></span>
+                        <span className='text-under' onClick={()=>this.changeWordConnect()}>{this.state.ConnectWord}</span></span>
                     <span><i className="material-icons  show-history-legends">save</i>
                         <span className='text-under' onClick={() => this.showLedgerTransHistory('Show_Ledger_Tran_History')}>Show Ledger Trans History</span></span>
                 </div>
