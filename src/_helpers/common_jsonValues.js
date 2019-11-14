@@ -207,8 +207,85 @@ let Common_JsonData = {
         "txno": "1756422245648723",
         "eta": "09/20/219 11:00 AM",
         "orderPercentage": 95
-      }]
-  }
+      }],
+     
+  },
+  blackChainTranHistory:[
+    {
+      "DeviceID" : "00098c006000",
+      "TxnCode" : "TxnCode001",
+      "TxnHash" : "TxnHash001",
+      "ChannellID" : "ChannelID001",
+      "BlockNo" : "BlkNo1",
+      "Createtime" : "11/14/2019:10.00",
+      "Age" : "5",
+      "From" : "11/14/2019:10.00",
+      "To" : "11/14/2019:10.05",
+      "participantType":"Exporter1",
+      "participantID" : "123",
+      "UserId": "test1"
+   },
+   
+    {
+       "DeviceID" : "00098c007000",
+       "TxnCode" : "TxnCode002",
+       "TxnHash" : "TxnHash002",
+       "ChannellID" : "ChannelID002",
+       "BlockNo" : "BlkNo2",
+       "Createtime" : "11/14/2019:10.05",
+       "Age" : "10",
+       "From" : "11/14/2019:10.05",
+       "To" : "11/14/2019:10.15",
+       "participantType":"Exporter2",
+       "participantID" : "124",
+       "UserId": "test1"
+   },
+   
+    {
+       "DeviceID" : "00098c008000",
+       "TxnCode" : "TxnCode003",
+       "TxnHash" : "TxnHash003",
+       "ChannellID" : "ChannelID003",
+       "BlockNo" : "BlkNo3",
+       "Createtime" : "11/14/2019:10.30",
+       "Age" : "5",
+       "From" : "11/14/2019:10.30",
+       "To" : "11/14/2019:10.35",
+       "participantType":"Exporter3",
+       "participantID" : "125",
+       "UserId": "test1"
+   },
+  
+    {
+       "DeviceID" : "00098c009100",
+       "TxnCode" : "TxnCode004",
+       "TxnHash" : "TxnHash004",
+       "ChannellID" : "ChannelID004",
+       "BlockNo" : "BlkNo4",
+       "Createtime" : "11/14/2019:11.00",
+       "Age" : "20",
+       "From" : "11/14/2019:11.00",
+       "To" : "11/14/2019:11.20",
+       "participantType":"Exporter4",
+       "participantID" : "126",
+       "UserId": "test1"
+    },
+    
+     {
+        "DeviceID" : "00098c009500",
+        "TxnCode" : "TxnCode005",
+        "TxnHash" : "TxnHash005",
+        "ChannellID" : "ChannelID005",
+        "BlockNo" : "BlkNo5",
+        "Createtime" : "11/14/2019:11.35",
+        "Age" : "10",
+        "From" : "11/14/2019:11.35",
+        "To" : "11/14/2019:11.45",
+        "participantType":"Exporter5",
+        "participantID" : "127",
+        "UserId": "test1"
+    }
+   ]
 }
 
 module.exports = { Common_JsonData };

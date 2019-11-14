@@ -7,7 +7,8 @@ export const OrderTrackingService= {
      submitTrackRequest,
      submitOTPRequest,
      OrderTrackingService,
-     postOTPResendRequest
+     postOTPResendRequest,
+     getShowLedgerBlockChainDetails
      
 }
 
@@ -116,4 +117,14 @@ function postOTPResendRequest(data){
       .then(handleResponse)
     
 
+}
+function getShowLedgerBlockChainDetails(){
+    let user = JSON.parse(localStorage.getItem('user'));
+    let userId = user.participantID === undefined ? user.registerId : user.email;
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+       
+    };
+     return Common_JsonData.blackChainTranHistory;//fetch(config.apiUrl + '/otr/PostOTPResendforUser', requestOptions).then(handleResponse)
 }

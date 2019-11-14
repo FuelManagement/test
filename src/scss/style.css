@@ -835,3 +835,30 @@ header .pad-50{
 .sendAuthenticaion-model .MuiDialog-paperWidthFalse{
   width: 250px;
 }   
+.order-tracking-main .show-history-legends{
+  vertical-align: text-bottom;
+}
+.order-tracking-main .legend-icons{
+   font-weight: bold;
+}
+.legend-icons >span{
+  padding:25px;
+}
+.text-under{
+  text-decoration: underline;
+  cursor: pointer;
+}
+.text-under:hover{
+  color:green;
+}
+.show-ledger-popup .MuiDialog-paperWidthSm{
+  max-width: unset;
+}
+.show-ledger-header{
+  font-size: 15px;
+  font-weight: bold;
+  padding-left: 27px;
+}
+.show-ledger-popup .order-tracking-model-body{
+  padding: 0px 25px 25px 25px;
+}
