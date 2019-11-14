@@ -12,12 +12,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import Box from '@material-ui/core/Box';
 import { OTPModel } from './OTPModel';
+import { OrderTrackingShowLedgerPop } from './OrderTrackingShowLedgerPop'
 window.jQuery = $; // hack
 window.$ = $;      // hack 
 import 'bootstrap';
 import { TextField, Typography, Tab, IconButton, Tabs, InputBase, Paper, InputAdornment } from '@material-ui/core';
 import {
-    MuiPickersUtilsProvider, 
+    MuiPickersUtilsProvider,
     KeyboardDatePicker,
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
@@ -68,20 +69,23 @@ class OrderTracking extends React.Component {
             selectedRfq: {},
             tabValue: 0,
             OrderStatus: "otp-enabled",
-            OTRStatusId:"",
+            OTRStatusId: "",
             orderList: [],
-            selectedOrderDate: new Date()
-            //selectedOrderDate: new Date()
-            
+            selectedOrderDate: new Date(),
+            showLedgerPopUp: false,
+            ConnectWord:'Connect'
         }
         this.trackBtnClk = this.trackBtnClk.bind(this);
         this.tabChange = this.tabChange.bind(this);
         this.closeModel = this.closeModel.bind(this);
         this.getEnteredOTP = this.getEnteredOTP.bind(this);
-        this.postReSendOTP=this.postReSendOTP.bind(this);
+        this.postReSendOTP = this.postReSendOTP.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
+        this.showLedgerTransHistory = this.showLedgerTransHistory.bind(this);
+        this.showLedgerPopUpClose=this.showLedgerPopUpClose.bind(this);
+        this.changeWordConnect=this.changeWordConnect.bind(this);
     }
-    componentDidMount() { 
+    componentDidMount() {
         this.props.dispatch(orderTrackingActions.listOrderTracking());
     }
 
@@ -90,22 +94,28 @@ class OrderTracking extends React.Component {
             this.setState({ orderList: this.props.orderTracking.orderTrackingList })
         }
     }
+    showLedgerTransHistory(type) {
+        console.log(type);
+        this.setState({ showLedgerPopUp: true });
+    }
+    changeWordConnect(){
+        this.setState({ConnectWord:'Connected'});
+    }
     handleDateChange(date) {
-        console.log("date val",date);
-        if(date == null){
-            date =  new Date();
+        if (date == null) {
+            date = new Date();
         }
         this.setState({ selectedOrderDate: date });
     }
 
-    getEnteredOTP(OTPValue,OTRStatusId) {
-        let collection={};
-        collection.OTP=OTPValue;
-        collection.requestId=this.state.OTRStatusId;
+    getEnteredOTP(OTPValue, OTRStatusId) {
+        let collection = {};
+        collection.OTP = OTPValue;
+        collection.requestId = this.state.OTRStatusId;
         this.props.dispatch(orderTrackingActions.submitOTPRequest(collection));
         this.setState({ showModel: false });
     }
-    postReSendOTP(){
+    postReSendOTP() {
         console.log("requestId");
         console.log(this.state.OTRStatusId);
         this.props.dispatch(orderTrackingActions.postOTPResendRequest(this.state.OTRStatusId));
@@ -115,25 +125,28 @@ class OrderTracking extends React.Component {
     }
 
     trackBtnClk(event, data, status, showModel = true) {
-        
+
         if (data.orderTrackingStatus === "Approved" || data.orderTrackingStatus === "Auto Approved") {
-            this.setState({ showModel: true, OrderStatus: status,OTRStatusId:data.OTRStatusId});
-        } 
-        else if ((data.orderTrackingStatus === "Request Submitted") || (data.orderTrackingStatus === "New Request") ) {
+            this.setState({ showModel: true, OrderStatus: status, OTRStatusId: data.OTRStatusId });
+        }
+        else if ((data.orderTrackingStatus === "Request Submitted") || (data.orderTrackingStatus === "New Request")) {
             this.setState({ showModel: true, OrderStatus: status });
         }
         else if (data.orderTrackingStatus === "") {
-            this.props.dispatch(orderTrackingActions.submitTrackRequest(data,this.state.orderList));
+            this.props.dispatch(orderTrackingActions.submitTrackRequest(data, this.state.orderList));
         }
-        
+
     }
 
     tabChange(event, newValue) {
         //this.setState({ tabValue: newValue,selectedOrderDate: new Date(),search:'' })
-        this.setState({ tabValue: newValue,selectedOrderDate: "",search:'' })
+        this.setState({ tabValue: newValue, selectedOrderDate: "", search: '' })
     };
     closeModel() {
-        this.setState({ showModel: false,OTRStatusId:""})
+        this.setState({ showModel: false, OTRStatusId: "" })
+    }
+    showLedgerPopUpClose(){
+        this.setState({showLedgerPopUp:false});
     }
     render() {
         const { rfq } = this.props;
@@ -144,6 +157,12 @@ class OrderTracking extends React.Component {
         }
         return (
             <div className="col-md-8 offset-md-3 contentDiv order-tracking-main">
+                <div className='float-right legend-icons'>
+                    <span><i className="material-icons show-history-legends">speaker_phone</i>
+                        <span className='text-under' onClick={()=>this.changeWordConnect()}>{this.state.ConnectWord}</span></span>
+                    <span><i className="material-icons  show-history-legends">save</i>
+                        <span className='text-under' onClick={() => this.showLedgerTransHistory('Show_Ledger_Tran_History')}>Show Ledger Trans History</span></span>
+                </div>
                 <Paper>
                     <Tabs
                         value={this.state.tabValue}
@@ -158,7 +177,7 @@ class OrderTracking extends React.Component {
                     </Tabs>
                     <TabPanel value={this.state.tabValue} index={0}>
                         <div>
-                            <div className="clearDiv"></div> 
+                            <div className="clearDiv"></div>
                             <div className='col-md-5 p0 mb-4'>
                                 {/* <Paper className={OrderTrackingStyles.root}> */}
                                 {/* <InputBase
@@ -176,8 +195,8 @@ class OrderTracking extends React.Component {
                                     className="form-control"
                                     autoComplete="off"
                                     margin="dense"
-                                    value={this.state.search} 
-                                     onChange={e => this.setState({search:e.target.value})} 
+                                    value={this.state.search}
+                                    onChange={e => this.setState({ search: e.target.value })}
                                     // endAdornment={<InputAdornment position="end">Kg</InputAdornment>}
                                     InputProps={{
                                         endAdornment: (
@@ -191,13 +210,13 @@ class OrderTracking extends React.Component {
                                 {/* </Paper> */}
                             </div>
                             <ReactTable
-                                data={this.state.search.trim() !== ""?(this.state.orderList || []).filter(
-                                    f => f.poNumber!==undefined &&
-                                      f.poNumber.toString()
-                                        .toLowerCase()
-                                        .includes(
-                                          this.state.search.toLowerCase()
-                                        )):(this.state.orderList || [])}
+                                data={this.state.search.trim() !== "" ? (this.state.orderList || []).filter(
+                                    f => f.poNumber !== undefined &&
+                                        f.poNumber.toString()
+                                            .toLowerCase()
+                                            .includes(
+                                                this.state.search.toLowerCase()
+                                            )) : (this.state.orderList || [])}
                                 columns={Table_Config.OrderTrackingRecords.OrderTrackingRecord.columns({ trackBtnClk: this.trackBtnClk.bind(this) })}
                                 {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
                             />
@@ -205,7 +224,7 @@ class OrderTracking extends React.Component {
                     </TabPanel>
                     <TabPanel value={this.state.tabValue} index={1}>
                         <div>
-                            <div className="clearDiv"></div> 
+                            <div className="clearDiv"></div>
                             <div className='col-md-5 p0 mb-4'>
                                 {/* <Paper className={OrderTrackingStyles.root}>
                                     <InputBase
@@ -223,7 +242,7 @@ class OrderTracking extends React.Component {
                                         id="date-picker-dialog"
                                         label="Search by Order Date"
                                         format="MM/dd/yyyy"
-                                        value={dateutility.datefunction(this.state.selectedOrderDate,formatutility.MMDDYYYY)}
+                                        value={dateutility.datefunction(this.state.selectedOrderDate, formatutility.MMDDYYYY)}
                                         onChange={this.handleDateChange}
                                         clearable
                                         inputVariant="outlined"
@@ -235,13 +254,13 @@ class OrderTracking extends React.Component {
                                 </MuiPickersUtilsProvider>
                             </div>
                             <ReactTable
-                                data={this.state.selectedOrderDate.toString().trim() !== ""?(this.state.orderList || []).filter(
-                                    f =>f.poDate!==undefined &&
-                                      dateutility.datefunction(f.poDate,formatutility.MMDDYYYY).toString()
-                                        .toLowerCase()
-                                        .includes(
-                                            dateutility.datefunction(this.state.selectedOrderDate,formatutility.MMDDYYYY).toString().toLowerCase()
-                                        )):(this.state.orderList || [])}
+                                data={this.state.selectedOrderDate.toString().trim() !== "" ? (this.state.orderList || []).filter(
+                                    f => f.poDate !== undefined &&
+                                        dateutility.datefunction(f.poDate, formatutility.MMDDYYYY).toString()
+                                            .toLowerCase()
+                                            .includes(
+                                                dateutility.datefunction(this.state.selectedOrderDate, formatutility.MMDDYYYY).toString().toLowerCase()
+                                            )) : (this.state.orderList || [])}
                                 columns={Table_Config.OrderTrackingRecords.OrderTrackingRecord.columns({ trackBtnClk: this.trackBtnClk.bind(this) })}
                                 {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
                             />
@@ -249,7 +268,7 @@ class OrderTracking extends React.Component {
                     </TabPanel>
                     <TabPanel value={this.state.tabValue} index={2}>
                         <div>
-                            <div className="clearDiv"></div> 
+                            <div className="clearDiv"></div>
                             <div className='col-md-5 p0 mb-4'>
                                 {/* <Paper className={OrderTrackingStyles.root}>
                                     <InputBase
@@ -260,7 +279,7 @@ class OrderTracking extends React.Component {
                                     <IconButton className={OrderTrackingStyles.iconButton} aria-label="search">
                                         <SearchIcon />
                                     </IconButton>
-                                </Paper> */} 
+                                </Paper> */}
                                 <MuiPickersUtilsProvider utils={DateFnsUtils} >
                                     <KeyboardDatePicker style={{ width: '100%' }}
                                         margin="dense"
@@ -279,13 +298,13 @@ class OrderTracking extends React.Component {
                                 </MuiPickersUtilsProvider>
                             </div>
                             <ReactTable
-                                data={this.state.selectedOrderDate.toString().trim() !== ""?(this.state.orderList || []).filter(
-                                    f =>f.deliveryDate!==undefined &&
-                                    dateutility.datefunction(f.deliveryDate,formatutility.MMDDYYYY).toString()
-                                        .toLowerCase()
-                                        .includes(
-                                            dateutility.datefunction(this.state.selectedOrderDate,formatutility.MMDDYYYY).toString().toLowerCase()
-                                        )):(this.state.orderList || [])}
+                                data={this.state.selectedOrderDate.toString().trim() !== "" ? (this.state.orderList || []).filter(
+                                    f => f.deliveryDate !== undefined &&
+                                        dateutility.datefunction(f.deliveryDate, formatutility.MMDDYYYY).toString()
+                                            .toLowerCase()
+                                            .includes(
+                                                dateutility.datefunction(this.state.selectedOrderDate, formatutility.MMDDYYYY).toString().toLowerCase()
+                                            )) : (this.state.orderList || [])}
                                 columns={Table_Config.OrderTrackingRecords.OrderTrackingRecord.columns({ trackBtnClk: this.trackBtnClk.bind(this) })}
                                 {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
                             />
@@ -300,6 +319,9 @@ class OrderTracking extends React.Component {
                     OTRStatusId={this.state.OTRStatusId}
                     postReSendOTP={this.postReSendOTP}
                 />
+                <OrderTrackingShowLedgerPop
+                    showModel={this.state.showLedgerPopUp}
+                    closeModel={this.showLedgerPopUpClose} />
 
                 <div>
                 </div>

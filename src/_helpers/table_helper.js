@@ -1022,8 +1022,8 @@ let Table_Config = {
 				Header: 'Request Timings',
 				accessor: 'createdOn',
 				headerClassName:'react-table-header-style',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={dateutility.datefunction(row.original.createdOn,formatutility.MMDDYYYYHHMM)}>
-					{dateutility.datefunction(row.original.createdOn,formatutility.MMDDYYYYHHMM)}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={dateutility.datefunction(row.original.createdOn,formatutility.MMDDYYYYHHMMTT)}>
+					{dateutility.datefunction(row.original.createdOn,formatutility.MMDDYYYYHHMMTT)}</span>
 			}, {
 				Header: 'Approve/Reject',
 				accessor: 'Approvereject',
@@ -1082,7 +1082,7 @@ let Table_Config = {
 			}, {
 				Header: 'Date',
 				accessor: 'date',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.date}>{dateutility.datefunction(row.original.date,formatutility.MMDDYYYYHHMM)}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.date}>{dateutility.datefunction(row.original.date,formatutility.MMDDYYYYHHMMTT)}</span>
 			}]
 		}
 	},
@@ -1091,7 +1091,7 @@ let Table_Config = {
 			options: { ...globalOptions },
 			columns: (props) => [{
 				Header: 'Device Id',
-				accessor: 'Device',
+				accessor: 'DeviceID',
 			}, {
 				Header: 'TxnCode',
 				accessor: 'TxnCode',
@@ -1103,10 +1103,13 @@ let Table_Config = {
 				accessor: 'TxnHash',
 			}, {
 				Header: 'Channel Id',
-				accessor: 'ChannelId',
+				accessor: 'ChannellID',
 			}, {
 				Header: 'Block',
-				accessor: 'Block',
+				accessor: 'BlockNo',
+			},{
+				Header: 'Create Time',
+				accessor: 'Createtime',
 			}, {
 				Header: 'Age',
 				accessor: 'Age',

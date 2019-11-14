@@ -8,7 +8,8 @@ export const orderTrackingActions = {
     getOrderTrackingProgress,
     submitTrackRequest,
     submitOTPRequest,
-    postOTPResendRequest
+    postOTPResendRequest,
+    getShowLedgerBlockChainDetails
 }
 
 function listOrderTracking(){
@@ -147,4 +148,26 @@ function postOTPResendRequest(data){
     function request() { return { type: orderTrackingConst.ORDER_TRACKING_OTP_RESEND_REQUEST } }
     function success(data) {return { type: orderTrackingConst.ORDER_TRACKING_OTP_RESEND_SUCCESS, data } }
     function failure(error) { return { type: orderTrackingConst.ORDER_TRACKING_OTP_RESEND_ERROR, error } }
+}
+function getShowLedgerBlockChainDetails(){
+    return dispatch => {
+        dispatch(alertActions.loading());
+        
+        dispatch(success(OrderTrackingService.getShowLedgerBlockChainDetails()))
+        //OrderTrackingService.getShowLedgerBlockChainDetails()
+        // .then(
+        //     blockChainDetails => {
+        //         dispatch(success(blockChainDetails));
+        //         dispatch(alertActions.clearLoading());
+        //     },
+        //     error => {
+        //         dispatch(failure(error))
+        //         dispatch(alertActions.clearLoading());
+        //     }
+        // );
+    };
+
+    function request() { return { type: orderTrackingConst.ORDER_TRACKING_SHOW_LEDGER_GET_BLOCKCHAIN_REQUEST } }
+    function success(data) {return { type: orderTrackingConst.ORDER_TRACKING_SHOW_LEDGER_GET_BLOCKCHAIN_SUCCESS, data } }
+    function failure(error) { return { type: orderTrackingConst.ORDER_TRACKING_SHOW_LEDGER_GET_BLOCKCHAIN_ERROR, error } }
 }
