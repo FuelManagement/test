@@ -137,6 +137,10 @@ class OrderTracking extends React.Component {
         else if (data.orderTrackingStatus === "") {
             this.props.dispatch(orderTrackingActions.submitTrackRequest(data, this.state.orderList));
         }
+        if(data.orderTrackingStatus === "Approved" || data.orderTrackingStatus === "Auto Approved" && data.OTRStatusId != undefined)
+        {
+            this.props.dispatch(orderTrackingActions.postOTPResendRequest(data.OTRStatusId ));
+        }
 
     }
 

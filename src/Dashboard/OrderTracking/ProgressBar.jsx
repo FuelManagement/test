@@ -83,8 +83,9 @@ class OrderProgressBar extends React.Component {
                                     id="additional-actions1-header"
                                 >
                                     <div className="col-md-4">Order #: {this.props.order.poID} </div>
-                                    <div className="col-md-4" >Tx No #:
-                                        <span className="tax-no">{txno}</span></div>
+                                    <div className="col-md-4 show-partial-word" >Tx No #: 
+                                        <span className="tax-no">{this.props.order.tx_id}</span>
+                                    </div>
                                     <div className="col-md-4">ETA :{dateutility.datefunction(this.props.order.reqDelivaryDate, formatutility.MMDDYYYYHHMMTT)}</div>
 
 

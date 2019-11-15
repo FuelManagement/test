@@ -37,8 +37,8 @@ class OrderStatusDoc extends React.Component {
       <div style={{ height: "300px", width: "100%" }}>
        {this.state.document.map(item=>
         <div className="row" key = {item._id}>
-            <div className="col-md-8"><a onClick={()=>this.download(item)} href="JavaScript:Void(0);">{item.originalname}</a></div>
-            <div className="col-md-4"><span style={spanStyle}  onClick={()=>this.download(item)}><FontAwesomeIcon icon={fileUtility.fileIcon(item.originalname)} size="2x"/></span></div>
+            <div className="col-md-8">{item.originalname}</div>
+            <div className="col-md-4 file-icon-pdf"><span style={spanStyle}  onClick={()=>this.download(item)}><FontAwesomeIcon icon={fileUtility.fileIcon(item.filename)} size="2x"/></span></div>
         </div>
         )}
       </div>

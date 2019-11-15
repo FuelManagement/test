@@ -862,3 +862,15 @@ header .pad-50{
 .show-ledger-popup .order-tracking-model-body{
   padding: 0px 25px 25px 25px;
 }
+
+.show-partial-word {
+  white-space: nowrap; 
+  width: 100px; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+}
+
+.show-partial-word:hover {
+  overflow: visible;
+}
