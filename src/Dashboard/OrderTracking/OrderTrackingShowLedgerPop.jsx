@@ -63,7 +63,7 @@ class OrderTrackingShowLedgerPop extends React.Component {
                     <div className='order-tracking-model-body'>
                         <div>
                             <ReactTable
-                                data={showLedgerBlockChainDetails || []}
+                                data={showLedgerBlockChainDetails && showLedgerBlockChainDetails.info_list || []}
                                 columns={Table_Config.ProgressBar.ProgressBarRecords.columns()}
                                 {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
                             />

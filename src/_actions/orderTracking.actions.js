@@ -181,8 +181,7 @@ function postOTPResendRequest(data){
 function getShowLedgerBlockChainDetails(){
     return dispatch => {
         dispatch(alertActions.loading());
-        
-        dispatch(success(OrderTrackingService.getShowLedgerBlockChainDetails()))
+        dispatch(request());
         OrderTrackingService.getShowLedgerBlockChainDetails()
          .then(
              blockChainDetails => {

@@ -153,12 +153,11 @@ function getShowLedgerBlockChainDetails(){
     let userId = user.participantID === undefined ? user.registerId : user.email;
     let payload =
         {
-            "userId" : userId
+            "userID" : userId
         }
     const requestOptions = {
         method: 'GET',
-        headers: authHeader(),
-        body: JSON.stringify(payload)
-    };
-     return Common_JsonData.blackChainTranHistory;//fetch(config.apiUrl + '/otr/PostOTPResendforUser', requestOptions).then(handleResponse)
+        headers: authHeader()
+       };
+    return fetch(config.apiUrl + '/product/getDeviceInfoList?userID='+userId+'', requestOptions).then(handleResponse)
 }

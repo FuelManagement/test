@@ -1091,34 +1091,44 @@ let Table_Config = {
 			options: { ...globalOptions },
 			columns: (props) => [{
 				Header: 'Device Id',
-				accessor: 'DeviceID',
+				accessor: 'Device_ID',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.Device_ID}>{row.original.Device_ID}</span>
 			}, {
 				Header: 'TxnCode',
-				accessor: 'TxnCode',
+				accessor: 'tx_code',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.tx_code}>{row.original.tx_code}</span>
 			}, {
 				Header: 'TxnId',
-				accessor: 'TxnId',
+				accessor: 'tx_id',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.tx_id}>{row.original.tx_id}</span>
 			}, {
 				Header: 'Txn Hash',
-				accessor: 'TxnHash',
+				accessor: 'tx_hash',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.tx_hash}>{row.original.tx_hash}</span>
 			}, {
 				Header: 'Channel Id',
-				accessor: 'ChannellID',
+				accessor: 'channel_id',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.channel_id}>{row.original.channel_id}</span>
 			}, {
 				Header: 'Block',
-				accessor: 'BlockNo',
+				accessor: 'block_no',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.block_no}>{row.original.block_no}</span>
 			},{
 				Header: 'Create Time',
-				accessor: 'Createtime',
+				accessor: 'Creation_Time',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.Creation_Time}>{row.original.Creation_Time}</span>
 			}, {
 				Header: 'Age',
-				accessor: 'Age',
+				accessor: 'age',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.age}>{row.original.age}</span>
 			}, {
 				Header: 'From',
-				accessor: 'From',
+				accessor: 'from',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.from}>{row.original.from}</span>
 			}, {
 				Header: 'To',
-				accessor: 'To',
+				accessor: 'to',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.to}>{row.original.to}</span>
 			}]
 		}
 	},
