@@ -10,11 +10,11 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
-import {connect} from 'react-redux';
-import { orderTrackingActions } from '../../_actions'; 
+import { connect } from 'react-redux';
+import { orderTrackingActions } from '../../_actions';
 
 import { Table_Config, dateutility, formatutility } from '../../_helpers';
-
+let timer;
 const styles = theme => ({
     root: {
         margin: 0,
@@ -45,16 +45,17 @@ class OrderTrackingShowLedgerPop extends React.Component {
     constructor(props) {
         super(props);
     }
-    componentDidMount(){
-        try{
-            setInterval(this.props.dispatch(orderTrackingActions.getShowLedgerBlockChainDetails())
-                , 30000);
-        } catch(e) {
-            console.log(e);
-        }
+    componentDidMount() {
+        timer = setInterval(() => { this.props.dispatch(orderTrackingActions.getShowLedgerBlockChainDetails()) }, 30000);
+        setTimeout(function() {
+            clearInterval(timer);
+        }, 1000 * 60 * 30);
+    }
+    componentWillMount() {
+        clearInterval(timer);
     }
     render() {
-        const { showModel,showLedgerBlockChainDetails } = { ...this.props };
+        const { showModel, showLedgerBlockChainDetails } = { ...this.props };
         return (
             <div className='show-ledger-popup-main'>
                 <Dialog onClose={this.props.closeModel} className='order-tracking-otp-model show-ledger-popup' aria-labelledby="customized-dialog-title" open={showModel}>
@@ -74,8 +75,8 @@ class OrderTrackingShowLedgerPop extends React.Component {
         );
     }
 }
-function mapStateToProps(state) { 
-    const { showLedgerBlockChainDetails } = {...state.orderTracking};
+function mapStateToProps(state) {
+    const { showLedgerBlockChainDetails } = { ...state.orderTracking };
     return { showLedgerBlockChainDetails };
 }
 
