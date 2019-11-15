@@ -160,5 +160,5 @@ function getShowLedgerBlockChainDetails(){
         headers: authHeader(),
         body: JSON.stringify(payload)
     };
-     return fetch(config.apiUrl + '/otr/PostOTPResendforUser', requestOptions).then(handleResponse)
+     return Common_JsonData.blackChainTranHistory;//fetch(config.apiUrl + '/otr/PostOTPResendforUser', requestOptions).then(handleResponse)
 }
