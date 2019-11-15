@@ -13,7 +13,8 @@ class OrderStatusWithMap extends React.Component {
             orders:{
                 gps: formatutility.isEmpty(this.props.orderTracking.orders)?{}:this.props.orderTracking.orders.gps_details,
                 po_details: formatutility.isEmpty(this.props.orderTracking.orders)?{}:this.props.orderTracking.orders.po_details,
-                requestId:formatutility.isEmpty(this.props.orderTracking.orders)?{}:this.props.orderTracking.orders.requestId
+                requestId:formatutility.isEmpty(this.props.orderTracking.orders)?{}:this.props.orderTracking.orders.requestId,
+                documents:formatutility.isEmpty(this.props.orderTracking.orders)?[]:this.props.orderTracking.orders.documents
             }
         }
     }
@@ -27,7 +28,8 @@ class OrderStatusWithMap extends React.Component {
         this.setState({orders:{
             gps: prevProps.orderTracking.orders.gps_details,
             po_details: prevProps.orderTracking.orders.po_details,
-            requestId:prevProps.orderTracking.orders.requestId
+            requestId:prevProps.orderTracking.orders.requestId,
+            documents:prevProps.orderTracking.orders.documents
         
         }})
     }
@@ -58,7 +60,7 @@ class OrderStatusWithMap extends React.Component {
             </div>
             <React.Fragment>
                 <br />
-                <OrderProgressBar order={this.state.orders['po_details']} gps={this.state.orders['gps']}
+                <OrderProgressBar order={this.state.orders['po_details']} gps={this.state.orders['gps']} documents = {this.state.orders['documents']}
                 />
                   <br />
             </React.Fragment>
