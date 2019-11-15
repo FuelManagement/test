@@ -46,7 +46,12 @@ class OrderTrackingShowLedgerPop extends React.Component {
         super(props);
     }
     componentDidMount(){
-        this.props.dispatch(orderTrackingActions.getShowLedgerBlockChainDetails())
+        try{
+            setInterval(this.props.dispatch(orderTrackingActions.getShowLedgerBlockChainDetails())
+                , 30000);
+        } catch(e) {
+            console.log(e);
+        }
     }
     render() {
         const { showModel,showLedgerBlockChainDetails } = { ...this.props };

@@ -9,6 +9,7 @@ export const orderTrackingActions = {
     submitTrackRequest,
     submitOTPRequest,
     postOTPResendRequest,
+    postVolumetricData,
     getShowLedgerBlockChainDetails
 }
 
@@ -122,6 +123,34 @@ function submitOTPRequest(data){
    // function failure(error) { return { type: orderTrackingConst.ORDER_TRACKING_OTP_SUBMIT_ERROR, error } }
 }
 
+function postVolumetricData(){
+    return dispatch => {
+        dispatch(alertActions.loading());
+        OrderTrackingService.postVolumetricData()
+            .then(
+                orderTrackingList => {
+                    if(orderTrackingList.statusCode===200){
+                        dispatch(alertActions.success(orderTrackingList.message));
+                    }else{
+                        dispatch(alertActions.error(orderTrackingList.message));
+                    }
+                    dispatch(alertActions.clearLoading());
+
+                },
+                error => {
+                    let obj = JSON.parse(error);
+                    dispatch(alertActions.error(obj.message));
+                    dispatch(alertActions.clearLoading());
+
+                }
+            );
+    };
+
+    //function request() { return { type: orderTrackingConst.ORDER_TRACKING_OTP_SUBMIT_REQUEST } }
+    //function success(data) {return { type: orderTrackingConst.ORDER_TRACKING_OTP_SUBMIT_SUCCESS, data } }
+    // function failure(error) { return { type: orderTrackingConst.ORDER_TRACKING_OTP_SUBMIT_ERROR, error } }
+}
+
 function postOTPResendRequest(data){
     return dispatch => {
         dispatch(alertActions.loading());
@@ -154,17 +183,17 @@ function getShowLedgerBlockChainDetails(){
         dispatch(alertActions.loading());
         
         dispatch(success(OrderTrackingService.getShowLedgerBlockChainDetails()))
-        //OrderTrackingService.getShowLedgerBlockChainDetails()
-        // .then(
-        //     blockChainDetails => {
-        //         dispatch(success(blockChainDetails));
-        //         dispatch(alertActions.clearLoading());
-        //     },
-        //     error => {
-        //         dispatch(failure(error))
-        //         dispatch(alertActions.clearLoading());
-        //     }
-        // );
+        OrderTrackingService.getShowLedgerBlockChainDetails()
+         .then(
+             blockChainDetails => {
+                 dispatch(success(blockChainDetails));
+                 dispatch(alertActions.clearLoading());
+             },
+             error => {
+                 dispatch(failure(error))
+                 dispatch(alertActions.clearLoading());
+             }
+         );
     };
 
     function request() { return { type: orderTrackingConst.ORDER_TRACKING_SHOW_LEDGER_GET_BLOCKCHAIN_REQUEST } }

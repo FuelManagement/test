@@ -100,6 +100,8 @@ class OrderTracking extends React.Component {
     }
     changeWordConnect(){
         this.setState({ConnectWord:'Connected'});
+        this.props.dispatch(orderTrackingActions.postVolumetricData());
+
     }
     handleDateChange(date) {
         if (date == null) {

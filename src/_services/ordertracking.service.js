@@ -8,6 +8,7 @@ export const OrderTrackingService= {
      submitOTPRequest,
      OrderTrackingService,
      postOTPResendRequest,
+     postVolumetricData,
      getShowLedgerBlockChainDetails
      
 }
@@ -118,13 +119,46 @@ function postOTPResendRequest(data){
     
 
 }
+function getVolumetricDataByUserID(){
+    let user = JSON.parse(localStorage.getItem('user'));
+    let userId = user.participantID === undefined ?  user.registerId :user.email ;
+    let payload =
+        {
+            "userId" : userId
+        }
+
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader(),
+        body: JSON.stringify(payload)
+    };
+    return fetch(config.apiUrl + '/otr/post2FAForOTRByUserId', requestOptions).then(handleResponse, handleError);
+
+}
+
+function postVolumetricData(){
+    let payload = getVolumetricDataByUserID()
+    const requestOptions = {
+        method: 'POST',
+        headers: authHeader(),
+        body: JSON.stringify(payload)
+    };
+    return fetch(config.apiUrl + '/otr/post2FAForOTRByUserId', requestOptions).then(handleResponse, handleError);
+
+}
+
+
 function getShowLedgerBlockChainDetails(){
     let user = JSON.parse(localStorage.getItem('user'));
     let userId = user.participantID === undefined ? user.registerId : user.email;
+    let payload =
+        {
+            "userId" : userId
+        }
     const requestOptions = {
         method: 'GET',
-        headers: authHeader()
-       
+        headers: authHeader(),
+        body: JSON.stringify(payload)
     };
-     return Common_JsonData.blackChainTranHistory;//fetch(config.apiUrl + '/otr/PostOTPResendforUser', requestOptions).then(handleResponse)
+     return fetch(config.apiUrl + '/otr/PostOTPResendforUser', requestOptions).then(handleResponse)
 }
