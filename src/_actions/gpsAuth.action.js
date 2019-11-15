@@ -51,12 +51,26 @@ function getCustomerByCarrierId() {
 >>>>>>> 12cc4a0c5fd8062edd3589a4c3bdd54527abb84f
 }
 
-function otrGpsAuthForCustomer() {
+function otrGpsAuthForCustomer(customerDetail) {
 
+    return dispatch => {
+        dispatch(alertActions.loading());
+        return gpsAuthService.otrGpsAuthForCustomer(customerDetail)
+        .then(
+            customerNames => {
+                dispatch(success(customerNames));
+                dispatch(alertActions.clearLoading());
+            },
+            error => {
+                dispatch(failure(error))
+                dispatch(alertActions.clearLoading());
+            }
+        );
+    }
 
-    function request() { return { type: gpsAuthConstants.SUBMITINGGPSAUTHFORCUSTOMERREQUEST } }
-    function success(data) { return { type: gpsAuthConstants.GPSAUTHFORCUSTOMERSUCCESS, data } }
-    function failure(error) { return { type: gpsAuthConstants.GPSAUTHFORCUSTOMERFAILURE, error } }
+    function request() { return { type: gpsAuthConstants.SUBMITING_GPS_AUTH_FOR_CUSTOMER_REQUEST } }
+    function success(data) { return { type: gpsAuthConstants.GPS_AUTH_FOR_CUSTOMER_SUCCESS, data } }
+    function failure(error) { return { type: gpsAuthConstants.GPS_AUTH_FOR_CUSTOMER_FAILURE, error } }
 
 }
 

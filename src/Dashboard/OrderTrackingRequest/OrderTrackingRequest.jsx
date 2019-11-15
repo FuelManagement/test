@@ -23,23 +23,19 @@ class OrderTrackingRequest extends React.Component {
             confirmDialog: false,
             selectedRow: {},
             data:[
-                {CustomerName:'BP Gas Station',RequestedBy:'Dan Nelson',Owner:'Yes',Status:'New Request',RequestTimings:"10/08/2019 10:15AM"}
+                // {CustomerName:'BP Gas Station',RequestedBy:'Dan Nelson',Owner:'Yes',Status:'New Request',RequestTimings:"10/08/2019 10:15AM"}
             ]
         }
         this.approveSubmit = this.approveSubmit.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.confirmReject = this.confirmReject.bind(this);
+        this.sendAuth=this.sendAuth.bind(this);
     }
     approveSubmit(event, rowData) {
         
         if(event.target.value === "Approve"){
             this.setState({isApprove:true, confirmDialog:false, selectedRow:rowData}); 
-            let collection={};
-        collection.customerParticipantID=rowData.customerParticipantID;
-        collection.customerID=rowData.customerID;
-        collection.status="Approve";
-        collection.CreatedOn=new Date();
-        this.props.dispatch(orderTrackingRequestActions.postOTRAuthDetailsForCustomer(collection));          
+                    
         }
         else if(event.target.value === "Reject"){
             this.setState({isApprove:false, confirmDialog:true, selectedRow:rowData});
@@ -48,22 +44,35 @@ class OrderTrackingRequest extends React.Component {
     handleClose(){
         this.setState({isApprove:false, confirmDialog:false, selectedRow:{}});
     }
+    sendAuth(email,phone){
+        let collection={};
+        collection.requestId=this.state.selectedRow.requestId;
+        collection.customerParticipantID=this.state.selectedRow.customerParticipantID;
+        collection.customerID=this.state.selectedRow.customerID;
+        collection.status="Approved";
+        collection.OTPEmail=email;
+        collection.OTPPhone=phone;
+        collection.CreatedOn=new Date();
+        this.props.dispatch(orderTrackingRequestActions.postOTRAuthDetailsForCustomer(collection)); 
+        this.handleClose();
+    }
     confirmReject(){
         let collection={};
-        collection.customerParticipantID=this.selectedRow.customerParticipantID;
-        collection.customerID=this.selectedRow.customerID;
+        collection.requestId=this.state.selectedRow.requestId;
+        collection.customerParticipantID=this.state.selectedRow.customerParticipantID;
+        collection.customerID=this.state.selectedRow.customerID;
         collection.status="Reject";
         collection.CreatedOn=new Date();
         this.props.dispatch(orderTrackingRequestActions.postOTRAuthDetailsForCustomer(collection));
-   
-        console.log("todo reject selected row: ", this.state.selectedRow);
-        this.setState({isApprove:false, confirmDialog:false, selectedRow:{}});
+        this.handleClose();
     }
     componentDidMount() {
         this.props.dispatch(orderTrackingRequestActions.getOTRDetailsBysupplier());
        
     }
    render() {
+       let orderTrackingReqDetails = this.props.orderTrackingRequest.orderTrackingReqDetails;
+       //let orderTrackingReqDetails = [];
        return (
             <div>
                 <div className="mx-auto">
@@ -73,7 +82,7 @@ class OrderTrackingRequest extends React.Component {
                             <div className="table-data order-request-table">
                                 <div className="clearDiv"></div>
                                 <ReactTable
-                                    data={this.state.data || []}
+                                    data={orderTrackingReqDetails || []}
                                     columns={Table_Config.OrderTrackingRequestRecords.OrderTrackingRequestRecord.columns({ approveSubmit: this.approveSubmit.bind(this) })}
                                     {...Table_Config.OrderTrackingRequestRecords.OrderTrackingRequestRecord.options}
                                 />
@@ -81,7 +90,7 @@ class OrderTrackingRequest extends React.Component {
                         </div>
                     </div>
                 </div>
-                <SendAuthentication isApprove={this.state.isApprove} handleClose={this.handleClose} />
+                <SendAuthentication isApprove={this.state.isApprove} sendAuth={this.sendAuth.bind(this)} handleClose={this.handleClose} />
                 <ConfirmDialog
                     open={this.state.confirmDialog}
                     confirmAction={this.confirmReject}
@@ -93,6 +102,7 @@ class OrderTrackingRequest extends React.Component {
 
 function mapStateToProps(state) {
     const { orderTrackingRequest } = state;
+    console.log("orderTrackingRequest",orderTrackingRequest);
     return { orderTrackingRequest };
 }
 const connectedOrderTrackingRequest = connect(mapStateToProps)(OrderTrackingRequest);

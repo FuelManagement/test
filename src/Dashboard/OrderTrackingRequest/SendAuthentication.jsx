@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { validate } from '../../_helpers';
 import { userProfileActions, alertActions } from '../../_actions';
 import Button from '@material-ui/core/Button';
+import MuiPhoneInput from 'material-ui-phone-number';
 
 const styles = theme => ({
     root: {
@@ -49,6 +50,7 @@ class SendAuthentication extends Component {
         super(props);
         this.state = this.initialState(this.props.userProfile.mode, this.props.userProfile.userProfile);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit=this.handleSubmit.bind(this);
     }
     initialState(props) {
         let state = {};
@@ -56,10 +58,10 @@ class SendAuthentication extends Component {
             controls: {
                 sendAuthenticationEmail: {
                     value: props !== undefined && props.sendAuthenticationEmail !== undefined ? props.sendAuthenticationEmail : '',
-                    valid: true,
+                    valid: false,
                     validationRules: {
                         notEmpty: true,
-                        isEmail:true
+                        isEmail: true
                     },
                     error: "",
                     touched: false,
@@ -68,7 +70,7 @@ class SendAuthentication extends Component {
                 },
                 cellPhone: {
                     value: props !== undefined && props.sendAuthenticationEmail !== undefined ? props.sendAuthenticationEmail : '',
-                    valid: true,
+                    valid: false,
                     validationRules: {
                         notEmpty: true,
                     },
@@ -82,7 +84,7 @@ class SendAuthentication extends Component {
         return state;
     }
     handleChange(event) {
-        let key=event.target.name,value=event.target.value;
+        let key = event.target.name, value = event.target.value;
         console.log("key");
         console.log(key);
         let connectedValue = {};
@@ -106,6 +108,36 @@ class SendAuthentication extends Component {
         });
         this.props.dispatch(userProfileActions.changeUserProfile(key, value));
     }
+    handleOnChange(value,key) {
+
+        let connectedValue = {};
+        this.setState(prevState => ({
+            controls: {
+              ...prevState.controls,
+              [key]: {
+                ...prevState.controls[key],
+                value: value,
+                valid: validate(
+                  value,
+                  prevState.controls[key].validationRules,
+                  connectedValue,
+                  key
+                ),
+                touched: true
+              }
+            }
+        }) ); 
+        this.props.dispatch(userProfileActions.changeUserProfile(key, value)); 
+      } 
+      handleSubmit(){
+          if(this.state.controls['sendAuthenticationEmail'].valid || this.state.controls['cellPhone'].valid){
+          this.props.sendAuth(this.state.controls.sendAuthenticationEmail.value,this.state.controls.cellPhone.value);
+          }
+          else{
+              this.props.dispatch(alertActions.error('Atleast provide email or phone to proceed further'));
+          }
+      }
+    
     render() {
         return (
             <div>
@@ -136,7 +168,7 @@ class SendAuthentication extends Component {
                             </div>
                             <div className="row">
                                 <div className="col-md-12 mb-3 ">
-                                    <TextField
+                                    {/* <TextField
                                         error={!this.state.controls.cellPhone.valid && this.state.controls.cellPhone.touched}
                                         id="cellPhone"
                                         label="Cell Phone "
@@ -147,11 +179,21 @@ class SendAuthentication extends Component {
                                         className="form-control"
                                         autoComplete="off"
                                         margin="dense"
-                                    />
+                                    /> */}
+                                    <MuiPhoneInput
+                                        defaultCountry='us'
+                                        margin="dense"
+                                        variant="outlined"
+                                        className="form-control"
+                                        label="Cell Phone"
+                                        value={this.state.controls.cellPhone.value}
+                                        name="cellPhone" 
+                                        onChange={val => this.handleOnChange(val, 'cellPhone')}
+                                        />
                                 </div>
                             </div>
                             <div className="row sendAuthenticat-submit-row">
-                                <Button variant="contained" className="sendAuthenticat-submit">
+                                <Button variant="contained" onClick={this.handleSubmit} className="sendAuthenticat-submit">
                                     Submit
                                 </Button>
                             </div>

@@ -45,15 +45,16 @@ class Sidebar extends React.Component {
                                     src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
                                     alt="User picture" />
                             </div>
-                            <div className="user-info">
-                                <span className="user-name">{user.first_name}
-                                    <strong> {user.last_name}</strong>
+                            <div className="user-info" >
+                            <span className="user-status">
+                                    {/* <i className="fa fa-circle"></i>
+                                    <span>Online</span> */}
                                 </span>
-                                <span className="user-role">{user.role}</span>
-                                <span className="user-status">
-                                    <i className="fa fa-circle"></i>
-                                    <span>Online</span>
+                                <span className="user-name">{user.registerId}{user.first_Name}{' '}{user.last_Name}{user.first_name}{' '}{user.last_name}
+                                    
                                 </span>
+                                <span className="user-role">{user.role != undefined ? user.role :user.participantType}{' : '}{user.domain}{user.participantName}</span>
+                                
                             </div>
                         </div>
                         {/* <!-- sidebar-header  --> */}
@@ -115,6 +116,8 @@ class Sidebar extends React.Component {
                                         </ul>
                                     </div>
                                 </li>
+                                { user.role != 'Admin' ?( 
+                                    <div>
                                 <li className="sidebar-dropdown">
                                     <Link to="/userProfile">
                                         <i className="fa fa-shopping-cart"></i>
@@ -142,7 +145,7 @@ class Sidebar extends React.Component {
                                                 </Link>
                                             </li>
                                             <li className="sidebar-dropdown">
-                                                <Link to="/">
+                                                <Link to="/rfq">
                                                     <span>Proposal Management</span>
                                                 </Link>
                                                 <div className="sidebar-dropdown">
@@ -158,6 +161,27 @@ class Sidebar extends React.Component {
                                                         <li>
                                                             <Link to="/contract">
                                                                 Contract</Link>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li className="sidebar-dropdown">
+                                                <Link to="/purchaseOrder">
+                                                    <span>Order Management</span>
+                                                </Link>
+                                                <div className="sidebar-dropdown">
+                                                    <ul>
+                                                        <li>
+                                                            <Link to="/purchaseOrder">
+                                                            Purchase Order </Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link to="/salesOrder">
+                                                            Sales Order</Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link to="/dispatchOrder">
+                                                            Dispatch Order</Link>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -180,7 +204,7 @@ class Sidebar extends React.Component {
                                     </Link>
                                 </li>
                                 <li className="sidebar-dropdown">
-                                    <Link to="#">
+                                    <Link to="/volumetric">
                                         <i className="fa fa-shopping-cart"></i>
                                         <span>Volumetric</span>
                                     </Link>
@@ -223,7 +247,8 @@ class Sidebar extends React.Component {
                                         </ul>
                                     </div>
                                 </li>
-                            </ul>
+                                </div>):null}
+                           </ul>
                         </div>
                         {/* <!-- sidebar-menu  --> */}
                     </div>

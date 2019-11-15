@@ -15,43 +15,49 @@ class ManageGPSTable extends React.Component {
     constructor(props) {
         super(props);
         this.onClickItem = this.onClickItem.bind(this);
-        this.state = { recordsDataValue: [], randomId: null, clickedItem: this.props.getClickedItem };
+        this.state = { recordsDataValue: [], randomId: null, clickedItem: this.props.getClickedItem,bgColor:'unset',selected:null };
     }
 
 
     static getDerivedStateFromProps(nextProps, prevState) {
         console.log("table props 1", nextProps);
-        if (nextProps.dataItem.randomId != prevState.randomId) {
+        // if (nextProps.dataItem.randomId != prevState.randomId) {
+        if (nextProps.dataItem != undefined && nextProps.dataItem.length > 0) {
 
-            var currentdate = new Date();
-           
-            let obj = {
-                customerName: nextProps.dataItem.formData.customername.value,
-                orderid: nextProps.dataItem.formData.orderid.value,
-                status: nextProps.dataItem.formData.action.value,
-                date: currentdate,
-                id: nextProps.dataItem.randomId
-            };
+            //let array = [...prevState.recordsDataValue];
+            let array = [];
+            nextProps.dataItem.filter(option => option.status != "")
+            .map(option => {
+                var currentdate = new Date();
 
-            nextProps.getAddedCallback("added data successfully");
-
-            let array=[...prevState.recordsDataValue];
-            if(formatutility.isEmpty(array.find(f=>f.orderid===obj.orderid && f.customerName===obj.customerName))){
-             
-            array.push(obj);
-           }
-           else{
-            array.find(f=>f.orderid===obj.orderid && f.customerName===obj.customerName).status=obj.status;
-            array.find(f=>f.orderid===obj.orderid && f.customerName===obj.customerName).date=obj.date;
-           }
-            return { recordsDataValue:array, randomId: nextProps.dataItem.randomId }
+                let obj = {
+                    customerName: option.customerParticipantName,
+                    orderId: option.orderId,
+                    status: option.status,
+                    date: currentdate,
+                    id: "nextProps.dataItem.randomId"
+                };
+                //nextProps.getAddedCallback("added data successfully");
+    
+                
+                if (formatutility.isEmpty(array.find(f => f.orderId === obj.orderId && f.customerName === obj.customerName))) {
+    
+                    array.push(obj);
+                }
+                else {
+                    array.find(f => f.orderId === obj.orderId && f.customerName === obj.customerName).status = obj.status;
+                    array.find(f => f.orderId === obj.orderId && f.customerName === obj.customerName).date = obj.date;
+                }
+            })
+            console.log("Array filtered data",array)            
+            return { recordsDataValue: array, randomId: "nextProps.dataItem.randomId" }
         }
 
         return null;
     }
 
     onClickItem(e, t, rowInfo) {
-        console.log("rowItem", rowInfo.original);
+        console.log("rowItem", rowInfo.index); 
         this.state.clickedItem(rowInfo.original);
     }
 
@@ -61,12 +67,19 @@ class ManageGPSTable extends React.Component {
                 <ReactTable
                     data={this.state.recordsDataValue || []}
                     columns={Table_Config.ManageGPSTable.ManageGPSTableRecords.columns()}
-                    {...Table_Config.ManageGPSTable.ManageGPSTableRecords.options}
-                    getTrProps={(state, rowInfo, column) => {
-                        return {
-                            onClick: (e, t) => { this.onClickItem(e, t, rowInfo) },
-
-                        }
+                    {...Table_Config.ManageGPSTable.ManageGPSTableRecords.options} 
+                    getTrProps={(state, rowInfo,column) => {
+                        if (rowInfo && rowInfo.row) {
+                            return {
+                                onClick: (e, t) => { 
+                                    this.onClickItem(e, t, rowInfo);
+                                    this.setState({selected:rowInfo.index})
+                                },
+                                style: {
+                                    background:  rowInfo.index === this.state.selected  ? '#31353D' : 'unset', color: rowInfo.index === this.state.selected ? 'white' : 'black'
+                                }
+                            }
+                        } else { return {} }
                     }}
                 />
             </div>

@@ -1,6 +1,7 @@
 import { gpsAuthConstants } from '../_constants';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 export function gpsAuth(state = {}, action) {
 
@@ -23,6 +24,9 @@ export function gpsAuth(state = {}, action) {
                 ...state,
 =======
 export function gpsAuth(state = {}, action) {
+=======
+export function gpsAuth(state = {customers:[],customerOrders:[],addedData:[]}, action) {
+>>>>>>> eabe38a0f62306f13f382771ffc0853cdb8db57b
 
     switch (action.type) {
         case gpsAuthConstants.GET_CUSTOMER_REQUEST:
@@ -51,19 +55,19 @@ export function gpsAuth(state = {}, action) {
                 error: action.error
             };
 
-        case gpsAuthConstants.SUBMITINGGPSAUTHFORCUSTOMERREQUEST:
+        case gpsAuthConstants.SUBMITING_GPS_AUTH_FOR_CUSTOMER_REQUEST:
             return {
                 ...state,
                 loading: true
             };
-        case gpsAuthConstants.GPSAUTHFORCUSTOMERSUCCESS:
+        case gpsAuthConstants.GPS_AUTH_FOR_CUSTOMER_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 addedData: action.data,
             };
 
-        case gpsAuthConstants.GPSAUTHFORCUSTOMERFAILURE:
+        case gpsAuthConstants.GPS_AUTH_FOR_CUSTOMER_FAILURE:
             return {
                 ...state,
                 error: action.error

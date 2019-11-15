@@ -18,7 +18,11 @@ import {gpsAuth} from './gpsAuth.reducer';
 import {orderTrackingRequest} from './orderTrackingRequest.reducer';
 import { orderTracking } from './orderTracking.reducer';
 import { gpsAuth } from './gpsAuth.reducer';
+<<<<<<< HEAD
 >>>>>>> 12cc4a0c5fd8062edd3589a4c3bdd54527abb84f
+=======
+import {purchaseOrder} from './purchaseOrder.reducer'
+>>>>>>> eabe38a0f62306f13f382771ffc0853cdb8db57b
 const rootReducer = combineReducers({
   authentication,
   registration,
@@ -36,8 +40,13 @@ const rootReducer = combineReducers({
 =======
   orderTrackingRequest,
   orderTracking,
+<<<<<<< HEAD
 >>>>>>> 12cc4a0c5fd8062edd3589a4c3bdd54527abb84f
   gpsAuth
+=======
+  gpsAuth,
+  purchaseOrder
+>>>>>>> eabe38a0f62306f13f382771ffc0853cdb8db57b
 });
 
 export default rootReducer;

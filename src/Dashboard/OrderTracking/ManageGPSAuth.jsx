@@ -18,23 +18,41 @@ class ManageGPSAuth extends React.Component {
         this.getClickedData = this.getClickedData.bind(this);
     }
     onSubmit() {
-        let validate = false;
+        let validate = true;
         if (this.state.formData.customername.value == "" || undefined) {
             this.setState({ customerError: true })
-            validate = true;
+            validate = false;
         }
-        if (this.state.formData.orderid.value == "" || undefined) {
+        if (this.state.formData.orderId.value == "" || undefined) {
             this.setState({ orderError: true })
-            validate = true;
+            validate = false;
         }
         if (this.state.formData.action.value == "" || undefined) {
             this.setState({ actionError: true })
-            validate = true;
+            validate = false;
         }
-        if (!validate) {
+        if (validate) {
             this.setState({ showTable: true });
-            let randomVal = Math.random();
-            this.setState({ randomId: randomVal });
+            // let randomVal = Math.random();
+            // this.setState({ randomId: randomVal });
+            let poNumber = this.state.formData.orderId.value;
+            let orderIdFilteredData = this.state.dataItem.filter(option => option.orderId == poNumber);
+            let participantCustomerId = orderIdFilteredData[0].customerParticipantId;
+            let status = this.state.formData.action.value;
+            if(status == 'Approve'){
+                status = 'Approved'
+            }else{
+                status = 'Rejected'
+            }
+
+            let obj = {
+                participantCustomerId:participantCustomerId,
+                poNumber : poNumber,
+                status : this.state.formData.action.value
+            }
+            this.props.dispatch(gpsAuthActions.otrGpsAuthForCustomer(obj))
+            .then(()=>this.props.dispatch(gpsAuthActions.getCustomerByCarrierId()))
+            .then(this.getDataAddedCallback);
         }
     }
 
@@ -42,7 +60,7 @@ class ManageGPSAuth extends React.Component {
         const { formData } = { ...this.state };
         const currentState = formData;
         currentState.customername.value = "";
-        currentState.orderid.value = "";
+        currentState.orderId.value = "";
         currentState.action.value = "";
         this.setState({ formData: currentState }, () => console.log("callback", this.state));
     }
@@ -51,10 +69,10 @@ class ManageGPSAuth extends React.Component {
         const { formData } = { ...this.state };
         const currentState = formData;
         currentState.customername.value = data.customerName;
-        currentState.orderid.value = data.orderid;
+        currentState.orderId.value = data.orderId;
         currentState.action.value = data.status;
-
-        this.setState({ formData: currentState }, () => console.log("callback", this.state));
+        let orderData = this.state.dataItem.filter(option => option.customerParticipantName == data.customerName && option.status == "");
+        this.setState({ formData: currentState, orderData }, () => console.log("callback", this.state));
     }
 
     handleChange(event) {
@@ -73,24 +91,25 @@ class ManageGPSAuth extends React.Component {
             };
         });
         if (key == 'customername') {
-            this.props.dispatch(gpsAuthActions.getCustomerOrders(value));
-            this.setState({ customerError: false })
-        }
-        if (key == 'orderid') {
+            let orderData = this.state.dataItem.filter(option => option.customerParticipantName == value && option.status == "");
+            this.setState({orderData, customerError:false});
+        } else if (key == 'orderId') {
             this.setState({ orderError: false })
-        }
-        if (key == 'action') {
+        } else if (key == 'action') {
             this.setState({ actionError: false })
         }
     }
     initialState(mode, props) {
         let state = {};
         state = {
-            showTable: false,
+            showTable: true,
             randomId: null,
             customerError: false,
             orderError: false,
             actionError: false,
+            dataItem : [],
+            dataItemWithoutDuplicate : [],
+            orderData : [],
             formData: {
                 customername: {
                     value: props !== undefined && props.customerName !== undefined ? props.customerName : '',
@@ -104,13 +123,13 @@ class ManageGPSAuth extends React.Component {
                     visible: true,
                     disable: false
                 },
-                orderid: {
-                    value: props !== undefined && props.orderid !== undefined ? props.orderid : '',
+                orderId: {
+                    value: props !== undefined && props.orderId !== undefined ? props.orderId : '',
                     valid: false,
                     validationRules: {
                         notEmpty: true,
                     },
-                    error: "Please select orderid",
+                    error: "Please select order #",
                     placeholder: "Order #",
                     touched: false,
                     visible: true,
@@ -134,27 +153,46 @@ class ManageGPSAuth extends React.Component {
         return state;
     }
 
+    static getDerivedStateFromProps(nextProps, prevState) {
+        let dataItem = nextProps.gpsAuth.customers.data;  
+        let addedDataItem = nextProps.gpsAuth.addedData.data;
+        if(dataItem == undefined) return null;
+        let dataItemWithoutDuplicate = [];
+            dataItemWithoutDuplicate = [
+                ...new Set(
+                    dataItem.map((item) => { return item.customerParticipantName; })
+                ),
+            ];
+        if(addedDataItem != undefined){
+            let obj = {
+                customerParticipantId: addedDataItem.customerParticipantId,
+                customerParticipantName : addedDataItem.customerParticipantName,
+                orderId : addedDataItem.poNumber,
+                status : addedDataItem.status
+            }
+            let objIndex = dataItem.findIndex((obj => obj.orderId == addedDataItem.poNumber));
+            dataItem[objIndex].status = addedDataItem.status;
+            let dataVal = {data:[]};
+        }    
+        return {dataItem:dataItem,dataItemWithoutDuplicate:dataItemWithoutDuplicate}; 
+    }
+
     componentDidMount(){
         this.props.dispatch(gpsAuthActions.getCustomerByCarrierId());
     }
 
     render() {
-        const Actions = [
-            {
-                value: '',
-                label: 'None'
-            },
-            {
-                value: 'Approve',
-                label: 'Approve'
-            },
-            {
-                value: 'Reject',
-                label: 'Reject'
-            }];
+        const Actions = [{
+            value: 'Approved',
+            label: 'Approve'
+        },{
+            value: 'Rejected',
+            label: 'Reject'
+        }];
+ 
         return <div>
             <div className='col-lg-9 add-rfq-main progress-main manage-gps-auth'>
-                <h2 className='manage-gps-title'>Manage GPS Authorizations</h2>
+                <h2 className="table-main-heading">Manage GPS Authorizations</h2>
                 <div className="row drop-down-sec">
                     <div className="col-12 col-md-12 form-wrapper">
                         <div className="row form-row">
@@ -172,20 +210,23 @@ class ManageGPSAuth extends React.Component {
                                     margin="dense"
                                     error={this.state.customerError}
                                 >
-                                    <MenuItem value={false}>None</MenuItem>
-                                    {this.props.gpsAuth.customers && this.props.gpsAuth.customers.map(option => (
-                                        <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                                    {/* <MenuItem value={false}>None</MenuItem> */}
+                                    {this.state.dataItemWithoutDuplicate && this.state.dataItemWithoutDuplicate.map(item => (
+                                        <MenuItem key={item} value={item}>{item}</MenuItem>
                                     ))}
+                                    {/* {this.props.gpsAuth.customers.data && this.props.gpsAuth.customers.data.map(option => (
+                                        <MenuItem key={option.customerParticipantName} value={option.customerParticipantName}>{option.customerParticipantName}</MenuItem>
+                                    ))} */}
                                 </TextField>
                             </div>
                             <div className="col-md-4  ">
                                 <TextField
                                     select
-                                    id="orderid"
+                                    id="orderId"
                                     label="Order #"
-                                    value={this.state.formData.orderid.value}
+                                    value={this.state.formData.orderId.value}
                                     onChange={this.handleChange}
-                                    name="orderid"
+                                    name="orderId"
                                     variant="outlined"
                                     className="form-control"
                                     autoComplete="off"
@@ -194,10 +235,11 @@ class ManageGPSAuth extends React.Component {
                                     error={this.state.orderError}
                                 >
                                     <MenuItem value={false}>None</MenuItem>
-                                    {this.props.gpsAuth.customerOrders?<MenuItem value="All">All</MenuItem>:""}
-                                    {this.props.gpsAuth.customerOrders && this.props.gpsAuth.customerOrders.map(option => 
-                                        {return !option.status?<MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>:""}
-                                    )}
+                                    {/* {this.props.gpsAuth.customerOrders?<MenuItem value="All">All</MenuItem>:""} */}
+                                    {this.state.orderData && this.state.orderData.map(option => (
+                                    
+                                        <MenuItem key={option.orderId} value={option.orderId}>{option.orderId}</MenuItem>
+                                    ))}
                                 </TextField>
                             </div>
                             <div className="col-md-4  ">
@@ -232,20 +274,16 @@ class ManageGPSAuth extends React.Component {
                     </div>
                 </div>
                 <div className='react-table-sec'>
-                    {this.state.showTable && <ManageGPSTable dataItem={this.state} getAddedCallback={this.getDataAddedCallback} getClickedItem={this.getClickedData} />}
+                    {this.state.showTable && <ManageGPSTable dataItem={this.state.dataItem} getAddedCallback={this.getDataAddedCallback} getClickedItem={this.getClickedData} />}
                 </div>
-
             </div>
-
-
         </div>
-
-
     }
 }
 
 function mapStateToProps(state) {
     const { gpsAuth } = state;
+    console.log("gpsAuth data",gpsAuth);
     return { gpsAuth };
 
 }

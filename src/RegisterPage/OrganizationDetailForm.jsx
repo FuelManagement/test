@@ -39,7 +39,7 @@ class OrganizationDetailForm extends React.Component {
     UNSAFE_componentWillReceiveProps(nextprops) {
         if (JSON.stringify(this.props.onboard.participant) !== JSON.stringify(nextprops.onboard.participant)) {
             ["domain", "dateOfIncorporation", "stateOfIncorporation", "countryOfIncorporation", "BuisnessType", "participantType", "entityTypeOther"
-                , "numberOfYearsinBuisness", "registerId", "companyCode"].forEach(name => {
+                , "registerId"].forEach(name => {
                     this.setState(prevState => {
                         return {
                             controls: {
@@ -90,21 +90,6 @@ class OrganizationDetailForm extends React.Component {
                     },
                     error: "Please enter business type",
                     placeholder: "Business Type",
-                    touched: false,
-                    visible: true,
-                    disable: false
-                },
-                numberOfYearsinBuisness: {
-                    value: props !== undefined && props.numberOfYearsinBuisness !== undefined ? props.numberOfYearsinBuisness : '',
-
-                    valid: this.props.onboard.isOrgFormValid ? true : false,
-                    validationRules: {
-                        notEmpty: true,
-                        minLength: true,
-                        maxLength: true
-                    },
-                    error: "Please enter number of years in business",
-                    placeholder: "Number of Years in Business",
                     touched: false,
                     visible: true,
                     disable: false
@@ -195,21 +180,6 @@ class OrganizationDetailForm extends React.Component {
                     visible: true,
                     disable: false
                 },
-                companyCode: {
-                    value: props !== undefined && props.companyCode !== undefined ? props.companyCode : '',
-
-                    valid: this.props.onboard.isOrgFormValid ? true : false,
-                    validationRules: {
-                        notEmpty: true,
-                        minLength: true,
-                        maxLength: true
-                    },
-                    error: "Please enter company code",
-                    placeholder: "Company Code",
-                    touched: false,
-                    visible: true,
-                    disable: false
-                },
             },
             errors: {}
         };
@@ -219,11 +189,9 @@ class OrganizationDetailForm extends React.Component {
         let key = event.target.name, value = event.target.value;
         let connectedValue = {
             domain: { minLength: 1, maxLength: 50 },
-            companyCode: { minLength: 1, maxLength: 50 },
             entityTypeOther: { minLength: 1, maxLength: 50 },
             countryOfIncorporation: { minLength: 1, maxLength: 50 },
             stateOfIncorporation: { minLength: 1, maxLength: 50 },
-            numberOfYearsinBuisness: { minLength: 1, maxLength: 3 },
         };
         if (key === 'participantType' && value.toLowerCase() === 'other') {
             this.updateFormState('entityTypeOther', '', connectedValue, false);
@@ -242,7 +210,7 @@ class OrganizationDetailForm extends React.Component {
         let isFormVaild = true;
         if (this.state.controls !== undefined) {
             ["domain", "dateOfIncorporation", "stateOfIncorporation", "countryOfIncorporation", "BuisnessType", "participantType", "entityTypeOther"
-                , "numberOfYearsinBuisness", "registerId", "companyCode"].forEach(name => {
+                , "registerId"].forEach(name => {
                     let value = this.state.controls[name].valid, touched = this.state.controls[name].touched;
                     if (!value && this.props.onboard.mode === 'create') {
 
@@ -295,7 +263,7 @@ class OrganizationDetailForm extends React.Component {
             return false;
         }
     }
-    //Allow only numbers 
+    //Allow only numbers
     allowOnlynumbers(e) {
         var regex = new RegExp(/^[0-9\b]+$/);
 
@@ -352,22 +320,7 @@ class OrganizationDetailForm extends React.Component {
                             </TextField>
                         </FormControl>
                     </div>
-                    <div className="col-md-4 mb-3">
-                        <TextField type="number"
-                            id="numberOfYearsinBuisness"
-                            label="Number of Years in Business"
-                            name="numberOfYearsinBuisness"
-                            value={this.state.controls.numberOfYearsinBuisness.value}
-                            onChange={this.handleChange}
-                            variant="outlined"
-                            className="form-control"
-                            autoComplete="off"
-                            margin="dense"
 
-                            error={!this.state.controls.numberOfYearsinBuisness.valid && this.state.controls.numberOfYearsinBuisness.touched}
-
-                        />
-                    </div>
                 </div>
                 <div className="form-row">
                     <div className="col-md-4 mb-3 ">
@@ -469,23 +422,6 @@ class OrganizationDetailForm extends React.Component {
                             autoComplete="off"
                             margin="dense"
                             error={!this.state.controls.registerId.valid && this.state.controls.registerId.touched}
-                        />
-                    </div>
-                </div>
-                <div className="form-row">
-                    <div className="col-md-4 mb-3">
-                        <TextField
-                            id="companyCode"
-                            label="Company Code"
-                            name="companyCode"
-                            value={this.state.controls.companyCode.value}
-                            onChange={this.handleChange}
-                            variant="outlined"
-                            className="form-control"
-                            autoComplete="off"
-                            // margin="normal"
-                            margin="dense"
-                            error={!this.state.controls.companyCode.valid && this.state.controls.companyCode.touched}
                         />
                     </div>
                 </div>

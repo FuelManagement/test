@@ -9,15 +9,16 @@ export const OrderTrackingRequestService= {
 function getOTRDetailsBysupplier() {
    
     let user = JSON.parse(localStorage.getItem('user'));
+    let participantId = user.participantID === undefined ? user.registerId : user.participantID;
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
-    };
-    return fetch(config.apiUrl + '/otr/GetOTRDetailsBysupplier?supplierID='+user.participantID, requestOptions).then(handleResponse)
+    };                                              //+user.participantID
+    return fetch(config.apiUrl + '/otr/GetOTRDetailsBysupplier?supplierId='+participantId, requestOptions).then(handleResponse)
 }
 function postOTRAuthDetailsForCustomer(data) {
     let user = JSON.parse(localStorage.getItem('user'));
-    data.CreatedBy=user.email;
+    data.loginUserId=user.email;
     const requestOptions = {
         method: 'POST',
         headers: authHeader(),

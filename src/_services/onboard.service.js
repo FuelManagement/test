@@ -33,6 +33,8 @@ function createOnBoarder(collection) {
         "participantType": collection.ParticipantType.value,
         "isCompany": true,
         "streetAddress": collection.StreetAddress.value,
+        "streetAddress2": collection.StreetAddress2.value,
+        "streetAddress3": collection.StreetAddress3.value,
         "City": collection.City.value,
         "State": collection.State.value,
         "zip": collection.ZipCode.value,
@@ -103,7 +105,7 @@ if(user!==undefined && user!==null)
         })
 
 }
-function updateParticipant(collection, Documentslist,downloadDocumentslist) 
+function updateParticipant(collection, Documentslist,downloadDocumentslist)
 {
 
     let user = JSON.parse(localStorage.getItem('user'));
@@ -119,10 +121,10 @@ function updateParticipant(collection, Documentslist,downloadDocumentslist)
                 body: JSON.stringify(collection)
             };
                     return fetch(config.apiUrl + '/product/updateParticipant', requestOptions).then(handleResponse, handleError);
-        
-    
+
+
         })
-    
+
 }
 function getParticipant(collection) {
     let user = JSON.parse(localStorage.getItem('user'));
@@ -165,9 +167,9 @@ function uploadFile(collection) {
     })
 }
 function approveParticipant(data) {
-    
-    
-  
+
+
+
     const requestOptions = {
         method: 'POST',
         headers: authHeader(),

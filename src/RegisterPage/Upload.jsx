@@ -14,13 +14,13 @@ class Upload extends React.Component {
             files: this.props.onboard.documentslist !== undefined ? this.props.onboard.documentslist : []
         };
         this.props.dispatch(onboardActions.changeFormState(this.props.onboard.mode === 'create' ? false : true));
-      
+
     }
-   
+
     download(collection){
         downloadFileService.downloadFileForParticipnt(collection);
     }
-   
+
     render() {
         return (
             <div>
@@ -36,12 +36,12 @@ class Upload extends React.Component {
                         this.props.dispatch(onboardActions.changeFormState(false));
                     }
                 }}
-                labelIdle='Upload Files <span class="filepond--label-action">Upload Files</span>' />
+                labelIdle='Document <span class="filepond--label-action">Add Document</span>' />
 
-                {this.props.onboard.downloadDocumentslist !== undefined && 
-                    this.props.onboard.downloadDocumentslist !== null && 
-                    this.props.onboard.downloadDocumentslist.length > 0 && 
-                    this.props.mode !== 'create' ? 
+                {this.props.onboard.downloadDocumentslist !== undefined &&
+                    this.props.onboard.downloadDocumentslist !== null &&
+                    this.props.onboard.downloadDocumentslist.length > 0 &&
+                    this.props.mode !== 'create' ?
                 <div >
                     <ul className="fa-ul">
                     {this.props.onboard.downloadDocumentslist.map(item=>
@@ -49,9 +49,9 @@ class Upload extends React.Component {
                     <a onClick={()=>this.download(item)} href="JavaScript:Void(0);">{item.originalname}</a>
                     <span > {fileUtility.bytesToSize(item.size)} </span> <span > <FontAwesomeIcon icon="trash" size="1x"/> </span></li>
                    )}
-                       
+
                     </ul>
-                </div> 
+                </div>
                 : null}
             </div>
         )

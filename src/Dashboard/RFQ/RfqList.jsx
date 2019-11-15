@@ -50,10 +50,10 @@ class RFQ extends React.Component {
         }
         return (
             <div className="col-md-8 offset-md-3 contentDiv">
-                <h2 style={{ display: "inline-block" }}>Request for quotation</h2>
+                {/* <h2 style={{ display: "inline-block" }} className="table-main-heading">Request for quotation</h2> */}
                 <hr />
                 <div>
-                <h3 className="vendor-text">Supplier's RFQ</h3>
+                <h3 className="vendor-text" className="table-main-heading">Supplier's RFQ</h3>
                 <Link to="/rfq/add" className="addRFQ-link">
                     <button className="btn btn-outline btn-success">
                         <FontAwesomeIcon icon="plus"/> RFQ

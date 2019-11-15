@@ -68,19 +68,20 @@ class OrderTracking extends React.Component {
             selectedRfq: {},
             tabValue: 0,
             OrderStatus: "otp-enabled",
-            //OrderStatus:"otp-disabled"
+            OTRStatusId:"",
             orderList: [],
             selectedOrderDate: new Date()
+            //selectedOrderDate: new Date()
+            
         }
         this.trackBtnClk = this.trackBtnClk.bind(this);
         this.tabChange = this.tabChange.bind(this);
         this.closeModel = this.closeModel.bind(this);
         this.getEnteredOTP = this.getEnteredOTP.bind(this);
+        this.reSendOTP=this.reSendOTP.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
     }
-    componentDidMount() {
-        console.log("orderTracking data");
-        console.log(this.props.orderTracking.data); 
+    componentDidMount() { 
         this.props.dispatch(orderTrackingActions.listOrderTracking());
     }
 
@@ -90,33 +91,48 @@ class OrderTracking extends React.Component {
         }
     }
     handleDateChange(date) {
+        console.log("date val",date);
+        if(date == null){
+            date =  new Date();
+        }
         this.setState({ selectedOrderDate: date });
     }
 
-    getEnteredOTP(OTPValue) {
+    getEnteredOTP(OTPValue,OTRStatusId) {
         let collection={};
         collection.OTP=OTPValue;
+        collection.requestId=this.state.OTRStatusId;
         this.props.dispatch(orderTrackingActions.submitOTPRequest(collection));
         this.setState({ showModel: false });
     }
+    reSendOTP(requestId){
+        console.log("requestId");
+        console.log(requestId);
+        // let data={
+        // }
+        // this.props.dispatch(orderTrackingActions.submitTrackRequest(data,this.state.orderList));
+    }
 
     trackBtnClk(event, data, status, showModel = true) {
-        if (data.status === "Approved") {
-            this.setState({ showModel: true, OrderStatus: status });
+        
+        if (data.orderTrackingStatus === "Approved" || data.orderTrackingStatus === "Auto Approved") {
+            this.setState({ showModel: true, OrderStatus: status,OTRStatusId:data.OTRStatusId});
         } 
-        else if (data.status === "Request Submitted") {
+        else if (data.orderTrackingStatus === "Request Submitted") {
             this.setState({ showModel: true, OrderStatus: status });
         }
-        else if (data.status === "") {
-            this.props.dispatch(orderTrackingActions.submitTrackRequest(data));
+        else if (data.orderTrackingStatus === "") {
+            this.props.dispatch(orderTrackingActions.submitTrackRequest(data,this.state.orderList));
         }
+        
     }
 
     tabChange(event, newValue) {
-        this.setState({ tabValue: newValue,selectedOrderDate: new Date(),search:'' })
+        //this.setState({ tabValue: newValue,selectedOrderDate: new Date(),search:'' })
+        this.setState({ tabValue: newValue,selectedOrderDate: "",search:'' })
     };
     closeModel() {
-        this.setState({ showModel: false })
+        this.setState({ showModel: false,OTRStatusId:""})
     }
     render() {
         const { rfq } = this.props;
@@ -206,7 +222,7 @@ class OrderTracking extends React.Component {
                                         id="date-picker-dialog"
                                         label="Search by Order Date"
                                         format="MM/dd/yyyy"
-                                        value={this.state.selectedOrderDate}
+                                        value={dateutility.datefunction(this.state.selectedOrderDate,formatutility.MMDDYYYY)}
                                         onChange={this.handleDateChange}
                                         clearable
                                         inputVariant="outlined"
@@ -250,7 +266,7 @@ class OrderTracking extends React.Component {
                                         id="date-picker-dialog"
                                         label="Search by Delivery Date"
                                         format="MM/dd/yyyy"
-                                        value={this.state.selectedOrderDate}
+                                        value={new Date(this.state.selectedOrderDate)}
                                         onChange={this.handleDateChange}
                                         clearable
                                         inputVariant="outlined"
@@ -275,10 +291,12 @@ class OrderTracking extends React.Component {
                         </div>
                     </TabPanel>
                 </Paper>
-                <OTPModel showModel={this.state.showModel}
+                <OTPModel
+                    showModel={this.state.showModel}
                     closeModel={this.closeModel}
                     getEnteredOTP={this.getEnteredOTP}
                     OrderStatus={this.state.OrderStatus}
+                    OTRStatusId={this.state.OTRStatusId}
                 />
 
                 <div>

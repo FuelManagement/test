@@ -62,24 +62,28 @@ class OrderProgressBar extends React.Component {
     }
 
     render() {
-        const{orderno,txno,eta,orderPercentage}={...this.props.order};
-
+        console.log("progress bar",this.props);
+        const { txno } = { ...this.props.order };
+        let progressPercent = this.props.gps.status === "Dispatched" ? 40
+                                : this.props.gps.status === "In Transit" ? 66.5
+                                : this.props.gps.status === "Delivered" ? 100
+                                : 0;
         return (
             <div className="mx-auto">
                 <div className="">
                     <div className='col-lg-9 add-rfq-main progress-main'>
                        <div className="progress-expand-pannel">
-                            <ExpansionPanel  >
+                            <ExpansionPanel defaultExpanded={true}>
                                 <ExpansionPanelSummary
                                     expandIcon={<ExpandMoreIcon />}
                                     aria-label="Expand"
                                     aria-controls="additional-actions1-content"
                                     id="additional-actions1-header"
                                 >
-                                    <div className="col-md-4">Order No: {orderno} </div>
-                                    <div className="col-md-4" onClick={this.openModal}>Tx No #:
+                                    <div className="col-md-4">Order #: {this.props.order.poID} </div>
+                                    <div className="col-md-4" >Tx No #:
                                         <span className="tax-no">{txno}</span></div>
-                                    <div className="col-md-4">ETA:{eta}</div>
+                                    <div className="col-md-4">ETA :{ dateutility.datefunction(this.props.order.reqDelivaryDate,formatutility.MMDDYYYYHHMMSS)}</div>
 
 
                                 </ExpansionPanelSummary>
@@ -89,7 +93,7 @@ class OrderProgressBar extends React.Component {
                                         <div className="col-md-12">
                                             <ProgressBar
                                                 filledBackground="linear-gradient(to right, green, green)"
-                                                percent={orderPercentage}
+                                                percent={progressPercent}
                                             >
                                                 <Step transition="scale">
                                                     {({ accomplished, index }) => (
@@ -155,7 +159,7 @@ class OrderProgressBar extends React.Component {
 export { OrderProgressBar };
 
 
-import { Table_Config } from '../../_helpers';
+import { Table_Config, dateutility, formatutility } from '../../_helpers';
 let Table = (props) => (
     <ReactTable
         data={props.data || []}
