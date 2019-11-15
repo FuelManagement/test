@@ -4,6 +4,7 @@ import { Locations } from '../../_components/Location/Location';
 import { OrderProgressBar } from './ProgressBar';
 import { orderTrackingActions } from '../../_actions';
 import { formatutility } from '../../_helpers';
+import { OrderStatusDoc } from './OrderStatusDoc';
 
 class OrderStatusWithMap extends React.Component {
     constructor(props) {
@@ -37,6 +38,7 @@ class OrderStatusWithMap extends React.Component {
         console.log("location gps details");
         console.log(this.state);
         return <div>
+                 
             <div className='col-lg-9 add-rfq-main progress-main'>
                 <div className="row order-track-status-map">
                     <div className="col-md-4">
@@ -49,13 +51,18 @@ class OrderStatusWithMap extends React.Component {
                 </div>
                 <div className='gps-google-map'>
                   {!formatutility.isEmpty(this.state.orders['gps'])? <Locations location={this.state.orders['gps']} /> :null}
+                  {/* <div>
+                  <OrderStatusDoc document={JSON.parse("[{\"fieldname\":\"file\",\"originalname\":\"endbuyer.PNG\",\"encoding\":\"7bit\",\"mimetype\":\"image/png\",\"destination\":\"uploads/file/endbuyer/\",\"filename\":\"1573715130240.PNG\",\"path\":\"uploads\\\\file\\\\endbuyer\\\\1573715130240.PNG\",\"size\":931,\"hash\":\"2ed6fa6d34910f1475ad6f83303397d0e798585e56ebe84fd066d807a7489d1c\"}]")} />
+                </div> */}
                 </div>
             </div>
             <React.Fragment>
                 <br />
                 <OrderProgressBar order={this.state.orders['po_details']} gps={this.state.orders['gps']}
                 />
+                  <br />
             </React.Fragment>
+           
         </div>
     }
 }
