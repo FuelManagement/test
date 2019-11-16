@@ -187,6 +187,7 @@ header .pad-50{
 
 .contentDiv {
   margin-top: 90px;
+  margin-left: 22%;
 }
 
 .contentDiv .dasboardStatic {
@@ -873,4 +874,48 @@ header .pad-50{
 
 .show-partial-word:hover {
   overflow: visible;
+}
+.setup-search{
+  width: 50%;
+  margin: 0px !important;
+  float: right;
+}
+.search-icon{
+  color: #495057;
+}
+.setup-form-div{
+  border: 1px solid #aadf99;
+  margin: 25px 0px;
+  padding: 15px;
+  position: relative;
+}
+.setup-form-heading{
+  position: absolute;
+    top: -12px;
+    margin: 0px;
+    padding: 0px 5px;
+    background-color: #fff;
+    color: #28ae01;
+    font-size: 15px;
+    font-weight: bold;
+}
+.setup-submit-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.setup-form-submit{
+  background-color: #00ce1b;
+  color: #fff;
+  font-size: 15px;
+  border: none;
+  outline: none; 
+  padding: 5px 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.setup-form-row{
+  padding: 20px 5px;
 }

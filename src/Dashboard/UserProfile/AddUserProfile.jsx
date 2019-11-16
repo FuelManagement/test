@@ -11,6 +11,7 @@ import ContactsIcon from '@material-ui/icons/Contacts';
 import ContactPhoneIcon from '@material-ui/icons/ContactPhone';
 import { userProfileActions, alertActions } from '../../_actions';
 import MuiPhoneInput from 'material-ui-phone-number';
+import {Common_JsonData} from '../../_helpers';
 
 const GreenRadio = withStyles({
     root: {
@@ -472,6 +473,7 @@ class AddUserProfile extends React.Component {
                                 </div>
                                 <div className="col-md-4 mb-3  ">
                                     <TextField
+                                        select
                                         // error={!this.state.controls.role.valid && this.state.controls.role.touched} 
                                         id='role'
                                         variant="outlined"
@@ -479,17 +481,16 @@ class AddUserProfile extends React.Component {
                                         label="User Role"
                                         value={this.state.controls.role.value}
                                         className="form-control"
-                                        // onChange={this.handleChange}
-                                        margin="dense"
-                                        disabled
-                                    />
-                                    {/* {this.state.data.map(option => (
+                                        onChange={this.handleChange}
+                                        margin="dense" 
+                                    >
+                                    {Common_JsonData.userRole.map(option => (
                                             <MenuItem key={option._id} value={option._id}>
-                                                {option.entityType}
+                                                {option.role}
                                             </MenuItem>
-                                         ))} */}
+                                         ))}
 
-                                    {/* </TextField> */}
+                                    </TextField>
                                 </div>
                                 <div className="col-md-4 mb-3  ">
                                     <TextField

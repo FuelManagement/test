@@ -164,6 +164,13 @@ let Common_JsonData = {
       }
     ]
   },
+  userRole:[
+    {_id:'0',role:"Adimin"},
+    {_id:'1',role:"Level - 1"},
+    {_id:'2',role:"Level - 2"},
+    {_id:'3',role:"Supervisor"},
+
+  ],
   orderTrackingDetails: {
     list: [
       {

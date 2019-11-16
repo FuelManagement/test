@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import InputLabel from '@material-ui/core/InputLabel';          
+import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
@@ -25,7 +25,7 @@ let globalOptions = {
 	resizable: true,
 	defaultSortDesc: false,
 	rowsText: "",
-	className:"-striped -highlight",
+	className: "-striped -highlight",
 	defaultSortMethod: (a, b, desc) => {
 		// force null and undefined to the bottom
 		a = a === null || a === undefined ? "" : a;
@@ -429,15 +429,15 @@ let Table_Config = {
 				Header: 'CustomerName',
 				accessor: 'User_ID',
 				Cell: row => <span title={row.original.User_ID}>{row.original.User_ID}</span>
-			},{
+			}, {
 				Header: 'Vehicle Type',
 				accessor: 'product',
 				Cell: row => <span title={row.original.product}>{row.original.product}</span>
-			},{
+			}, {
 				Header: 'License Plate ID',
 				accessor: 'User_ID',
 				Cell: row => <span title={row.original.User_ID}>{row.original.User_ID}</span>
-			},{
+			}, {
 				Header: 'Origin Destination',
 				accessor: 'User_ID',
 				Cell: row => <span title={row.original.User_ID}>{row.original.User_ID}</span>
@@ -446,45 +446,45 @@ let Table_Config = {
 				Header: 'Shipping Date',
 				accessor: 'timestamp',
 				Cell: row => <span title={row.original.timestamp.slice(0, 10)}>{row.original.timestamp.slice(0, 10)}</span>
-			},{
+			}, {
 				Header: 'Delivery Date',
 				accessor: 'timestamp',
 				Cell: row => <span title={row.original.timestamp.slice(0, 10)}>{row.original.timestamp.slice(0, 10)}</span>
-			},{
+			}, {
 				Header: 'Carrier Name',
 				accessor: 'User_ID',
 				Cell: row => <span title={row.original.User_ID}>{row.original.User_ID}</span>
-			},{
+			}, {
 				Header: 'Driver Name',
 				accessor: 'User_ID',
 				Cell: row => <span title={row.original.User_ID}>{row.original.User_ID}</span>
-			 }
-			//  {
-			// 	Header: 'Quantity',
-			// 	accessor: 'quantity',
-			// 	style: { textAlign: 'right' },
-			// 	Cell: row => <span style={{ textAlign: 'right' }} title={row.original.quantity}>{row.original.quantity}</span>
-			// }, {
-			// 	Header: 'Price',
-			// 	accessor: 'price',
-			// 	style: { textAlign: 'right' },
-			// 	Cell: row => <span style={{ textAlign: 'right' }} title={formatMoney(row.original.price)}>{formatMoney(row.original.price)}</span>
-			// }, 
-			// {
-			// 	Header: 'Documents',
-			// 	accessor: 'documents',
-			// 	Cell: row => {
-			// 		if (row.row.documents && row.row.documents.length) {
-			// 			return <button
-			// 				className="btn btn-success btn-sm button-style"
-			// 				style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
-			// 				onClick={e => { props.toggleDocumentModal(e, row.row, true) }}>
-			// 				View
-			// 				</button>
-			// 		}
-			// 		else return "No Documents"
-			// 	}
-			// }
+			}
+				//  {
+				// 	Header: 'Quantity',
+				// 	accessor: 'quantity',
+				// 	style: { textAlign: 'right' },
+				// 	Cell: row => <span style={{ textAlign: 'right' }} title={row.original.quantity}>{row.original.quantity}</span>
+				// }, {
+				// 	Header: 'Price',
+				// 	accessor: 'price',
+				// 	style: { textAlign: 'right' },
+				// 	Cell: row => <span style={{ textAlign: 'right' }} title={formatMoney(row.original.price)}>{formatMoney(row.original.price)}</span>
+				// }, 
+				// {
+				// 	Header: 'Documents',
+				// 	accessor: 'documents',
+				// 	Cell: row => {
+				// 		if (row.row.documents && row.row.documents.length) {
+				// 			return <button
+				// 				className="btn btn-success btn-sm button-style"
+				// 				style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
+				// 				onClick={e => { props.toggleDocumentModal(e, row.row, true) }}>
+				// 				View
+				// 				</button>
+				// 		}
+				// 		else return "No Documents"
+				// 	}
+				// }
 			]
 		}
 	},
@@ -864,7 +864,7 @@ let Table_Config = {
 				},
 
 
-				 {
+				{
 					Header: 'Status',
 					accessor: 'status',
 					Cell: row => <span title={row.original.status !== 0 ? 'Approved' : 'Pending'}>{row.original.status !== 0 ? 'Approved' : 'Pending'}</span>
@@ -910,7 +910,7 @@ let Table_Config = {
 			columns: (props) => [{
 				Header: 'Name',
 				accessor: 'first_Name',
-				Cell: row => <span title={row.original.first_Name + ' '  + row.original.last_Name}>{row.original.first_Name + ' ' +  row.original.last_Name}</span>
+				Cell: row => <span title={row.original.first_Name + ' ' + row.original.last_Name}>{row.original.first_Name + ' ' + row.original.last_Name}</span>
 			}, {
 				Header: 'Organization Name',
 				accessor: 'participantName',
@@ -922,7 +922,7 @@ let Table_Config = {
 			}, {
 				Header: 'Email ID',
 				accessor: 'email',
-				Cell: row => <span title={row.original.email}>{row.original.email === "admin@certum.com" ? " ":row.original.email}</span>
+				Cell: row => <span title={row.original.email}>{row.original.email === "admin@certum.com" ? " " : row.original.email}</span>
 			}, {
 				Header: 'Actions',
 				accessor: 'participantID',
@@ -948,43 +948,47 @@ let Table_Config = {
 			options: { ...globalOptions },
 			columns: (props) => [{
 				Header: 'Order #',
-				headerClassName:'react-table-header-style',
+				headerClassName: 'react-table-header-style',
 				accessor: 'poNumber',
 				Cell: row => <span className="react-table-row-content-align-left" title={row.original.poNumber}>{row.original.poNumber}</span>
 			}, {
 				Header: 'Product Name',
-				headerClassName:'react-table-header-style',
+				headerClassName: 'react-table-header-style',
 				accessor: 'productName',
 				Cell: row => <span className="react-table-row-content-align-left" title={row.original.productName}>{row.original.productName}</span>
 			}, {
 				Header: 'Supplier Name',
-				headerClassName:'react-table-header-style',
+				headerClassName: 'react-table-header-style',
 				accessor: 'supplierName',
 				Cell: row => <span className="react-table-row-content-align-left"
-			    title={row.original.supplierName}>{row.original.supplierName}</span>
+					title={row.original.supplierName}>{row.original.supplierName}</span>
 			}, {
 				Header: 'Status',
-				headerClassName:'react-table-header-style',
+				headerClassName: 'react-table-header-style',
 				accessor: 'orderTrackingStatus',
-				Cell: row => <span className="react-table-row-content-align-left" style={{ fontWeight: 'normal',
-				color:row.original.orderTrackingStatus === "Approved" ? 
-				'Green':row.original.orderTrackingStatus === "Rejected"?
-				'red':row.original.orderTrackingStatus === "Request Submitted"? 
-				'blue':row.original.orderTrackingStatus === "New Request" ? 'blue':'green'  }} 
-				title={row.original.orderTrackingStatus}>{row.original.orderTrackingStatus === 'New Request' ? 'Request Submitted' : row.original.orderTrackingStatus}</span>
+				Cell: row => <span className="react-table-row-content-align-left" style={{
+					fontWeight: 'normal',
+					color: row.original.orderTrackingStatus === "Approved" ?
+						'Green' : row.original.orderTrackingStatus === "Rejected" ?
+							'red' : row.original.orderTrackingStatus === "Request Submitted" ?
+								'blue' : row.original.orderTrackingStatus === "New Request" ? 'blue' : 'green'
+				}}
+					title={row.original.orderTrackingStatus}>{row.original.orderTrackingStatus === 'New Request' ? 'Request Submitted' : row.original.orderTrackingStatus}</span>
 			}, {
 				Header: 'Track Request',
-				headerClassName:'react-table-header-style',
+				headerClassName: 'react-table-header-style',
 				accessor: 'orderTrackingStatus',
 				Cell: row => <div className="row">
 					<button
 						className="btn btn-outline-info btn-sm btn-track"
 						style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
 						// disabled={row.original.status==='Approved'?false:(row.original.status===''?false:true)}
-						onClick={e => { props.trackBtnClk(e, row.original,row.original.orderTrackingStatus==='Approved'? "track":
-						(row.original.orderTrackingStatus==='Auto Approved'?"track":"otp-disabled")) }}
+						onClick={e => {
+							props.trackBtnClk(e, row.original, row.original.orderTrackingStatus === 'Approved' ? "track" :
+								(row.original.orderTrackingStatus === 'Auto Approved' ? "track" : "otp-disabled"))
+						}}
 					>
-						{row.original.orderTrackingStatus===''?'Track':'Track'}
+						{row.original.orderTrackingStatus === '' ? 'Track' : 'Track'}
 					</button>
 
 				</div>
@@ -997,66 +1001,68 @@ let Table_Config = {
 			columns: (props) => [{
 				Header: 'Customer Name',
 				accessor: 'CustomerParticipantName',
-				headerClassName:'react-table-header-style',
+				headerClassName: 'react-table-header-style',
 				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.CustomerParticipantName}>{row.original.CustomerParticipantName}</span>
 			}, {
 				Header: 'Requested By',
 				accessor: 'CustomerName',
-				headerClassName:'react-table-header-style',
+				headerClassName: 'react-table-header-style',
 				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.CustomerName}>{row.original.CustomerName.replace(/([A-Z])/g, ' $1').trim()}</span>
 			}, {
 				Header: 'Owner',
 				accessor: 'userRole',
-				headerClassName:'react-table-header-style',
+				headerClassName: 'react-table-header-style',
 				maxWidth: 100,
 				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.userRole}>
-					{row.original.userRole === "Admin" ? "Yes":"No"}</span>
+					{row.original.userRole === "Admin" ? "Yes" : "No"}</span>
 			}, {
 				Header: 'Status',
 				accessor: 'status',
-				headerClassName:'react-table-header-style',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left',
-				color:row.original.status === "Approved" || row.original.status === "Auto Approved"?'Green':(row.original.status === "Rejected"?'red':'orange') }}
-				 title={row.original.status.replace(/([A-Z])/g, ' $1').trim()}>{row.original.status.replace(/([A-Z])/g, ' $1').trim()}</span>
+				headerClassName: 'react-table-header-style',
+				Cell: row => <span style={{
+					display: 'block', textAlign: 'left',
+					color: row.original.status === "Approved" || row.original.status === "Auto Approved" ? 'Green' : (row.original.status === "Rejected" ? 'red' : 'orange')
+				}}
+					title={row.original.status.replace(/([A-Z])/g, ' $1').trim()}>{row.original.status.replace(/([A-Z])/g, ' $1').trim()}</span>
 			}, {
 				Header: 'Request Timings',
 				accessor: 'createdOn',
-				headerClassName:'react-table-header-style',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={dateutility.datefunction(row.original.createdOn,formatutility.MMDDYYYYHHMMTT)}>
-					{dateutility.datefunction(row.original.createdOn,formatutility.MMDDYYYYHHMMTT)}</span>
+				headerClassName: 'react-table-header-style',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={dateutility.datefunction(row.original.createdOn, formatutility.MMDDYYYYHHMMTT)}>
+					{dateutility.datefunction(row.original.createdOn, formatutility.MMDDYYYYHHMMTT)}</span>
 			}, {
 				Header: 'Approve/Reject',
 				accessor: 'Approvereject',
-				headerClassName:'react-table-header-style',
+				headerClassName: 'react-table-header-style',
 				Cell: row => <div className="row OTR-actions-row">
 					{
 						row.original.status === "Auto Approved" ?
-						(<button
-							className="btn OTR-approve-btn"
-							disabled={true}
-							style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}>
+							(<button
+								className="btn OTR-approve-btn"
+								disabled={true}
+								style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}>
 								Approve
-						</button>  )
-						// : row.original.Status === "Rejected" ?
-						// (<button
-						// 	className="btn OTR-reject-btn"
-						// 	disabled={true}
-						// 	style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}>
-						// 		Reject
-						// </button>  )
-						: (
+						</button>)
+							// : row.original.Status === "Rejected" ?
+							// (<button
+							// 	className="btn OTR-reject-btn"
+							// 	disabled={true}
+							// 	style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}>
+							// 		Reject
+							// </button>  )
+							: (
 								<FormControl className="OTR-actions" >
-								<Select
-									id="demo-simple-select"
-									value={ row.original.status ==='Rejected'?'Reject':
-									(row.original .status==='Approved'?'Approve':row.original.Approvereject) }
-									onChange={(e)=>props.approveSubmit(e, row.original)}
-								>
-									<MenuItem value="Approve">Approve</MenuItem>
-									<MenuItem value="Reject">Reject</MenuItem>
-								</Select>
-							</FormControl>
-						)
+									<Select
+										id="demo-simple-select"
+										value={row.original.status === 'Rejected' ? 'Reject' :
+											(row.original.status === 'Approved' ? 'Approve' : row.original.Approvereject)}
+										onChange={(e) => props.approveSubmit(e, row.original)}
+									>
+										<MenuItem value="Approve">Approve</MenuItem>
+										<MenuItem value="Reject">Reject</MenuItem>
+									</Select>
+								</FormControl>
+							)
 					}
 				</div>
 			}]
@@ -1074,15 +1080,17 @@ let Table_Config = {
 				accessor: 'orderId',
 				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.orderId}>{row.original.orderId}</span>
 			},
-			 {
+			{
 				Header: 'Status',
 				accessor: 'status',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left',fontWeight: 'bold'  ,color:
-				row.original.status === "Approved" ?'#29AD01': 'red'  }} title={row.original.status}>{row.original.status}</span>
+				Cell: row => <span style={{
+					display: 'block', textAlign: 'left', fontWeight: 'bold', color:
+						row.original.status === "Approved" ? '#29AD01' : 'red'
+				}} title={row.original.status}>{row.original.status}</span>
 			}, {
 				Header: 'Date',
 				accessor: 'date',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.date}>{dateutility.datefunction(row.original.date,formatutility.MMDDYYYYHHMMTT)}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.date}>{dateutility.datefunction(row.original.date, formatutility.MMDDYYYYHHMMTT)}</span>
 			}]
 		}
 	},
@@ -1092,43 +1100,43 @@ let Table_Config = {
 			columns: (props) => [{
 				Header: 'Device Id',
 				accessor: 'Device_ID',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.Device_ID}>{row.original.Device_ID}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left', width: '100%' }} title={row.original.Device_ID}>{row.original.Device_ID}</span>
 			}, {
 				Header: 'TxnCode',
 				accessor: 'tx_code',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.tx_code}>{row.original.tx_code}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left', width: '100%' }} title={row.original.tx_code}>{row.original.tx_code}</span>
 			}, {
 				Header: 'TxnId',
 				accessor: 'tx_id',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.tx_id}>{row.original.tx_id}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left', width: '100%' }} title={row.original.tx_id}>{row.original.tx_id}</span>
 			}, {
 				Header: 'Txn Hash',
 				accessor: 'tx_hash',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.tx_hash}>{row.original.tx_hash}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left', width: '100%' }} title={row.original.tx_hash}>{row.original.tx_hash}</span>
 			}, {
 				Header: 'Channel Id',
 				accessor: 'channel_id',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.channel_id}>{row.original.channel_id}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left', width: '100%' }} title={row.original.channel_id}>{row.original.channel_id}</span>
 			}, {
 				Header: 'Block',
 				accessor: 'block_no',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.block_no}>{row.original.block_no}</span>
-			},{
+				Cell: row => <span style={{ display: 'block', textAlign: 'left', width: '100%' }} title={row.original.block_no}>{row.original.block_no}</span>
+			}, {
 				Header: 'Create Time',
 				accessor: 'Creation_Time',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.Creation_Time}>{row.original.Creation_Time}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left', width: '100%' }} title={row.original.Creation_Time}>{row.original.Creation_Time}</span>
 			}, {
 				Header: 'Age',
 				accessor: 'age',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.age}>{row.original.age}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left', width: '100%' }} title={row.original.age}>{row.original.age}</span>
 			}, {
 				Header: 'From',
 				accessor: 'from',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.from}>{row.original.from}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left', width: '100%' }} title={row.original.from}>{row.original.from}</span>
 			}, {
 				Header: 'To',
 				accessor: 'to',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.to}>{row.original.to}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left', width: '100%' }} title={row.original.to}>{row.original.to}</span>
 			}]
 		}
 	},
@@ -1138,35 +1146,35 @@ let Table_Config = {
 			columns: (props) => [{
 				Header: 'Entity ID',
 				accessor: 'participantID',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.participantID}>{row.original.participantID}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left', width: '100%' }} title={row.original.participantID}>{row.original.participantID}</span>
 			}, {
 				Header: 'Product ID',
 				accessor: 'ProductID',
-				Cell: props =>props.original.products.map((product,index)=>{
+				Cell: props => props.original.products.map((product, index) => {
 					return <span key={index} style={{ display: 'block', textAlign: 'left' }}
-					title={product.productID}>
-					{product.productID}
-				</span>
+						title={product.productID}>
+						{product.productID}
+					</span>
 				})
-					
+
 			},
 			{
 				Header: 'Product Name',
 				accessor: 'ProductName',
-				Cell: props =>props.original.products.map((product,index)=>{
+				Cell: props => props.original.products.map((product, index) => {
 					return <span key={index} style={{ display: 'block', textAlign: 'left' }}
-					title={product.productName}>
-					{product.productName}
-				</span>
+						title={product.productName}>
+						{product.productName}
+					</span>
 				})
 			}, {
 				Header: 'Product Price',
 				accessor: 'ProductPrice',
-				Cell: props =>props.original.products.map((product,index)=>{
+				Cell: props => props.original.products.map((product, index) => {
 					return <span key={index} style={{ display: 'block', textAlign: 'left' }}
-					title={product.unitPrice}>
-					{product.unitPrice}
-				</span>
+						title={product.unitPrice}>
+						{product.unitPrice}
+					</span>
 				})
 			}, {
 				Header: 'Qty',
@@ -1175,11 +1183,11 @@ let Table_Config = {
 			}, {
 				Header: 'Amount',
 				accessor: 'Amount',
-				Cell: props =>props.original.products.map((product,index)=>{
+				Cell: props => props.original.products.map((product, index) => {
 					return <span key={index} style={{ display: 'block', textAlign: 'left' }}
-					title={product.totalAmount}>
-					{product.totalAmount}
-				</span>
+						title={product.totalAmount}>
+						{product.totalAmount}
+					</span>
 				})
 			}, {
 				Header: 'Sub Total',
@@ -1199,6 +1207,30 @@ let Table_Config = {
 		}
 	},
 
+	ProfilesSetups: {
+		ProfilesSetup: {
+			options: { ...globalOptions },
+			columns: (props) => [{
+				Header: 'User Role',
+				accessor: 'userRole',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.userRole}>{row.original.userRole}</span>
+			}, {
+				Header: 'Description',
+				accessor: 'description',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.description}>{row.original.description}</span>
+			},  {
+				Header: 'Actions', 
+				Cell: row => <div className="row"> 
+					<button
+						className="btn btn-outline-primary btn-sm"
+						style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
+						onClick={e => { props.editUserProfile(e, row.original, "update") }}>
+						<FontAwesomeIcon icon="edit" size="xs" />
+					</button>
+				</div>
+			}]
+		}
+	},
 
 }
 
