@@ -4,53 +4,55 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import { TextField, InputAdornment } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import { Checkbox, Select, FormControl, FormHelperText, FormControlLabel, MenuItem, InputLabel } from '@material-ui/core';
+import {Common_JsonData} from '../../_helpers';
 
 class AssignPrivileges extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.initialState(null, this);
         this.openSetupProfile = this.openSetupProfile.bind(this);
-        this.handleChange=this.handleChange.bind(this);
-        this.onSubmitSetup=this.onSubmitSetup.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.onSubmitSetup = this.onSubmitSetup.bind(this);
     }
-    initialState(mode,props){ 
-        let state={};
-        state={
-            controls:{
-                userRole:{
-                    value:props !== undefined && props.userRole !== undefined ? props.userRole:'',
+    initialState(mode, props) {
+        let state = {};
+        state = {
+            controls: {
+                userRole: {
+                    value: props !== undefined && props.userRole !== undefined ? props.userRole : '',
                 },
-                description:{
-                    value:props !== undefined && props.description !== undefined ? props.description:'',
+                screenName: {
+                    value: props !== undefined && props.description !== undefined ? props.description : '',
                 }
             },
             addSetupRole: false,
             data: [
-                { 'userRole': 'Adimin', ScreenName: 'ScreenName',Privileges:"PrivilegesPrivilegesPrivilegesPrivilegesPrivilegesPrivilegesPrivilegesPrivileges 1" },
-                { 'userRole': 'Level - 1', ScreenName: 'ScreenName',Privileges:"Privileges 2"  },
+                { 'userRole': 'Adimin', ScreenName: 'ScreenName', Privileges: "PrivilegesPrivilegesPrivilegesPrivilegesPrivilegesPrivilegesPrivilegesPrivileges 1" },
+                { 'userRole': 'Level - 1', ScreenName: 'ScreenName', Privileges: "Privileges 2" },
             ]
         }
         return state;
     }
-    assignPrivileges(e, collection, mode) { 
+    assignPrivileges(e, collection, mode) {
         this.setState({
             addSetupRole: true
-        }) 
+        })
     }
-    onSubmitSetup(){
+    onSubmitSetup() {
         this.setState({
             addSetupRole: false,
         })
     }
-    handleChange(event){
-        let key= event.target.name; let value=event.target.value;  
-        this.setState(prevState=>{
-            return{
-                controls:{
+    handleChange(event) {
+        let key = event.target.name; let value = event.target.value;
+        this.setState(prevState => {
+            return {
+                controls: {
                     ...prevState.controls,
-                    [key]:{
+                    [key]: {
                         ...prevState.controls[key],
-                        value:value,
+                        value: value,
                         touched: true
                     }
                 }
@@ -65,7 +67,7 @@ class AssignPrivileges extends React.Component {
     }
     render() {
         return (
-            <div className="col-md-9 contentDiv">
+            <div className="col-md-9 contentDiv contect-div">
                 <h2 style={{ display: "inline-block" }} className="table-main-heading">Assign Privileges</h2>
                 <hr />
                 <div>
@@ -87,33 +89,97 @@ class AssignPrivileges extends React.Component {
                     <div className="setup-form-div">
                         <p className="setup-form-heading">User Privilege</p>
                         <div className="row setup-form-row">
-                            <div className="col-md-4">
+                            <div className="col-md-3">
                                 <TextField
-                                    id="userRole"
-                                    label="User Role"
-                                    name="userRole"
-                                    value={this.state.controls.userRole.value}
-                                    onChange={this.handleChange}
+                                    select
+                                    // error={!this.state.controls.role.valid && this.state.controls.role.touched} 
+                                    id='role'
                                     variant="outlined"
+                                    name='role'
+                                    label="User Role"
+                                    value={this.state.controls.userRole.value}
                                     className="form-control"
-                                    autoComplete="off"
+                                    onChange={this.handleChange}
                                     margin="dense"
-                                />
+                                >
+                                    {Common_JsonData.userRole.map(option => (
+                                        <MenuItem key={option._id} value={option._id}>
+                                            {option.role}
+                                        </MenuItem>
+                                    ))}
+
+                                </TextField>
                             </div>
-                            <div className="col-md-6"> <TextField
-                                id="description"
-                                label="Description"
-                                name="description"
-                                value={this.state.controls.description.value}
-                                onChange={this.handleChange}
-                                variant="outlined"
-                                className="form-control"
-                                autoComplete="off"
-                                margin="dense"
-                            />
+                            <div className="col-md-3"> 
+                            <TextField
+                                    select 
+                                    id='screenName'
+                                    variant="outlined"
+                                    name='screenName'
+                                    label="screenName"
+                                    value={this.state.controls.screenName.value}
+                                    className="form-control"
+                                    onChange={this.handleChange}
+                                    margin="dense"
+                                >
+                                    {Common_JsonData.screenName.map(option => (
+                                        <MenuItem key={option._id} value={option._id}>
+                                            {option.name}
+                                        </MenuItem>
+                                    ))}
+
+                                </TextField>
                             </div>
-                            <div className="col-md-2 setup-submit-div">
-                                <buton className="setup-form-submit" onClick={this.onSubmitSetup}>Save</buton>
+                            <div className="col-md-6">
+                                <div className="row assign-privileges">
+                                    <div className="col-md-2 pl-0 pr-0 mrg-tp5px">
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox value="assignCreate" />
+                                            }
+                                            label="Create"
+                                        />
+                                    </div>
+                                    <div className="col-md-2 pl-0 pr-0 mrg-tp5px">
+                                        <FormControlLabel className="form-checkbox"
+                                            control={
+                                                <Checkbox value="assignView" />
+                                            }
+                                            label="View"
+                                            className="form-checkbox"
+                                        />
+                                    </div>
+                                    <div className="col-md-2 pl-0 pr-0 mrg-tp5px">
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox value="assignUpdate" />
+                                            }
+                                            label="Update"
+                                            className="form-checkbox"
+                                        />
+                                    </div>
+                                    <div className="col-md-2 pl-0 pr-0 mrg-tp5px">
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox value="assignDelete" />
+                                            }
+                                            className="form-checkbox"
+                                            label="Delete"
+                                        />
+                                    </div>
+                                    <div className="col-md-2 pl-0 pr-0  mrg-tp5px">
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox value="assignApprove" />
+                                            }
+                                            className="form-checkbox"
+                                            label="Approve"
+                                        />
+                                    </div>
+                                    <div className="col-md-2 setup-submit-div">
+                                        <button className="setup-form-submit" onClick={this.onSubmitSetup} >Save</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -130,4 +196,4 @@ class AssignPrivileges extends React.Component {
         )
     }
 }
-export {AssignPrivileges};
+export { AssignPrivileges };

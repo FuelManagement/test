@@ -187,6 +187,8 @@ header .pad-50{
 
 .contentDiv {
   margin-top: 90px;
+}
+.contect-div{
   margin-left: 22%;
 }
 
@@ -915,10 +917,21 @@ header .pad-50{
   letter-spacing: 1px;
   border-radius: 3px;
   cursor: pointer;
+  margin-top: -5px;
 }
 .setup-form-row{
   padding: 20px 5px;
+} 
+.assignPrivilege .MuiCheckbox-colorSecondary.Mui-checked {
+  color: #00ce1b !important;
 }
-.privilege-table{
-  flex: 557.188 0 auto !important; 
+.assignPrivilege .PrivateSwitchBase-root-93 {
+  padding: 0px !important;
+}
+.assignPrivilege .MuiFormControlLabel-root {  
+   margin-left: 0px !important; 
+   margin-right: 0px !important;  
+} 
+.mrg-tp5px{
+  margin-top: 5px;
 }

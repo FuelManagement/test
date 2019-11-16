@@ -1,16 +1,13 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import { dateutility } from './date_helpers';
 import { formatutility } from './format_helpers';
 // import { library } from "@fortawesome/fontawesome-svg-core";
 // import { faEye, faEdit, faCheckSquare } from "@fortawesome/free-solid-svg-icons";
 
-// library.add(faEye, faEdit, faCheckSquare);
+// library.add(faEye, faEdit, faCheckSquare); 
+import { Checkbox, Select, FormControl, FormHelperText,FormControlLabel, MenuItem, InputLabel } from '@material-ui/core';
+
 let user = JSON.parse(localStorage.getItem('user'));
 
 let globalOptions = {
@@ -1245,11 +1242,53 @@ let Table_Config = {
 				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.ScreenName}>{row.original.ScreenName}</span>
 			}, {
 				Header: 'Privileges',
-				accessor: 'Privileges', 
 				width: 560,
 				Cell: row =>
-					<div className="privilege-table">
-						<span style={{ display: 'block', textAlign: 'left' }} title={row.original.Privileges}>{row.original.Privileges}</span>
+					<div className="row assignPrivilege">
+						<div className="col-md-2 ml-1">
+							<FormControlLabel
+								control={
+									<Checkbox   value="assignCreate" />
+								}
+								label="Create"
+							/> 
+						</div>
+						<div className="col-md-2 ml-1">
+						<FormControlLabel className="form-checkbox"
+								control={
+									<Checkbox  value="assignView" />
+								}
+								label="View"
+								className="form-checkbox"
+							/> 
+						</div>
+						<div className="col-md-2 ml-1">
+						<FormControlLabel
+								control={
+									<Checkbox   value="assignUpdate" />
+								}
+								label="Update"
+								className="form-checkbox"
+							/> 
+						</div>
+						<div className="col-md-2 ml-1">
+						<FormControlLabel
+								control={
+									<Checkbox   value="assignDelete" />
+								}
+								className="form-checkbox"
+								label="Delete"
+							/> 
+						</div>
+						<div className="col-md-2 ml-1">
+						<FormControlLabel
+								control={
+									<Checkbox  value="assignApprove" />
+								}
+								className="form-checkbox"
+								label="Approve"
+							/> 
+						</div>
 					</div>
 
 			}, {

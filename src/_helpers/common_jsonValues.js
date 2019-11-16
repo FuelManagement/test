@@ -171,6 +171,13 @@ let Common_JsonData = {
     {_id:'3',role:"Supervisor"},
 
   ],
+  screenName: [
+    {_id:'0',role:"RFQ"},
+    {_id:'1',role:"PO"},
+    {_id:'2',role:"User Profile"},
+    {_id:'3',role:"Supervisor"},
+  ],
+
   orderTrackingDetails: {
     list: [
       {

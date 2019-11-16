@@ -66,7 +66,7 @@ class SetupRole extends React.Component {
     }
     render() {
         return (
-            <div className="col-md-9 contentDiv">
+            <div className="col-md-9 contentDiv contect-div">
                 <h2 style={{ display: "inline-block" }} className="table-main-heading">Setup User Roles</h2>
                 <hr />
                 <div>
@@ -114,7 +114,7 @@ class SetupRole extends React.Component {
                                     />
                             </div> 
                             <div className="col-md-2 setup-submit-div">
-                                <buton className="setup-form-submit" onClick={this.onSubmitSetup}>Save</buton>
+                                <button className="setup-form-submit" onClick={this.onSubmitSetup}>Save</button>
                             </div>
                         </div>
                     </div>
