@@ -75,7 +75,7 @@ class OnBoard_Profile extends React.Component {
         }
         return (
             <div className="col-md-9 contentDiv" style={{ left: "22%" }}>
-                <h2 style={{ display: "inline-block" }}>
+                <h2 style={{ display: "inline-block" }} className="table-main-heading">
                     On-boarding - Profile Setup
                 </h2>
 
@@ -111,8 +111,7 @@ class OnBoard_Profile extends React.Component {
                     })}
                     {...Table_Config.Participant.participants.options}
                 />
-
-                <hr />
+ 
                 <br />
 
                 {/* <div className="modal onboard-profile" id="createParticipantModal" tabIndex="-1" role="dialog">

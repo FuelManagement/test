@@ -82,7 +82,7 @@ export const dateutility = {
     millisec,
     type
   ) {
-    var strdate, strmonth, strseconds, strhour, strminutes;
+    var strdate, strmonth, strseconds, strhour, strminutes,strminutesAMPM;
     if (date < 10) {
       strdate = zero + date.toString();
     } else {
@@ -108,6 +108,19 @@ export const dateutility = {
     } else {
       strminutes = minutes.toString();
     }
+    // if(hour > 12) {
+    //   strhour =  (hour > 12) ? (hour-12 < 10) ?  zero + (hour-12).toString() : (hour-12).toString :'' ;
+    //   strminutesAMPM = strminutes + ' '+ 'PM';
+    // } 
+    // else
+    // {
+    //   if (hour < 10) {
+    //       strhour = zero + hour.toString();
+    //     } else {
+    //       strhour = hour.toString();
+    //     }
+    //     strminutesAMPM = strminutes + ' ' +'AM';
+    // }
   
     switch (type) {
       case "MMM dd YYYY":
@@ -149,6 +162,37 @@ export const dateutility = {
           ":" +
           millisec
         );
+        case "MM/dd/yyyy hh:mm:ss":
+        return (
+          strmonth +
+          "/" +
+          strdate +
+          "/" +
+          year +
+          " " +
+          strhour  +
+          ":" +
+          strminutes +
+          ":" +
+          strseconds 
+        );
+        case "MM/dd/yyyy hh:mm tt":
+          let tthour=hour>12?(hour-12):hour;
+          let tt=hour>12?'PM':'AM'
+          return (
+            strmonth +
+            "/" +
+            strdate +
+            "/" +
+            year +
+            " " +
+            tthour+
+            ":" +
+            strminutes +" "+tt
+         
+           
+           
+          );
       default:
         return strmonth + "/" + strdate + "/" + year;
     }

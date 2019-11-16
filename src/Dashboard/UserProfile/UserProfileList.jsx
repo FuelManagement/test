@@ -33,11 +33,11 @@ class UserProfile extends React.Component {
 
         return ( 
             <div className="col-md-8 offset-md-3 contentDiv">
-                <h2 style={{ display: "inline-block" }}>User Profile</h2>
+                <h2 style={{ display: "inline-block" }} className="table-main-heading">User Profile</h2>
                 <hr />
                 <Link to="/userProfile/add">
                     <button className="btn btn-outline btn-success">
-                        <FontAwesomeIcon icon="plus"/> User Profile
+                       Add User
                     </button>
                 </Link>
                 <div className="clearDiv"></div>

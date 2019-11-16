@@ -45,12 +45,12 @@ class OTPModel extends React.Component {
             "otp_4":'',
             "otp_5":'',
             "otp_6":'',
-
         }
         this.handleEnter = this.handleEnter.bind(this);
         this.getEnteredOTP=this.getEnteredOTP.bind(this);
+        this.reSendOTP=this.reSendOTP.bind(this);
     }
-    handleEnter(e) {
+    handleEnter(e) { 
         const form = event.target.form;
         const index = Array.prototype.indexOf.call(form, event.target);
         if (index < 5) {
@@ -60,37 +60,73 @@ class OTPModel extends React.Component {
         event.preventDefault();
     }
     getEnteredOTP(){
-        this.props.getEnteredOTP(Object.values(this.state).toString().replace(/,/g, ''));
+        this.props.getEnteredOTP(Object.values(this.state).toString().replace(/,/g, ''),this.props.OTRStatusId);
+        let state = {
+            "otp_1":'',
+            "otp_2":'',
+            "otp_3":'',
+            "otp_4":'',
+            "otp_5":'',
+            "otp_6":'',
+        }
+        this.setState({...state});
+    }
+    reSendOTP(){
+        this.props.postReSendOTP();
+    }
+    //Allow only numbers 
+    allowOnlynumbers(e) {
+        var regex = new RegExp(/^[0-9\b]+$/);
+        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (regex.test(str)) {
+            return true;
+        }
+        else {
+            e.preventDefault();
+            return false;
+        }
     }
     render() {
         const { showModel, OrderStatus } = { ...this.props };
+        let btnDisabled = showModel;
+        if (   !this.state.otp_1.length
+            || !this.state.otp_2.length
+            || !this.state.otp_3.length
+            || !this.state.otp_4.length
+            || !this.state.otp_5.length
+            || !this.state.otp_6.length
+        ){
+            btnDisabled = true;
+        } else {
+            btnDisabled = false;
+        }
         return (
             <div>
                 <Dialog onClose={this.props.closeModel} className='order-tracking-otp-model' aria-labelledby="customized-dialog-title" open={showModel}>
                     <DialogTitle id="customized-dialog-title" onClose={this.props.closeModel} />
                     <div className='order-tracking-model-body'>
                         {OrderStatus === 'otp-disabled' && <Typography gutterBottom>
-                            <p className='otp-warning-msg'>Your request has been submitted. Please wait until it is approved and an OTP is received.</p>
+                            <p style={{color:"Orange"}}>Your request has been submitted. Please wait until it is approved and an OTP is received.</p>
                         </Typography>
                         }
                         <div className={OrderStatus}>
                             <div>
                                 <h5 className='otp-title'>Enter OTP</h5>
                                 <form className="otp-form">
-                                    <input type="text" id='otp_1' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
-                                    <input type="text" id='otp_2' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
-                                    <input type="text" id='otp_3' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
-                                    <input type="text" id='otp_4' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
-                                    <input type="text" id='otp_5' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
-                                    <input type="text" id='otp_6' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} />
+                                    <input type="text" id='otp_1' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} onKeyPress={this.allowOnlynumbers} autoComplete="off" />
+                                    <input type="text" id='otp_2' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} onKeyPress={this.allowOnlynumbers} autoComplete="off" />
+                                    <input type="text" id='otp_3' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} onKeyPress={this.allowOnlynumbers} autoComplete="off" />
+                                    <input type="text" id='otp_4' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} onKeyPress={this.allowOnlynumbers} autoComplete="off" />
+                                    <input type="text" id='otp_5' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} onKeyPress={this.allowOnlynumbers} autoComplete="off" />
+                                    <input type="text" id='otp_6' maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" onChange={this.handleEnter} onKeyPress={this.allowOnlynumbers} autoComplete="off" />
                                 </form>
                             </div>
                             <div className='otp-text-notif'>
-                                <p className='m0'>Did you receive the code ? if not,</p>
-                                <a href='#'>click here to resend</a>
+                                <p className='m0'>Did you receive the code ? if not,</p> 
+                                <button className="reSend-otp" onClick={this.reSendOTP}>click here to resend</button>
                             </div>
                             <div className='order-tracking-opt-submit'>
-                                <button className='btn btn-sucess' onClick={this.getEnteredOTP}>Submit</button>
+                                <button className='btn btn-sucess' onClick={this.getEnteredOTP} disabled={btnDisabled}>Submit</button>
                             </div>
                         </div>
                     </div>

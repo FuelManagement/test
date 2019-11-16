@@ -4,7 +4,7 @@ import $ from 'jquery';
 window.jQuery = $; // hack
 window.$ = $;      // hack 
 
-import './sidebar.css'; 
+import './sidebar.css';
 class Sidebar extends React.Component {
     constructor(props) {
         super(props);
@@ -13,7 +13,7 @@ class Sidebar extends React.Component {
     componentDidMount() {
         jQuery(function ($) {
             $(".sidebar-dropdown > a").click(function () {
-               $(".sidebar-submenu").slideUp(200);
+                $(".sidebar-submenu").slideUp(200);
                 if ($(this).parent().hasClass("active")) {
                     $(".sidebar-dropdown").removeClass("active");
                     $(this).parent().removeClass("active");
@@ -45,15 +45,16 @@ class Sidebar extends React.Component {
                                     src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
                                     alt="User picture" />
                             </div>
-                            <div className="user-info">
-                                <span className="user-name">{user.first_name}
-                                    <strong> {user.last_name}</strong>
+                            <div className="user-info" >
+                            <span className="user-status">
+                                    {/* <i className="fa fa-circle"></i>
+                                    <span>Online</span> */}
                                 </span>
-                                <span className="user-role">{user.role}</span>
-                                <span className="user-status">
-                                    <i className="fa fa-circle"></i>
-                                    <span>Online</span>
+                                <span className="user-name">{user.firstName}{' '}{user.lastName}{user.first_Name}{' '}{user.last_Name}{user.first_name}{' '}{user.last_name}
+                                    
                                 </span>
+                                <span className="user-role">{user.role != undefined ? user.role :user.participantType}{' : '}{user.domain}{user.participantName}</span>
+                                
                             </div>
                         </div>
                         {/* <!-- sidebar-header  --> */}
@@ -67,42 +68,12 @@ class Sidebar extends React.Component {
                                         <i className="fa fa-tachometer-alt"></i>
                                         <span>Dashboard</span>
                                         {/* <span className="badge badge-pill badge-warning">New</span> */}
-                                    </Link>
-                                    
-                                <div className="sidebar-submenu">
-                                    <ul>
-                                        <li>
-                                            <Link to="/">Dashboard 1
-                                                <span className="badge badge-pill badge-success">Pro</span>
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/">Dashboard 2</Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/">Dashboard 3</Link>
-                                        </li>
-                                    </ul>
-                                </div>
-                               
-                                </li>
-                                {/* <li className="sidebar-dropdown">
-                                    <Link to="/orders">
-                                        <i className="fa fa-shopping-cart"></i>
-                                        <span>Order Management</span>
-                                          <span className="badge badge-pill badge-danger">3</span>  
-                                    </Link>
-                                    
-                                <div className="sidebar-submenu">
-                                    <ul>
-                                        <li><Link to="/">Products</Link></li>
-                                        <li><Link to="/">Orders</Link></li>
-                                        <li><Link to="/">Credit cart</Link></li>
-                                    </ul>
-                                </div>
-                               
-                                </li> */}
+                                    </Link>                                   
 
+                                </li>
+                                
+                                { user.role == 'Admin' ?(
+                                    <div>
                                 <li className="sidebar-dropdown">
                                     <Link to="/profile">
                                         <i className="fa fa-shopping-cart"></i>
@@ -111,36 +82,256 @@ class Sidebar extends React.Component {
                                     <div className="sidebar-submenu">
                                         <ul>
                                             {/* <li><Link to="/">Registration</Link></li> */}
-                                            <li><Link to="/profile">Profile</Link></li>
+                                            <li><Link to="/profile">Participant Setup</Link></li>
+                                            <li><Link to="#">Invite Participants</Link></li>
                                         </ul>
                                     </div>
                                 </li>
                                 <li className="sidebar-dropdown">
                                     <Link to="/userProfile">
                                         <i className="fa fa-shopping-cart"></i>
-                                        <span>User Creation</span>
+                                        <span>User Management</span>
                                     </Link>
                                     <div className="sidebar-submenu">
                                         <ul>
-                                            <li><Link to="/userProfile">Profile Setup for User</Link></li>
+                                        {/* <i className="fa fa-shopping-cart"></i> */}
+                                            <li><Link to="/userProfile">User Profile</Link></li>
+                                            <li><Link to="#">Setup Roles </Link></li>
+                                            <li><Link to="#">Assign Privileges</Link></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li className="sidebar-dropdown">
+                                    <Link to="/userProfile">
+                                        <i className="fa fa-shopping-cart"></i>
+                                        <span>Product Management</span>
+                                    </Link>
+                                    <div className="sidebar-submenu">
+                                        <ul>
+                                                <li><Link to="/product">Manage Products</Link></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li className>
+                                    <Link to="#">
+                                        <i className="fa fa-shopping-cart"></i>
+                                        <span>Document Management</span>
+
+                                    </Link>
+                                </li>
+                                <li className>
+                                    <Link to="#">
+                                        <i className="fa fa-shopping-cart"></i>
+                                        <span>Alerts & Notifications</span>
+
+                                    </Link>
+                                </li>
+
+                                
+                                </div>
+                                ):(user.participantType == 'End Buyer' ||  
+                                user.participantType == 'Commercial')?
+                                (<div>
+                                <li className="sidebar-dropdown">
+                                    <Link to="/userProfile">
+                                        <i className="fa fa-shopping-cart"></i>
+                                        <span>User Management</span>
+                                    </Link>
+                                    <div className="sidebar-submenu">
+                                        <ul>
+                                       
+                                            <li><Link to="/userProfile">User Profile</Link></li>
+                                            <li><Link to="#">Setup Roles </Link></li>
+                                            <li><Link to="#">Assign Privileges</Link></li>
+                                        </ul>
+                                    </div>
+                                </li> 
+                                <li className="sidebar-dropdown">
+                                <Link to="#">
+                                    <i className="fa fa-shopping-cart"></i>
+                                    <span>Order Management</span>
+                                </Link>
+                                <div className="sidebar-submenu">
+                                    <ul>
+                                        <li><Link to="#">Quotes</Link></li>
+                                        <li><Link to="#">Proposals</Link></li>
+                                        <li><Link to="#">Purchase Orders </Link></li>
+                                        {user.participantType == 'End Buyer' ?  
+                                        <li><Link to="/order-tracking">Tracking</Link></li>:null
+                                        }
+                                        
+                                        {user.participantType == 'Commercial' ?  
+                                        <li><Link to="/orderTracking-request">Order Tracking Request</Link></li>:null
+                                        }
+                                    </ul>
+                                </div>
+                            </li> 
+                            <li className>
+                                    <Link to="#">
+                                        <i className="fa fa-shopping-cart"></i>
+                                        <span>Document Management</span>
+
+                                    </Link>
+                            </li>             
+                            {user.participantType == 'End Buyer' ? (        
+                            <li className="sidebar-dropdown">
+                                <Link to="/volumetric">
+                                    <i className="fa fa-shopping-cart"></i>
+                                    <span>Volumetric</span>
+                                </Link>
+                                <div className="sidebar-submenu">
+                                    <ul>
+                                        <li><Link to="#">By Volume</Link></li>
+                                        <li><Link to="#">By Sales</Link></li>
+                                        <li><Link to="#">By Site </Link></li>
+                                  
+                                    </ul>
+                                </div>
+                            </li> ):null
+                           }
+                            <li className>
+                                    <Link to="#">
+                                        <i className="fa fa-shopping-cart"></i>
+                                        <span>Alerts & Notifications</span>
+
+                                    </Link>
+                                </li> 
+
+                                </div>
+                                )     
+                                
+                                : (user.participantType == 'Carrier (Mex)') ?
+                                (<div>
+                                <li className="sidebar-dropdown">
+                                    <Link to="/userProfile">
+                                        <i className="fa fa-shopping-cart"></i>
+                                        <span>User Management</span>
+                                    </Link>
+                                    <div className="sidebar-submenu">
+                                        <ul>
+                                       
+                                            <li><Link to="/userProfile">User Profile</Link></li>
+                                            <li><Link to="#">Setup Roles </Link></li>
+                                            <li><Link to="#">Assign Privileges</Link></li>
+                                        </ul>
+                                    </div>
+                                </li> 
+                                <li className="sidebar-dropdown">
+                                <Link to="#">
+                                    <i className="fa fa-shopping-cart"></i>
+                                    <span>Order Management</span>
+                                </Link>
+                                <div className="sidebar-submenu">
+                                    <ul>
+                                        <li><Link to="#">Dispatch Orders</Link></li>
+                                        <li><Link to="/order-tracking/manage-gps-auth">Manage GPS Authorizations</Link></li>                                 
+                                    </ul>
+                                </div>
+                                
+                            </li> 
+                            <li>
+                                    <Link to="#">
+                                        <i className="fa fa-shopping-cart"></i>
+                                        <span>Document Management</span>
+
+                                    </Link>
+                            </li>      
+
+                            <li>
+                                    <Link to="#">
+                                        <i className="fa fa-shopping-cart"></i>
+                                        <span>Alerts & Notifications</span>
+
+                                    </Link>
+                            </li>
+                            
+                                </div>
+                                )
+                                : (user.participantType == 'Oil Well') ? (
+                                <div>
+                                    <li className="sidebar-dropdown">
+                                    <Link to="/userProfile">
+                                        <i className="fa fa-shopping-cart"></i>
+                                        <span>User Management</span>
+                                    </Link>
+                                    <div className="sidebar-submenu">
+                                        <ul>
+                                       
+                                            <li><Link to="/userProfile">User Profile</Link></li>
+                                            <li><Link to="#">Setup Roles </Link></li>
+                                            <li><Link to="#">Assign Privileges</Link></li>
+                                        </ul>
+                                    </div>
+                                </li> 
+                                <li className="sidebar-dropdown">
+                                <Link to="#">
+                                    <i className="fa fa-shopping-cart"></i>
+                                    <span>Order Management</span>
+                                </Link>
+                                <div className="sidebar-submenu">
+                                    <ul>
+                                        <li><Link to="#">Quotes</Link></li>
+                                        <li><Link to="#">Proposals</Link></li>
+                                        <li><Link to="#">Purchase Orders </Link></li>                                          
+                                        <li><Link to="/order-tracking">Tracking</Link></li>:null
+                                        
+                                    </ul>
+                                </div>
+                            </li> 
+                            <li>
+                                    <Link to="#">
+                                        <i className="fa fa-shopping-cart"></i>
+                                        <span>Document Management</span>
+
+                                    </Link>
+                            </li>     
+                            <li>
+                                <Link to="/volumetric">
+                                    <i className="fa fa-shopping-cart"></i>
+                                    <span>Volumetric</span>
+                                </Link>
+                                
+                            </li> 
+                            <li>
+                                    <Link to="#">
+                                        <i className="fa fa-shopping-cart"></i>
+                                        <span>Alerts & Notifications</span>
+
+                                    </Link>
+                            </li>
+                                </div>
+                                ) : null
+    }
+                                {/* { user.role != 'Admin' ?( 
+                                    <div>
+                                <li className="sidebar-dropdown">
+                                    <Link to="/userProfile">
+                                        <i className="fa fa-shopping-cart"></i>
+                                        <span>User Management</span>
+                                    </Link>
+                                    <div className="sidebar-submenu">
+                                        <ul>
+                                        
+                                            <li><Link to="/userProfile"> User Profile</Link></li>
+                                            <li><Link to="#">Setup Roles </Link></li>
+                                            <li><Link to="#"> Assign Privileges</Link></li>
                                         </ul>
                                     </div>
                                 </li>
                                 <li className="sidebar-dropdown">
                                     <Link to="/">
-                                        <i className="fa fa-shopping-cart"></i>
                                         <span>Management</span>
                                     </Link>
                                     <div className="sidebar-submenu">
                                         <ul>
-                                            <li><Link to="/product">Product Management</Link></li>
+                                           
                                             <li className="sidebar-dropdown">
                                                 <Link to="/">
                                                     <span>Project Management</span>
                                                 </Link>
                                             </li>
                                             <li className="sidebar-dropdown">
-                                                <Link to="/">
+                                                <Link to="/rfq">
                                                     <span>Proposal Management</span>
                                                 </Link>
                                                 <div className="sidebar-dropdown">
@@ -160,6 +351,27 @@ class Sidebar extends React.Component {
                                                     </ul>
                                                 </div>
                                             </li>
+                                            <li className="sidebar-dropdown">
+                                                <Link to="/purchaseOrder">
+                                                    <span>Order Management</span>
+                                                </Link>
+                                                <div className="sidebar-dropdown">
+                                                    <ul>
+                                                        <li>
+                                                            <Link to="/purchaseOrder">
+                                                            Purchase Order </Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link to="/salesOrder">
+                                                            Sales Order</Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link to="/dispatchOrder">
+                                                            Dispatch Order</Link>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
                                         </ul>
                                     </div>
                                 </li>
@@ -168,7 +380,7 @@ class Sidebar extends React.Component {
                                         <i className="fa fa-shopping-cart"></i>
                                         <span>Product Management</span>
                                     </Link>
-                                </li> */}
+                                </li> 
 
                                 <li className="sidebar-dropdown">
                                     <Link to="#">
@@ -178,7 +390,7 @@ class Sidebar extends React.Component {
                                     </Link>
                                 </li>
                                 <li className="sidebar-dropdown">
-                                    <Link to="#">
+                                    <Link to="/volumetric">
                                         <i className="fa fa-shopping-cart"></i>
                                         <span>Volumetric</span>
                                     </Link>
@@ -201,8 +413,28 @@ class Sidebar extends React.Component {
                                         <i className="fa fa-shopping-cart"></i>
                                         <span>Order Tracking</span>
                                     </Link>
+                                    <div className="sidebar-submenu">
+                                        <ul>
+                                            <li>
+                                                <Link to="/order-tracking/manage-gps-auth">
+                                                    <span>Manage GPS Authorizations</span></Link>
+                                            </li>
+                                            
+                                             <li>     
+                                                <Link to="/orderTracking-request">
+                                                    <span>Order Tracking Request</span>
+                                                </Link>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div className="sidebar-submenu">
+                                        <ul>
+
+                                        </ul>
+                                    </div>
                                 </li>
-                            </ul>
+                                </div>):null} */}
+                           </ul>
                         </div>
                         {/* <!-- sidebar-menu  --> */}
                     </div>

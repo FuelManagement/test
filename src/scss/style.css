@@ -186,7 +186,7 @@ header .pad-50{
 }
 
 .contentDiv {
-  margin-top: 70px;
+  margin-top: 90px;
 }
 
 .contentDiv .dasboardStatic {
@@ -291,8 +291,9 @@ header .pad-50{
   font-size: 17px !important;
 }
 .rt-thead{
-  background:#00ce1b;
+  background:#29AD01;
   color: #fff;
+
 }
 .filepond--root .filepond--drop-label {
   min-height: 3.25em;
@@ -320,11 +321,6 @@ header .pad-50{
 .MuiTableRow-root.MuiTableRow-hover:hover {
   background-color: #887b7b !important;
 }
-
-/* React table css   */
-.rt-resizable-header-content{
-  font-weight: bold;
-} 
 
 /* Onboard profile add form Styles */
 .onboard-profile .modal-dialog {
@@ -415,10 +411,18 @@ header .pad-50{
   margin-bottom: 15px;
 }
 .order-tracking-peper .MuiPaper-root{
-  border: 1px solid green;
+  border: 1px solid #00ce1b;
   border-radius: 15px;
   padding:0 15px;
-} 
+}  
+.notchedOutline {
+  border-width: 1px;
+  border-color: yellow !important;
+}  
+.MuiInputLabel-outlined.MuiInputLabel-shrink{
+  background: #fff;
+  padding: 0px 5px;;
+}
 .order-tracking-peper .MuiIconButton-root{
   padding:5px;
 }
@@ -426,16 +430,19 @@ header .pad-50{
   display: block;
 }
 .order-tracking-main .MuiTabs-root{
-  
-  border-radius: 5px 5px 
-
+  border-radius: 5px 5px;
+  min-height: 35px !important;
+}
+.MuiTab-root{
+  min-height: 35px !important;
+  min-width: 140px !important;
 }
 .order-tracking-main .MuiTab-textColorPrimary.Mui-selected{
   color:white;
   background:#716c6c;
   margin:0 1px;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   outline: none;
 }
 .order-tracking-main .MuiTab-textColorPrimary{
@@ -443,11 +450,11 @@ header .pad-50{
   color: white;
   margin:0 1px;
   outline: none;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 .order-tracking-main .MuiTab-root{
-  font-size: 20px;
+  font-size: 15px;
   text-transform: capitalize;
 }
 .order-tracking-main .MuiBox-root{
@@ -455,9 +462,6 @@ header .pad-50{
 }
 .order-tracking-main .MuiPaper-elevation1{
   box-shadow: none;
-}
-.order-tracking-main .ReactTable .rt-thead .rt-resizable-header-content{
-  padding:5px;
 }
 .order-tracking-otp-input{
   padding-left: 15px;
@@ -501,21 +505,21 @@ header .pad-50{
   background: #00ce1b;
   color:white;
   font-weight: bold;
-  padding:10px 30px;
-  font-size: 20px;
+  padding:4px 30px;
+  font-size: 18px;
   margin-bottom: 20px;
 }
 .otp-title{
   color:#00ce1b;
-  width:58%;
+  width:54%;
   text-align: center;
   margin:0;
   padding:0;
+  font-size: 18px;
 }
 .otp-text-notif{
   margin: 25px 156px 30px;
-  color: #00ce1b;
-  font-weight: 600;
+  color: #00ce1b; 
   font-size: 15px;
   text-align: center;
 }
@@ -550,7 +554,7 @@ header .pad-50{
 }
 /* Progress bar css */
  .progress-heading{
-  background-color: green; 
+  background-color: #00ce1b; 
   margin-bottom: 11px;
   color: #fff;
   font-size: 17px;
@@ -570,7 +574,7 @@ header .pad-50{
   border-bottom: 1px solid #fff;
 }
 .progress-main .MuiExpansionPanelDetails-root {
-  border: 1px solid #332233;
+  border: 1px solid #716c6c;
 }
 .transitionStep {
   filter: grayscale(1);
@@ -584,15 +588,13 @@ header .pad-50{
   justify-content: center;
   align-items: center;
 }
-
 .transitionStep.accomplished {
   filter: grayscale(0);
-  background-color: green;
+  background-color: #00ce1b;
 } 
 .progress-bar {
   background-color: unset !important;
 }
-
 .acomplished-text{
   position: absolute;
   top: 27px;
@@ -635,7 +637,7 @@ header .pad-50{
 } 
 .progress-main  .MuiExpansionPanelSummary-root{
   width: 100%;
-  background-color: green; 
+  background-color: #00ce1b; 
   margin-bottom: 11px;
   color: #fff;
   font-size: 17px;
@@ -651,4 +653,224 @@ header .pad-50{
 }
 .order-track-status-map{
   margin-bottom: 10px;
+}
+.RSPBprogressBar .RSPBprogression {
+  background: #00ce1b !important;
+}
+/* Table styling  */
+.table-heading{
+  background-color: #a9aaaa;
+  color: #fff;
+  cursor: pointer;
+  margin: 0px 0px 0px 0px;
+  padding: 10px 24px;
+  font-size: 20px;
+  border-radius: 10px 10px 0px 0px;
+}
+.table-heading:hover,.table-heading:active,.table-heading:focus{
+  background-color: #716c6c;
+  color: #ffffff;
+
+}
+.table-data{
+  border: 1px solid #716c6c;
+  padding: 20px;
+}
+.mrg-tp40px{
+  margin-top: 40px;
+}
+.OTR-actions-row{
+  margin: 0px;
+  justify-content: center;
+}
+.OTR-actions { 
+  width: 80%;
+}
+.OTR-approve-btn{
+  background-color: #eaeaf0;
+  color: #00ce1b;
+  width: 80%;
+  outline: none;
+  padding: 0rem 0.7rem;
+}
+.OTR-reject-btn{
+  background-color: #eaeaf0;
+  color: #ce0030;
+  width: 80%;
+  outline: none;
+}
+.OTR-actions .MuiInput-formControl{
+  width: 100%;
+}
+/* Send Authenticaion component styles */
+.sendAuthenticaion-model .MuiDialog-paperWidthSm{
+  width: 400px;
+  border: 2px solid #00ce1b;
+}
+.sendAuthenticaion-hdg{
+    text-align: center;
+    font-size: 17px;
+    font-weight: 500;
+    color: #00ce1b;
+}
+.sendAuthenticaion-custhdg{
+  color: #00ce1b;
+  font-size: 15px;
+  font-weight: 100;
+}
+.sendAuthenticaion-custName{
+  color: #a9aaaa;
+}
+.sendAuthenticaion-formDiv{
+  margin: 30px 0px;
+}
+.sendAuthenticat-submit-row{
+  justify-content: center;
+}
+.sendAuthenticat-submit{
+  background-color: #00ce1b !important;
+  color: #fff !important;
+  opacity: 0.7;
+}
+.sendAuthenticat-submit:hover{
+  opacity: 1;
+}
+ .table-main-heading{
+  font-size: 22px;
+  font-weight: 600;
+  color: gray;
+  font-family: Roboto, 'Segoe UI', Tahoma, sans-serif;
+  display: inline-block;
+}
+.manage-gps-auth .drop-down-sec{
+  border: 1px solid #dcdada;
+  border-radius: 5px;
+}
+.manage-gps-auth .set-center{
+  text-align: center;
+  margin:20px;
+}
+.manage-gps-auth .form-wrapper{
+  margin-top:20px;
+} 
+.manage-gps-auth .manage-submit-button{
+  margin: auto;
+  top: -7px;
+}
+.MuiTypography-body1{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+  font-size: 0.9rem !important;
+} 
+.reSend-otp{
+  color: #842b2b;
+    font-weight: 700;    
+    text-decoration: underline;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+/* React table css   */
+.rt-resizable-header-content{
+  font-weight: normal;
+} 
+.order-tracking-main .ReactTable .rt-thead .rt-resizable-header-content{
+  padding:5px 0px;
+}
+.ReactTable .rt-thead .rt-tr{
+  text-align: left !important;
+}
+.ReactTable {
+  border: 1px solid #fff;
+}
+.manage-gps-auth .react-table-border{
+  border: 1px solid #dcdada;
+  padding:10px;
+  border-radius: 5px;
+}
+.react-table-header-style{
+  text-align:left;
+   padding: 0px 12px !important;
+}
+.react-table-row-content-align-left{
+   display: block !important;
+   text-align: left !important;
+   
+}
+.ReactTable .rt-tbody .rt-tr-group{
+  border-bottom: solid 1px #fff;
+} 
+.ReactTable .rt-tr {
+  height: 35px;
+}
+.ReactTable .rt-thead .rt-th, .ReactTable .rt-thead .rt-td{
+  border-right: 1px solid #fff;
+  padding: 5px 12px;
+}
+.ReactTable .rt-tbody .rt-td{
+  border-right: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+}
+.ReactTable .rt-tbody .rt-td:first-child{
+  border-left: 1px solid lightgray;
+}
+.ReactTable .rt-tbody .rt-td:last-child{
+  border-right: 1px solid lightgray;
+}
+.ReactTable .-pagination{
+  border-top: unset;
+  box-shadow: none;
+}
+.btn-group-sm>.btn, .btn-sm{
+  padding: 0rem 0.5rem;
+}
+.ReactTable .rt-thead.-header{
+  box-shadow: none;
+}
+.order-request-table .rt-resizable-header-content{
+  padding: 5px 0px;
+}
+.order-request-table .rt-td,.ReactTable .rt-td {
+  padding: 5px 12px;
+}
+.sendAuthenticaion-model .MuiDialog-paperWidthFalse{
+  width: 250px;
+}   
+.order-tracking-main .show-history-legends{
+  vertical-align: text-bottom;
+}
+.order-tracking-main .legend-icons{
+   font-weight: bold;
+}
+.legend-icons >span{
+  padding:25px;
+}
+.text-under{
+  text-decoration: underline;
+  cursor: pointer;
+}
+.text-under:hover{
+  color:green;
+}
+.show-ledger-popup .MuiDialog-paperWidthSm{
+  max-width: unset;
+}
+.show-ledger-header{
+  font-size: 15px;
+  font-weight: bold;
+  padding-left: 27px;
+}
+.show-ledger-popup .order-tracking-model-body{
+  padding: 0px 25px 25px 25px;
+}
+
+.show-partial-word {
+  white-space: nowrap; 
+  width: 100px; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+}
+
+.show-partial-word:hover {
+  overflow: visible;
 }
