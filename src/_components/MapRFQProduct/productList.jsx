@@ -9,7 +9,7 @@ window.$ = $;      // hack
 import 'bootstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TextField, Select, Checkbox, MenuItem, FormControl, Radio, RadioGroup, FormControlLabel, FormLabel } from '@material-ui/core';
-
+import {ConfirmDialog} from '../ConfirmDialog';
 export default class ProductList extends React.Component {
 
     constructor(props) {
@@ -17,7 +17,9 @@ export default class ProductList extends React.Component {
         this.state = {
                         products:this.props.products!==undefined?this.props.products:[],
                         showAddProduct:true, showEditProduct:true,
-                        selectedProduct:{}
+                        selectedProduct:{},confirmDialog:false,confirmDialogAccept:'',confirmDialogReject:'',
+                        confirmDialogMessage:'',ConfirmDialogHeader:''
+                       
                   };
        this.handleAddProduct=this.handleAddProduct.bind(this);
        this.handleDeleteProduct=this.handleDeleteProduct.bind(this);
@@ -25,6 +27,8 @@ export default class ProductList extends React.Component {
        this.handleChange=this.handleChange.bind(this);  
        this.handleReset=this.handleReset.bind(this);  
        this.handleSave=this.handleSave.bind(this);        
+       this.handleClose=this.handleClose.bind(this);        
+       this.confirmDelete=this.confirmDelete.bind(this);        
         
     }
     UNSAFE_componentWillReceiveProps(nextprops)
@@ -54,7 +58,8 @@ export default class ProductList extends React.Component {
     };
     this.setState(prevState => ({
         products: [...prevState.products, product]
-      }),()=>{ this.setState({showAddProduct:false,showEditProduct:false})});
+      }),()=>{ this.setState({showAddProduct:false,showEditProduct:false
+       })});
    
     }
     handleEditProduct(item){
@@ -63,76 +68,94 @@ export default class ProductList extends React.Component {
         var array = [...this.state.products]; // make a separate copy of the array
         var index = array.indexOf(item)
         if (index !== -1) {
-          array.splice(index, 1);
+        array[index].rowAction.edit=true;
         }
-        item.rowAction.edit=true;
-        array=[...array,item];
         this.setState({products:array})
     }
     handleDeleteProduct(item){
-        var r = confirm("Are you sure, you want to remove this product?");
-if (r == true) {
-    var array = [...this.state.products]; // make a separate copy of the array
-    var index = array.indexOf(item)
-    if (index !== -1) {
-      array.splice(index, 1);
+       
+        this.setState({confirmDialog:true,selectedProduct:item,
+            confirmDialogAccept:'Yes',confirmDialogReject:'No',
+            confirmDialogMessage:'Are you sure, you want to remove this product?',ConfirmDialogHeader:'Confirm'});
     }
-    
-    array=[...array];
-    this.setState({products:array});
-    this.props.productCallback(array);
-} else {
- 
-}
-        
-    }
+
     handleChange(event,product){
         
         
         var array = [...this.state.products]; // make a separate copy of the array
         var index = array.indexOf(product)
         if (index !== -1) {
-          array.splice(index, 1);
           
-        }
-        let key=event.target.name,value=event.target.value;
+          let key=event.target.name,value=event.target.value;
         if(key==='productName'){
+        if(this.state.products.indexOf(this.state.products.find(f=>f.productName===value))===-1){
         let productDetail=([...this.props.productDetailList] ||[]).find(f=>f.productName===event.target.value);
-        product.productCategory=productDetail.productCategory;
-        product.productName=productDetail.productName;
-        product.subCategory=productDetail.subCategory;
-        product.measuringUnit=productDetail.measuringUnit;
+        array[index].productCategory=productDetail.productCategory;
+        array[index].productName=productDetail.productName;
+        array[index].productID=productDetail.productID;
+        array[index].subCategory=productDetail.subCategory;
+        array[index].measuringUnit=productDetail.measuringUnit;
+            }
+            else{
+                this.setState({confirmDialog:true,
+                    confirmDialogAccept:'',confirmDialogReject:'OK',
+                    confirmDialogMessage:'Same product can not be added twice!',ConfirmDialogHeader:'Alert'});
+                return false;
+            }
         }else{
-            product[key]=value;
+            array[index][key]=value;
         }
-        array=[...array,product];
+        }
         this.setState({products:array})
     }
     handleSave(item){
-        
+        if(item.productName!=='' && item.quantity!=='' && item.price!==''){
         var array = [...this.state.products]; // make a separate copy of the array
         var index = array.indexOf(item)
         if (index !== -1) {
-          array.splice(index, 1);
+          array[index].rowAction.add=false;
+          array[index].rowAction.edit=false;
+          array[index].rowAction.delete=false;
         }
-        item.rowAction.add=false;
-        item.rowAction.edit=false;
-        item.rowAction.delete=false;
-        array=[...array,item];
+        
         this.setState({products:array,showAddProduct:true,showEditProduct:true,selectedProduct:{}})
         this.props.productCallback(array);
+    }
+    else{
+        this.setState({confirmDialog:true,
+            confirmDialogAccept:'',confirmDialogReject:'OK',
+            confirmDialogMessage:'Product Name, Quantity and Price are the rquired Fields.',ConfirmDialogHeader:'Alert'});
+            return false;
+    }
     }
     handleReset(item){
     
         var array = [...this.state.products]; // make a separate copy of the array
         var index = array.indexOf(item)
         if (index !== -1) {
+          
+          if(array[index].rowAction.edit){
+            array[index]=this.state.selectedProduct;
+            }
+            else{
+                array.splice(index, 1);
+            }
+        }
+       
+        this.setState({products:array,showAddProduct:true,showEditProduct:true,selectedProduct:{}})
+    }
+    confirmDelete(){
+        var array = [...this.state.products]; // make a separate copy of the array
+        var index = array.indexOf(this.state.selectedProduct)
+        if (index !== -1) {
           array.splice(index, 1);
         }
-        if(item.rowAction.edit){
-        array=[...array,this.state.selectedProduct];
-        }
-        this.setState({products:array,showAddProduct:true,showEditProduct:true,selectedProduct:{}})
+        this.setState({products:array,selectedProduct:{}});
+        this.props.productCallback(array);  
+        this.handleClose();  
+    }
+    handleClose(){
+        this.setState({confirmDialog:false,confirmDialogMessage:'',ConfirmDialogHeader:'',confirmDialogAccept:'',confirmDialogReject:''});
     }
     attachActions(product){
         if(product.rowAction===undefined || product.rowAction===null){
@@ -142,6 +165,7 @@ if (r == true) {
         }
         return product;
     }
+    
     render() {
         
         return (
@@ -161,9 +185,9 @@ if (r == true) {
                     {
                         Header: 'Product Name',
                         accessor: 'productName',
-                        Cell: row =>(row.original.rowAction.add || row.original.rowAction.edit? <FormControl style={{ width: "100%" }}>
-                        <TextField
-                            select
+                        Cell: row =>(row.original.rowAction.add || row.original.rowAction.edit? 
+                        <select
+                          
                            id='productName'
                             variant="outlined"
                             name='productName'
@@ -174,13 +198,16 @@ if (r == true) {
                             margin="dense"
                            
                         >
+                             <option key="-1" value="">
+                                        None
+                                    </option>
                             {this.props.productDetailList!==undefined && this.props.productDetailList.length>0 && this.props.productDetailList.map(option => (
-                                    <MenuItem key={option.productID} value={option.productName}>
+                                    <option key={option.productID} value={option.productName}>
                                         {option.productName}
-                                    </MenuItem>
+                                    </option>
                                 ))}
-                        </TextField>
-                    </FormControl>: <span title={row.original.productName}>{row.original.productName}</span>)
+                        </select>
+                   : <span title={row.original.productName}>{row.original.productName}</span>)
                     },{
                         Header: 'Category',
                         accessor: 'productCategory',
@@ -198,7 +225,7 @@ if (r == true) {
                         Header: 'Quantity',
                         accessor: 'quantity',
                         Cell: row =>(row.original.rowAction.add || row.original.rowAction.edit? <FormControl style={{ width: "100%" }}>
-                        <TextField
+                        <input type="number"
                            
                            id='quantity'
                             variant="outlined"
@@ -209,16 +236,16 @@ if (r == true) {
                             onChange={(e)=>this.handleChange(e,row.original)}
                             margin="dense"
                            
-                        >
+                        />
                            
-                        </TextField>
+                       
                     </FormControl>: <span style={{ textAlign: "right" }} title={row.original.quantity}>{row.original.quantity}</span>)
                     },{
                         Header: 'Price',
                         accessor: 'price',
                         
                         Cell: row => (row.original.rowAction.add || row.original.rowAction.edit? <FormControl style={{ width: "100%" }}>
-                        <TextField
+                        <input type="number"
                            
                            id='price'
                             variant="outlined"
@@ -229,9 +256,9 @@ if (r == true) {
                             onChange={(e)=>this.handleChange(e,row.original)}
                             margin="dense"
                            
-                        >
+                        />
                            
-                        </TextField>
+                       
                     </FormControl>:<span style={{ textAlign: "right" }} title={(row.original.price)}>{(row.original.price)}</span>)
                     }, {
                         Header: 'Price Adjustment',
@@ -249,7 +276,14 @@ if (r == true) {
                     }]}
                     {...Table_Config.Product.products.options}
                 />
-
+                    <ConfirmDialog
+                    message={this.state.confirmDialogMessage}
+                    header={this.state.ConfirmDialogHeader}
+                    accept={this.state.confirmDialogAccept}
+                    decline={this.state.confirmDialogReject}
+                    open={this.state.confirmDialog}
+                    confirmAction={this.confirmDelete}
+                    handleClose={this.handleClose} />
                  </div>
         );
     }

@@ -17,8 +17,8 @@ function getAllRfq() {
         method: 'GET',
         headers: authHeader()
     };
-    
-    return fetch(config.apiUrl + '/product/getRFQListByFromUserID?userID='+user.registerId, requestOptions)
+    let email = user.participantID === undefined ? user.registerId : user.email;
+    return fetch(config.apiUrl + '/product/getRFQListByFromUserID?userID='+email, requestOptions)
     .then(handleResponse)
     .then((data)=> data.rfqs)
     .catch(err => {
@@ -33,7 +33,8 @@ function getAllRfqToUser() {
         method: 'GET',
         headers: authHeader()
     };
-    return fetch(config.apiUrl + '/product/getRFQListByToUserID?userID='+user.registerId, requestOptions)
+    let email = user.participantID === undefined ? user.registerId : user.email;
+    return fetch(config.apiUrl + '/product/getRFQListByToUserID?userID='+email, requestOptions)
     .then(handleResponse)
     .then(data=> data.rfqs)
     .catch(err => {
@@ -43,28 +44,29 @@ function getAllRfqToUser() {
 }
 
 function postNewRfq(formData){
-    console.log('3. I am in Create')
+   let collection=JSON.parse(JSON.stringify(formData));
     let user = JSON.parse(localStorage.getItem('user'));
-    formData.userID = user.registerId;
-    formData.role = user.role;
-    formData.status = 'Created';
-    formData.fromUserID=user.registerId;
-    formData.toUserId = formData.participantId;
-   
+    let email = user.participantID === undefined ? user.registerId : user.email;
+    collection.userID = user.registerId;
+    collection.role = user.role;
+    collection.status = 'Created';
+    collection.fromUserID=user.registerId;
+    collection.toUserId = formData.participantId;
+    collection.products=[];
+if(formData.products!==undefined && formData.products.length>0){
+formData.products.forEach(element => {
+    if(element.rowAction!==undefined){
+        element.rowAction=undefined;
+    }
+    collection.products.push(element);
+});
+}
     const requestOptions = {
         method: 'POST',
         headers: authHeader(),
-        body: JSON.stringify(formData)
+        body: JSON.stringify(collection)
     };
-    // return fetch(config.apiUrl + '/product/createRFQ', requestOptions)
-    // .then(handleResponse)
-    // .then(()=> dummyData)
-    // .catch(err => {
-    //     // handleError(err)
-    //     return dummyData;
-    // })
-
-
+    
     return fetch(config.apiUrl + '/product/createRFQ', requestOptions).then(handleResponse, handleError);
 }
 function getAllProducts(){

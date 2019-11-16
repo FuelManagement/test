@@ -84,6 +84,7 @@ class AddRFQ extends React.Component {
         console.log('updateLineItems')
         let formData = this.state.formData;
         formData.products = products;
+        console.log(formData);
         this.setState({ formData });
     }
     getEntityTypes(participants = []) {
@@ -309,7 +310,7 @@ class AddRFQ extends React.Component {
                             </div>
                             <div className="row form-row mb-3">
                                 <div className="col-md-12">
-                                    <ProductList products={[]} productCallback={this.updateLineItems.bind(this)} productDetailList={this.props.rfq.products.products} />
+                                    <ProductList products={this.state.formData.products || []} productCallback={this.updateLineItems.bind(this)} productDetailList={this.props.rfq.products.products} />
                                 </div>
                             </div>
                             <div className="row form-row">
