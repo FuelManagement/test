@@ -874,3 +874,31 @@ header .pad-50{
 .show-partial-word:hover {
   overflow: visible;
 }
+.register-submitbtn,.register-add-tax{
+  text-align: end;
+}
+.register-submitbtn button,.register-submitbtn button:hover{
+  background: #00ce1b;
+  color:white;
+}
+.register-tax-form .tax-details-filedset{
+  border:1px solid green;
+  padding:30px;
+  margin-top:30px;
+  border-radius: 5px;
+  
+}
+.tax-details-filedset .tax-details-legend{
+  color:green;
+  font-weight: bold;
+  font-size: 16px;
+  width:auto;
+  padding:5px;
+
+}
+.register-add-tax button,.register-tax-form button:hover{
+  text-transform: capitalize;
+  font-weight: 700;
+  background: #00ce1b;
+  color:white;
+}
