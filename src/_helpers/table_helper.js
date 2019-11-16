@@ -1218,13 +1218,47 @@ let Table_Config = {
 				Header: 'Description',
 				accessor: 'description',
 				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.description}>{row.original.description}</span>
-			},  {
-				Header: 'Actions', 
-				Cell: row => <div className="row"> 
+			}, {
+				Header: 'Actions',
+				Cell: row => <div className="row">
 					<button
 						className="btn btn-outline-primary btn-sm"
 						style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
 						onClick={e => { props.editUserProfile(e, row.original, "update") }}>
+						<FontAwesomeIcon icon="edit" size="xs" />
+					</button>
+				</div>
+			}]
+		}
+	},
+	AssignPrivileges: {
+		AssignPrivilege: {
+			options: { ...globalOptions },
+			columns: (props) => [{
+				Header: 'User Role',
+				accessor: 'userRole',
+
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.userRole}>{row.original.userRole}</span>
+			}, {
+				Header: 'Screen Name',
+				accessor: 'ScreenName',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.ScreenName}>{row.original.ScreenName}</span>
+			}, {
+				Header: 'Privileges',
+				accessor: 'Privileges', 
+				width: 560,
+				Cell: row =>
+					<div className="privilege-table">
+						<span style={{ display: 'block', textAlign: 'left' }} title={row.original.Privileges}>{row.original.Privileges}</span>
+					</div>
+
+			}, {
+				Header: 'Actions',
+				Cell: row => <div className="row">
+					<button
+						className="btn btn-outline-primary btn-sm"
+						style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
+						onClick={e => { props.assignPrivileges(e, row.original, "update") }}>
 						<FontAwesomeIcon icon="edit" size="xs" />
 					</button>
 				</div>
