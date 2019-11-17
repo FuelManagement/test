@@ -27,7 +27,7 @@ const withHodingtaxTypeIndicator = {
             value: "",
             label: "None"
         }, {
-            value: "TAXAT_SOURCE",
+            value: "Tax at Source",
             label: "Tax at Source"
         }
     ],
@@ -39,7 +39,7 @@ class TaxDetailForm extends React.Component {
         this.state = this.initialState(null, this.props.taxInfo);
         this.handleAddtaxInfo = this.handleAddtaxInfo.bind(this);
         this.handleSavetaxInfo = this.handleSavetaxInfo.bind(this);
-        this.handleChange=this.handleChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
     initialState(mode, props) {
         let state = {};
@@ -52,7 +52,7 @@ class TaxDetailForm extends React.Component {
 
                     validationRules: {
                         notEmpty: true,
-                        
+
                     },
                     error: "Please enter Tax Type",
                     placeholder: "Tax Type",
@@ -65,7 +65,7 @@ class TaxDetailForm extends React.Component {
 
                     validationRules: {
                         notEmpty: true,
-                        
+
                     },
                     error: "Please enter Tax Number",
                     placeholder: "Tax Number",
@@ -78,10 +78,10 @@ class TaxDetailForm extends React.Component {
 
                     validationRules: {
                         notEmpty: true,
-                        
+
                     },
                     error: "Please enter withholding Tax Type Indicator",
-                    placeholder: "Tax Number",
+                    placeholder: "Tax Type Indicator",
                     touched: false,
                     visible: true,
                     disable: false
@@ -91,10 +91,10 @@ class TaxDetailForm extends React.Component {
 
                     validationRules: {
                         notEmpty: true,
-                        
+
                     },
                     error: "Please enter withholding Tax Code",
-                    placeholder: "Tax Number",
+                    placeholder: "Tax Code",
                     touched: false,
                     visible: true,
                     disable: false
@@ -104,7 +104,7 @@ class TaxDetailForm extends React.Component {
 
                     validationRules: {
                         notEmpty: true,
-                        
+
                     },
                     error: "Please select withholding Tax",
                     placeholder: "Subject to withholding tax ?",
@@ -117,16 +117,50 @@ class TaxDetailForm extends React.Component {
         return state;
     }
     handleAddtaxInfo() {
-        this.setState({ filedsetTitle: 'Add Tax Info', showAddTaxInfo: true })
+        this.setState(prevState => {
+            return {
+                controls: {
+                    ...prevState.controls,
+                    taxType: {
+                        ...prevState.controls['taxType'],
+                        value: '',
+                    },
+                    taxNumber: {
+                        ...prevState.controls['taxNumber'],
+                        value: '',
+                    }
+                },
+                filedsetTitle: 'Add Tax Info',
+                showAddTaxInfo: true
+            };
+        });
     }
     handleSavetaxInfo() {
 
     }
     editTaxInfo(e, row) {
-        this.setState({ filedsetTitle: 'Edit Tax Info', showAddTaxInfo: true })
+        this.setState(prevState => {
+            return {
+                controls: {
+                    ...prevState.controls,
+                    taxType: {
+                        ...prevState.controls['taxType'],
+                        value: row.taxType,
+                    },
+                    taxNumber: {
+                        ...prevState.controls['taxNumber'],
+                        value: row.taxNumber,
+                    }
+                },
+                filedsetTitle: 'Edit Tax Info',
+                showAddTaxInfo: true
+            };
+        });
+
     }
     handleChange(event) {
-        let key = event.target.name, value = event.target.name === 'withholdingTaxCheckbox' ? !(event.target.value == 'true' ? true : false) : event.target.value;
+        let key = event.target.name;
+        let value = event.target.name === 'withholdingTaxCheckbox' ? !(event.target.value == 'true' ? true : false) : event.target.value;
         this.setState(prevState => {
             return {
                 controls: {
@@ -134,13 +168,13 @@ class TaxDetailForm extends React.Component {
                     [key]: {
                         ...prevState.controls[key],
                         value: value,
-
+                        valid: true,
                         touched: true
                     }
                 }
             };
         });
-        
+
     }
     render() {
         return (
@@ -201,7 +235,7 @@ class TaxDetailForm extends React.Component {
                             </div>
                         </fieldset>
                     </div>}
-                    <div className='form-row register-taxform-table'>
+                    <div className='form-row register-taxform-table mb-3'>
                         <ReactTable
                             data={taxData || []}
                             columns={Table_Config.RegisterTaxInfoTable.RegisterTaxInfoTableRecords.columns({ editTaxInfo: this.editTaxInfo.bind(this) })}
@@ -215,7 +249,7 @@ class TaxDetailForm extends React.Component {
                                 id="withHodingtaxTypeIndicator"
                                 name="withHodingtaxTypeIndicator"
                                 label="withholding Tax Type Indicator"
-                                value={this.state.controls.taxType.value}
+                                value={this.state.controls.withHodingtaxTypeIndicator.value}
                                 onChange={this.handleChange}
                                 className="form-control"
                                 margin="dense"
