@@ -506,7 +506,7 @@ allowOnlynumbers(e) {
             />
           </div>
 
-          <div className="col-md-3 md-3">
+          <div className="col-md-4 md-3">
 
             <MuiPhoneInput
                defaultCountry='us'
@@ -547,7 +547,7 @@ allowOnlynumbers(e) {
             />
           </div>
 
-          <div className="col-md-4 md-3">
+          <div className="col-md-3 md-3">
             <MuiPhoneInput
                defaultCountry='us'
               //  regions={['north-america']}

@@ -93,9 +93,9 @@ class RegisterPage_New extends React.Component {
                 <div className="row brd-tp1px">
                     <CarouselComponent></CarouselComponent>
 
-                    <div className="login-section" style={style.loginSection}>
+                    <div className="register-main-section" style={style.loginSection}>
                         <div className="col-lg-12 col-md-12 form-wrapper">
-                            <div className="row form-content  order-tracking-main">
+                            <div className="row form-content  order-tracking-main register-main-section-content">
                                 <Paper>
                                     <Tabs
                                         value={this.state.tabValue}
@@ -118,7 +118,7 @@ class RegisterPage_New extends React.Component {
                                             </div>
                                         </div>
                                     </TabPanel>
-                                    <TabPanel value={this.state.tabValue} index={1} className='col-lg-10 p0'>
+                                    <TabPanel value={this.state.tabValue} index={1} className='p0'>
                                         <div className='p0' >
                                             <ContactDetailForm />
                                         </div>

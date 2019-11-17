@@ -17,6 +17,27 @@ body {
   border-top: 1px solid #00ce1b;    
   clip-path: polygon(0 0, 100% 0%, 100% 99%, 17% 99%);
 }
+.register-main-section {
+  position: absolute;
+  top: 82px;
+  background-color: #fff; 
+  background-image: url(../../assets/img/patterns.png);
+  left: 5%;
+  right: 0;
+  min-width: 300px; 
+  width: 100%;
+  min-height: 94vh;
+  border-bottom-left-radius: 40%; 
+  border-top: 1px solid #00ce1b;    
+  clip-path: polygon(0 0, 100% 0%, 100% 99%, 17% 99%);
+}
+.register-main-section-content{
+  width:96%;
+margin-top:5%;
+}
+.register-main-section-content .MuiPaper-root{
+  width:96%;
+}
 .brd-tp1px{
   border-top: 1px solid #00ce1b;
 }
@@ -876,15 +897,17 @@ header .pad-50{
 }
 .register-submitbtn,.register-add-tax{
   text-align: end;
+  
 }
 .register-submitbtn button,.register-submitbtn button:hover{
   background: #00ce1b;
   color:white;
+
 }
 .register-tax-form .tax-details-filedset{
   border:1px solid green;
-  padding:30px;
-  margin-top:30px;
+  padding:20px;
+  margin-top:10px;
   border-radius: 5px;
   
 }
@@ -894,6 +917,7 @@ header .pad-50{
   font-size: 16px;
   width:auto;
   padding:5px;
+  margin-bottom: 0;
 
 }
 .register-add-tax button,.register-tax-form button:hover{
@@ -901,4 +925,16 @@ header .pad-50{
   font-weight: 700;
   background: #00ce1b;
   color:white;
+  margin: 10px;
+}
+.register-tax-btn:hover{
+  color:green;
+  border:0;
+  background-color: #00ce1b;
+}
+.register-taxform-table{
+  margin-top:20px;
+}
+.p8{
+  padding:8px;
 }
