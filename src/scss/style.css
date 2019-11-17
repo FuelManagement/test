@@ -935,3 +935,9 @@ header .pad-50{
 .mrg-tp5px{
   margin-top: 5px;
 }
+.flt-rgt{
+  float: right;
+}
+.fnt-wght{
+  font-weight: 600;
+}
