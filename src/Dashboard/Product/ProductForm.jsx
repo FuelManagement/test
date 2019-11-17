@@ -197,9 +197,25 @@ class ProductForm extends React.Component {
               &nbsp;&nbsp;&nbsp;Add Product
                         </h3>
             <hr />
-            <div className="col-12 col-md-12 form-wrapper">
+            <div className="col-12 col-md-12 form-wrapper product-form-div">
               <div className="form-row">
-                <div className="col-md-6 mb-3">
+                <div className="col-md-4 mb-3">
+                  <TextField
+                    error={!this.state.controls.productName.valid && this.state.controls.productName.touched}
+                    id="productName"
+                    margin="normal"
+                    name="productName"
+                    label={this.state.controls.productName.placeholder}
+                    value={this.state.controls.productName.value}
+                    onChange={this.handleChange}
+                    className="form-control"
+                    variant="outlined"
+                    autoComplete="off"
+                    margin="dense"
+                    disabled={this.state.controls.productName.disable}
+                  />
+                </div>
+                <div className="col-md-4 mb-3">
                   <FormControl style={{ width: "100%" }}>
                     <TextField
                       select
@@ -222,7 +238,7 @@ class ProductForm extends React.Component {
                     </TextField>
                   </FormControl>
                 </div>
-                <div className="col-md-6 mb-3 ">
+                <div className="col-md-4 mb-3 ">
                   <FormControl style={{ width: "100%" }}>
                     <TextField
                       select
@@ -247,24 +263,9 @@ class ProductForm extends React.Component {
                 </div>
 
               </div>
-              <div className="form-row">
-                <div className="col-md-6 mb-3">
-                  <TextField
-                    error={!this.state.controls.productName.valid && this.state.controls.productName.touched}
-                    id="productName"
-                    margin="normal"
-                    name="productName"
-                    label={this.state.controls.productName.placeholder}
-                    value={this.state.controls.productName.value}
-                    onChange={this.handleChange}
-                    className="form-control"
-                    variant="outlined"
-                    autoComplete="off"
-                    margin="dense"
-                    disabled={this.state.controls.productName.disable}
-                  />
-                </div>
-                <div className="col-md-6 mb-3">
+              {/* <div className="form-row">
+
+                <div className="col-md-4 mb-3">
                   <TextField
                     error={!this.state.controls.price.valid && this.state.controls.price.touched}
                     id="price"
@@ -280,10 +281,24 @@ class ProductForm extends React.Component {
                     disabled={this.state.controls.price.disable}
                   />
                 </div>
-              </div>
+              </div> */}
+              
               <div className="form-row">
-
-                <div className="col-md-6 mb-3">
+              <div className="col-md-4 mb-3">
+                  <FormControlLabel
+                    control={<Checkbox icon={<CircleUnchecked className="checkboxIcon" />} checkedIcon={<CircleCheckedFilled className="checkboxIcon" />}
+                      onChange={this.handleChange} name="productStatus"
+                      checked={this.state.controls.productStatus.value}
+                      value={this.state.controls.productStatus.value}
+                      disabled={this.state.controls.productStatus.disable}
+                    />}
+                    label={this.state.controls.productStatus.placeholder}
+                    className="form-checkbox"
+                    name="productStatus"
+                    labelPlacement="start"
+                  />
+                </div>
+                <div className="col-md-4 mb-3">
                   <FormControl style={{ width: "100%" }}>
                     <TextField
                       select
@@ -306,7 +321,7 @@ class ProductForm extends React.Component {
                     </TextField>
                   </FormControl>
                 </div>
-                <div className="col-md-6 mb-3">
+                {/* <div className="col-md-4 mb-3">
                   <FormControl style={{ width: "100%" }}>
                     <TextField
                       select
@@ -328,25 +343,10 @@ class ProductForm extends React.Component {
                       ))}
                     </TextField>
                   </FormControl>
-                </div>
-              </div>
-              <div className="form-row">
-                <div className="col-md-6 mb-3">
-                  <FormControlLabel
-                    control={<Checkbox icon={<CircleUnchecked className="checkboxIcon" />} checkedIcon={<CircleCheckedFilled className="checkboxIcon" />}
-                      onChange={this.handleChange} name="productStatus"
-                      checked={this.state.controls.productStatus.value}
-                      value={this.state.controls.productStatus.value}
-                      disabled={this.state.controls.productStatus.disable}
-                    />}
-                    label={this.state.controls.productStatus.placeholder}
-                    className="form-checkbox"
-                    name="productStatus"
-                    labelPlacement="start"
-                  />
-                </div>
-              </div>
-              <div className="offset-7 flt-rgt">
+                </div> */}
+              </div> 
+              <div className="row product-submit">
+                {/* <div > */}
                 {/* <button className="btn btn-default"
                   type="reset" onClick={() => { this.props.closeModal(); this.props.dispatch(productActions.resetProduct()); }}>
                   Cancel
@@ -355,8 +355,8 @@ class ProductForm extends React.Component {
                   type="button" onClick={this.handleSubmit} disabled={this.props.product.loading} >
                   Submit
                 </button> : null}
+                {/* </div> */}
               </div>
-
             </div>
           </div>
         </div>

@@ -347,7 +347,7 @@ header .pad-50{
 .add-rfq-main{
 	border-top:none;
 	top:88px;
-  left:22%;
+  left:21%;
   background-image: none;
   min-height: auto;
   clip-path:none;
@@ -940,4 +940,14 @@ header .pad-50{
 }
 .fnt-wght{
   font-weight: 600;
+}
+.product-submit{
+  display: flex;
+  justify-content: flex-end;
+  margin: 0px;
+}
+.product-form-div{
+  border: 1px solid #2a931f;
+  padding: 40px 20px;
+  border-radius: 5px;
 }
