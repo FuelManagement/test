@@ -6,7 +6,7 @@ import { alertActions } from '../_actions';
 import * as Components from '../_components';
 import * as Dashboard from '../Dashboard';
 import { LoginPage } from '../LoginPage';
-import { RegisterPage } from '../RegisterPage';  
+import { RegisterPage_New } from '../RegisterPage_New';  
 import OrderTracking from '../_components/OrderTracking/OrderTracking';
 
 import { LandingPage } from '../LandingPage';
@@ -95,8 +95,9 @@ class App extends React.Component {
                                 <Route path="/product" exact component={Dashboard.Product} />  
                                 <Route path="/product/add" exact component={Dashboard.ProductForm} />  
                                 <Route path="/login" render={(props) => <LoginPage {...props} role = {"importer"}/>} />
-                                <Route path="/register" component={RegisterPage} />
-                                <Route path="/home" component={LandingPage} /> 
+                                <Route path="/register" component={RegisterPage_New} />
+                                <Route path="/home" component={LandingPage} />
+                               
                                 <Route path="/userProfile" exact component={Dashboard.UserProfile} />
                                 <Route path="/rfq" exact component={Dashboard.RFQ} />
 							    <Route path="/userProfile/add" exact component={Dashboard.AddUserProfile} /> 

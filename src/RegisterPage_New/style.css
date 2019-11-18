@@ -1,0 +1,227 @@
+
+body {
+  
+  overflow-x:hidden;
+}
+.login-section {
+  position: absolute;
+  top: 82px;
+  background: #fff; 
+  left: 10%;
+  right: 0;
+  min-width: 300px; 
+  width: 100%;
+  min-height: 93vh;
+  border-bottom-left-radius: 50%; 
+  border-top: 1px solid #00ce1b;    
+  clip-path: polygon(0 0, 100% 0%, 100% 99%, 23% 99%);
+}
+.brd-tp1px{
+  border-top: 1px solid #00ce1b;
+}
+
+.submit-btn{
+  background: -webkit-linear-gradient(left, rgb(110, 113, 251) 0%, rgb(82, 175, 250) 63%, rgb(71, 183, 233) 100%);
+  background: -o-linear-gradient(left, rgb(110, 113, 251) 0%, rgb(82, 175, 250) 63%, rgb(71, 183, 233) 100%);
+  background: -ms-linear-gradient(left, rgb(110, 113, 251) 0%, rgb(82, 175, 250) 63%, rgb(71, 183, 233) 100%);
+  background: -moz-linear-gradient(left, rgb(110, 113, 251) 0%, rgb(82, 175, 250) 63%, rgb(71, 183, 233) 100%);
+  background: linear-gradient(to right, rgb(110, 113, 251) 0%, rgb(82, 175, 250) 63%, rgb(71, 183, 233) 100%);
+  width:100%;
+}
+.form-control{
+  BORDER: 0;
+  BORDER-BOTTOM: 1px solid #ccc;
+  border-radius: 0;
+  padding-left: 0;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;  
+  padding-left: 30px;
+}
+
+.form-control1{
+  BORDER: 0;
+  BORDER-BOTTOM: 1px solid #ccc;
+  border-radius: 0;
+  padding-left: 0;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;  
+  padding-left: 10px;
+}
+.form-group{
+  position:relative;
+}
+.sign-in{
+  color:#419fe7;
+}
+.or{
+  color:#deb450;
+}
+.sign-up{
+  color: #a1a4aa;
+  /* border-bottom: 1px solid #a1a4aa; */
+}
+.form-content{
+  float: right;
+  margin-right: 5%;
+  width: 70%;
+}
+
+.input-icon{
+  position: absolute;
+  top: 12px;
+  left: 0px;
+  font-size: 20px;
+  color: #887b7b;
+}
+.info-section{
+  position: absolute;
+    top: 96px;
+    transform: translate(50%, 50%);
+    width: 29%;
+}
+
+.info-section h2{
+  color:#fff;
+  font-size:30px;
+}
+.info-section p{
+  font-size:18px;
+  color:#fff;
+}
+.info-section ul li{
+  color:#fff;
+}
+.carousel{
+  height: 90vh;
+  background: -webkit-rgb(1, 1, 11);
+  background: -o-rgb(1, 1, 11);
+  background: -ms-rgb(1, 1, 11);
+  background: -moz-rgb(1, 1, 11);
+  background: rgb(1, 1, 11);
+
+}
+
+.control-dots{
+  left: -21%;
+}
+.control-dots .dot{
+  border-radius: 0  !important;
+    width: 20px !important;
+    height: 5px  !important;
+}
+
+header .pad-50{
+  padding:10px 50px;
+
+}
+.float-right{
+  float:right;
+}
+
+.heading{
+  position: absolute;
+  top: 50%;
+  transform: translate(50%, 0);
+  max-width:700px;
+  min-width:300px;
+  text-align:center;
+}
+.heading h1{
+  color:#fff;
+}
+.heading p{
+  color:#fff;
+  margin:20px 0 40px;
+}
+.heading a{
+    text-align:center;
+    border:3px solid #fff;
+    color:#fff;
+    padding:15px 30px;
+    border-radius:25px;
+}
+.landing-page{
+  height:100vh;
+  overflow:hidden;
+}
+.heading{
+  display:none;
+}
+.landing-page .heading{
+  display:block;
+}
+
+.fixed_header{
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.fixed_header tbody{
+  display:block;
+  width: 100%;
+  overflow: auto;
+  max-height: 300px;
+}
+
+.fixed_header thead tr {
+  display: block;
+}
+
+.fixed_header th, .fixed_header td {
+  width: 200px;
+}
+
+.contentDiv {
+  margin-top: 70px;
+}
+
+.contentDiv .dasboardStatic {
+  width: 100%;
+  height: auto;
+}
+
+.searchBox {
+  float: right;
+  width: 50%;
+}
+
+.inlineHeading {
+  display: inline;
+}
+
+.clearDiv {
+  clear: both;
+}
+/*Manoj changes*/
+.page-wrapper.toggled .sidebar-wrapper{
+  top:83px;
+}
+.submit-btn.link-bg:hover, .link-bg:hover {
+  background: #2a931f !important;
+  color: #ffffff !important;
+  border-color:transparent!important;
+}
+.link:hover {
+  color: #2a931f!important;
+}
+
+.button-style{
+  background-color: #23a830 !important;
+  border-color: #23a830 !important;
+  background: #23a830;
+}
+
+.button-style:hover { 
+  background: #00ce1b !important; 
+}
+
+.header-bold{
+  font-weight: bold !important;
+} 
+.mrg-tp11px{
+  margin-top: 11px;
+}
+.mrg-tp33px{
+  margin-top: 33px;
+} 

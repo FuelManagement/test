@@ -1,5 +1,5 @@
 import React from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; 
 import { dateutility } from './date_helpers';
 import { formatutility } from './format_helpers';
 // import { library } from "@fortawesome/fontawesome-svg-core";
@@ -1200,6 +1200,35 @@ let Table_Config = {
 				accessor: 'total',
 				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.total}> {row.original.total}</span>
 			},
+			]
+		}
+	},
+	RegisterTaxInfoTable: {
+		RegisterTaxInfoTableRecords: {
+			options: {...globalOptions },
+			columns: (props) => [{
+				Header: 'Tax Type',
+				accessor: 'taxType',
+				width:250,
+				Cell: row => <span style={{ display: 'block', textAlign: 'left', width: '100%' }} title={row.original.taxType}>{row.original.taxType}</span>
+			}, {
+				Header: 'Tax Number',
+				accessor: 'taxNumber',
+				width:300,
+				Cell: row => <span style={{ display: 'block', textAlign: 'left', width: '100%' }} title={row.original.taxNumber}>{row.original.taxNumber}</span>
+
+			},
+			{
+				Header: 'Action',
+				accessor: 'taxType',
+				width:200,
+				Cell: row => <div><button
+					className="btn btn-outline-info btn-sm register-tax-btn"
+					style={{ horizontalAlign: 'middle', display: 'block', margin: '0',border:'0',color:'green' }}
+					onClick={e => { props.editTaxInfo(e, row.original) }}>
+					<FontAwesomeIcon icon="edit" size="lg" />
+				</button></div>
+			}
 			]
 		}
 	},

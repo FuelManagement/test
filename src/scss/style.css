@@ -17,6 +17,27 @@ body {
   border-top: 1px solid #00ce1b;    
   clip-path: polygon(0 0, 100% 0%, 100% 99%, 17% 99%);
 }
+.register-main-section {
+  position: absolute;
+  top: 82px;
+  background-color: #fff; 
+  background-image: url(../../assets/img/patterns.png);
+  left: 5%;
+  right: 0;
+  min-width: 300px; 
+  width: 100%;
+  min-height: 94vh;
+  border-bottom-left-radius: 40%; 
+  border-top: 1px solid #00ce1b;    
+  clip-path: polygon(0 0, 100% 0%, 100% 99%, 17% 99%);
+}
+.register-main-section-content{
+  width:96%;
+margin-top:5%;
+}
+.register-main-section-content .MuiPaper-root{
+  width:96%;
+}
 .brd-tp1px{
   border-top: 1px solid #00ce1b;
 }
@@ -877,77 +898,46 @@ header .pad-50{
 .show-partial-word:hover {
   overflow: visible;
 }
-.setup-search{
-  width: 50%;
-  margin: 0px !important;
-  float: right;
+.register-submitbtn,.register-add-tax{
+  text-align: end;
+  
 }
-.search-icon{
-  color: #495057;
+.register-submitbtn button,.register-submitbtn button:hover{
+  background: #00ce1b;
+  color:white;
+
 }
-.setup-form-div{
-  border: 1px solid #aadf99;
-  margin: 25px 0px;
-  padding: 15px;
-  position: relative;
-}
-.setup-form-heading{
-  position: absolute;
-    top: -12px;
-    margin: 0px;
-    padding: 0px 5px;
-    background-color: #fff;
-    color: #28ae01;
-    font-size: 15px;
-    font-weight: bold;
-}
-.setup-submit-div{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.setup-form-submit{
-  background-color: #00ce1b;
-  color: #fff;
-  font-size: 15px;
-  border: none;
-  outline: none; 
-  padding: 5px 15px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  border-radius: 3px;
-  cursor: pointer;
-  margin-top: -5px;
-}
-.setup-form-row{
-  padding: 20px 5px;
-} 
-.assignPrivilege .MuiCheckbox-colorSecondary.Mui-checked {
-  color: #00ce1b !important;
-}
-.assignPrivilege .PrivateSwitchBase-root-93 {
-  padding: 0px !important;
-}
-.assignPrivilege .MuiFormControlLabel-root {  
-   margin-left: 0px !important; 
-   margin-right: 0px !important;  
-} 
-.mrg-tp5px{
-  margin-top: 5px;
-}
-.flt-rgt{
-  float: right;
-}
-.fnt-wght{
-  font-weight: 600;
-}
-.product-submit{
-  display: flex;
-  justify-content: flex-end;
-  margin: 0px;
-}
-.product-form-div{
-  border: 1px solid #2a931f;
-  padding: 40px 20px;
+.register-tax-form .tax-details-filedset{
+  border:1px solid green;
+  padding:20px;
+  margin-top:10px;
   border-radius: 5px;
+  
+}
+.tax-details-filedset .tax-details-legend{
+  color:green;
+  font-weight: bold;
+  font-size: 16px;
+  width:auto;
+  padding:5px;
+  margin-bottom: 0;
+
+}
+.register-add-tax button,.register-tax-form button:hover{
+  text-transform: capitalize;
+  font-weight: 700;
+  background: #00ce1b;
+  color:white;
+  margin: 10px;
+}
+.register-tax-btn:hover{
+  color:green;
+  border:0;
+  background-color: #00ce1b;
+}
+.register-taxform-table{
+  margin-top:20px;
+}
+.p8{
+  padding:8px;
 }
