@@ -32,7 +32,7 @@ body {
   clip-path: polygon(0 0, 100% 0%, 100% 99%, 17% 99%);
 }
 .register-main-section-content{
-  width:96%;
+  width:76%;
 margin-top:5%;
 }
 .register-main-section-content .MuiPaper-root{
@@ -99,8 +99,8 @@ margin-top:5%;
 }
 .form-content{
   float: right;
-  margin-right: 5%;
-  width: 70%;
+  margin-right: 7%;
+  width: 76%;
 }
 
 .input-icon{ 
@@ -483,6 +483,7 @@ header .pad-50{
 }
 .order-tracking-main .MuiBox-root{
   border: 1px solid #d2d0d0;
+  margin-bottom: 25px;
 }
 .order-tracking-main .MuiPaper-elevation1{
   box-shadow: none;
