@@ -1208,7 +1208,7 @@ let Table_Config = {
 	},
 	RegisterTaxInfoTable: {
 		RegisterTaxInfoTableRecords: {
-			options: {...globalOptions },
+			options: (props)=>({...globalOptions, ...props.defaultPageSize }),
 			columns: (props) => [{
 				Header: 'Tax Type',
 				accessor: 'taxType',
@@ -1225,12 +1225,15 @@ let Table_Config = {
 				Header: 'Action',
 				accessor: 'taxType',
 				width:200,
-				Cell: row => <div><button
-					className="btn btn-outline-info btn-sm register-tax-btn"
-					style={{ horizontalAlign: 'middle', display: 'block', margin: '0',border:'0',color:'green' }}
-					onClick={e => { props.editTaxInfo(e, row.original) }}>
-					<FontAwesomeIcon icon="edit" size="lg" />
-				</button></div>
+				Cell: row => <div>
+					<button
+						className="btn btn-outline-info btn-sm register-tax-btn float-left"
+						style={{ horizontalAlign: 'middle', display: 'block', margin: '0',border:'0',color:'green' }}
+						onClick={e => { props.editTaxInfo(e, row.original) }}>
+						<FontAwesomeIcon icon="edit" size="lg" />
+					</button>
+					<FontAwesomeIcon className="float-right text-danger" icon="trash" size="lg" onClick={e => { props.deleteTaxInfo(e, row.original) }}/>
+				</div>
 			}
 			]
 		}

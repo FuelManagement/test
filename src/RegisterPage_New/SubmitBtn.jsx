@@ -8,7 +8,7 @@ class SubmitBtn extends React.Component {
         return <div className='register-submitbtn'>
             <Button
                 variant="contained"
-                onClick={(e) => handleSubmit(e)}>Submit
+                onClick={(e) => handleSubmit(e)}>Save
         </Button></div>
     }
 }
