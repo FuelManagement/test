@@ -46,6 +46,18 @@ class TaxDetailForm extends React.Component {
         state = {
             showAddTaxInfo: false,
             filedsetTitle: 'Add Tax Info',
+            taxData: [{
+                "id": 1,
+                "taxType": "EIA",
+                "taxNumber": "12345"
+            },
+            {
+                "id": 2,
+                "taxType": "VAT",
+                "taxNumber": "78901"
+            }],
+            updateItem: false,
+            updateItemId: '',
             controls: {
                 taxType: {
                     value: props !== undefined && props.taxType !== undefined ? props.taxType : '',
@@ -112,7 +124,8 @@ class TaxDetailForm extends React.Component {
                     visible: true,
                     disable: false
                 },
-            }
+            },
+
         }
         return state;
     }
@@ -137,8 +150,92 @@ class TaxDetailForm extends React.Component {
     }
     handleSavetaxInfo() {
 
+        let taxTypeVal = this.state.controls.taxType.value;
+        let taxNumberVal = this.state.controls.taxNumber.value;
+
+        let valid = true;
+
+        if (taxTypeVal === undefined || taxTypeVal == '' || taxTypeVal.length < 1) {
+            valid = false;
+            this.setState(prevState => {
+                return {
+                    controls: {
+                        ...prevState.controls,
+                        taxType: {
+                            ...prevState.controls['taxType'],
+                            valid: false,
+                        }
+                    }
+                };
+            });
+        }
+
+        if (taxNumberVal === undefined || taxNumberVal == '' || taxNumberVal.length < 1) {
+            valid = false;
+            this.setState(prevState => {
+                return {
+                    controls: {
+                        ...prevState.controls,
+                        taxNumber: {
+                            ...prevState.controls['taxNumber'],
+                            valid: false,
+                        }
+                    }
+                };
+            });
+        }
+
+        if (valid) {
+            let id = Math.random()
+            let { taxData } = this.state;
+
+            
+
+            if(!this.state.updateItem){
+                let taxDataItem = {
+                    "id":id,
+                    "taxType": taxTypeVal,
+                    "taxNumber": taxNumberVal
+                };
+                taxData.push(taxDataItem);
+            }else{
+               let index = taxData.findIndex(x => x.id == this.state.updateItemId);
+                taxData[index].taxType = taxTypeVal;
+                taxData[index].taxNumber = taxNumberVal;
+            }
+
+            this.setState(prevState => {
+                return {
+                    controls: {
+                        ...prevState.controls,
+                        taxType: {
+                            ...prevState.controls['taxType'],
+                            value: '',
+                            valid: true,
+                        },
+                        taxNumber: {
+                            ...prevState.controls['taxNumber'],
+                            value: '',
+                            valid: true,
+                        }
+                    },
+                    taxData: taxData,
+                    updateItem: false,
+                    updateItemId: '',
+                };
+            });
+        }
+
     }
+
+
     editTaxInfo(e, row) {
+        console.log("Selected Item id ", row.id);
+        this.setState({
+            updateItem: true,
+            updateItemId: row.id,
+            showAddTaxInfo: true
+        })
         this.setState(prevState => {
             return {
                 controls: {
@@ -237,7 +334,7 @@ class TaxDetailForm extends React.Component {
                     </div>}
                     <div className='form-row register-taxform-table mb-3'>
                         <ReactTable
-                            data={taxData || []}
+                            data={this.state.taxData || []}
                             columns={Table_Config.RegisterTaxInfoTable.RegisterTaxInfoTableRecords.columns({ editTaxInfo: this.editTaxInfo.bind(this) })}
                             {...Table_Config.RegisterTaxInfoTable.RegisterTaxInfoTableRecords.options}
                         />
