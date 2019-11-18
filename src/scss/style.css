@@ -331,12 +331,12 @@ header .pad-50{
   justify-content: center;
   align-items: center;
   max-width: 80%;
-}
+} 
 .onboard-profile .modal-body {
   display: flex;
   justify-content: center;
 }
-/*Add RFQ Styles*/
+/*Add RFQ Styles*/ 
 .addRFQ-link{
   display: block;
   float: right;
