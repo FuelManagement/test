@@ -478,9 +478,9 @@ header .pad-50{
   border-top:none;
   border-bottom: none;
 }
-.order-tracking-model-body{
+/* .order-tracking-model-body{
   padding:25px
-}
+} */
 .otp-form input {
   margin: 0 5px;
   text-align: center;
@@ -873,4 +873,7 @@ header .pad-50{
 
 .show-partial-word:hover {
   overflow: visible;
+}
+.mrg-lft22per{
+  margin-left: 22%; 
 }

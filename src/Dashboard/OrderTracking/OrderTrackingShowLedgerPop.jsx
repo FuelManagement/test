@@ -57,8 +57,8 @@ class OrderTrackingShowLedgerPop extends React.Component {
     render() {
         const { showModel, showLedgerBlockChainDetails } = { ...this.props };
         return (
-            <div className='col-md-8 offset-md-3 contentDiv order-tracking-main'> 
-                    <p className='show-ledger-header'>Blockchain Transaction History</p>
+            <div className='col-md-9 contentDiv order-tracking-main mrg-lft22per'> 
+                    <p className='table-main-heading'>Blockchain Transaction </p>
                     <div className='order-tracking-model-body'>
                         <div>
                             <ReactTable
