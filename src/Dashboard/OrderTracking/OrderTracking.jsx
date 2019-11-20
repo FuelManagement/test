@@ -12,7 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import Box from '@material-ui/core/Box';
 import { OTPModel } from './OTPModel';
-import { OrderTrackingShowLedgerPop } from './OrderTrackingShowLedgerPop'
+// import { OrderTrackingShowLedgerPop } from './OrderTrackingShowLedgerPop'
 window.jQuery = $; // hack
 window.$ = $;      // hack 
 import 'bootstrap';
@@ -325,9 +325,9 @@ class OrderTracking extends React.Component {
                     OTRStatusId={this.state.OTRStatusId}
                     postReSendOTP={this.postReSendOTP}
                 />
-                <OrderTrackingShowLedgerPop
+                {/* <OrderTrackingShowLedgerPop
                     showModel={this.state.showLedgerPopUp}
-                    closeModel={this.showLedgerPopUpClose} />
+                    closeModel={this.showLedgerPopUpClose} /> */}
 
                 <div>
                 </div>

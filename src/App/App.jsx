@@ -107,6 +107,7 @@ class App extends React.Component {
                                 <Route path="/indicative-offer/edit" exact component={Dashboard.IndicativeOfferEdit} />
                                 <Route path="/indicative-offer/view" exact component={Dashboard.IndicativeOfferEdit} />
                                 <Route path="/order-tracking" exact component={Dashboard.OrderTracking} />
+                                <Route path="/order-tracking/blockchain-transaction" exact component={Dashboard.OrderTrackingShowLedgerPop} />
                                 <Route path="/order-progress" exact component={Dashboard.OrderStatusWithMap} />
                                 <Route path="/orderTracking-request" exact component={Dashboard.OrderTrackingRequest} />
                                 <Route path="/order-tracking/manage-gps-auth" exact component={Dashboard.ManageGPSAuth}/>

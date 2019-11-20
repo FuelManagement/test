@@ -157,7 +157,7 @@ class Sidebar extends React.Component {
                                         <li><Link to="#">Proposals</Link></li>
                                         <li><Link to="#">Purchase Orders </Link></li>
                                         {user.participantType == 'End Buyer' ?  
-                                        <li><Link to="/order-tracking">Tracking</Link></li>:null
+                                        <li><Link to="/order-tracking/blockchain-transaction">Blockchain Transaction</Link></li>:null
                                         }
                                         
                                         {user.participantType == 'Commercial' ?  

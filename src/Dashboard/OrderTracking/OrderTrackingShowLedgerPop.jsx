@@ -57,9 +57,7 @@ class OrderTrackingShowLedgerPop extends React.Component {
     render() {
         const { showModel, showLedgerBlockChainDetails } = { ...this.props };
         return (
-            <div className='show-ledger-popup-main'>
-                <Dialog onClose={this.props.closeModel} className='order-tracking-otp-model show-ledger-popup' aria-labelledby="customized-dialog-title" open={showModel}>
-                    <DialogTitle id="customized-dialog-title" onClose={this.props.closeModel} />
+            <div className='col-md-8 offset-md-3 contentDiv order-tracking-main'> 
                     <p className='show-ledger-header'>Blockchain Transaction History</p>
                     <div className='order-tracking-model-body'>
                         <div>
@@ -69,8 +67,7 @@ class OrderTrackingShowLedgerPop extends React.Component {
                                 {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
                             />
                         </div>
-                    </div>
-                </Dialog>
+                    </div> 
             </div>
         );
     }
