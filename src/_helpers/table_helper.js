@@ -1116,7 +1116,8 @@ let Table_Config = {
 			},{
 				Header: 'Create Time',
 				accessor: 'Creation_Time',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.Creation_Time}>{row.original.Creation_Time}</span>
+				Cell: row => <span style={{ display: 'block', textAlign: 'left',width:'100%' }} title={row.original.Creation_Time}>{dateutility.datefunction(row.original.Creation_Time,formatutility.MMDDYYYYHHMMTT)}</span>
+				
 			}, {
 				Header: 'Age',
 				accessor: 'age',

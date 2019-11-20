@@ -164,8 +164,8 @@ class OrderTracking extends React.Component {
         return (
             <div className="col-md-8 offset-md-3 contentDiv order-tracking-main">
                 <div className='float-right legend-icons'>
-                    <span><i className="material-icons show-history-legends">speaker_phone</i>
-                        <span className='text-under' onClick={()=>this.changeWordConnect()}>{this.state.ConnectWord}</span></span>
+                    {/* <span><i className="material-icons show-history-legends">speaker_phone</i>
+                        <span className='text-under' onClick={()=>this.changeWordConnect()}>{this.state.ConnectWord}</span></span> */}
                     <span><i className="material-icons  show-history-legends">save</i>
                         <span className='text-under' onClick={() => this.showLedgerTransHistory('Show_Ledger_Tran_History')}>Show Ledger Trans History</span></span>
                 </div>

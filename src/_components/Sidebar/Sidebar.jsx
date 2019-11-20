@@ -155,9 +155,12 @@ class Sidebar extends React.Component {
                                     <ul>
                                         <li><Link to="#">Quotes</Link></li>
                                         <li><Link to="#">Proposals</Link></li>
-                                        <li><Link to="#">Purchase Orders </Link></li>
-                                        {user.participantType == 'End Buyer' ?  
-                                        <li><Link to="/order-tracking/blockchain-transaction">Blockchain Transaction</Link></li>:null
+                                        <li><Link to="#">Purchase Orders </Link></li> 
+                                        {user.participantType == 'End Buyer' ?  <div style={{display:'inline-block'}}>
+                                            <li><Link to="/order-tracking">Order Tracking</Link></li>
+                                            <li><Link to="/order-tracking/blockchain-transaction">Blockchain Transaction</Link></li>
+                                            </div>
+                                        :null
                                         }
                                         
                                         {user.participantType == 'Commercial' ?  

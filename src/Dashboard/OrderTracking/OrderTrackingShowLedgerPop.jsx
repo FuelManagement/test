@@ -44,12 +44,21 @@ const DialogTitle = withStyles(styles)(props => {
 class OrderTrackingShowLedgerPop extends React.Component {
     constructor(props) {
         super(props);
+        this.changeWordConnect = this.changeWordConnect.bind(this);
+        this.state = {
+            ConnectWord: "Connect"
+        }
     }
     componentDidMount() {
         timer = setInterval(() => { this.props.dispatch(orderTrackingActions.getShowLedgerBlockChainDetails()) }, 30000);
-        setTimeout(function() {
+        setTimeout(function () {
             clearInterval(timer);
         }, 1000 * 60 * 30);
+    }
+    changeWordConnect() {
+        this.setState({ ConnectWord: 'Connected' });
+        this.props.dispatch(orderTrackingActions.postVolumetricData());
+
     }
     componentWillMount() {
         clearInterval(timer);
@@ -57,17 +66,21 @@ class OrderTrackingShowLedgerPop extends React.Component {
     render() {
         const { showModel, showLedgerBlockChainDetails } = { ...this.props };
         return (
-            <div className='col-md-9 contentDiv order-tracking-main mrg-lft22per'> 
-                    <p className='table-main-heading'>Blockchain Transaction </p>
-                    <div className='order-tracking-model-body'>
-                        <div>
-                            <ReactTable
-                                data={showLedgerBlockChainDetails && showLedgerBlockChainDetails.info_list || []}
-                                columns={Table_Config.ProgressBar.ProgressBarRecords.columns()}
-                                {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
-                            />
-                        </div>
-                    </div> 
+            <div className='col-md-9 contentDiv order-tracking-main mrg-lft22per'>
+                <div className="blockchan-heading-div">
+                    <p className='table-main-heading' style={{ float: 'left' }}>Blockchain Transaction </p>
+                    <p style={{ float: 'right',fontWeight:'bold' }}><i className="material-icons show-history-legends">speaker_phone</i>
+                        <span className='text-under' onClick={() => this.changeWordConnect()}>{this.state.ConnectWord}</span></p>
+                </div>
+                <div className='order-tracking-model-body'>
+                    <div>
+                        <ReactTable
+                            data={showLedgerBlockChainDetails && showLedgerBlockChainDetails.info_list || []}
+                            columns={Table_Config.ProgressBar.ProgressBarRecords.columns()}
+                            {...Table_Config.OrderTrackingRecords.OrderTrackingRecord.options}
+                        />
+                    </div>
+                </div>
             </div>
         );
     }

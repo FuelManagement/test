@@ -877,3 +877,7 @@ header .pad-50{
 .mrg-lft22per{
   margin-left: 22%; 
 }
+.blockchan-heading-div{
+  display: block;
+  overflow: hidden;
+}
