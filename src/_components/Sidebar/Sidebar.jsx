@@ -153,18 +153,18 @@ class Sidebar extends React.Component {
                                 </Link>
                                 <div className="sidebar-submenu">
                                     <ul>
-                                        <li><Link to="#">Quotes</Link></li>
-                                        <li><Link to="#">Proposals</Link></li>
-                                        <li><Link to="#">Purchase Orders </Link></li> 
+                                        <li style={{padding: '0%'}}><Link to="#">Quotes</Link></li>
+                                        <li style={{padding: '0%'}}><Link to="#">Proposals</Link></li>
+                                        <li style={{padding: '0%'}}><Link to="#">Purchase Orders </Link></li> 
                                         {user.participantType == 'End Buyer' ?  <div style={{display:'inline-block'}}>
-                                            <li><Link to="/order-tracking">Order Tracking</Link></li>
-                                            <li><Link to="/order-tracking/blockchain-transaction">Blockchain Transaction</Link></li>
+                                            <li style={{padding: '0%'}}><Link to="/order-tracking">Order Tracking</Link></li>
+                                            <li style={{padding: '0%'}}><Link to="/order-tracking/blockchain-transaction">Blockchain Transaction History</Link></li>
                                             </div>
                                         :null
                                         }
                                         
                                         {user.participantType == 'Commercial' ?  
-                                        <li><Link to="/orderTracking-request">Order Tracking Request</Link></li>:null
+                                        <li style={{padding: '0%'}}><Link to="/orderTracking-request">Order Tracking Request</Link></li>:null
                                         }
                                     </ul>
                                 </div>
@@ -203,7 +203,7 @@ class Sidebar extends React.Component {
                                 </div>
                                 )     
                                 
-                                : (user.participantType == 'Carrier (Mex)') ?
+                                : (user.participantType == 'Carrier (Mex)' || user.participantType == 'Carrier (USA)') ?
                                 (<div>
                                 <li className="sidebar-dropdown">
                                     <Link to="/userProfile">

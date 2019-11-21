@@ -46,7 +46,7 @@ class OrderTrackingShowLedgerPop extends React.Component {
         super(props);
         this.changeWordConnect = this.changeWordConnect.bind(this);
         this.state = {
-            ConnectWord: "Connect"
+            ConnectWord: "Connected"
         }
     }
     componentDidMount() {
@@ -68,9 +68,9 @@ class OrderTrackingShowLedgerPop extends React.Component {
         return (
             <div className='col-md-9 contentDiv order-tracking-main mrg-lft22per'>
                 <div className="blockchan-heading-div">
-                    <p className='table-main-heading' style={{ float: 'left' }}>Blockchain Transaction </p>
-                    <p style={{ float: 'right',fontWeight:'bold' }}><i className="material-icons show-history-legends">speaker_phone</i>
-                        <span className='text-under' onClick={() => this.changeWordConnect()}>{this.state.ConnectWord}</span></p>
+                    <p className='table-main-heading' style={{ float: 'left' }}>Blockchain Transaction History </p>
+                    {/* <p style={{ float: 'right',fontWeight:'bold' }}><i className="material-icons show-history-legends">speaker_phone</i>
+                        <span className='text-under' onClick={() => this.changeWordConnect()}>{this.state.ConnectWord}</span></p> */}
                 </div>
                 <div className='order-tracking-model-body'>
                     <div>
