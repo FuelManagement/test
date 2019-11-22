@@ -227,7 +227,7 @@ allowOnlynumbers(e) {
   render() {
     return (
       <div className="mx-auto">
-        <h2 className="reg-heading">Account Details<span style={{float:'right',verticalAlign:'bottom',fontSize:'13px',padding: '11px 0 0 0'}}>All fields are mandatory</span></h2>
+        {/* <h2 className="reg-heading">Account Details<span style={{float:'right',verticalAlign:'bottom',fontSize:'13px',padding: '11px 0 0 0'}}>All fields are mandatory</span></h2> */}
         <div className="form-row">
         <div className="col-md-12 mb-3">
             <TextField

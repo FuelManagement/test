@@ -267,7 +267,7 @@ class TaxDetailForm extends React.Component {
     render() {
         return (
             <div className="mx-auto" onLoad={this.props.onPageLoad}>
-                <h2 className="reg-heading">Tax Details<span style={{ float: 'right', verticalAlign: 'bottom', fontSize: '13px', padding: '11px 0 0 0' }}>All fields are mandatory</span></h2>
+                {/* <h2 className="reg-heading">Tax Details<span style={{ float: 'right', verticalAlign: 'bottom', fontSize: '13px', padding: '11px 0 0 0' }}>All fields are mandatory</span></h2> */}
                 <Fragment>
                     <div className="form-row register-tax-details">
                         <div className='register-add-tax'>

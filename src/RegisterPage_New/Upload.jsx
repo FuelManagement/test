@@ -161,7 +161,7 @@ class Upload extends React.Component {
                                     select
                                     id="documents"
                                     name="documents"
-                                    label="documents"
+                                    label="Documents"
                                     value={this.state.controls.documents.value}
                                     onChange={this.handleChange}
                                     className="form-control"

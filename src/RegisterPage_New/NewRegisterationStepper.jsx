@@ -19,7 +19,7 @@ const NewRegisteration = (props) => {
                 <div className='property-tab'
                     onClick={tab => { props.showTab('org') }}
                 >
-                    Organization Information
+                    
                 </div>
                 <div className='property-tab'
                     onClick={tab => { props.showTab('contact') }}
