@@ -5,29 +5,31 @@ import { connect } from 'react-redux';
 import { onboardActions } from '../_actions';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { downloadFileService } from '../_services/downloadFile.service';
-import { authHeader, config, Utils, fileUtility } from '../_helpers'; 
+import { authHeader, config, Utils, fileUtility } from '../_helpers';
 import ReactTable from 'react-table';
 import { Table_Config } from '../_helpers';
 import { TextField, Select, InputLabel, MenuItem, Checkbox, FormControl, Radio, RadioGroup, FormControlLabel, Button } from '@material-ui/core';
 const documents = {
     data: [
         {
-            value: "",
-            label: "None"
-        }, {
             value: "Incorporation",
             label: "Incorporation"
+        },
+        {
+            value: "corporation",
+            label: "corporation"
         }
     ],
 }
 class Upload extends React.Component {
     constructor(props) {
         super(props);
-        this.state = this.initialState(null, this);  
+        this.state = this.initialState(null, this);
         this.props.dispatch(onboardActions.changeFormState(this.props.onboard.mode === 'create' ? false : true));
         this.handleAddUpload = this.handleAddUpload.bind(this);
         this.handleChange = this.handleChange.bind(this);
-
+        this.addDocument = this.addDocument.bind(this);
+        this.handleUploadFile = this.handleUploadFile.bind(this);
     }
     initialState(mode, props) {
         let state = {};
@@ -35,32 +37,88 @@ class Upload extends React.Component {
             files: this.props.onboard.documentslist !== undefined ? this.props.onboard.documentslist : [],
             controls: {
 
-            documents: {
-                value: props !== undefined && props.documents !== undefined ? props.documents : '',
+                documents: {
+                    value: props !== undefined && props.documents !== undefined ? props.documents : '',
+                },
             },
-        },
             showUploadForm: false,
             filedsetTitle: 'Add Document',
-            uploadData:[
-                {document:'Document'},
-            ]
+            uploadData: [],
+            updateItem: false,
+            updateItemId: '',
         }
         return state;
     }
-    editUploadInfo(e){
-        console.log("Edit upload information");
-        this.setState({
-            filedsetTitle: 'Edit Document',
-            showUploadForm:true
-        })
+    editUploadInfo(e, row) {
+        console.log("Edit upload information", row);
+
+        this.setState(prevState => {
+            return {
+                controls: {
+                    documents: {
+                        value: row.document
+                    }
+                },
+                filedsetTitle: 'Edit Document',
+                showUploadForm: true,
+                updateItem: true,
+                updateItemId: row.id,
+            };
+        });
     }
-    pdfUploadsubmit(event){
+
+    addDocument() {
+
+        let item = this.pond.getFile();
+
+        let { uploadData } = this.state;
+
+        if(!this.state.updateItem){
+            let itemObj = {
+                document: this.state.controls.documents.value,
+                file: item.file,
+                id: item.id,
+                fileExtension: item.fileExtension,
+                filename: item.filename
+            }
+            uploadData.push(itemObj)
+        }else{
+            let index = uploadData.findIndex(x => x.id == this.state.updateItemId);
+            uploadData[index].document = this.state.controls.documents.value;
+            uploadData[index].file = item.file;
+            uploadData[index].id = item.id;
+            uploadData[index].fileExtension = item.fileExtension;
+            uploadData[index].filename = item.filename;
+         }
+
+
+        this.setState(prevState => {
+            return {
+                controls: {
+                    documents: {
+                        value: ''
+                    }
+                },
+                uploadData: uploadData,
+                updateItem: false,
+                updateItemId: '',
+            }
+        }, console.log("uploaded Data", this.state.uploadData));
+
+    }
+
+    handleUploadFile() {
+        console.log("File Upload Second Method ");
+        console.log("Files", this.pond.getFile());
+    }
+
+    pdfUploadsubmit(event) {
         //Pdf upload method here
         console.log("upload method ");
     }
     handleChange(event) {
         let key = event.target.name;
-        let value =  event.target.value;
+        let value = event.target.value;
         this.setState(prevState => {
             return {
                 controls: {
@@ -99,42 +157,42 @@ class Upload extends React.Component {
                         <legend className='tax-details-legend'>{this.state.filedsetTitle}</legend>
                         <div className="row">
                             <div className="col-md-6">
-                            <TextField
-                                select
-                                id="documents"
-                                name="documents"
-                                label="documents"
-                                value={this.state.controls.documents.value}
-                                onChange={this.handleChange}
-                                className="form-control"
-                                margin="dense"
-                                variant="outlined"
-                                error={!this.state.controls.documents.valid && this.state.controls.documents.touched}
-                            >
-                                {documents && documents.data.map(option => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
+                                <TextField
+                                    select
+                                    id="documents"
+                                    name="documents"
+                                    label="documents"
+                                    value={this.state.controls.documents.value}
+                                    onChange={this.handleChange}
+                                    className="form-control"
+                                    margin="dense"
+                                    variant="outlined"
+                                    error={!this.state.controls.documents.valid && this.state.controls.documents.touched}
+                                >
+                                    {documents && documents.data.map(option => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
                             </div>
                             <div className="col-md-5">
-                            <FilePond allowMultiple={true} files={this.state.files} onupdatefiles={fileItems => {
-                            this.setState({
-                                files: fileItems.map(fileItem => fileItem.file)
-                            });
-                            this.props.dispatch(onboardActions.uploadParticipantFile(this.state.files));
-                            if (this.state.files.length > 0) {
-                                this.props.dispatch(onboardActions.changeFormState(true));
-                            }
-                            else {
-                                this.props.dispatch(onboardActions.changeFormState(false));
-                            }
-                        }}
-                            labelIdle='<span class="filepond--label-action">Upload Documents</span>' />
+                                <FilePond ref={ref => this.pond = ref} onaddfile={() => this.addDocument()} allowMultiple={true} files={this.state.files} onupdatefiles={fileItems => {
+                                    this.setState({
+                                        files: fileItems.map(fileItem => fileItem.file)
+                                    });
+                                    this.props.dispatch(onboardActions.uploadParticipantFile(this.state.files));
+                                    if (this.state.files.length > 0) {
+                                        this.props.dispatch(onboardActions.changeFormState(true));
+                                    }
+                                    else {
+                                        this.props.dispatch(onboardActions.changeFormState(false));
+                                    }
+                                }}
+                                    labelIdle='<span class="filepond--label-action">Upload Documents</span>' />
                             </div>
                         </div>
-                        
+
 
                         {this.props.onboard.downloadDocumentslist !== undefined &&
                             this.props.onboard.downloadDocumentslist !== null &&
@@ -166,7 +224,7 @@ class Upload extends React.Component {
                 <div className="upload-react-tabe-div">
                     <ReactTable
                         data={this.state.uploadData || []}
-                        columns={Table_Config.RegisterUploadInfoTable.RegisterUploadInfoTables.columns({ editUploadInfo: this.editUploadInfo.bind(this),pdfUploadsubmit:this.pdfUploadsubmit.bind(this) })}
+                        columns={Table_Config.RegisterUploadInfoTable.RegisterUploadInfoTables.columns({ editUploadInfo: this.editUploadInfo.bind(this), pdfUploadsubmit: this.pdfUploadsubmit.bind(this) })}
                         {...Table_Config.RegisterUploadInfoTable.RegisterUploadInfoTables.options}
                     />
                 </div>
