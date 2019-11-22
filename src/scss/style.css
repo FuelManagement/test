@@ -293,26 +293,31 @@ header .pad-50{
   width: 100%;
   text-align: left;
   font-size: 20px;
-}
-.filepond--root .filepond--drop-label {
-  background: #fff; 
-  border-bottom: 1px solid #757577; 
-}
+  padding: 0px;
+  width: 190px;
+} 
 .filepond--drop-label{ 
   justify-content: start !important;
 }
 .filepond--root :not(text) {  
   display: block;
   float: right;
+  padding: 8px 8px 8px 30px;
 }
 .filepond--label-action{
-  color: #fff;
-  background:#00ce1b;
+  background: url(../../assets/img/uploadpng.png) no-repeat;
+  background-position-x: left;
+  background-position-y: center;
+  background-size: 20px;
+  color: #00ce1b;
+  background-color:#fbfbfb;
   border-bottom: none;
   padding: 4px 10px;
   border-radius: 5px;
-  text-decoration-color: #00ce1b;
+  text-decoration:none;
   font-size: 17px !important;
+  border: 1px solid #00ce1b;
+  
 }
 .rt-thead{
   background:#29AD01;
@@ -320,7 +325,14 @@ header .pad-50{
 
 }
 .filepond--root .filepond--drop-label {
-  min-height: 3.25em;
+  min-height: 2.1em;
+  border: none;
+  background: #fff; 
+  border-bottom: 1px solid #757577; 
+  border: none;
+}
+.filepond--root{
+  margin-bottom: 0px !important;
 }
 .product-form .MuiFormLabel-root,.organization .MuiFormLabel-root{
   background: #fff;
@@ -954,4 +966,38 @@ header .pad-50{
 }
 .p8{
   padding:8px;
+  
 }
+.add-documents-button{
+  text-transform: capitalize;
+  font-weight: 700;
+  background: #00ce1b;
+  color:white;
+  margin: 10px;
+}
+.upload-fieldSet{
+  border: 1px solid #00ce1b;
+  border-radius: 5px;
+  padding: 25px; 
+}
+.register-add-upload button{
+  text-transform: capitalize;
+  font-weight: 700;
+  background: #00ce1b;
+  color:white; 
+}
+.upload-action-btn{
+  display: inline-block !important;
+  font-size: 16px;
+}
+.upload-react-tabe-div{
+  margin-top: 15px;
+}
+.upload-file-button{
+  float:right;
+}
+
+.filepond--wrapper{ 
+    float: right;
+    margin: 0px;
+} 

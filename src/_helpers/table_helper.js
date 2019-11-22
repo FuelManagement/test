@@ -1232,6 +1232,38 @@ let Table_Config = {
 			]
 		}
 	},
+	RegisterUploadInfoTable: {
+		RegisterUploadInfoTables: {
+			options: {...globalOptions },
+			columns: (props) => [{
+				Header: 'Document',
+				accessor: 'document',
+				width:700,
+				Cell: row => <span style={{ display: 'block', textAlign: 'left', width: '100%' }} title={row.original.document}>{row.original.document}</span>
+			}, 
+			{
+				Header: 'Action',
+				accessor: 'taxType',
+				width:250,
+				Cell: row => <div>
+					<button
+					className="btn btn-outline-info btn-sm register-tax-btn upload-action-btn"
+					style={{ horizontalAlign: 'middle', display: 'block', margin: '0',border:'0',color:'green' }}
+					onClick={e => { props.pdfUploadsubmit, rofo(w.original) }}> 
+                         <FontAwesomeIcon icon="file-pdf" size="1x" />
+				</button>
+					<button
+					className="btn btn-outline-info btn-sm register-tax-btn upload-action-btn"
+					style={{ horizontalAlign: 'middle', display: 'block', margin: '0',border:'0',color:'green' }}
+					onClick={e => { props.editUploadInfo(e, row.original) }}>
+					<FontAwesomeIcon icon="edit" size="lg" /> 
+				</button>
+				
+				</div>
+			}
+			]
+		}
+	},
 
 	ProfilesSetups: {
 		ProfilesSetup: {
