@@ -351,7 +351,7 @@ allowOnlynumbers(e) {
           <div className="col-md-4 mb-3">
             <TextField
               id="streetAddress"
-              label="Street 1"
+              label="Street-1"
               name="streetAddress"
               value={this.state.controls.streetAddress.value}
               onChange={this.handleChange}
@@ -367,7 +367,7 @@ allowOnlynumbers(e) {
           <div className="col-md-4 mb-3">
             <TextField
               id="streetAddress2"
-              label="Street 2"
+              label="Street-2"
               name="streetAddress2"
               value={this.state.controls.streetAddress2.value}
               onChange={this.handleChange}
@@ -383,7 +383,7 @@ allowOnlynumbers(e) {
           <div className="col-md-4 mb-3">
             <TextField
               id="streetAddress3"
-              label="Street 3"
+              label="Street-3"
               name="streetAddress3"
               value={this.state.controls.streetAddress3.value}
               onChange={this.handleChange}
@@ -398,12 +398,12 @@ allowOnlynumbers(e) {
           </div>
         </div>
         <div className="form-row">
-          <div className="col-md-12 mb-3 ">
+          <div className="col-md-4 mb-3 ">
             <TextField
               id="city"
               margin="normal"
               name="city"
-              label="Neighborhood / City"
+              label="City"
               value={this.state.controls.city.value}
               onChange={this.handleChange}
               className="form-control"
@@ -414,31 +414,12 @@ allowOnlynumbers(e) {
 
             />
           </div>
-        </div>
-        <div className="form-row">
-          <div className="col-md-4 mb-3">
-            <TextField
-              id="postalCode"
-              margin="normal"
-              name="postalCode"
-              label="Postal Code"
-              value={this.state.controls.postalCode.value}
-              onChange={this.handleChange}
-              className="form-control"
-              variant="outlined"
-              autoComplete="off"
-              margin="dense"
-              error={!this.state.controls.postalCode.valid && this.state.controls.postalCode.touched}
-
-
-              />
-          </div>
           <div className="col-md-4 mb-3">
             <TextField
               id="state"
               margin="normal"
               name="state"
-              label="Region / State"
+              label="State"
               value={this.state.controls.state.value}
               onChange={this.handleChange}
               className="form-control"
@@ -446,8 +427,6 @@ allowOnlynumbers(e) {
               autoComplete="off"
               margin="dense"
               error={!this.state.controls.state.valid && this.state.controls.state.touched}
-
-
             />
           </div>
           <div className="col-md-4 md-3">
@@ -463,18 +442,31 @@ allowOnlynumbers(e) {
               autoComplete="off"
               margin="dense"
               error={!this.state.controls.country.valid && this.state.controls.country.touched}
-
-
             />
           </div>
         </div>
         <div className="form-row">
-          <div className="col-md-3 md-3">
+          <div className="col-md-4 mb-3">
+            <TextField
+              id="postalCode"
+              margin="normal"
+              name="postalCode"
+              label="Zip Code"
+              value={this.state.controls.postalCode.value}
+              onChange={this.handleChange}
+              className="form-control"
+              variant="outlined"
+              autoComplete="off"
+              margin="dense"
+              error={!this.state.controls.postalCode.valid && this.state.controls.postalCode.touched}
+              />
+          </div>
+          <div className="col-md-4 md-3">
             <MuiPhoneInput
                defaultCountry='us'
               margin="dense"
               variant="outlined"
-              label="Primary Telephone Number"
+              label="Primary Phone Number"
               name="firstContactNumber"
               value={this.state.controls.firstContactNumber.value}
               onChange={val=>this.handleOnChange(val,'firstContactNumber')}
@@ -496,7 +488,7 @@ allowOnlynumbers(e) {
                 />
               </RadioGroup></FormControl>
           </div>
-          <div className="col-md-1 md-1">
+          {/* <div className="col-md-1 md-1">
             <TextField
               label="Ext"
               name="firstContactNumberExt"
@@ -504,16 +496,15 @@ allowOnlynumbers(e) {
               onChange={this.handleChange}
 
             />
-          </div>
+          </div> */}
 
           <div className="col-md-4 md-3">
-
             <MuiPhoneInput
                defaultCountry='us'
               //  regions={['north-america']}
               margin="dense"
               variant="outlined"
-              label="Alternate Telephone Number"
+              label="Alternate Phone Number"
               name="secondContactNumber"
               value={this.state.controls.secondContactNumber.value}
               onChange={val=>this.handleOnChange(val,'secondContactNumber')}
@@ -537,7 +528,11 @@ allowOnlynumbers(e) {
               </RadioGroup>
             </FormControl>
           </div>
-          <div className="col-md-1 md-1">
+        
+        </div>
+        <div className="form-row">
+         
+          {/* <div className="col-md-1 md-1">
             <TextField
               label="Ext"
               name="secondContactNumberExt"
@@ -545,9 +540,9 @@ allowOnlynumbers(e) {
               onChange={this.handleChange}
 
             />
-          </div>
+          </div> */}
 
-          <div className="col-md-3 md-3">
+          <div className="col-md-4 md-3">
             <MuiPhoneInput
                defaultCountry='us'
               //  regions={['north-america']}

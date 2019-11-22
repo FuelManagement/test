@@ -246,7 +246,7 @@ allowOnlynumbers(e) {
           </div>
         </div>
         <div className="form-row">
-          <div className="col-md-8 mb-3 ">
+          <div className="col-md-4 mb-3 ">
             <TextField
               id="bankAccountName"
               name="bankAccountName"
@@ -257,8 +257,6 @@ allowOnlynumbers(e) {
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankAccountName.valid && this.state.controls.bankAccountName.touched}
-
-
             />
           </div>
           <div className="col-md-4 mb-3 ">
@@ -272,27 +270,22 @@ allowOnlynumbers(e) {
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankAccountNumber.valid && this.state.controls.bankAccountNumber.touched}
-
-
             />
           </div>
-        </div>
-        <div className="form-row">
           <div className="col-md-4 mb-3">
             <TextField
               id="bankControlKey"
               name="bankControlKey"
-              label="Bank Routing Number"
+              label="Routing Number"
               value={this.state.controls.bankControlKey.value}
               onChange={this.handleChange}
               className="form-control"
               margin="dense"
               variant="outlined"
               error={!this.state.controls.bankControlKey.valid && this.state.controls.bankControlKey.touched}
-
             />
           </div>
-        </div>
+        </div> 
         <div className="form-row">
           <div className="col-md-4">
             <FormControl style={{ width: '100%'}}>

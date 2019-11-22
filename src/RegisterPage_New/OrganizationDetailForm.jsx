@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { TextField, Select, InputLabel, MenuItem, FormControl } from '@material-ui/core';
+import { TextField, Select, InputLabel, MenuItem, FormControl,FormControlLabel,Checkbox } from '@material-ui/core';
 import { validate, dateutility, formatutility } from '../_helpers';
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -11,6 +11,8 @@ import {
 } from '@material-ui/pickers';
 import { onboardActions } from '../_actions';
 import { Common_JsonData } from '../_helpers'
+import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
+import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 const businessRange = [
     {
         value: "",
@@ -180,6 +182,19 @@ class OrganizationDetailForm extends React.Component {
                     visible: true,
                     disable: false
                 },
+                emailAddressCheckbox: {
+                    value: props !== undefined && props.emailAddress !== undefined ? props.emailAddress : false,
+
+                    validationRules: {
+                        notEmpty: true,
+
+                    },
+                    error: "Mark this E-mail address is the default address",
+                    placeholder: "Mark this E-mail address is the default address",
+                    touched: false,
+                    visible: true,
+                    disable: false
+                },
             },
             errors: {}
         };
@@ -320,6 +335,36 @@ class OrganizationDetailForm extends React.Component {
                             </TextField>
                         </FormControl>
                     </div>
+                    <div className="col-md-4  org-email-div">
+                        <TextField
+                            id="registerId"
+                            label="E-Mail Address"
+                            name="registerId"
+                            value={this.state.controls.registerId.value}
+                            onChange={this.handleChange}
+                            variant="outlined"
+                            className="form-control"
+                            autoComplete="off"
+                            margin="dense"
+                            error={!this.state.controls.registerId.valid && this.state.controls.registerId.touched}
+                        />
+                        <FormControlLabel
+                                control={<Checkbox
+                                    icon={<CircleUnchecked className="checkboxIcon" />}
+                                    checkedIcon={<CircleCheckedFilled
+                                        className="checkboxIcon" />}
+                                    onChange={this.handleChange}
+                                    name="emailAddressCheckbox"
+                                    checked={this.state.controls.emailAddressCheckbox.value}
+                                    value={this.state.controls.emailAddressCheckbox.value}
+                                    disabled={this.state.controls.emailAddressCheckbox.disable}
+                                />}
+                                label={this.state.controls.emailAddressCheckbox.placeholder}
+                                className="emil-ceckbox"
+                                name="emailAddressCheckbox"
+
+                            />
+                    </div>
 
                 </div>
                 <div className="form-row">
@@ -378,7 +423,7 @@ class OrganizationDetailForm extends React.Component {
                                 id='participantType'
                                 variant="outlined"
                                 name='participantType'
-                                label="Entity Type"
+                                label="participant Type"
                                 value={this.state.controls.participantType.value}
                                 onChange={this.handleChange}
                                 className="form-control"
@@ -397,7 +442,7 @@ class OrganizationDetailForm extends React.Component {
                     <div className="col-md-4 mb-3 ">
                         <TextField
                             id="entityTypeOther"
-                            label="Entity Type - Other"
+                            label="participant Type - Other"
                             name="entityTypeOther"
                             value={this.state.controls.entityTypeOther.value}
                             disabled={this.state.controls.entityTypeOther.disable}
@@ -410,20 +455,7 @@ class OrganizationDetailForm extends React.Component {
 
                         />
                     </div>
-                    <div className="col-md-4 mb-3">
-                        <TextField
-                            id="registerId"
-                            label="E-Mail Address"
-                            name="registerId"
-                            value={this.state.controls.registerId.value}
-                            onChange={this.handleChange}
-                            variant="outlined"
-                            className="form-control"
-                            autoComplete="off"
-                            margin="dense"
-                            error={!this.state.controls.registerId.valid && this.state.controls.registerId.touched}
-                        />
-                    </div>
+                    
                 </div>
 
             </div>

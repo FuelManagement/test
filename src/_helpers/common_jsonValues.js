@@ -54,51 +54,37 @@ let Common_JsonData = {
     label: "None"
   },
   {
-    value: "prod1",
-    label: "prod1"
+    value: "Downstream",
+    label: "Downstream"
   },
-  {
-    value: "prod2",
-    label: "prod2"
-  },],
+ ],
   subCategory: [{
     value: "",
     label: "None",
     productCategory: ""
-  }, {
-    value: "Sub1Prod1",
-    label: "Sub1Prod1",
-    productCategory: "prod1"
-  }, {
-    value: "Sub2Prod1",
-    label: "Sub2Prod1",
-    productCategory: "prod1"
-  }, {
-    value: "Sub1Prod2",
-    label: "Sub1Prod2",
-    productCategory: "prod2"
-  }, {
-    value: "Sub2Prod2",
-    label: "Sub2Prod2",
-    productCategory: "prod2"
-  }, {
-    value: "Sub3Prod2",
-    label: "Sub3Prod2",
-    productCategory: "prod2"
-  },],
+  }, 
+  {
+    value: "Crude Oil",
+    label: "Crude Oil",
+    productCategory: "Downstream"
+  },
+  {
+    value: "Natural Gas",
+    label: "Natural Gas",
+    productCategory: "Downstream"
+  }],
   measuringUnit: [{
     value: "",
     label: "None"
-  }, {
-    value: "Litre",
-    label: "Litre"
-  }, {
-    value: "Barrel",
-    label: "Barrel"
-  }, {
-    value: "Gallon (US)",
-    label: "Gallon (US)"
-  },],
+  }, 
+  {
+    value: "Cubic feet",
+    label: "Cubic feet"
+  }, 
+  {
+    value: "Barrels (bbl)",
+    label: "Barrels (bbl)"
+  }],
   vendorAcctGrp: [
     {
       value: "",
@@ -164,6 +150,20 @@ let Common_JsonData = {
       }
     ]
   },
+  userRole:[
+    {_id:'0',role:"Adimin"},
+    {_id:'1',role:"Level - 1"},
+    {_id:'2',role:"Level - 2"},
+    {_id:'3',role:"Supervisor"},
+
+  ],
+  screenName: [
+    {_id:'0',role:"RFQ"},
+    {_id:'1',role:"PO"},
+    {_id:'2',role:"User Profile"},
+    {_id:'3',role:"Supervisor"},
+  ],
+
   orderTrackingDetails: {
     list: [
       {

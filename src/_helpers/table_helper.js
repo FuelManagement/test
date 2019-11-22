@@ -1,16 +1,13 @@
 import React from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; 
 import { dateutility } from './date_helpers';
 import { formatutility } from './format_helpers';
 // import { library } from "@fortawesome/fontawesome-svg-core";
 // import { faEye, faEdit, faCheckSquare } from "@fortawesome/free-solid-svg-icons";
 
-// library.add(faEye, faEdit, faCheckSquare);
+// library.add(faEye, faEdit, faCheckSquare); 
+import { Checkbox, Select, FormControl, FormHelperText,FormControlLabel, MenuItem, InputLabel } from '@material-ui/core';
+
 let user = JSON.parse(localStorage.getItem('user'));
 
 let globalOptions = {
@@ -1237,8 +1234,140 @@ let Table_Config = {
 			}
 			]
 		}
-	}
+	},
+	RegisterUploadInfoTable: {
+		RegisterUploadInfoTables: {
+			options: {...globalOptions },
+			columns: (props) => [{
+				Header: 'Document',
+				accessor: 'document',
+				width:700,
+				Cell: row => <span style={{ display: 'block', textAlign: 'left', width: '100%' }} title={row.original.document}>{row.original.document}</span>
+			}, 
+			{
+				Header: 'Action',
+				accessor: 'taxType',
+				width:250,
+				Cell: row => <div>
+					<button
+					className="btn btn-outline-info btn-sm register-tax-btn upload-action-btn"
+					style={{ horizontalAlign: 'middle', display: 'block', margin: '0',border:'0',color:'green' }}
+					onClick={e => { props.pdfUploadsubmit, rofo(w.original) }}> 
+                         <FontAwesomeIcon icon="file-pdf" size="1x" />
+				</button>
+					<button
+					className="btn btn-outline-info btn-sm register-tax-btn upload-action-btn"
+					style={{ horizontalAlign: 'middle', display: 'block', margin: '0',border:'0',color:'green' }}
+					onClick={e => { props.editUploadInfo(e, row.original) }}>
+					<FontAwesomeIcon icon="edit" size="lg" /> 
+				</button>
+				
+				</div>
+			}
+			]
+		}
+	},
 
+	ProfilesSetups: {
+		ProfilesSetup: {
+			options: { ...globalOptions },
+			columns: (props) => [{
+				Header: 'User Role',
+				accessor: 'userRole',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.userRole}>{row.original.userRole}</span>
+			}, {
+				Header: 'Description',
+				accessor: 'description',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.description}>{row.original.description}</span>
+			}, {
+				Header: 'Actions',
+				Cell: row => <div className="row">
+					<button
+						className="btn btn-outline-primary btn-sm"
+						style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
+						onClick={e => { props.editUserProfile(e, row.original, "update") }}>
+						<FontAwesomeIcon icon="edit" size="xs" />
+					</button>
+				</div>
+			}]
+		}
+	},
+	AssignPrivileges: {
+		AssignPrivilege: {
+			options: { ...globalOptions },
+			columns: (props) => [{
+				Header: 'User Role',
+				accessor: 'userRole',
+
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.userRole}>{row.original.userRole}</span>
+			}, {
+				Header: 'Screen Name',
+				accessor: 'ScreenName',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.ScreenName}>{row.original.ScreenName}</span>
+			}, {
+				Header: 'Privileges',
+				width: 560,
+				Cell: row =>
+					<div className="row assignPrivilege">
+						<div className="col-md-2 ml-1">
+							<FormControlLabel
+								control={
+									<Checkbox   value="assignCreate" />
+								}
+								label="Create"
+							/> 
+						</div>
+						<div className="col-md-2 ml-1">
+						<FormControlLabel className="form-checkbox"
+								control={
+									<Checkbox  value="assignView" />
+								}
+								label="View"
+								className="form-checkbox"
+							/> 
+						</div>
+						<div className="col-md-2 ml-1">
+						<FormControlLabel
+								control={
+									<Checkbox   value="assignUpdate" />
+								}
+								label="Update"
+								className="form-checkbox"
+							/> 
+						</div>
+						<div className="col-md-2 ml-1">
+						<FormControlLabel
+								control={
+									<Checkbox   value="assignDelete" />
+								}
+								className="form-checkbox"
+								label="Delete"
+							/> 
+						</div>
+						<div className="col-md-2 ml-1">
+						<FormControlLabel
+								control={
+									<Checkbox  value="assignApprove" />
+								}
+								className="form-checkbox"
+								label="Approve"
+							/> 
+						</div>
+					</div>
+
+			}, {
+				Header: 'Actions',
+				Cell: row => <div className="row">
+					<button
+						className="btn btn-outline-primary btn-sm"
+						style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
+						onClick={e => { props.assignPrivileges(e, row.original, "update") }}>
+						<FontAwesomeIcon icon="edit" size="xs" />
+					</button>
+				</div>
+			}]
+		}
+	},
 
 }
 

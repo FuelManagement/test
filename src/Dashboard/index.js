@@ -11,3 +11,5 @@ export * from './Volumetric';
 export * from './PurchaseOrder';
 export * from './SalesOrder';
 export * from './DispatchOrder';
+export * from './SetupRole';
+export * from './AssignPrivileges';

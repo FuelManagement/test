@@ -246,7 +246,7 @@ class OrganizationDetailForm extends React.Component {
                     touched: touched
                 }
             }
-        }),()=> this.handleFormSubmit());
+        }), () => this.handleFormSubmit());
         this.props.dispatch(onboardActions.changeParticipant(key, value));
 
     }
@@ -320,6 +320,20 @@ class OrganizationDetailForm extends React.Component {
                             </TextField>
                         </FormControl>
                     </div>
+                    <div className="col-md-4 mb-3">
+                        <TextField
+                            id="registerId"
+                            label="E-Mail Address"
+                            name="registerId"
+                            value={this.state.controls.registerId.value}
+                            onChange={this.handleChange}
+                            variant="outlined"
+                            className="form-control"
+                            autoComplete="off"
+                            margin="dense"
+                            error={!this.state.controls.registerId.valid && this.state.controls.registerId.touched}
+                        />
+                    </div>
 
                 </div>
                 <div className="form-row">
@@ -378,7 +392,7 @@ class OrganizationDetailForm extends React.Component {
                                 id='participantType'
                                 variant="outlined"
                                 name='participantType'
-                                label="Entity Type"
+                                label="participant Type"
                                 value={this.state.controls.participantType.value}
                                 onChange={this.handleChange}
                                 className="form-control"
@@ -397,7 +411,7 @@ class OrganizationDetailForm extends React.Component {
                     <div className="col-md-4 mb-3 ">
                         <TextField
                             id="entityTypeOther"
-                            label="Entity Type - Other"
+                            label="participant Type - Other"
                             name="entityTypeOther"
                             value={this.state.controls.entityTypeOther.value}
                             disabled={this.state.controls.entityTypeOther.disable}
@@ -411,18 +425,7 @@ class OrganizationDetailForm extends React.Component {
                         />
                     </div>
                     <div className="col-md-4 mb-3">
-                        <TextField
-                            id="registerId"
-                            label="E-Mail Address"
-                            name="registerId"
-                            value={this.state.controls.registerId.value}
-                            onChange={this.handleChange}
-                            variant="outlined"
-                            className="form-control"
-                            autoComplete="off"
-                            margin="dense"
-                            error={!this.state.controls.registerId.valid && this.state.controls.registerId.touched}
-                        />
+
                     </div>
                 </div>
 
