@@ -185,6 +185,25 @@ function getShowLedgerBlockChainDetails(){
         OrderTrackingService.getShowLedgerBlockChainDetails()
          .then(
              blockChainDetails => {
+                // var date1, date2;  
+                // date1 = new Date();
+                // for(let i=0;i <= blockChainDetails.info_list.length ; i++)
+                // {
+                     
+                //     date2 = new Date( Date.parse(blockChainDetails.info_list[i].Creation_Time) );
+                //     var res = Math.abs(date1 - date2) / 1000;
+                //     var days = Math.floor(res / 86400);
+                //     var hours = Math.floor(res / 3600) % 24;  
+                //     var minutes = Math.floor(res / 60) % 60;
+                //     var seconds = res % 60;
+                    
+                // }
+
+                
+                
+                
+                
+               
                  dispatch(success(blockChainDetails));
                  dispatch(alertActions.clearLoading());
              },

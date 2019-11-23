@@ -280,7 +280,7 @@ class OrganizationDetailForm extends React.Component {
 
         return (
             <div className="mx-auto organization">
-                <h2 className="reg-heading">Organization Information<span style={{ float: 'right', verticalAlign: 'bottom', fontSize: '13px', padding: '11px 0 0 0' }}>All fields are mandatory</span></h2>
+                {/* <h2 className="reg-heading">Organization Information<span style={{ float: 'right', verticalAlign: 'bottom', fontSize: '13px', padding: '11px 0 0 0' }}>All fields are mandatory</span></h2> */}
                 <div className="form-row">
                     <div className="col-md-4 mb-3">
                         <TextField
@@ -392,7 +392,7 @@ class OrganizationDetailForm extends React.Component {
                                 id='participantType'
                                 variant="outlined"
                                 name='participantType'
-                                label="participant Type"
+                                label="Participant Type"
                                 value={this.state.controls.participantType.value}
                                 onChange={this.handleChange}
                                 className="form-control"
@@ -411,7 +411,7 @@ class OrganizationDetailForm extends React.Component {
                     <div className="col-md-4 mb-3 ">
                         <TextField
                             id="entityTypeOther"
-                            label="participant Type - Other"
+                            label="Participant Type - Other"
                             name="entityTypeOther"
                             value={this.state.controls.entityTypeOther.value}
                             disabled={this.state.controls.entityTypeOther.disable}
