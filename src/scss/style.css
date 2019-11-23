@@ -1001,3 +1001,11 @@ header .pad-50{
     float: right;
     margin: 0px;
 } 
+.upload-filess{
+  width:100%;
+  background: red;
+}
+.product-form .product-submit{
+  float: right;
+  margin-right: 10px;
+}

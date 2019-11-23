@@ -25,7 +25,7 @@ class ProductForm extends React.Component {
 
   UNSAFE_componentWillReceiveProps(nextprops) {
     if (JSON.stringify(this.props.product.product) !== JSON.stringify(nextprops.product.product)) {
-      ["productCategory", "subCategory", "productName", "price", "measuringUnit", "currency", "productStatus"].forEach(name => {
+      ["productCategory", "subCategory", "productName", "price", "measuringUnit", "currency", "productStatus1"].forEach(name => {
         this.setState(prevState => {
           return {
             controls: {
@@ -112,6 +112,18 @@ class ProductForm extends React.Component {
           visible: true,
           disable: mode === 'view' ? true : false
         },
+        productStatus:{
+          value: props !== undefined && props.productStatus !== undefined ? props.productStatus : '',
+          valid: mode !== 'create' ? true : false,
+          validationRules: {
+            notEmpty: true,
+          },
+          error: "Please select product status",
+          placeholder: "Status",
+          touched: false,
+          visible: true,
+          disable: mode === 'view' ? true : false
+        },
         currency: {
           value: props !== undefined && props.currency !== undefined ? props.currency : '',
           valid: mode !== 'create' ? true : false,
@@ -124,24 +136,24 @@ class ProductForm extends React.Component {
           visible: true,
           disable: mode === 'view' ? true : false
         },
-        productStatus: {
-          value: props !== undefined && props.productStatus !== undefined ? props.productStatus : true,
-          valid: true,
-          validationRules: {
-          },
-          error: "Please select product status",
-          placeholder: "Product Status",
-          touched: false,
-          visible: true,
-          disable: mode === 'view' ? true : false
-        },
+        // productStatus: {
+        //   value: props !== undefined && props.productStatus !== undefined ? props.productStatus : true,
+        //   valid: true,
+        //   validationRules: {
+        //   },
+        //   error: "Please select product status",
+        //   placeholder: "Product Status",
+        //   touched: false,
+        //   visible: true,
+        //   disable: mode === 'view' ? true : false
+        // },
       },
       errors: {}
     };
     return state;
   }
   handleChange(event) {
-    let key = event.target.name, value = event.target.name === 'productStatus' ? !(event.target.value == 'true' ? true : false) : event.target.value;
+    let key = event.target.name, value = event.target.name === 'productStatus12' ? !(event.target.value == 'true' ? true : false) : event.target.value;
     let connectedValue = { productName: { maxLength: 50 } };
     this.setState(prevState => {
       return {
@@ -165,7 +177,7 @@ class ProductForm extends React.Component {
   handleSubmit() {
     let isFormVaild = true;
     if (this.state.controls !== undefined) {
-      ["productCategory", "subCategory", "productName", "price", "measuringUnit", "currency"].forEach(name => {
+      ["productCategory", "subCategory", "productName", "price", "measuringUnit",'productStatus123',"currency"].forEach(name => {
         let value = this.state.controls[name].valid, touched = this.state.controls[name].touched;
         if (!value && this.props.product.mode === 'create') {
           this.props.dispatch(alertActions.error("Field(s) cannot be empty."));
@@ -189,7 +201,7 @@ class ProductForm extends React.Component {
   }
   render() {
     return (
-      <div className="mx-auto">
+      <div className="mx-auto product-form">
         <div className="row brd-tp1px">
           <div className='col-lg-9 add-rfq-main'>
             <h3>
@@ -285,7 +297,7 @@ class ProductForm extends React.Component {
               
               <div className="form-row">
               <div className="col-md-4 mb-3">
-                  <FormControlLabel
+                  {/* <FormControlLabel
                     control={<Checkbox icon={<CircleUnchecked className="checkboxIcon" />} checkedIcon={<CircleCheckedFilled className="checkboxIcon" />}
                       onChange={this.handleChange} name="productStatus"
                       checked={this.state.controls.productStatus.value}
@@ -296,7 +308,28 @@ class ProductForm extends React.Component {
                     className="form-checkbox"
                     name="productStatus"
                     labelPlacement="start"
-                  />
+                  /> */}
+                   <FormControl style={{ width: "100%" }}>
+                    <TextField
+                      select
+                      error={!this.state.controls.productStatus.valid && this.state.controls.productStatus.touched}
+                      id='productStatus'
+                      variant="outlined"
+                      name='productStatus'
+                      label={this.state.controls.productStatus.placeholder}
+                      value={this.state.controls.productStatus.value}
+                      className="form-control"
+                      onChange={this.handleChange}
+                      margin="dense"
+                      disabled={this.state.controls.productStatus.disable}
+                    >
+                      {Common_JsonData.productStatus && Common_JsonData.productStatus.map(option => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </FormControl>
                 </div>
                 <div className="col-md-4 mb-3">
                   <FormControl style={{ width: "100%" }}>
@@ -351,7 +384,7 @@ class ProductForm extends React.Component {
                   type="reset" onClick={() => { this.props.closeModal(); this.props.dispatch(productActions.resetProduct()); }}>
                   Cancel
                                         </button> */}
-                {this.props.mode !== 'view' ? <button className="btn btn-primary link-bg button-style fnt-wght"
+                {this.props.mode !== 'view' ? <button className="btn btn-primary link-bg button-style fnt-wght product-submit-btn"
                   type="button" onClick={this.handleSubmit} disabled={this.props.product.loading} >
                   Submit
                 </button> : null}

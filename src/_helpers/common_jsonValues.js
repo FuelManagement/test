@@ -85,6 +85,18 @@ let Common_JsonData = {
     value: "Barrels (bbl)",
     label: "Barrels (bbl)"
   }],
+  productStatus: [{
+    value: "",
+    label: "None"
+  }, 
+  {
+    value: "Active",
+    label: "Active"
+  }, 
+  {
+    value: "Inactive",
+    label: "Inactive"
+  }],
   vendorAcctGrp: [
     {
       value: "",

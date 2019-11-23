@@ -192,13 +192,13 @@ class Upload extends React.Component {
                                     labelIdle='<span class="filepond--label-action">Upload Documents</span>' />
                             </div>
                         </div>
-
+                                
 
                         {this.props.onboard.downloadDocumentslist !== undefined &&
                             this.props.onboard.downloadDocumentslist !== null &&
                             this.props.onboard.downloadDocumentslist.length > 0 &&
                             this.props.mode !== 'create' ?
-                            <div >
+                            <div className="upload-filess">
                                 <ul className="fa-ul">
                                     {this.props.onboard.downloadDocumentslist.map(item =>
                                         <li>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { API_Helpers, Utils, Table_Config } from '../../_helpers';
+import { API_Helpers, Utils, Table_Config,history } from '../../_helpers';
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
 import $ from 'jquery';
@@ -60,6 +60,8 @@ class Product extends React.Component {
         this.props.dispatch(productActions.changeModeProduct(mode));
         this.props.dispatch(productActions.getProduct(data));
         this.setState({ createProductModal: !this.state.createProductModal });
+        history.push('/product/add');
+
     }
 
     render() {
@@ -79,7 +81,7 @@ class Product extends React.Component {
                 <div>
                     <Link to="/product/add">
                         <button name="btnAddProduct" className="btn btn-outline btn-success" 
-                        // onClick={e => { this.toggleModal(e); this.props.dispatch(productActions.changeModeProduct('create')); }}
+                         onClick={e => { this.props.dispatch(productActions.changeModeProduct('create')); }}
                         >
                             <FontAwesomeIcon icon="plus" /> Product
                     </button>

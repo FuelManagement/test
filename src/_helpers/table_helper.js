@@ -519,7 +519,12 @@ let Table_Config = {
 	Product: {
 		products: {
 			options: { ...globalOptions },
-			columns: (props) => [{
+			columns: (props) => [
+				{
+					Header: 'product Name',
+					accessor: 'productName',
+					Cell: row => <span title={row.original.productName}>{row.original.productName}</span>
+				},{
 				Header: 'Category',
 				accessor: 'productCategory',
 				Cell: row => <span title={row.original.productCategory}>{row.original.productCategory}</span>
@@ -528,25 +533,24 @@ let Table_Config = {
 				accessor: 'subCategory',
 				Cell: row => <span title={row.original.subCategory}>{row.original.subCategory}</span>
 			},
-			{
-				Header: 'Name',
-				accessor: 'productName',
-				Cell: row => <span title={row.original.productName}>{row.original.productName}</span>
-			},
-			{
-				Header: 'Price',
-				accessor: 'price',
-				style: { textAlign: 'right' },
-				Cell: row => <span title={formatMoney(row.original.price)}>{formatMoney(row.original.price)}</span>
-			}, {
+			
+			// {
+			// 	Header: 'Price',
+			// 	accessor: 'price',
+			// 	style: { textAlign: 'right' },
+			// 	Cell: row => <span title={formatMoney(row.original.price)}>{formatMoney(row.original.price)}</span>
+			// },
+			 {
 				Header: 'Measuring Unit',
 				accessor: 'quantityUnit',
 				Cell: row => <span title={row.original.measuringUnit}>{row.original.measuringUnit}</span>
-			}, {
-				Header: 'Currency',
-				accessor: 'currency',
-				Cell: row => <span title={row.original.currency}>{row.original.currency}</span>
-			}, {
+			},
+			//  {
+			// 	Header: 'Currency',
+			// 	accessor: 'currency',
+			// 	Cell: row => <span title={row.original.currency}>{row.original.currency}</span>
+			// }, 
+			{
 				Header: 'Status',
 				accessor: 'productStatus',
 				Cell: row => <span title={row.original.productStatus == 'true' ? 'Active' : 'Inactive'}>{row.original.productStatus == 'true' ? 'Active' : 'Inactive'}</span>
