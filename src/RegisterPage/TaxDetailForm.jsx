@@ -273,17 +273,20 @@ class TaxDetailForm extends React.Component {
                     [key]: {
                         ...prevState.controls[key],
                         value: value,
-                        valid: validate(
-                            value,
-                            prevState.controls[key].validationRules,
-                            connectedValue, key
-                        ),
+                        // valid: validate(
+                        //     value,
+                        //     prevState.controls[key].validationRules,
+                        //     connectedValue, key
+                        // ),
                         touched: true
                     }
                 }
           
-        }),()=>this.handleFormSubmit());
-        this.props.dispatch(onboardActions.changeParticipant(key, value));
+        }),()=>
+        console.log("welcome")
+        // this.handleFormSubmit()
+        );
+        // this.props.dispatch(onboardActions.changeParticipant(key, value));
         
     }
     handleOnChange(key, value) {
@@ -304,9 +307,12 @@ class TaxDetailForm extends React.Component {
                     }
                 }
           
-        }),()=>this.handleFormSubmit());
-        this.props.dispatch(onboardActions.changeParticipant(key, value));
-        this.handleFormSubmit();
+        }),()=>
+        // this.handleFormSubmit()
+        console.log("welcome")
+        );
+        // this.props.dispatch(onboardActions.changeParticipant(key, value));
+        // this.handleFormSubmit();
     }
     handleFormSubmit() {
         let isFormVaild = true;

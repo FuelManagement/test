@@ -189,17 +189,18 @@ class ProductForm extends React.Component {
           [key]: {
             ...prevState.controls[key],
             value: value,
-            valid: validate(
-              value,
-              prevState.controls[key].validationRules,
-              connectedValue, key
-            ),
+            // valid: validate(
+            //   value,
+            //   prevState.controls[key].validationRules,
+            //   connectedValue, key
+            // ),
+            valid:true,
             touched: true
           }
         }
       };
     });
-    this.props.dispatch(productActions.changeProduct(key, value));
+    // this.props.dispatch(productActions.changeProduct(key, value));
   }
   handleSubmit() {
     let isFormVaild = true;

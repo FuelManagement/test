@@ -165,17 +165,21 @@ class AccountDetailForm extends React.Component {
           [key]: {
             ...prevState.controls[key],
             value: value,
-            valid: validate(
-              value,
-              prevState.controls[key].validationRules,
-              connectedValue,
-              key
-            ),
+            valid:true,
+            // valid: validate(
+            //   value,
+            //   prevState.controls[key].validationRules,
+            //   connectedValue,
+            //   key
+            // ),
             touched: true
           }
         }
-    }),()=> this.handleFormSubmit());
-    this.props.dispatch(onboardActions.changeParticipant(key,value));
+    }),()=>
+    //  this.handleFormSubmit()
+    console.log("Account page")
+    );
+    // this.props.dispatch(onboardActions.changeParticipant(key,value));
 
   }
   handleFormSubmit(){

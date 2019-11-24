@@ -332,9 +332,9 @@ class AddUserProfile extends React.Component {
                     }
                 };
             });
-            this.props.dispatch(userProfileActions.changeUserProfile('role', role));
-            this.props.dispatch(userProfileActions.changeUserProfile('participantName', participantName));
-            this.props.dispatch(userProfileActions.changeUserProfile('participantType', participantType));
+            // this.props.dispatch(userProfileActions.changeUserProfile('role', role));
+            // this.props.dispatch(userProfileActions.changeUserProfile('participantName', participantName));
+            // this.props.dispatch(userProfileActions.changeUserProfile('participantType', participantType));
         }
 
         let connectedValue = {
@@ -347,18 +347,19 @@ class AddUserProfile extends React.Component {
                     [key]: {
                         ...prevState.controls[key],
                         value: value,
-                        valid: validate(
-                            value,
-                            prevState.controls[key].validationRules,
-                            connectedValue,
-                            key
-                        ),
+                        // valid: validate(
+                        //     value,
+                        //     prevState.controls[key].validationRules,
+                        //     connectedValue,
+                        //     key
+                        // ),
+                        valid:true,
                         touched: true
                     }
                 }
             };
         });
-        this.props.dispatch(userProfileActions.changeUserProfile(key, value));
+        // this.props.dispatch(userProfileActions.changeUserProfile(key, value));
     }
     handleOnChange(value,key) {
         let connectedValue = {};
@@ -369,18 +370,19 @@ class AddUserProfile extends React.Component {
               [key]: {
                 ...prevState.controls[key],
                 value: value,
-                valid: validate(
-                  value,
-                  prevState.controls[key].validationRules,
-                  connectedValue,
-                  key
-                ),
+                // valid: validate(
+                //   value,
+                //   prevState.controls[key].validationRules,
+                //   connectedValue,
+                //   key
+                // ),
+                valid:true,
                 touched: true
               }
             }
           };
         }); 
-        this.props.dispatch(userProfileActions.changeUserProfile(key, value));
+        // this.props.dispatch(userProfileActions.changeUserProfile(key, value));
       }
 
     handleSubmit() {
