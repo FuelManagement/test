@@ -70,7 +70,7 @@ class SetupRole extends React.Component {
                 <h2 style={{ display: "inline-block" }} className="table-main-heading">Setup User Roles</h2>
                 <hr />
                 <div>
-                    <button className="btn btn-outline btn-success" onClick={this.openSetupProfile}>
+                    <button className="btn btn-outline btn-success setup-addRolebtn" onClick={this.openSetupProfile}>
                         Add User Role
                     </button>
                     <TextField
@@ -114,7 +114,7 @@ class SetupRole extends React.Component {
                                     />
                             </div> 
                             <div className="col-md-2 setup-submit-div">
-                                <button className="setup-form-submit" onClick={this.onSubmitSetup}>Save</button>
+                                <button className="setup-form-submit btn btn-outline btn-success " onClick={this.onSubmitSetup}>Save</button>
                             </div>
                         </div>
                     </div>

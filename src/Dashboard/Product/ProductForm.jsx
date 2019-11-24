@@ -25,14 +25,14 @@ class ProductForm extends React.Component {
 
   UNSAFE_componentWillReceiveProps(nextprops) {
     if (JSON.stringify(this.props.product.product) !== JSON.stringify(nextprops.product.product)) {
-      ["productCategory", "subCategory", "productName", "price", "measuringUnit", "currency", "productStatus1"].forEach(name => {
+      ["productCategory", "subCategory", "productName", "price", "measuringUnit", "currency", "productStatus"].forEach(name => {
         this.setState(prevState => {
           return {
             controls: {
               ...prevState.controls,
               [name]: {
                 ...prevState.controls[name],
-                value: name === 'productStatus' ? !(nextprops.product.product[name] == 'true' ? true : false) : (nextprops.product.product[name] !== undefined ? nextprops.product.product[name] : ''),
+                value: name === 'productStatus12' ? !(nextprops.product.product[name] == 'true' ? true : false) : (nextprops.product.product[name] !== undefined ? nextprops.product.product[name] : ''),
                 disable: nextprops.mode === 'view' ? true : false
               }
             }
@@ -45,9 +45,34 @@ class ProductForm extends React.Component {
   shouldComponentUpdate() {
     return true;
   }
+  componentDidMount(){
+    if(this.props.product.mode === "update"){
+      this.setState({
+        productStatusdsb:false      
+      }) 
+    }
+    else{
+      this.setState({
+        productStatusdsb:true      
+      }) 
+    }
+    if(this.props.product.mode === "view"){
+      this.setState({
+        formdisable:true      
+      })
+    }
+    else{
+      this.setState({
+        formdisable:false      
+      })
+    }
+   
+  }
   initialState(mode, props) {
     let state = {};
-    state = {
+    state = { 
+      formdisable:false,
+      productStatusdsb:false,
       controls: {
         productCategory: {
           value: props !== undefined && props.productCategory !== undefined ? props.productCategory : '',
@@ -113,7 +138,7 @@ class ProductForm extends React.Component {
           disable: mode === 'view' ? true : false
         },
         productStatus:{
-          value: props !== undefined && props.productStatus !== undefined ? props.productStatus : '',
+          value: props !== undefined && props.productStatus !== undefined ? props.productStatus : 'Active',
           valid: mode !== 'create' ? true : false,
           validationRules: {
             notEmpty: true,
@@ -153,7 +178,9 @@ class ProductForm extends React.Component {
     return state;
   }
   handleChange(event) {
-    let key = event.target.name, value = event.target.name === 'productStatus12' ? !(event.target.value == 'true' ? true : false) : event.target.value;
+    console.log("product")
+    console.log(this.props.product.products);
+    let key = event.target.name, value = event.target.value;
     let connectedValue = { productName: { maxLength: 50 } };
     this.setState(prevState => {
       return {
@@ -162,22 +189,23 @@ class ProductForm extends React.Component {
           [key]: {
             ...prevState.controls[key],
             value: value,
-            valid: validate(
-              value,
-              prevState.controls[key].validationRules,
-              connectedValue, key
-            ),
+            // valid: validate(
+            //   value,
+            //   prevState.controls[key].validationRules,
+            //   connectedValue, key
+            // ),
+            valid:true,
             touched: true
           }
         }
       };
     });
-    this.props.dispatch(productActions.changeProduct(key, value));
+    // this.props.dispatch(productActions.changeProduct(key, value));
   }
   handleSubmit() {
     let isFormVaild = true;
     if (this.state.controls !== undefined) {
-      ["productCategory", "subCategory", "productName", "price", "measuringUnit",'productStatus123',"currency"].forEach(name => {
+      ["productCategory", "subCategory", "productName", "price", "measuringUnit",'productStatus',"currency"].forEach(name => {
         let value = this.state.controls[name].valid, touched = this.state.controls[name].touched;
         if (!value && this.props.product.mode === 'create') {
           this.props.dispatch(alertActions.error("Field(s) cannot be empty."));
@@ -204,9 +232,9 @@ class ProductForm extends React.Component {
       <div className="mx-auto product-form">
         <div className="row brd-tp1px">
           <div className='col-lg-9 add-rfq-main'>
-            <h3>
+            <h3 className="product-form-hdg">
               <Link to="/product"> <FontAwesomeIcon icon="angle-left" /></Link>
-              &nbsp;&nbsp;&nbsp;Add Product
+              &nbsp;&nbsp;&nbsp;{this.props.product.mode} Product
                         </h3>
             <hr />
             <div className="col-12 col-md-12 form-wrapper product-form-div">
@@ -224,7 +252,8 @@ class ProductForm extends React.Component {
                     variant="outlined"
                     autoComplete="off"
                     margin="dense"
-                    disabled={this.state.controls.productName.disable}
+                    disabled= {this.state.formdisable}
+                    // {this.state.controls.productName.disable}
                   />
                 </div>
                 <div className="col-md-4 mb-3">
@@ -240,7 +269,7 @@ class ProductForm extends React.Component {
                       className="form-control"
                       onChange={this.handleChange}
                       margin="dense"
-                      disabled={this.state.controls.productCategory.disable}
+                    disabled= {this.state.formdisable} 
                     >
                       {Common_JsonData.productCategory && Common_JsonData.productCategory.map(option => (
                         <MenuItem key={option.value} value={option.value}>
@@ -263,7 +292,7 @@ class ProductForm extends React.Component {
                       className="form-control"
                       onChange={this.handleChange}
                       margin="dense"
-                      disabled={this.state.controls.subCategory.disable}
+                      disabled={this.state.formdisable}
                     >
                       {Common_JsonData.subCategory && Common_JsonData.subCategory.filter(f => f.productCategory === this.state.controls.productCategory.value).map(option => (
                         <MenuItem key={option.value} value={option.value}>
@@ -321,7 +350,7 @@ class ProductForm extends React.Component {
                       className="form-control"
                       onChange={this.handleChange}
                       margin="dense"
-                      disabled={this.state.controls.productStatus.disable}
+                      disabled={this.state.productStatusdsb}
                     >
                       {Common_JsonData.productStatus && Common_JsonData.productStatus.map(option => (
                         <MenuItem key={option.value} value={option.value}>
@@ -344,7 +373,7 @@ class ProductForm extends React.Component {
                       className="form-control"
                       onChange={this.handleChange}
                       margin="dense"
-                      disabled={this.state.controls.measuringUnit.disable}
+                      disabled={this.state.formdisable}
                     >
                       {Common_JsonData.measuringUnit && Common_JsonData.measuringUnit.map(option => (
                         <MenuItem key={option.value} value={option.value}>

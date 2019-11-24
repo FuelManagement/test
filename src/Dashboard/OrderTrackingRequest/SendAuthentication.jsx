@@ -95,18 +95,19 @@ class SendAuthentication extends Component {
                     [key]: {
                         ...prevState.controls[key],
                         value: value,
-                        valid: validate(
-                            value,
-                            prevState.controls[key].validationRules,
-                            connectedValue,
-                            key
-                        ),
+                        // valid: validate(
+                        //     value,
+                        //     prevState.controls[key].validationRules,
+                        //     connectedValue,
+                        //     key
+                        // ),
+                        valid:true,
                         touched: true
                     }
                 }
             };
         });
-        this.props.dispatch(userProfileActions.changeUserProfile(key, value));
+        // this.props.dispatch(userProfileActions.changeUserProfile(key, value));
     }
     handleOnChange(value,key) {
 
@@ -117,17 +118,18 @@ class SendAuthentication extends Component {
               [key]: {
                 ...prevState.controls[key],
                 value: value,
-                valid: validate(
-                  value,
-                  prevState.controls[key].validationRules,
-                  connectedValue,
-                  key
-                ),
+                // valid: validate(
+                //   value,
+                //   prevState.controls[key].validationRules,
+                //   connectedValue,
+                //   key
+                // ),
+                valid:true,
                 touched: true
               }
             }
         }) ); 
-        this.props.dispatch(userProfileActions.changeUserProfile(key, value)); 
+        // this.props.dispatch(userProfileActions.changeUserProfile(key, value)); 
       } 
       handleSubmit(){
           if(this.state.controls['sendAuthenticationEmail'].valid || this.state.controls['cellPhone'].valid){

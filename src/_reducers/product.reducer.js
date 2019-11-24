@@ -47,6 +47,8 @@ export function product(state = {}, action) {
 
                    
               case productConstants.PRODUCT_CHANGE:
+                console.log("product data");
+                console.log(state.product);
                     return {
                         ...state,
                         product: {

@@ -7,7 +7,7 @@ const localtunnel = require('localtunnel');
     console.log("Client Tunnel stopped");
   });
 
-  const tunnel_server = await localtunnel({port: 3009, subdomain: "geonet-server"})
+  const tunnel_server = await localtunnel({port: 30099, subdomain: "geonet-server"})
   console.log("Server Tunnel url ::",tunnel_server.url);
   tunnel_server.on('close', () => {
     console.log("Server Tunnel stopped");
