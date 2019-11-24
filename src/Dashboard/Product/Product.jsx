@@ -24,9 +24,8 @@ class Product extends React.Component {
             createProductModal: false,
             domain: '',
             mode: this.props.product.mode !== undefined ? this.props.product.mode : 'create'
-        }
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.toggleModal = this.toggleModal.bind(this);
+        } 
+        this.addProduct=this.addProduct.bind(this);
     }
     UNSAFE_componentWillReceiveProps(nextprops) {
         if (JSON.stringify(this.props.product.mode) !== JSON.stringify(nextprops.product.mode)) {
@@ -34,43 +33,28 @@ class Product extends React.Component {
         }
     }
     componentDidMount() {
-
         this.props.dispatch(productActions.getAllProduct());
+    }
+    addProduct(event){ 
+        this.props.dispatch(productActions.changeModeProduct('create'));
+        history.push('/product/add'); 
+
     }
 
     shouldComponentUpdate() {
         return true;
     }
-    handleSubmit(event) {
-        event.preventDefault();
-        const data = event.target;
-        return this.props.dispatch(productActions.createProduct(data, this.props.onboard.participants));
-    }
-    toggleModal(event) {
-        if (this.state.createPoModal) {
-            $('#createProductModal input[type="text"]').val("");
-        }
-        this.setState({ createProductModal: !this.state.createProductModal })
-    }
+   
     toggleProductModal(e, data, mode) {
-        console.log(mode);
-        if (this.state.createPoModal) {
-            $('#createProductModal input[type="text"]').val("");
-        }
+        
         this.props.dispatch(productActions.changeModeProduct(mode));
         this.props.dispatch(productActions.getProduct(data));
         this.setState({ createProductModal: !this.state.createProductModal });
-        history.push('/product/add');
+        history.push('/product/add'); 
 
     }
 
-    render() {
-        //const { loading,product,products,mode} = this.props.product;
-        if (this.state.createProductModal) {
-            $('#createProductModal').modal('show');
-        } else {
-            $('#createProductModal').modal('hide');
-        }
+    render() { 
         return (
             <div className="col-md-8 offset-md-3 contentDiv">
                 <h2 style={{ display: "inline-block" }} className="table-main-heading">
@@ -79,13 +63,14 @@ class Product extends React.Component {
 
                 <hr />
                 <div>
-                    <Link to="/product/add">
+                    {/* <Link to="/product/add"> */}
                         <button name="btnAddProduct" className="btn btn-outline btn-success" 
-                         onClick={e => { this.props.dispatch(productActions.changeModeProduct('create')); }}
+                         onClick={this.addProduct}
+                        //  {e => { this.props.dispatch(productActions.changeModeProduct('create')); }}
                         >
                             <FontAwesomeIcon icon="plus" /> Product
                     </button>
-                    </Link>
+                    {/* </Link> */}
 
                     {/* <input className="searchBox"
                         type="text" name="search" 
@@ -125,8 +110,7 @@ class Product extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { product } = state;
-
+    const { product } = state; 
     return {
         product
 

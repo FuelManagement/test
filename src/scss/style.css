@@ -1009,3 +1009,9 @@ header .pad-50{
   float: right;
   margin-right: 10px;
 }
+.product-form-hdg{
+  text-transform: capitalize;
+}
+.assign-privileges-row{ 
+  margin-top: -7px; 
+}

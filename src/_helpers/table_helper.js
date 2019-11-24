@@ -1311,8 +1311,9 @@ let Table_Config = {
 			}, {
 				Header: 'Privileges',
 				width: 560,
+				headerClassName:" ",
 				Cell: row =>
-					<div className="row assignPrivilege">
+					<div className="row assign-privileges-row">
 						<div className="col-md-2 ml-1">
 							<FormControlLabel
 								control={
