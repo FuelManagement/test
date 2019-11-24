@@ -303,6 +303,7 @@ class TaxDetailForm extends React.Component {
                         //   prevState.controls[key].validationRules,
                         //   connectedValue,key
                         // ),
+                        valid:true,
                         touched: true
                     }
                 }

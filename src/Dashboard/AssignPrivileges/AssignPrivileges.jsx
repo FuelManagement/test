@@ -71,7 +71,7 @@ class AssignPrivileges extends React.Component {
                 <h2 style={{ display: "inline-block" }} className="table-main-heading">Assign Privileges</h2>
                 <hr />
                 <div>
-                    <button className="btn btn-outline btn-success" onClick={this.openSetupProfile}>
+                    <button className="btn btn-outline btn-success setup-addRolebtn" onClick={this.openSetupProfile}>
                         Manage Permissions
                 </button>
                     <TextField
@@ -122,9 +122,9 @@ class AssignPrivileges extends React.Component {
                                     onChange={this.handleChange}
                                     margin="dense"
                                 >
-                                    {Common_JsonData.screenName.map(option => (
+                                    {Common_JsonData.screenNames.map(option => (
                                         <MenuItem key={option._id} value={option._id}>
-                                            {option.name}
+                                            {option.role}
                                         </MenuItem>
                                     ))}
 
@@ -177,7 +177,7 @@ class AssignPrivileges extends React.Component {
                                         />
                                     </div>
                                     <div className="col-md-2 setup-submit-div">
-                                        <button className="setup-form-submit" onClick={this.onSubmitSetup} >Save</button>
+                                        <button className="setup-form-submit btn btn-outline btn-success"  onClick={this.onSubmitSetup} >Save</button>
                                     </div>
                                 </div>
                             </div>

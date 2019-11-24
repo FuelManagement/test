@@ -1015,3 +1015,26 @@ header .pad-50{
 .assign-privileges-row{ 
   margin-top: -7px; 
 }
+.setup-form-div{
+  position: relative;
+  border: 1px solid #00ce1b;
+  margin-top: 25px;
+  padding: 15px;
+}
+.setup-addRolebtn{
+  margin-bottom: 17px;
+} 
+.setup-form-heading{
+    background: #fff;
+    color: #00ce1b;
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 20px;
+    padding: 0px 10px;
+    position: absolute;
+    top: -15px; 
+}
+.setup-form-submit{
+  margin-top: 10px;
+  float: right;
+}

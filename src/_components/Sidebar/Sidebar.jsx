@@ -102,7 +102,7 @@ class Sidebar extends React.Component {
                                     </div>
                                 </li>
                                 <li className="sidebar-dropdown">
-                                    <Link to="/userProfile">
+                                    <Link to="/product">
                                         <i className="fa fa-shopping-cart"></i>
                                         <span>Product Management</span>
                                     </Link>
