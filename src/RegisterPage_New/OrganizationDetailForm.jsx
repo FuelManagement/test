@@ -251,17 +251,20 @@ class OrganizationDetailForm extends React.Component {
                 [key]: {
                     ...prevState.controls[key],
                     value: value,
-                    valid: validCheck ? validate(
-                        value,
-                        prevState.controls[key].validationRules,
-                        connectedValue,
-                        key
-                    ) : true,
+                    // valid: validCheck ? validate(
+                    //     value,
+                    //     prevState.controls[key].validationRules,
+                    //     connectedValue,
+                    //     key
+                    // ) : true,
+                    valid:true,
                     disable: disable,
                     touched: touched
                 }
             }
-        }),()=> this.handleFormSubmit());
+        }),()=>{}
+        // this.handleFormSubmit()
+        );
         this.props.dispatch(onboardActions.changeParticipant(key, value));
 
     }

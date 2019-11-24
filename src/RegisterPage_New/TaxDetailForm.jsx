@@ -12,7 +12,7 @@ window.jQuery = $; // hack
 window.$ = $;      // hack 
 import 'bootstrap';
 import { Table_Config } from '../_helpers';
-
+import {onboardActions} from '../_actions'
 const taxData = [{
     "taxType": "EIA",
     "taxNumber": "12345"
@@ -210,6 +210,7 @@ class TaxDetailForm extends React.Component {
                     showAddTaxInfo: false
                 };
             });
+            this.props.dispatch(onboardActions.changeParticipant('tax', taxData));
         }
 
     }
@@ -243,7 +244,7 @@ class TaxDetailForm extends React.Component {
         let index = taxData.findIndex(x => x.id == row.id);
         taxData.splice(index,1);
         this.setState({taxData});
-
+        this.props.dispatch(onboardActions.changeParticipant('tax', taxData));
     }
 
     handleChange(event) {
@@ -262,7 +263,7 @@ class TaxDetailForm extends React.Component {
                 }
             };
         });
-
+        this.props.dispatch(onboardActions.changeParticipant(key, value));
     }
     render() {
         return (
