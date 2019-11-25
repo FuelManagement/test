@@ -1038,3 +1038,19 @@ header .pad-50{
   margin-top: 10px;
   float: right;
 }
+.MuiCheckbox-colorSecondary.Mui-checked{
+  color: #00ce1b !important;
+}
+.MuiIconButton-colorSecondary:hover {
+  background-color: rgba(0, 206, 27, 0.08) !important;
+}
+.assign-privileges{
+  margin: 0px;
+}
+.mrgtp-15px{
+  margin: 15px 0px 0px 0px;
+}
+.assign-searchField{
+  float: right;
+  width: 50%;
+}

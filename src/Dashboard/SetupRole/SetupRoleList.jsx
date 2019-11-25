@@ -171,6 +171,7 @@ class SetupRole extends React.Component {
                     <button className="btn btn-outline btn-success setup-addRolebtn" onClick={this.openSetupProfile}>
                         Add User Role
                     </button>
+                    <div className="assign-searchField">  
                     <TextField
                         label="Search"
                         id="outlined-start-adornment"
@@ -181,6 +182,7 @@ class SetupRole extends React.Component {
                         variant="outlined"
                         margin="dense"
                     />
+                    </div>
                 </div>
                 {this.state.addSetupRole && (
                     <div className="setup-form-div">

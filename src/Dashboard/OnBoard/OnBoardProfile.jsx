@@ -86,7 +86,7 @@ class OnBoard_Profile extends React.Component {
                             <FontAwesomeIcon icon="plus" /> On-boarding Profile
                     </button>
                     </Link>
-
+                    <div className="assign-searchField">  
                     <TextField className="searchBox"
                         type="text" name="searc"
                         value={this.state.search}
@@ -95,6 +95,7 @@ class OnBoard_Profile extends React.Component {
                         variant="outlined"
                         margin="dense"
                     />
+                    </div>
                     {/* <input className="searchBox"
                         type="text" name="search" 
                         value={this.state.search} 

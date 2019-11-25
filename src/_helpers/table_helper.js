@@ -1310,7 +1310,7 @@ let Table_Config = {
 				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.screenName}>{row.original.screenName}</span>
 			}, {
 				Header: 'Privileges',
-				width: 560,
+				width: 580,
 				headerClassName:" ",
 				Cell: row =>
 					<div className="row assign-privileges-row">
@@ -1321,7 +1321,7 @@ let Table_Config = {
 									value="assignCreate"
 									checked = {row.original.privileges.assignCreate} />
 								}
-								label="Create"
+								label="Create12"
 							/> 
 						</div>
 						<div className="col-md-2 ml-1">
@@ -1366,6 +1366,17 @@ let Table_Config = {
 								}
 								className="form-checkbox"
 								label="Approve"
+							/> 
+						</div>
+						<div className="col-md-2 ml-1">
+						<FormControlLabel
+								control={
+									<Checkbox disabled={true} 
+									value="assignDownload" 
+									checked = {row.original.privileges.assignDownload} />
+								}
+								className="form-checkbox"
+								label="Download"
 							/> 
 						</div>
 					</div>
