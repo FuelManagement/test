@@ -5,7 +5,7 @@ import 'react-table/react-table.css';
 import { TextField, InputAdornment } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { Checkbox, Select, FormControl, FormHelperText, FormControlLabel, MenuItem, InputLabel } from '@material-ui/core';
-import {Common_JsonData} from '../../_helpers';
+import { Common_JsonData } from '../../_helpers';
 
 class AssignPrivileges extends React.Component {
     constructor(props) {
@@ -14,6 +14,7 @@ class AssignPrivileges extends React.Component {
         this.openSetupProfile = this.openSetupProfile.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.onSubmitSetup = this.onSubmitSetup.bind(this);
+        this.onPrivilageHandleChange = this.onPrivilageHandleChange.bind(this);
     }
     initialState(mode, props) {
         let state = {};
@@ -21,31 +22,167 @@ class AssignPrivileges extends React.Component {
             controls: {
                 userRole: {
                     value: props !== undefined && props.userRole !== undefined ? props.userRole : '',
+                    touched: false,
+                    valid: true
                 },
                 screenName: {
                     value: props !== undefined && props.description !== undefined ? props.description : '',
+                    touched: false,
+                    valid: true
+                },
+                privileges: {
+                    assignCreate: false,
+                    assignView: false,
+                    assignUpdate: false,
+                    assignDelete: false,
+                    assignApprove: false,
                 }
             },
             addSetupRole: false,
-            data: [
-                { 'userRole': 'Adimin', ScreenName: 'ScreenName', Privileges: "PrivilegesPrivilegesPrivilegesPrivilegesPrivilegesPrivilegesPrivilegesPrivileges 1" },
-                { 'userRole': 'Level - 1', ScreenName: 'ScreenName', Privileges: "Privileges 2" },
-            ]
+            updateItem: false,
+            updateItemId: '',
+            data: []
         }
         return state;
     }
     assignPrivileges(e, collection, mode) {
-        this.setState({
-            addSetupRole: true
-        })
+        console.log("e val", e)
+        console.log("collection val", collection)
+
+        this.setState(prevState => {
+            return {
+                updateItem: true,
+                updateItemId: collection.id,
+                controls: {
+                    ...prevState.controls,
+                    userRole: {
+                        ...prevState.controls['userRole'],
+                        value: collection.userRole,
+                    },
+                    screenName: {
+                        ...prevState.controls['screenName'],
+                        value: collection.screenName,
+                    },
+                    privileges: collection.privileges
+                },
+                addSetupRole: true,
+                privilegeText: 'Edit User Privilege',
+            };
+        });
+
     }
     onSubmitSetup() {
-        this.setState({
-            addSetupRole: false,
-        })
+
+        let userRole = this.state.controls.userRole.value;
+        let screenName = this.state.controls.screenName.value;
+        let privileges = this.state.controls.privileges;
+        let valid = true;
+        if (userRole === undefined || userRole == '' || userRole.length < 1) {
+            valid = false;
+            this.setState(prevState => {
+                return {
+                    controls: {
+                        ...prevState.controls,
+                        userRole: {
+                            ...prevState.controls['userRole'],
+                            valid: false,
+                            touched: true
+                        }
+                    }
+                };
+            });
+        }
+
+        if (screenName === undefined || screenName == '' || screenName.length < 1) {
+            valid = false;
+            this.setState(prevState => {
+                return {
+                    controls: {
+                        ...prevState.controls,
+                        screenName: {
+                            ...prevState.controls['screenName'],
+                            valid: false,
+                            touched: true
+                        }
+                    }
+                };
+            });
+        }
+
+        if (valid) {
+            let id = Math.random()
+            let { data } = this.state;
+            if (!this.state.updateItem) {
+                let item = {
+                    "id": id,
+                    'userRole': userRole,
+                    'screenName': screenName,
+                    'privileges': privileges
+                };
+                data.unshift(item);
+            } else {
+                let index = data.findIndex(x => x.id == this.state.updateItemId);
+                data[index].userRole = userRole;
+                data[index].screenName = screenName;
+                data[index].privileges = privileges;
+            }
+
+            this.setState(prevState => {
+                return {
+                    controls: {
+                        ...prevState.controls,
+                        userRole: {
+                            ...prevState.controls['userRole'],
+                            value: '',
+                            valid: true,
+                        },
+                        screenName: {
+                            ...prevState.controls['screenName'],
+                            value: '',
+                            valid: true,
+                        },
+                        privileges: {
+                            ...prevState.controls['privileges'],
+                            assignCreate: false,
+                            assignView: false,
+                            assignUpdate: false,
+                            assignDelete: false,
+                            assignApprove: false,
+                        }
+                    },
+                    data: data,
+                    updateItem: false,
+                    updateItemId: '',
+                    addSetupRole: false,
+                    privilegeText: 'User Privilege',
+                };
+            });
+
+        }
+
     }
+
+
+    onPrivilageHandleChange(event) {
+        let key = event.target.value; let value = event.target.checked;
+
+        this.setState(prevState => {
+            return {
+                controls: {
+                    ...prevState.controls,
+                    privileges: {
+                        ...prevState.controls["privileges"],
+                        [key]: value
+                    }
+                }
+            }
+        })
+
+    }
+
     handleChange(event) {
         let key = event.target.name; let value = event.target.value;
+        console.log("key " + key + " value " + value);
         this.setState(prevState => {
             return {
                 controls: {
@@ -53,7 +190,8 @@ class AssignPrivileges extends React.Component {
                     [key]: {
                         ...prevState.controls[key],
                         value: value,
-                        touched: true
+                        touched: true,
+                        valid: true
                     }
                 }
             }
@@ -62,7 +200,8 @@ class AssignPrivileges extends React.Component {
     //open User setupRole form
     openSetupProfile() {
         this.setState({
-            addSetupRole: true
+            addSetupRole: true,
+            privilegeText: 'User Privilege',
         })
     }
     render() {
@@ -87,7 +226,7 @@ class AssignPrivileges extends React.Component {
                 </div>
                 {this.state.addSetupRole && (
                     <div className="setup-form-div">
-                        <p className="setup-form-heading">User Privilege</p>
+                        <p className="setup-form-heading">{this.state.privilegeText}</p>
                         <div className="row setup-form-row">
                             <div className="col-md-3">
                                 <TextField
@@ -95,24 +234,25 @@ class AssignPrivileges extends React.Component {
                                     // error={!this.state.controls.role.valid && this.state.controls.role.touched} 
                                     id='role'
                                     variant="outlined"
-                                    name='role'
+                                    name='userRole'
                                     label="User Role"
                                     value={this.state.controls.userRole.value}
                                     className="form-control"
                                     onChange={this.handleChange}
+                                    error={!this.state.controls.userRole.valid && this.state.controls.userRole.touched}
                                     margin="dense"
                                 >
                                     {Common_JsonData.userRole.map(option => (
-                                        <MenuItem key={option._id} value={option._id}>
+                                        <MenuItem key={option._id} value={option.role}>
                                             {option.role}
                                         </MenuItem>
                                     ))}
 
                                 </TextField>
                             </div>
-                            <div className="col-md-3"> 
-                            <TextField
-                                    select 
+                            <div className="col-md-3">
+                                <TextField
+                                    select
                                     id='screenName'
                                     variant="outlined"
                                     name='screenName'
@@ -121,9 +261,10 @@ class AssignPrivileges extends React.Component {
                                     className="form-control"
                                     onChange={this.handleChange}
                                     margin="dense"
+                                    error={!this.state.controls.screenName.valid && this.state.controls.screenName.touched}
                                 >
                                     {Common_JsonData.screenNames.map(option => (
-                                        <MenuItem key={option._id} value={option._id}>
+                                        <MenuItem key={option._id} value={option.role}>
                                             {option.role}
                                         </MenuItem>
                                     ))}
@@ -135,7 +276,9 @@ class AssignPrivileges extends React.Component {
                                     <div className="col-md-2 pl-0 pr-0 mrg-tp5px">
                                         <FormControlLabel
                                             control={
-                                                <Checkbox value="assignCreate" />
+                                                <Checkbox value="assignCreate"
+                                                    checked={this.state.controls.privileges.assignCreate}
+                                                    onChange={this.onPrivilageHandleChange} />
                                             }
                                             label="Create"
                                         />
@@ -143,7 +286,9 @@ class AssignPrivileges extends React.Component {
                                     <div className="col-md-2 pl-0 pr-0 mrg-tp5px">
                                         <FormControlLabel className="form-checkbox"
                                             control={
-                                                <Checkbox value="assignView" />
+                                                <Checkbox value="assignView"
+                                                    checked={this.state.controls.privileges.assignView}
+                                                    onChange={this.onPrivilageHandleChange} />
                                             }
                                             label="View"
                                             className="form-checkbox"
@@ -152,7 +297,9 @@ class AssignPrivileges extends React.Component {
                                     <div className="col-md-2 pl-0 pr-0 mrg-tp5px">
                                         <FormControlLabel
                                             control={
-                                                <Checkbox value="assignUpdate" />
+                                                <Checkbox value="assignUpdate"
+                                                    checked={this.state.controls.privileges.assignUpdate}
+                                                    onChange={this.onPrivilageHandleChange} />
                                             }
                                             label="Update"
                                             className="form-checkbox"
@@ -161,7 +308,9 @@ class AssignPrivileges extends React.Component {
                                     <div className="col-md-2 pl-0 pr-0 mrg-tp5px">
                                         <FormControlLabel
                                             control={
-                                                <Checkbox value="assignDelete" />
+                                                <Checkbox value="assignDelete"
+                                                    checked={this.state.controls.privileges.assignDelete}
+                                                    onChange={this.onPrivilageHandleChange} />
                                             }
                                             className="form-checkbox"
                                             label="Delete"
@@ -170,14 +319,16 @@ class AssignPrivileges extends React.Component {
                                     <div className="col-md-2 pl-0 pr-0  mrg-tp5px">
                                         <FormControlLabel
                                             control={
-                                                <Checkbox value="assignApprove" />
+                                                <Checkbox value="assignApprove"
+                                                    checked={this.state.controls.privileges.assignApprove}
+                                                    onChange={this.onPrivilageHandleChange} />
                                             }
                                             className="form-checkbox"
                                             label="Approve"
                                         />
                                     </div>
                                     <div className="col-md-2 setup-submit-div">
-                                        <button className="setup-form-submit btn btn-outline btn-success"  onClick={this.onSubmitSetup} >Save</button>
+                                        <button className="setup-form-submit btn btn-outline btn-success" onClick={this.onSubmitSetup} >Save</button>
                                     </div>
                                 </div>
                             </div>

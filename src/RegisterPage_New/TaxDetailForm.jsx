@@ -210,7 +210,7 @@ class TaxDetailForm extends React.Component {
                     showAddTaxInfo: false
                 };
             });
-            this.props.dispatch(onboardActions.changeParticipant('tax', taxData));
+            this.props.dispatch(onboardActions.changeParticipant('taxDetails', taxData));
         }
 
     }
@@ -244,7 +244,7 @@ class TaxDetailForm extends React.Component {
         let index = taxData.findIndex(x => x.id == row.id);
         taxData.splice(index,1);
         this.setState({taxData});
-        this.props.dispatch(onboardActions.changeParticipant('tax', taxData));
+        this.props.dispatch(onboardActions.changeParticipant('taxDetails', taxData));
     }
 
     handleChange(event) {

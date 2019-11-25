@@ -1306,8 +1306,8 @@ let Table_Config = {
 				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.userRole}>{row.original.userRole}</span>
 			}, {
 				Header: 'Screen Name',
-				accessor: 'ScreenName',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.ScreenName}>{row.original.ScreenName}</span>
+				accessor: 'screenName',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.screenName}>{row.original.screenName}</span>
 			}, {
 				Header: 'Privileges',
 				width: 560,
@@ -1317,7 +1317,9 @@ let Table_Config = {
 						<div className="col-md-2 ml-1">
 							<FormControlLabel
 								control={
-									<Checkbox   value="assignCreate" />
+									<Checkbox disabled={true}  
+									value="assignCreate"
+									checked = {row.original.privileges.assignCreate} />
 								}
 								label="Create"
 							/> 
@@ -1325,7 +1327,9 @@ let Table_Config = {
 						<div className="col-md-2 ml-1">
 						<FormControlLabel className="form-checkbox"
 								control={
-									<Checkbox  value="assignView" />
+									<Checkbox disabled={true}  
+									value="assignView" 
+									checked = {row.original.privileges.assignView} />
 								}
 								label="View"
 								className="form-checkbox"
@@ -1334,7 +1338,9 @@ let Table_Config = {
 						<div className="col-md-2 ml-1">
 						<FormControlLabel
 								control={
-									<Checkbox   value="assignUpdate" />
+									<Checkbox disabled={true} 
+									 value="assignUpdate" 
+									 checked = {row.original.privileges.assignUpdate} />
 								}
 								label="Update"
 								className="form-checkbox"
@@ -1343,7 +1349,9 @@ let Table_Config = {
 						<div className="col-md-2 ml-1">
 						<FormControlLabel
 								control={
-									<Checkbox   value="assignDelete" />
+									<Checkbox disabled={true}  
+									value="assignDelete" 
+									checked = {row.original.privileges.assignDelete} />
 								}
 								className="form-checkbox"
 								label="Delete"
@@ -1352,7 +1360,9 @@ let Table_Config = {
 						<div className="col-md-2 ml-1">
 						<FormControlLabel
 								control={
-									<Checkbox  value="assignApprove" />
+									<Checkbox disabled={true} 
+									value="assignApprove" 
+									checked = {row.original.privileges.assignApprove} />
 								}
 								className="form-checkbox"
 								label="Approve"

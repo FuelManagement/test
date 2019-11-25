@@ -79,29 +79,33 @@ if(user!==undefined && user!==null)
 {
     collection.email=user.email;
 }
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+        'cache-control': 'no-cache',
+        Connection: 'keep-alive',
+
+        'Content-Length': '1315',
+        'Accept-Encoding': 'gzip, deflate',
+        Host: '192.168.1.2:30089',
+
+        'Cache-Control': 'no-cache',
+        Accept: '*/*',
+        'User-Agent': '*',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(collection)
+};
+
+return fetch(config.apiUrl + '/product/createParticipant', requestOptions).then(participant=>
+    {
+        return uploadFile(Documentslist,participant.registerId)
+    });
+
     return uploadFile(Documentslist)
         .then(uploadResponse => {
             collection.Documentslist = uploadResponse;
-            const requestOptions = {
-                method: 'POST',
-                headers: {
-                    'cache-control': 'no-cache',
-                    Connection: 'keep-alive',
-
-                    'Content-Length': '1315',
-                    'Accept-Encoding': 'gzip, deflate',
-                    Host: '192.168.1.2:30089',
-
-                    'Cache-Control': 'no-cache',
-                    Accept: '*/*',
-                    'User-Agent': '*',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(collection)
-            };
-
-            return fetch(config.apiUrl + '/product/createParticipant', requestOptions).then(handleResponse, handleError);
-
+           
         })
 
 }
@@ -135,12 +139,13 @@ function getParticipant(collection) {
     return fetch(config.apiUrl + '/product/getParticipants', requestOptions)
         .then(handleResponse)
 }
-function uploadFile(collection) {
+function uploadFile(collection,participantId) {
     return new Promise((resolve, reject) => {
         var form = new FormData();
         for (let i = 0; i < collection.length; i++) {
             form.append("file", collection[i]);
         }
+        form.append('participantID',participantId);
         // let tokenObj = JSON.parse(localStorage.getItem('token'));
         var settings = {
             "async": true,

@@ -203,7 +203,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() { 
-  return ['Organizational Detail', 'Address Detail', 'Bank Detail', 'Tax Detail',"Documents And Submit"];
+  return ['Organizational Detail', 'Address Deail', 'Bank Detail', 'Tax Detail',"Documents And Submit"];
 
 } 
 // var values =true;
