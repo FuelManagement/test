@@ -553,7 +553,7 @@ let Table_Config = {
 			{
 				Header: 'Status',
 				accessor: 'productStatus',
-				Cell: row => <span title={row.original.productStatus == 'true' ? 'Active' : 'Inactive'}>{row.original.productStatus == 'true' ? 'Active' : 'Inactive'}</span>
+				Cell: row => <span title={row.original.productStatus}>{row.original.productStatus}</span>
 			},
 			{
 				Header: 'Action',

@@ -36,7 +36,7 @@ function updateProduct(collection)
     let user = JSON.parse(localStorage.getItem('user'));
     collection.userID= user.email;
     collection.role= user.role;
-    collection.productStatus= collection.productStatus!==undefined?collection.productStatus.toString():'true';
+   // collection.productStatus= collection.productStatus!==undefined?collection.productStatus.toString():'true';
     
     const requestOptions = {
         method: 'POST',
