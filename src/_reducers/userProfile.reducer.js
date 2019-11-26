@@ -46,15 +46,15 @@ export function userProfile(state = {}, action) {
               };
 
                    
-                          case userProfileConstants.USER_PROFILE_CHANGE:
-                                return {
-                                    ...state,
-                                    userProfile: {
-                                        ...state.userProfile,
-                                        [action.collection.key]: 
-                                       action.collection.value
-                                      }
-                                      };
+            case userProfileConstants.USER_PROFILE_CHANGE:
+                  return {
+                      ...state,
+                      userProfile: {
+                          ...state.userProfile,
+                          [action.collection.key]: 
+                          action.collection.value
+                        }
+                        };
       default:
         return {
             ...state

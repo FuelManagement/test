@@ -96,7 +96,7 @@ class Sidebar extends React.Component {
                                         <ul>
                                         {/* <i className="fa fa-shopping-cart"></i> */}
                                             <li><Link to="/userProfile">User Profile</Link></li>
-                                            <li><Link to="/setupRole">Setup Roles </Link></li>
+                                            <li><Link to="/UserRole">Setup Roles </Link></li>
                                             <li><Link to="/assignPrivileges">Assign Privileges</Link></li>
                                         </ul>
                                     </div>
@@ -141,7 +141,7 @@ class Sidebar extends React.Component {
                                         <ul>
                                        
                                             <li><Link to="/userProfile">User Profile</Link></li>
-                                            <li><Link to="/setupRole">Setup Roles </Link></li>
+                                            <li><Link to="/UserRole">Setup Roles </Link></li>
                                             <li><Link to="/assignPrivileges">Assign Privileges</Link></li>
                                         </ul>
                                     </div>
@@ -211,7 +211,7 @@ class Sidebar extends React.Component {
                                         <ul>
                                        
                                             <li><Link to="/userProfile">User Profile</Link></li>
-                                            <li><Link to="/setupRole">Setup Roles </Link></li>
+                                            <li><Link to="/UserRole">Setup Roles </Link></li>
                                             <li><Link to="/assignPrivileges">Assign Privileges</Link></li>
                                         </ul>
                                     </div>
@@ -258,7 +258,7 @@ class Sidebar extends React.Component {
                                         <ul>
                                        
                                             <li><Link to="/userProfile">User Profile</Link></li>
-                                            <li><Link to="/setupRole">Setup Roles </Link></li>
+                                            <li><Link to="/UserRole">Setup Roles </Link></li>
                                             <li><Link to="/assignPrivileges">Assign Privileges</Link></li>
                                         </ul>
                                     </div>
@@ -313,7 +313,7 @@ class Sidebar extends React.Component {
                                         <ul>
                                         
                                             <li><Link to="/userProfile"> User Profile</Link></li>
-                                            <li><Link to="/setupRole ">Setup Roles </Link></li>
+                                            <li><Link to="/UserRole ">Setup Roles </Link></li>
                                             <li><Link to="/assignPrivileges"> Assign Privileges</Link></li>
                                         </ul>
                                     </div>

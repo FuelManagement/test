@@ -1,11 +1,14 @@
 import React from 'react';
 import { Table_Config } from '../../_helpers';
+
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';  
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import { TextField, InputAdornment } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
-class SetupRole extends React.Component {
+class UserRole extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.initialState(null, this);
@@ -13,7 +16,7 @@ class SetupRole extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.onSubmitSetup = this.onSubmitSetup.bind(this);
     }
-    editUserProfile(e, collection, mode) {
+    editUserRole(e, collection, mode) {
 
         this.setState(prevState => {
             return {
@@ -226,11 +229,22 @@ class SetupRole extends React.Component {
                 <br />
                 <ReactTable
                     data={this.state.data !== undefined && this.state.data !== null ? this.state.data : []}
-                    columns={Table_Config.ProfilesSetups.ProfilesSetup.columns({ editUserProfile: this.editUserProfile.bind(this) })}
-                    {...Table_Config.UserProfiles.userProfile.options}
+                    columns={Table_Config.UserRoleSetups.UserRoleSetup.columns({ editUserRole: this.editUserRole.bind(this) })}
+                    {...Table_Config.UserRoleSetups.UserRoleSetup.options}
                 />
             </div>
         )
     }
 }
-export { SetupRole };
+//export { SetupRole };
+
+function mapStateToProps(state) {
+    
+    return {
+        userRole:state.userRole
+      
+    };
+}
+
+const connectedUserRoleForm = connect(mapStateToProps)(UserRole);
+export { connectedUserRoleForm as UserRole };

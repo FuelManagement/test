@@ -1272,8 +1272,8 @@ let Table_Config = {
 		}
 	},
 
-	ProfilesSetups: {
-		ProfilesSetup: {
+	UserRoleSetups: {
+		UserRoleSetup: {
 			options: { ...globalOptions },
 			columns: (props) => [{
 				Header: 'User Role',
@@ -1289,7 +1289,7 @@ let Table_Config = {
 					<button
 						className="btn btn-outline-primary btn-sm"
 						style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
-						onClick={e => { props.editUserProfile(e, row.original, "update") }}>
+						onClick={e => { props.editUserRole(e, row.original, "update") }}>
 						<FontAwesomeIcon icon="edit" size="xs" />
 					</button>
 				</div>

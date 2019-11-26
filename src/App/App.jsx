@@ -115,7 +115,7 @@ class App extends React.Component {
                                 <Route path="/purchaseOrder" exact component={Dashboard.PurchaseOrder}/>
                                 <Route path="/salesOrder" exact component={Dashboard.SalesOrder}/>
                                 <Route path="/dispatchOrder" exact component={Dashboard.DispatchOrder}/>
-                                <Route path="/setupRole" exact component={Dashboard.SetupRole}/>
+                                <Route path="/UserRole" exact component={Dashboard.UserRole}/>
                                 <Route path="/assignPrivileges" exact component={Dashboard.AssignPrivileges}/>
                             </React.Fragment>                               
 
