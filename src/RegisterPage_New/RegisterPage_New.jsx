@@ -14,7 +14,7 @@ import { SubmitBtn } from './SubmitBtn';
 
 import { TextField, Typography, Tab, IconButton, Tabs, InputBase, Paper, InputAdornment, Box } from '@material-ui/core';
 
-
+import {RegisterationStepper_New } from './RegisterationStepper_New';
 const style = {
     loginSection: {
         paddingRight: "15px",
@@ -92,8 +92,14 @@ class RegisterPage_New extends React.Component {
                 <LandingPageHeader />
                 <div className="row brd-tp1px">
                     <CarouselComponent></CarouselComponent>
-
                     <div className="register-main-section" style={style.loginSection}>
+                    <div className="col-lg-12 col-md-12 form-wrapper">
+            <div className="row form-content  order-tracking-main register-main-section-content">
+                    <RegisterationStepper_New />
+                    </div>
+                    </div>
+                    </div>
+                    {/* <div className="register-main-section" style={style.loginSection}>
                         <div className="col-lg-12 col-md-12 form-wrapper">
                             <div className="row form-content  order-tracking-main register-main-section-content">
                                 <Paper>
@@ -149,6 +155,7 @@ class RegisterPage_New extends React.Component {
                             </div>
                         </div>
                     </div>
+                */}
                 </div>
             </div>
         );

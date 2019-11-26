@@ -1050,6 +1050,9 @@ header .pad-50{
 .mrgtp-15px{
   margin: 15px 0px 0px 0px;
 }
+.pdg-0px{
+  padding: 0px;
+}
 .assign-searchField{
   float: right;
   width: 50%;
