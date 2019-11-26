@@ -266,7 +266,7 @@ class OrganizationDetailForm extends React.Component {
         // this.handleFormSubmit()
         console.log("Organization")
         );
-        // this.props.dispatch(onboardActions.changeParticipant(key, value));
+         this.props.dispatch(onboardActions.changeParticipant(key, value));
 
     }
     //Allow only letters
