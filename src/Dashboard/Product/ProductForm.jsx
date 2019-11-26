@@ -138,7 +138,7 @@ class ProductForm extends React.Component {
           disable: mode === 'view' ? true : false
         },
         productStatus:{
-          value: props !== undefined && props.productStatus !== undefined ? props.productStatus : 'Active',
+          value: props !== undefined && props.productStatus !== undefined && props.productStatus === "true" ? 'Active' : 'InActive',
           valid: mode !== 'create' ? true : false,
           validationRules: {
             notEmpty: true,
@@ -223,7 +223,7 @@ class ProductForm extends React.Component {
         } else {
           this.props.dispatch(productActions.updateProduct(this.props.product.product));
         }
-        this.props.closeModal();
+ //     this.props.closeModal();
       }
     }
   }
