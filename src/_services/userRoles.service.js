@@ -32,7 +32,7 @@ function createUserRolesForParticipant(collection) {
         headers: authHeader(),
         body: JSON.stringify(requestData)
     };
-    return fetch(config.apiUrl + '/roles/createUserRole?userId='+user.email, requestOptions)
+    return fetch(config.apiUrl + '/roles/createUserRole', requestOptions)
         .then(handleResponse)
         .catch(handleError);
    
@@ -42,23 +42,20 @@ function updateUserRolesForParticipant(collection)
 {
     console.log("update collection",collection);
     let user = JSON.parse(localStorage.getItem('user'));
-    collection.userID= user.email;
-     
     let requestData = {
-        updatedBy: user.email,
-        updatedOn: new Date().toLocaleDateString(),
         participantId: user.email,
         roleType: collection.userRole,
         roleDescription: collection.description,
-        _id: collection._id,
-        createdOn: new Date().toLocaleDateString(),
+        _id: collection._id,      
+        updatedBy: user.email,
+        updatedOn: new Date().toLocaleDateString(),
     }
     const requestOptions = {
         method: 'POST',
         headers: authHeader(),
         body: JSON.stringify(requestData)
     };
-    return fetch(config.apiUrl + '/roles/updateUserRole?userId='+user.email, requestOptions)
+    return fetch(config.apiUrl + '/roles/updateUserRole', requestOptions)
         .then(handleResponse)
         .catch(handleError);
 

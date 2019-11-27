@@ -13,3 +13,4 @@ export * from './orderTracking.constants';
 export * from './gpsAuth.constants';
 export * from './purchaseOrder.constants';
 export * from './userRoles.Constants';
+export * from './userPrivileges.Constants';

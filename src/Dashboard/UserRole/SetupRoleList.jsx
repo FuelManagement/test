@@ -76,11 +76,10 @@ class UserRole extends React.Component {
         }
 
         if (valid) {
-            let id = Math.random()
+        
             let { data } = this.state;
             if (!this.state.updateItem) {
                 let item = {
-                    "_id": id,
                     'userRole': userRole,
                     'description': description
                 };
@@ -88,35 +87,43 @@ class UserRole extends React.Component {
                 this.props.dispatch(userRolesActions.createUserRolesForParticipant(data[0]));
 
             } else {
-                let index = data.findIndex(x => x._id == this.state.updateItemId);
-                data[index].userRole = userRole;
-                data[index].description = description;
-                data[index]._id = this.state.updateItemId;
+                // let index = data.findIndex(x => x._id == this.state.updateItemId);
+                // data[index].userRole = userRole;
+                // data[index].description = description;
+                // data[index]._id = this.state.updateItemId;
+
+                let item = {
+                    "_id": this.state.updateItemId,
+                    'userRole': userRole,
+                    'description': description
+                };
+                data.unshift(item);
                 this.props.dispatch(userRolesActions.updateUserRolesForParticipant(data[0]));
+                
             }
 
 
-            this.setState(prevState => {
-                return {
-                    controls: {
-                        ...prevState.controls,
-                        userRole: {
-                            ...prevState.controls['userRole'],
-                            value: '',
-                            valid: true,
-                        },
-                        description: {
-                            ...prevState.controls['description'],
-                            value: '',
-                            valid: true,
-                        }
-                    },
-                    data: data,
-                    updateItem: false,
-                    updateItemId: '',
-                    addSetupRole: false
-                };
-            });
+            // this.setState(prevState => {
+            //     return {
+            //         controls: {
+            //             ...prevState.controls,
+            //             userRole: {
+            //                 ...prevState.controls['userRole'],
+            //                 value: '',
+            //                 valid: true,
+            //             },
+            //             description: {
+            //                 ...prevState.controls['description'],
+            //                 value: '',
+            //                 valid: true,
+            //             }
+            //         },
+            //         data: data,
+            //         updateItem: false,
+            //         updateItemId: '',
+            //         addSetupRole: false
+            //     };
+            // });
             //this.props.dispatch(userRolesActions.createUserRolesForParticipant(data[0]));
         }
 

@@ -13,3 +13,4 @@ export * from './orderTracking.actions';
 export * from './gpsAuth.action';
 export * from './purchaseOrder.actions';
 export * from './userRoles.actions';
+export * from './userPrivileges.actions';

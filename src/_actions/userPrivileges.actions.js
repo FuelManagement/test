@@ -1,23 +1,23 @@
-import { userRolesConstants } from '../_constants';
+import { userPrivilegesConstants } from '../_constants';
 import { userRolesService } from '../_services';
-import { alertActions } from './';
+import { alertActions } from '.';
 import { history } from '../_helpers';
 export const userRolesActions = {
-    getUserRolesByParticipant,
-    createUserRolesForParticipant,
-    updateUserRolesForParticipant,
+    getUserPrivilegesByParticipant,
+    createUserPrivilegesForParticipant,
+    updateUserRPrivilegesForParticipant,
     changeModeUserRole
     
 }
-function getUserRolesByParticipant(participantId) {
+function getUserPrivilegesByParticipant(participantId) {
     return dispatch => {
         dispatch(alertActions.loading());
         dispatch(request());
-        userRolesService.getUserRolesByParticipant()
+        userPrivilegesservice.getUserPrivilegesByParticipant()
             .then(
-                userRoles => { 
+                userPrivelges => { 
                     if(userRoles.statusCode===200){
-                    dispatch(success(userRoles));
+                    dispatch(success(userPrivelges));
                    
                     }
                     else{
