@@ -18,17 +18,23 @@ export function userRole(state = {}, action) {
         error: action.error
       };
      
-    case userRolesConstants.USER_ROLES_GET_SUCCESS:
+    case userRolesConstants.USER_ROLES_GETALL_SUCCESS:
         return {
             ...state,
             loading: false,
-            userRole: action.userroles
+            userRole: action.userRoles
               };
         case userRolesConstants.USER_ROLES_CREATE_SUCCESS:
+          return{
+            ...state,
+            loading: false,
+            userCreateRole: action
+          }
         case userRolesConstants.USER_ROLES_UPDATE_SUCCESS:
         return {
             ...state,
             loading: false,
+            userUpdateRole: action
               };
               
       default:

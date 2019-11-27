@@ -18,20 +18,20 @@ class UserRole extends React.Component {
         this.onSubmitSetup = this.onSubmitSetup.bind(this);
     }
     editUserRole(e, collection, mode) {
-
+        console.log("edit collection",collection);
         this.setState(prevState => {
             return {
                 updateItem: true,
-                updateItemId: collection.id,
+                updateItemId: collection._id,
                 controls: {
                     ...prevState.controls,
                     userRole: {
                         ...prevState.controls['userRole'],
-                        value: collection.userRole,
+                        value: collection.roleType,
                     },
                     description: {
                         ...prevState.controls['description'],
-                        value: collection.description,
+                        value: collection.roleDescription,
                     }
                 },
                 addSetupRole: true,
@@ -80,16 +80,21 @@ class UserRole extends React.Component {
             let { data } = this.state;
             if (!this.state.updateItem) {
                 let item = {
-                    "id": id,
+                    "_id": id,
                     'userRole': userRole,
                     'description': description
                 };
                 data.unshift(item);
+                this.props.dispatch(userRolesActions.createUserRolesForParticipant(data[0]));
+
             } else {
-                let index = data.findIndex(x => x.id == this.state.updateItemId);
+                let index = data.findIndex(x => x._id == this.state.updateItemId);
                 data[index].userRole = userRole;
                 data[index].description = description;
+                data[index]._id = this.state.updateItemId;
+                this.props.dispatch(userRolesActions.updateUserRolesForParticipant(data[0]));
             }
+
 
             this.setState(prevState => {
                 return {
@@ -112,7 +117,7 @@ class UserRole extends React.Component {
                     addSetupRole: false
                 };
             });
-            this.props.dispatch(userRolesActions.createUserRolesForParticipant(data[0]));
+            //this.props.dispatch(userRolesActions.createUserRolesForParticipant(data[0]));
         }
 
 
@@ -167,6 +172,17 @@ class UserRole extends React.Component {
     componentDidMount(){
         this.props.dispatch(userRolesActions.getUserRolesByParticipant());
     }
+
+    UNSAFE_componentWillReceiveProps() {
+        console.log("this.props.userRole",this.props.userRole);
+        if (this.props.userRole.userRole != undefined) {
+            console.log("this.props.userRole enter",this.props.userRole);
+            this.setState({ data: this.props.userRole.userRole.data.userRoles },e => {
+                console.log("updated State",this.state.data)
+            })
+        }
+    }
+
     render() {
         return (
             <div className="col-md-9 contentDiv contect-div">
@@ -241,10 +257,11 @@ class UserRole extends React.Component {
 //export { SetupRole };
 
 function mapStateToProps(state) {
-    
+    console.log("state.userRole ",state.userRole);
     return {
-        userRole:state.userRole
-      
+        userRole:state.userRole,
+        userCreateRole: state.userCreateRole,
+        userUpdateRole: state.userUpdateRole
     };
 }
 

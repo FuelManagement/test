@@ -40,16 +40,27 @@ function createUserRolesForParticipant(collection) {
 }
 function updateUserRolesForParticipant(collection)
 {
+    console.log("update collection",collection);
     let user = JSON.parse(localStorage.getItem('user'));
     collection.userID= user.email;
-    collection._id= undefined;
- 
-    
+     
+    let requestData = {
+        updatedBy: user.email,
+        updatedOn: new Date().toLocaleDateString(),
+        participantId: user.email,
+        roleType: collection.userRole,
+        roleDescription: collection.description,
+        _id: collection._id,
+        createdOn: new Date().toLocaleDateString(),
+    }
     const requestOptions = {
         method: 'POST',
         headers: authHeader(),
-        body: JSON.stringify(collection)
+        body: JSON.stringify(requestData)
     };
+    return fetch(config.apiUrl + '/roles/updateUserRole?userId='+user.email, requestOptions)
+        .then(handleResponse)
+        .catch(handleError);
 
     
 

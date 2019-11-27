@@ -1277,12 +1277,12 @@ let Table_Config = {
 			options: { ...globalOptions },
 			columns: (props) => [{
 				Header: 'User Role',
-				accessor: 'userRole',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.userRole}>{row.original.userRole}</span>
+				accessor: 'roleType',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.roleType}>{row.original.roleType}</span>
 			}, {
 				Header: 'Description',
-				accessor: 'description',
-				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.description}>{row.original.description}</span>
+				accessor: 'roleDescription',
+				Cell: row => <span style={{ display: 'block', textAlign: 'left' }} title={row.original.roleDescription}>{row.original.roleDescription}</span>
 			}, {
 				Header: 'Actions',
 				Cell: row => <div className="row">

@@ -71,9 +71,9 @@ function updateUserRolesForParticipant(collection)
             });
     };
 
-    function request() { return { type: userRolesService.USER_ROLES_UPDATE_REQUEST } }
-    function success(userRole) { return { type: userRolesService.USER_ROLES_UPDATE_SUCCESS, userRole } }
-    function failure(error) { return { type: userRolesService.USER_ROLES_UPDATE_FAILURE, error } }
+    function request() { return { type: userRolesConstants.USER_ROLES_UPDATE_REQUEST } }
+    function success(userRole) { return { type: userRolesConstants.USER_ROLES_UPDATE_SUCCESS, userRole } }
+    function failure(error) { return { type: userRolesConstants.USER_ROLES_UPDATE_FAILURE, error } }
 
 }
 function changeModeUserRole(mode){
