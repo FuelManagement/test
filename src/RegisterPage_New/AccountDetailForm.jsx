@@ -176,10 +176,9 @@ class AccountDetailForm extends React.Component {
           }
         }
     }),()=>
-    //  this.handleFormSubmit()
-    console.log("Account page")
+   {}
     );
-    // this.props.dispatch(onboardActions.changeParticipant(key,value));
+     this.props.dispatch(onboardActions.changeParticipant(key,value));
 
   }
   handleFormSubmit(){

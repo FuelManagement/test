@@ -288,20 +288,14 @@ class ContactDetailForm extends React.Component {
           [key]: {
             ...prevState.controls[key],
             value: value,
-            valid: validate(
-              value,
-              prevState.controls[key].validationRules,
-              connectedValue,
-              key
-            ),
+            valid: true,
             touched: true
           }
         }
     }),()=> 
-    // this.handleFormSubmit()
-    console.log("welcome")
+    {}
     );
-    // this.props.dispatch(onboardActions.changeParticipant(key, value));
+     this.props.dispatch(onboardActions.changeParticipant(key, value));
 
   }
   handleFormSubmit(){

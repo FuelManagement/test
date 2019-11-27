@@ -79,7 +79,11 @@ if(user!==undefined && user!==null)
 {
     collection.email=user.email;
 }
-  const requestOptions = {
+  
+let array=[];
+collection.taxDetails.forEach(item=>{let collectTax={taxNumber:item.taxNumber,taxType:item.taxType};array.push(collectTax)});
+collection.taxDetails=array;
+const requestOptions = {
     method: 'POST',
     headers: {
         'cache-control': 'no-cache',
@@ -96,18 +100,11 @@ if(user!==undefined && user!==null)
     },
     body: JSON.stringify(collection)
 };
-
-return fetch(config.apiUrl + '/product/createParticipant', requestOptions).then(participant=>
+return fetch(config.apiUrl + '/product/createParticipant', requestOptions).then(handleResponse,handleError).then(participant=>
     {
-        return uploadFile(Documentslist,participant.registerId)
+        console.log(participant);
+        return uploadFile(Documentslist,participant.participantID)
     });
-
-    return uploadFile(Documentslist)
-        .then(uploadResponse => {
-            collection.Documentslist = uploadResponse;
-           
-        })
-
 }
 function updateParticipant(collection, Documentslist,downloadDocumentslist)
 {

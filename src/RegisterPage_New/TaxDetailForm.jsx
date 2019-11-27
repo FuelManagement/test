@@ -263,7 +263,9 @@ class TaxDetailForm extends React.Component {
                 }
             };
         });
+        if(key !=='taxType' && key !=='taxNumber'){
         this.props.dispatch(onboardActions.changeParticipant(key, value));
+        }
     }
     render() {
         return (
