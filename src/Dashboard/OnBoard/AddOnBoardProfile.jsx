@@ -1,5 +1,6 @@
 import React from "react";
-import RegisterationStepper from '../../RegisterPage/RegisterationStepper';
+// import RegisterationStepper from '../../RegisterPage/RegisterationStepper';
+import {RegisterationStepper_New} from '../../RegisterPage_New/RegisterationStepper_New';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,7 +22,7 @@ class AddOnBoardProfile extends React.Component {
                         </h3>
                         <hr />
                         <div className="col-12 col-md-12 form-wrapper">
-                        <RegisterationStepper />
+                        <RegisterationStepper_New />
                         {/* <NewRegisteration/> */}
                         </div>
                     </div>

@@ -63,17 +63,10 @@ function getAllParticipant() {
 }
 
 function createParticipant(collection, Documentslist) {
-    collection.defaultEmailaddress = 'yes';
-    collection.clearingBetCustAndVend = "Yes";
-    collection.hash = "$2a$10$Vl7Qk6VNTUQLSCBVQR77oOSGDZ9g86RkvMmesDWWIJOV/h5Ybd0pm";
-    collection.status = 0;
     collection.isIdentityCreated = false;
-    collection.pubKey = "";
-    collection.priKey = "";
     collection.firstName = "test";
     collection.lastName = "test";
-    collection.Documentslist = [];
-    collection["cert_id"] = "";
+    
     let user = JSON.parse(localStorage.getItem('user'));
 if(user!==undefined && user!==null)
 {

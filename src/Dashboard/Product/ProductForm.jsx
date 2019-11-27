@@ -66,7 +66,9 @@ class ProductForm extends React.Component {
         formdisable:false      
       })
     }
-   
+    if(this.props.product.mode === "create"){
+    this.props.dispatch(productActions.changeProduct("productStatus", 'Active'));
+    }
   }
   initialState(mode, props) {
     let state = {};
@@ -138,7 +140,7 @@ class ProductForm extends React.Component {
           disable: mode === 'view' ? true : false
         },
         productStatus:{
-          value: props !== undefined && props.productStatus !== undefined && props.productStatus === "true" ? 'Active' : 'InActive',
+          value: props !== undefined && props.productStatus !== undefined ? props.productStatus : 'Active',
           valid: mode !== 'create' ? true : false,
           validationRules: {
             notEmpty: true,
@@ -200,21 +202,21 @@ class ProductForm extends React.Component {
         }
       };
     });
-    // this.props.dispatch(productActions.changeProduct(key, value));
+     this.props.dispatch(productActions.changeProduct(key, value));
   }
   handleSubmit() {
     let isFormVaild = true;
     if (this.state.controls !== undefined) {
-      ["productCategory", "subCategory", "productName", "price", "measuringUnit",'productStatus',"currency"].forEach(name => {
-        let value = this.state.controls[name].valid, touched = this.state.controls[name].touched;
-        if (!value && this.props.product.mode === 'create') {
+      ["productCategory", "subCategory", "productName", "measuringUnit",'productStatus'].forEach(name => {
+        let value = this.state.controls[name].value;//, touched = this.state.controls[name].touched;
+        if (value.trim() ==="") {
           this.props.dispatch(alertActions.error("Field(s) cannot be empty."));
           isFormVaild = false;
         }
-        else if (!value && touched && this.props.product.mode !== 'create') {
-          this.props.dispatch(alertActions.error("Field(s) cannot be empty."));
-          isFormVaild = false;
-        }
+        // else if (!value && touched && this.props.product.mode !== 'create') {
+        //   this.props.dispatch(alertActions.error("Field(s) cannot be empty."));
+        //   isFormVaild = false;
+        // }
 
       });
       if (isFormVaild) {

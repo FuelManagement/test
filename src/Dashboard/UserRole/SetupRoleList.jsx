@@ -7,6 +7,7 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import { TextField, InputAdornment } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import { userRolesActions } from '../../_actions/userRoles.actions'
 
 class UserRole extends React.Component {
     constructor(props) {
@@ -39,7 +40,6 @@ class UserRole extends React.Component {
         });
     }
     onSubmitSetup() {
-
         let userRole = this.state.controls.userRole.value;
         let description = this.state.controls.description.value;
         let valid = true;
@@ -112,7 +112,7 @@ class UserRole extends React.Component {
                     addSetupRole: false
                 };
             });
-
+            this.props.dispatch(userRolesActions.createUserRolesForParticipant(data[0]));
         }
 
 
@@ -159,11 +159,13 @@ class UserRole extends React.Component {
     }
     //open User setupRole form
     openSetupProfile() {
-
         this.setState({
             addSetupRole: true,
             roleText: 'Add User Role',
         })
+    }
+    componentDidMount(){
+        this.props.dispatch(userRolesActions.getUserRolesByParticipant());
     }
     render() {
         return (

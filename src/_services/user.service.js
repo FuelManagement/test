@@ -12,11 +12,6 @@ export const userService = {
 };
 
 function login(email, password) {
-    if (config.env === "local"){
-        let user = loginData[1];    // 0 => importer, 1 => exporter, 2 => refinery
-        localStorage.setItem('user', JSON.stringify(user));
-        return Promise.resolve(user);
-    }
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

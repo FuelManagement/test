@@ -9,14 +9,14 @@ export const userRolesActions = {
     changeModeUserRole
     
 }
-function getUserRolesByParticipant() {
+function getUserRolesByParticipant(participantId) {
     return dispatch => {
         dispatch(alertActions.loading());
         dispatch(request());
-        userRolesService.getUserRolesByParticipant
+        userRolesService.getUserRolesByParticipant()
             .then(
-                userRole => { 
-                    dispatch(success(userRole));
+                userRoles => { 
+                    dispatch(success(userRoles));
                     dispatch(alertActions.clearLoading());
                 },
                 error => {
@@ -27,7 +27,7 @@ function getUserRolesByParticipant() {
     };
 
     function request() { return { type: userRolesConstants.USER_ROLES_GETALL_REQUEST } }
-    function success(userRole) { return { type: userRolesConstants.USER_ROLES_GETALL_SUCCESS, userRole } }
+    function success(userRoles) { return { type: userRolesConstants.USER_ROLES_GETALL_SUCCESS, userRoles } }
     function failure(error) { return { type: userRolesConstants.USER_ROLES_GETALL_FAILURE, error } }
 }
 function createUserRolesForParticipant(collection) {
@@ -38,9 +38,7 @@ function createUserRolesForParticipant(collection) {
             .then( userRole => { 
                 dispatch(success(userRole));
                 dispatch(alertActions.success('User Role Added Successfully !'));
-             //  history.push('/userProfile');
             })
-            .then(()=>dispatch(getAllUserProfile()))
             .then(()=> dispatch(alertActions.clearLoading()))
             .catch(error => {
                 dispatch(failure(error));
@@ -49,9 +47,9 @@ function createUserRolesForParticipant(collection) {
             });
     };
 
-    function request() { return { type: userRolesService.USER_ROLES_CREATE_REQUEST } }
-    function success(userRole) { return { type: serRolesService.USER_ROLES_CREATE_SUCCESS, userRole } }
-    function failure(error) { return { type: serRolesService.USER_ROLES_CREATE_FAILURE, error } }
+    function request() { return { type: userRolesConstants.USER_ROLES_CREATE_REQUEST } }
+    function success(userRole) { return { type: userRolesConstants.USER_ROLES_CREATE_SUCCESS, userRole } }
+    function failure(error) { return { type: userRolesConstants.USER_ROLES_CREATE_FAILURE, error } }
 }
 
 function updateUserRolesForParticipant(collection)
@@ -65,7 +63,6 @@ function updateUserRolesForParticipant(collection)
                 dispatch(alertActions.success('User Role Updated Successfully !'));
              //   history.push('/userProfile');
             })
-            .then(()=>dispatch(getAllUserProfile()))
             .then(()=> dispatch(alertActions.clearLoading()))
             .catch(error => {
                 dispatch(failure(error));

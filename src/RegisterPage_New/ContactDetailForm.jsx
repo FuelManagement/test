@@ -276,7 +276,7 @@ class ContactDetailForm extends React.Component {
     // this.handleFormSubmit()
     console.log("Contact Details")
     );
-    // this.props.dispatch(onboardActions.changeParticipant(key, value));
+     this.props.dispatch(onboardActions.changeParticipant(key, value));
 
   }
   handleOnChange(value,key) {

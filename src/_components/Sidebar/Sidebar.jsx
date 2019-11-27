@@ -112,14 +112,14 @@ class Sidebar extends React.Component {
                                         </ul>
                                     </div>
                                 </li>
-                                <li className>
+                                <li >
                                     <Link to="#">
                                         <i className="fa fa-shopping-cart"></i>
                                         <span>Document Management</span>
 
                                     </Link>
                                 </li>
-                                <li className>
+                                <li >
                                     <Link to="#">
                                         <i className="fa fa-shopping-cart"></i>
                                         <span>Alerts & Notifications</span>
@@ -166,7 +166,7 @@ class Sidebar extends React.Component {
                                     </ul>
                                 </div>
                             </li> 
-                            <li className>
+                            <li >
                                     <Link to="#">
                                         <i className="fa fa-shopping-cart"></i>
                                         <span>Document Management</span>
@@ -189,7 +189,7 @@ class Sidebar extends React.Component {
                                 </div>
                             </li> ):null
                            }
-                            <li className>
+                            <li >
                                     <Link to="#">
                                         <i className="fa fa-shopping-cart"></i>
                                         <span>Alerts & Notifications</span>

@@ -20,13 +20,7 @@ import { ContactDetailForm } from './ContactDetailForm';
 import { AccountDetailForm } from './AccountDetailForm';
 import { TaxDetailForm } from './TaxDetailForm'; 
 import {Upload} from './Upload';
-
-//import the Stepper icons 
-// import Org from '../../assets/img/org.png';
-// import Contact from '../../assets/img/contact.png';
-// import Account from '../../assets/img/account.png';
-// import Tax from '../../assets/img/tax.png';
-// import Upload from '../../assets/img/upload.png';
+ 
 
 // import the icon from material ui
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
