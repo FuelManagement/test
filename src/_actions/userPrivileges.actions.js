@@ -2,11 +2,11 @@ import { userPrivilegesConstants } from '../_constants';
 import { userRolesService } from '../_services';
 import { alertActions } from '.';
 import { history } from '../_helpers';
-export const userRolesActions = {
+export const userPriviegesActions = {
     getUserPrivilegesByParticipant,
     createUserPrivilegesForParticipant,
-    updateUserRPrivilegesForParticipant,
-    changeModeUserRole
+    updateUserPrivilegesForParticipant,
+    changeModeUserPrivilege
     
 }
 function getUserPrivilegesByParticipant(participantId) {
@@ -36,7 +36,7 @@ function getUserPrivilegesByParticipant(participantId) {
     function success(userRoles) { return { type: userRolesConstants.USER_ROLES_GETALL_SUCCESS, userRoles } }
     function failure(error) { return { type: userRolesConstants.USER_ROLES_GETALL_FAILURE, error } }
 }
-function createUserRolesForParticipant(collection) {
+function createUserPrivilegesForParticipant(collection) {
     return dispatch => {
         dispatch(request());
         dispatch(alertActions.loading());
@@ -58,7 +58,7 @@ function createUserRolesForParticipant(collection) {
     function failure(error) { return { type: userRolesConstants.USER_ROLES_CREATE_FAILURE, error } }
 }
 
-function updateUserRolesForParticipant(collection)
+function updateUserPrivilegesForParticipant(collection)
 {
     return dispatch => {
         dispatch(request());
@@ -82,7 +82,7 @@ function updateUserRolesForParticipant(collection)
     function failure(error) { return { type: userRolesConstants.USER_ROLES_UPDATE_FAILURE, error } }
 
 }
-function changeModeUserRole(mode){
+function changeModeUserPrivilege(mode){
     return dispatch => {
 
             let collection={

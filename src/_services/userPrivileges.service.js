@@ -1,7 +1,7 @@
 import { authHeader, config, Utils } from '../_helpers';
 const { handleError, handleResponse } = Utils;
 
-export const userRolesService = {
+export const userPrivilegesService = {
     getUserPrivilegesByParticipant,
     createUserPrivilegesForParticipant,
     updateUserPrivilegesForParticipant,
