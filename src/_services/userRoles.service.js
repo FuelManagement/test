@@ -19,13 +19,18 @@ function getUserRolesByParticipant() {
 }
 function createUserRolesForParticipant(collection) {
     let user = JSON.parse(localStorage.getItem('user'));
-    let requestData = {
-        updatedBy: user.email,
-        updatedOn: new Date().toLocaleDateString(),
-        participantId: user.email,
+    let participantId = user.participantID === undefined ? user.registerId : user.participantID;
+    let userId =  user.participantID === undefined ? user.registerId : user.emailid;
+    let requestData = {        
+        participantId: participantId,
         roleType: collection.userRole,
         roleDescription: collection.description,
+        userId:userId,
+        createdBy:userId,
         createdOn: new Date().toLocaleDateString(),
+        updatedBy: userId,
+        updatedOn: new Date().toLocaleDateString(),
+       
     }
     const requestOptions = {
         method: 'POST',
@@ -42,12 +47,15 @@ function updateUserRolesForParticipant(collection)
 {
     console.log("update collection",collection);
     let user = JSON.parse(localStorage.getItem('user'));
+    let participantId = user.participantID === undefined ? user.registerId : user.participantID;
+    let userId =  user.participantID === undefined ? user.registerId : user.emailid;
     let requestData = {
-        participantId: user.email,
+        participantId: participantId,
         roleType: collection.userRole,
         roleDescription: collection.description,
-        _id: collection._id,      
-        updatedBy: user.email,
+        _id: collection._id,   
+        userId:userId,   
+        updatedBy: userId,
         updatedOn: new Date().toLocaleDateString(),
     }
     const requestOptions = {
