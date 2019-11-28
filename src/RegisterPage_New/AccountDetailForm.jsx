@@ -12,41 +12,6 @@ import {
 import {onboardActions} from '../_actions';
 import {Common_JsonData} from '../_helpers';
 
-// const bankPartnerType = [
-//   {
-//       value: "",
-//       label: "None"
-//   },
-//   {
-//       value: "IMF",
-//       label: "IMF"
-//   },
-//   {
-//       value: "WB",
-//       label: "WB"
-//   },
-
-// ];
-// const ddlCurr = [
-//   {
-//       value: "",
-//       label: "None"
-//   },
-//   {
-//       value: "USD",
-//       label: "USD"
-//   },
-//   {
-//     value: "CAN$",
-//     label: "CAN $"
-// },
-//   {
-//       value: "MEX$",
-//       label: "MEX $"
-//   },
-
-// ];
-
 class AccountDetailForm extends React.Component {
   constructor(props) {
     super(props);

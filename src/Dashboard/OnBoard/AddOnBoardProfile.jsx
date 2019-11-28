@@ -16,7 +16,7 @@ class AddOnBoardProfile extends React.Component {
             <div className="mx-auto">
                 <div className="row brd-tp1px">
                     <div className='col-lg-9 add-rfq-main'>
-                    <h3>
+                        <h3>
                             <Link to="/profile"> <FontAwesomeIcon icon="angle-left" /></Link>
                             &nbsp;&nbsp;&nbsp; OnBoard Profile
                         </h3>
@@ -34,10 +34,8 @@ class AddOnBoardProfile extends React.Component {
 }
 function mapStateToProps(state) {
     const { onboard } = state;
-
     return {
         onboard
-
     };
 }
 

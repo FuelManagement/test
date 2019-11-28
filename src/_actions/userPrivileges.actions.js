@@ -32,9 +32,9 @@ function getUserPrivilegesByParticipant(participantId) {
             );
     };
 
-    function request() { return { type: userRolesConstants.USER_ROLES_GETALL_REQUEST } }
-    function success(userRoles) { return { type: userRolesConstants.USER_ROLES_GETALL_SUCCESS, userRoles } }
-    function failure(error) { return { type: userRolesConstants.USER_ROLES_GETALL_FAILURE, error } }
+    function request() { return { type: userPrivilegesConstants.USER_PRIVILEGES_GETALL_REQUEST } }
+    function success(userRoles) { return { type: userPrivilegesConstants.USER_PRIVILEGES_GETALL_SUCCESS, userRoles } }
+    function failure(error) { return { type: userPrivilegesConstants.USER_PRIVILEGES_GETALL_FAILURE, error } }
 }
 function createUserPrivilegesForParticipant(collection) {
     return dispatch => {
@@ -53,9 +53,9 @@ function createUserPrivilegesForParticipant(collection) {
             });
     };
 
-    function request() { return { type: userRolesConstants.USER_ROLES_CREATE_REQUEST } }
-    function success(userRole) { return { type: userRolesConstants.USER_ROLES_CREATE_SUCCESS, userRole } }
-    function failure(error) { return { type: userRolesConstants.USER_ROLES_CREATE_FAILURE, error } }
+    function request() { return { type: userPrivilegesConstants.USER_PRIVILEGES_CREATE_REQUEST } }
+    function success(userRole) { return { type: userPrivilegesConstants.USER_PRIVILEGES_CREATE_SUCCESS, userRole } }
+    function failure(error) { return { type: userPrivilegesConstants.USER_PRIVILEGES_CREATE_FAILURE, error } }
 }
 
 function updateUserPrivilegesForParticipant(collection)
@@ -77,9 +77,9 @@ function updateUserPrivilegesForParticipant(collection)
             });
     };
 
-    function request() { return { type: userRolesConstants.USER_ROLES_UPDATE_REQUEST } }
-    function success(userRole) { return { type: userRolesConstants.USER_ROLES_UPDATE_SUCCESS, userRole } }
-    function failure(error) { return { type: userRolesConstants.USER_ROLES_UPDATE_FAILURE, error } }
+    function request() { return { type: userPrivilegesConstants.USER_PRIVILEGES_UPDATE_REQUEST } }
+    function success(userRole) { return { type: userPrivilegesConstants.USER_PRIVILEGES_UPDATE_SUCCESS, userRole } }
+    function failure(error) { return { type: userPrivilegesConstants.USER_PRIVILEGES_UPDATE_FAILURE, error } }
 
 }
 function changeModeUserPrivilege(mode){

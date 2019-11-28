@@ -878,13 +878,13 @@ let Table_Config = {
 							<button
 								className="btn btn-outline-info btn-sm"
 								style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
-								onClick={e => { props.toggleParticipantModal(e, row.original._id, 'view') }}>
+								onClick={e => { props.toggleParticipantModal(e, row.original, 'view') }}>
 								<FontAwesomeIcon icon="eye" size="xs" />
 							</button>
 							<button
 								className="btn btn-outline-primary btn-sm"
 								style={{ horizontalAlign: 'middle', display: 'block', margin: 'auto' }}
-								onClick={e => { props.toggleParticipantModal(e, row.original._id, 'update') }}>
+								onClick={e => { props.toggleParticipantModal(e, row.original, 'update') }}>
 								<FontAwesomeIcon icon="edit" size="xs" />
 							</button>
 							{row.original.status === 0 ?
