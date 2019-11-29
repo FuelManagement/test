@@ -12,6 +12,8 @@ import ContactPhoneIcon from '@material-ui/icons/ContactPhone';
 import { userProfileActions, alertActions } from '../../_actions';
 import MuiPhoneInput from 'material-ui-phone-number';
 import {Common_JsonData} from '../../_helpers';
+import { userRolesActions } from '../../_actions/userRoles.actions'
+
 
 const GreenRadio = withStyles({
     root: {
@@ -51,11 +53,24 @@ class AddUserProfile extends React.Component {
             });
 
         }
+
+        if (this.props.userRole.userRole != undefined) {
+            console.log("this.props.userRole enter",this.props.userRole);
+            this.setState({ userRoleData: this.props.userRole.userRole.data.userRoles },e => {
+                console.log("updated State",this.state.userRoleData)
+            })
+        }
     }
+
+    componentDidMount(){
+        this.props.dispatch(userRolesActions.getUserRolesByParticipant());
+    }
+
     initialState(mode, props) {
         let state = {};
         state = {
             data: "",
+            userRoleData:[],
             controls: {
                 participantID: {
                     value: props !== undefined && props.participantID !== undefined ? props.participantID : '',
@@ -486,9 +501,9 @@ class AddUserProfile extends React.Component {
                                         onChange={this.handleChange}
                                         margin="dense" 
                                     >
-                                    {Common_JsonData.userRole.map(option => (
+                                    {this.state.userRoleData.map(option => (
                                             <MenuItem key={option._id} value={option._id}>
-                                                {option.role}
+                                                {option.roleType}
                                             </MenuItem>
                                          ))}
 
@@ -796,6 +811,7 @@ class AddUserProfile extends React.Component {
 
 function mapStateToProps(state) {
     return {
+        userRole:state.userRole,
         userProfile: state.userProfile,
         participants: state.onboard.participants
     };
