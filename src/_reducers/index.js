@@ -17,7 +17,7 @@ import { orderTracking } from './orderTracking.reducer';
 import { gpsAuth } from './gpsAuth.reducer';
 import {purchaseOrder} from './purchaseOrder.reducer';
 import {userRole} from './userRoles.reducer';
-import {userRolePrivilege} from './userPrivileges.reducer';
+import {userPrivilege} from './userPrivileges.reducer';
 const rootReducer = combineReducers({
   authentication,
   registration,
@@ -36,7 +36,7 @@ const rootReducer = combineReducers({
   gpsAuth,
   purchaseOrder,
   userRole,
-  userRolePrivilege
+  userPrivilege
 });
 
 export default rootReducer;
