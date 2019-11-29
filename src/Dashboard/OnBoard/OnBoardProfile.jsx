@@ -49,6 +49,7 @@ class OnBoard_Profile extends React.Component {
         this.setState({ createParticipantModal: !this.state.createParticipantModal })
     }
     toggleParticipantModal(e, data, mode) {
+        this.props.onboard.mode = mode;
         this.props.dispatch(onboardActions.editParticipant(data));
         history.push('/onboard/edit');
 

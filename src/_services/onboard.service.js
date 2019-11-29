@@ -93,7 +93,8 @@ const requestOptions = {
     },
     body: JSON.stringify(collection)
 };
-return fetch(config.apiUrl + '/product/createParticipant', requestOptions).then(handleResponse,handleError).then(participant=>
+return fetch(config.apiUrl + '/product/createParticipant', requestOptions)
+.then(handleResponse,handleError).then(participant=>
     {
         console.log(participant);
         return uploadFile(Documentslist,participant.participantID)
@@ -106,18 +107,18 @@ function updateParticipant(collection, Documentslist,downloadDocumentslist)
     collection.email=user.email;
     collection._id=undefined;
     let tokenObj = JSON.parse(localStorage.getItem('token'));
-    return uploadFile(Documentslist)
-        .then(uploadResponse => {
-            collection.Documentslist = downloadDocumentslist.concat(JSON.parse(uploadResponse));
+    // return uploadFile(Documentslist)
+    //     .then(uploadResponse => {
+    //         collection.Documentslist = downloadDocumentslist.concat(JSON.parse(uploadResponse));
             const requestOptions = {
                 method: 'POST',
                 headers: authHeader(),
                 body: JSON.stringify(collection)
             };
-                    return fetch(config.apiUrl + '/product/updateParticipant', requestOptions).then(handleResponse, handleError);
+     return fetch(config.apiUrl + '/product/updateParticipant', requestOptions).then(handleResponse, handleError);
 
 
-        })
+      
 
 }
 function getParticipant(collection) {

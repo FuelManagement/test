@@ -11,6 +11,12 @@ class SubmitBtn extends React.Component {
         if(this.props.onboard.mode==='create'){
             this.props.dispatch(onboardActions.createParticipant(this.props.onboard.participant,this.props.onboard.documentslist));
           }
+          else if (this.props.onboard.mode==='update'){
+            this.props.dispatch(onboardActions.updateParticipant(this.props.onboard.participant,this.props.onboard.documentslist));
+          }
+          else{
+
+          }
     }
     render() {
         return <div className='register-submitbtn'>
