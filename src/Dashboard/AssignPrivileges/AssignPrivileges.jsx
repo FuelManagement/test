@@ -1,5 +1,6 @@
 import React from "react";
 import { Table_Config } from "../../_helpers";
+import {connect} from 'react-redux';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import { TextField, InputAdornment } from "@material-ui/core";
@@ -14,15 +15,34 @@ import {
   InputLabel
 } from "@material-ui/core";
 import { Common_JsonData } from "../../_helpers";
+import { userPriviegesActions } from "../../_actions";
 
 class AssignPrivileges extends React.Component {
   constructor(props) {
     super(props);
-    this.state = this.initialState(null, this);
+    this.state = this.initialState(null, this.props.userPrivilege.userPrivilege);
     this.openSetupProfile = this.openSetupProfile.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.onSubmitSetup = this.onSubmitSetup.bind(this);
     this.onPrivilageHandleChange = this.onPrivilageHandleChange.bind(this);
+  }
+  UNSAFE_componentWillReceiveProps(nextprops) {
+    if (JSON.stringify(this.props.userPrivilege.userPrivilege) !== JSON.stringify(nextprops.userPrivilege.userPrivilege)) {
+      ["userRole", "screenName", "privileges"].forEach(name => {
+        this.setState(prevState => {
+          return {
+            controls: {
+              ...prevState.controls,
+              [name]: {
+                ...prevState.controls[name],
+                value: nextprops.userPrivilege.userPrivilege[name]
+              }
+            }
+          }
+        });
+      });
+
+    }
   }
   initialState(mode, props) {
     let state = {};
@@ -134,11 +154,13 @@ class AssignPrivileges extends React.Component {
           privileges: privileges
         };
         data.unshift(item);
+        this.props.dispatch(userPriviegesActions.createUserPrivilegesForParticipant(data));
       } else {
         let index = data.findIndex(x => x.id == this.state.updateItemId);
         data[index].userRole = userRole;
         data[index].screenName = screenName;
         data[index].privileges = privileges;
+        this.props.dispatch(userPriviegesActions.updateUserPrivilegesForParticipant(data));
       }
 
       this.setState(prevState => {
@@ -176,7 +198,9 @@ class AssignPrivileges extends React.Component {
     console.log("data");
     console.log(this.state.data);
   }
-
+  componentDidMount() {
+    this.props.dispatch(userPriviegesActions.getUserPrivilegesByParticipant());
+}
   onPrivilageHandleChange(event) {
     let key = event.target.value;
     let value = event.target.checked;
@@ -218,6 +242,15 @@ class AssignPrivileges extends React.Component {
       addAssignPrivileges: true,
       privilegeText: "Assign Privilege"
     });
+    let collection={userRole:'',screenName:'',privileges: {
+      assignCreate: false,
+      assignView: false,
+      assignUpdate: false,
+      assignDelete: false,
+      assignApprove: false,
+      assignDownload: false,
+    }};
+    this.props.dispatch(userPriviegesActions.changeModeUserPrivilege('add',collection));
   }
   render() {
     return (
@@ -413,10 +446,8 @@ class AssignPrivileges extends React.Component {
         <div className="clearDiv"></div>
         <br />
         <ReactTable
-          data={
-            this.state.data !== undefined && this.state.data !== null
-              ? this.state.data
-              : []
+          data={this.props.userPrivilege.userPrivileges
+            
           }
           columns={Table_Config.AssignPrivileges.AssignPrivilege.columns({
             assignPrivileges: this.assignPrivileges.bind(this)
@@ -427,4 +458,12 @@ class AssignPrivileges extends React.Component {
     );
   }
 }
-export { AssignPrivileges };
+function mapStateToProps(state) {
+  const { userPrivilege } = state; 
+  return {
+    userPrivilege
+
+  };
+}
+const connectedAssignPrivileges = connect(mapStateToProps)(AssignPrivileges);
+export { connectedAssignPrivileges as AssignPrivileges };

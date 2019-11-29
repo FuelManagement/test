@@ -12,3 +12,4 @@ export * from './orderTrackingRequest.service';
 export * from './gpsAuth.service';
 export * from './purchaseOrder.service';
 export * from './userRoles.service';
+export * from './userPrivileges.service';

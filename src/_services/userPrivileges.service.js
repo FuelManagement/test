@@ -1,4 +1,4 @@
-import { authHeader, config, Utils } from '../_helpers';
+import { authHeader, config, Utils,APIURL }from '../_helpers';
 const { handleError, handleResponse } = Utils;
 
 export const userPrivilegesService = {
@@ -13,7 +13,7 @@ function getUserPrivilegesByParticipant() {
         method: 'GET',
         headers: authHeader()
     };
-    return fetch(config.apiUrl + '/roles/getPrivilgesByParticipantId?participantId='+user.email, requestOptions)
+return fetch(APIURL.GET_ALL_USER_PRIVILEGES+'?participantId='+user.email, requestOptions)
         .then(handleResponse)
         .catch(handleError);
 }
@@ -27,7 +27,7 @@ function createUserPrivilegesForParticipant(collection) {
         headers: authHeader(),
         body: JSON.stringify(requestData)
     };
-    return fetch(config.apiUrl + '/roles/createUserPrivilges', requestOptions)
+    return fetch(APIURL.CREATE_USER_PRIVILEGES, requestOptions)
         .then(handleResponse)
         .catch(handleError);
    
@@ -45,11 +45,10 @@ function updateUserPrivilegesForParticipant(collection)
         headers: authHeader(),
         body: JSON.stringify(requestData)
     };
-    return fetch(config.apiUrl + '/roles/updateUserPrivilges', requestOptions)
+    return fetch(APIURL.UPDATE_USER_PRIVILEGES, requestOptions)
         .then(handleResponse)
         .catch(handleError);
 
     
 
 }
-

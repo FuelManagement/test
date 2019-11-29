@@ -1,15 +1,15 @@
 import { userPrivilegesConstants } from '../_constants';
 
-export function userRolePrivilege(state = {}, action) {
+export function userPrivilege(state = {}, action) {
   switch (action.type) {
-     case userPrivilegesConstants.USER_PRIVILEGES_GET_REQUEST:
+     case userPrivilegesConstants.USER_PRIVILEGES_GETALL_REQUEST:
     case userPrivilegesConstants.USER_PRIVILEGES_CREATE_REQUEST:
     case userPrivilegesConstants.USER_PRIVILEGES_UPDATE_REQUEST:
       return {
         ...state,
         loading: true
       };
-    case userPrivilegesConstants.USER_PRIVILEGES_GET_FAILURE:
+    case userPrivilegesConstants.USER_PRIVILEGES_GETALL_FAILURE:
     case userPrivilegesConstants.USER_PRIVILEGES_CREATE_FAILURE:
     case userPrivilegesConstants.USER_PRIVILEGES_UPDATE_FAILURE:
       return {
@@ -22,21 +22,26 @@ export function userRolePrivilege(state = {}, action) {
         return {
             ...state,
             loading: false,
-            userPrivilege: action.userPrivileges
+            userPrivileges: action.userPrivileges
               };
         case userPrivilegesConstants.USER_PRIVILEGES_CREATE_SUCCESS:
           return{
             ...state,
             loading: false,
-            userCreatePrivilege: action
+            userPrivilege: action.userPrivilege
           }
         case userPrivilegesConstants.USER_PRIVILEGES_UPDATE_SUCCESS:
         return {
             ...state,
             loading: false,
-            userUpdatePrivilege: action
+            userPrivilege: action.userPrivilege
               };
-              
+              case userPrivilegesConstants.USER_PRIVILEGES_MODE:
+                return {
+                    ...state,
+                   mode:action.collection.mode,
+                    userPrivilege: action.collection.userPrivilege
+                      };
       default:
         return {
             ...state
