@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { TextField, Select, InputLabel, MenuItem, Checkbox, FormControl, Radio, RadioGroup, FormControlLabel, Button } from '@material-ui/core';
-import { validate } from '../_helpers';
+import { TextField, MenuItem, Checkbox, FormControlLabel, Button } from '@material-ui/core';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import ReactTable from 'react-table';
@@ -13,14 +11,6 @@ window.$ = $;      // hack
 import 'bootstrap';
 import { Table_Config } from '../_helpers';
 import {onboardActions} from '../_actions'
-const taxData = [{
-    "taxType": "EIA",
-    "taxNumber": "12345"
-},
-{
-    "taxType": "VAT",
-    "taxNumber": "78901"
-}]
 const withHodingtaxTypeIndicator = {
     data: [
         {
@@ -36,7 +26,7 @@ const withHodingtaxTypeIndicator = {
 class TaxDetailForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = this.initialState(null, this.props.taxInfo);
+        this.state = this.initialState(null, this.props.onboard.participant);
         this.handleAddtaxInfo = this.handleAddtaxInfo.bind(this);
         this.handleSavetaxInfo = this.handleSavetaxInfo.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -46,7 +36,7 @@ class TaxDetailForm extends React.Component {
         state = {
             showAddTaxInfo: false,
             filedsetTitle: 'Add Tax Info',
-            taxData: [],
+            taxData: props !== undefined && props.taxDetails !== undefined ? props.taxDetails : [],
             updateItem: false,
             updateItemId: '',
             controls: {
@@ -394,10 +384,10 @@ class TaxDetailForm extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { taxInfo } = state;
+    const { taxInfo, onboard } = state;
 
     return {
-        taxInfo
+        taxInfo, onboard
     };
 }
 

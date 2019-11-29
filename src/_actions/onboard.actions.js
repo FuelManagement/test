@@ -16,7 +16,8 @@ export const onboardActions = {
     changeModeParticipant,
     uploadParticipantFile,
     changeFormState,
-    approveParticipant
+    approveParticipant,
+    editParticipant
 }
 function getAllOnBoarder() {
     return dispatch => {
@@ -63,14 +64,12 @@ function createOnBoarder(formData) {
     function success(onboarder) { return { type: onboardConstants.ONBRD_CREATE_ONBOARD_SUCCESS, onboarder } }
     function failure(error) { return { type: onboardConstants.ONBRD_CREATE_ONBOARD_FAILURE, error } }
 }
-function createParticipant(collection,Documentslist)
-{
-    
+
+function createParticipant(collection,Documentslist){
     return dispatch => {
         dispatch(request());
         onboardService.createParticipant(collection,Documentslist)
-            .then((collection)=>
-            {
+            .then((collection)=>{
                 dispatch(success({}));
                 dispatch(successDoc({}));
                 dispatch(alertActions.success(`Participant Added Successfully !`));
@@ -82,32 +81,28 @@ function createParticipant(collection,Documentslist)
                     history.push('/');
                 }
                 dispatch(getAllParticipant());
-        })
-            .catch(error => {
+            }).catch(error => {
                 dispatch(failure(error))
                 dispatch(alertActions.error(`Failed to add participant!`));
             });
     };
-
     function request() { return { type: onboardConstants.ONBRD_CREATE_PARTICIPANT_REQUEST} }
     function success(participant) { return { type: onboardConstants.ONBRD_CREATE_PARTICIPANT_SUCCESS, participant } }
     function failure(error) { return { type: onboardConstants.ONBRD_CREATE_PARTICIPANT_FAILURE, error } }
     function successDoc(files) { return { type: onboardConstants.ONBRD_UPLOAD_PARTICIPANT_FILE_SUCCESS, files } }
 }
-function getParticipant(collection)
-{
+
+function getParticipant(collection){
     return dispatch => {
         dispatch(alertActions.loading());
         dispatch(request());
         onboardService.getParticipant(collection)
             .then(
-                participant => { 
-                   
+                participant => {
                     dispatch(success(participant.find(f=>f.Documentslist!==undefined && f.Documentslist.length>0 && f._id==collection)));
-                   dispatch(successDoc([]));
-                   dispatch(successDownloadabbleDoc(participant.find(f=>f.Documentslist!==undefined && f.Documentslist.length>0 && f._id==collection).Documentslist));
-                   
-                   dispatch(alertActions.clearLoading());
+                    dispatch(successDoc([]));
+                    dispatch(successDownloadabbleDoc(participant.find(f=>f.Documentslist!==undefined && f.Documentslist.length>0 && f._id==collection).Documentslist));
+                    dispatch(alertActions.clearLoading());
                 },
                 error => {
                     dispatch(failure(error))
@@ -122,13 +117,12 @@ function getParticipant(collection)
     function successDoc(files) { return { type: onboardConstants.ONBRD_UPLOAD_PARTICIPANT_FILE_SUCCESS, files } }
     function successDownloadabbleDoc(files){return {type: onboardConstants.ONBRD_DOWNLOAD_PARTICIPANT_FILE, files}}
 }
-function updateParticipant(collection,Documentslist,downloadDocumentslist)
-{
+
+function updateParticipant(collection,Documentslist,downloadDocumentslist){
     return dispatch => {
         dispatch(request());
         onboardService.updateParticipant(collection,Documentslist,downloadDocumentslist)
-            .then((collection)=>
-            {
+            .then((collection)=>{
                 dispatch(success({}));
                 dispatch(alertActions.success(`Participant updated successfully !`));
                 let user = JSON.parse(localStorage.getItem('user'));
@@ -137,69 +131,55 @@ function updateParticipant(collection,Documentslist,downloadDocumentslist)
                     history.push('/profile');
                 }
                 dispatch(getAllParticipant());
-        })
-            .catch(error => {
+            }).catch(error => {
                 dispatch(failure(error))
                 dispatch(alertActions.error(`Failed to update participant!`));
             });
     };
-
     function request() { return { type: onboardConstants.ONBRD_UPDATE_PARTICIPANT_REQUEST} }
     function success(participant) { return { type: onboardConstants.ONBRD_UPDATE_PARTICIPANT_SUCCESS, participant } }
     function failure(error) { return { type: onboardConstants.ONBRD_UPDATE_PARTICIPANT_FAILURE, error } }
 
 }
-function changeParticipant(key,value)
-{
+
+function changeParticipant(key,value){
     return dispatch => {
-       
         let collection={
             key:key,
             value:value
         }
         dispatch(success(collection));
-    
-};
-function success(collection) { return { type: onboardConstants.ONBRD_CHANGE_PARTICIPANT, collection } }
-
+    };
+    function success(collection) { return { type: onboardConstants.ONBRD_CHANGE_PARTICIPANT, collection } }
 }
-function resetParticipant()
-{
+
+function resetParticipant(){
     return dispatch => {
-       
-            let collection={
-                mode:'create',
-                participant:{}
-            }
-            dispatch(success(collection));
-        
+        let collection={
+            mode:'create',
+            participant:{}
+        }
+        dispatch(success(collection));
     };
     function success(collection) { return { type: onboardConstants.ONBRD_RESET_PARTICIPANT, collection } }
-   
 }
+
 function changeModeParticipant(mode){
     return dispatch => {
-      
-                let collection={
-                    mode:mode,
-                    participant:{}
-                }
-            dispatch(success(collection));
-     
-       
+        let collection={
+            mode:mode,
+            participant:{}
+        }
+        dispatch(success(collection));
     };
     function success(collection) { return { type: onboardConstants.ONBRD_MODE_PARTICIPANT, collection } }
-   
 }
+
 function changeFormState(key,valid){
-    return dispatch => {
-      
-            dispatch(success({'key':key,'valid':valid}));
-     
-       
+    return dispatch => {     
+        dispatch(success({'key':key,'valid':valid}));
     };
     function success(collection) { return { type: onboardConstants.ONBRD_CHANGE_FORM_STATE, collection } }
-   
 }
 
 function getAllParticipant(){
@@ -209,9 +189,7 @@ function getAllParticipant(){
         onboardService.getAllParticipant()
             .then(
                 participant => { 
-                   
                     dispatch(success(participant));
-                   
                     dispatch(alertActions.clearLoading());
                 },
                 error => {
@@ -224,10 +202,9 @@ function getAllParticipant(){
     function request() { return { type: onboardConstants.ONBRD_GET_ALL_PARTICIPANT_REQUEST } }
     function success(participants) { return { type: onboardConstants.ONBRD_GET_ALL_PARTICIPANT_SUCCESS, participants } }
     function failure(error) { return { type: onboardConstants.ONBRD_GET_ALL_PARTICIPANT_FAILURE, error } }
-
 }
-function uploadParticipantFile(collection)
-{
+
+function uploadParticipantFile(collection){
     return dispatch => {
        // dispatch(request());
         // onboardService.uploadFile(collection)
@@ -245,25 +222,32 @@ function uploadParticipantFile(collection)
     function success(files) { return { type: onboardConstants.ONBRD_UPLOAD_PARTICIPANT_FILE_SUCCESS, files } }
     //function failure(error) { return { type: onboardConstants.ONBRD_UPLOAD_PARTICIPANT_FILE_FAILURE, error } }
 
-} 
+}
+
 function approveParticipant(data, action){
     return dispatch => {
         dispatch(request());
         onboardService.approveParticipant(data, action)
             .then(participant => dispatch(success(participant)))
-            .then(()=>
-            {dispatch(alertActions.success(`Approved Sucessfully !`))
-           dispatch( getAllParticipant());
-           
-        
-        })
+            .then(()=>{
+                dispatch(alertActions.success(`Approved Sucessfully !`))
+                dispatch( getAllParticipant());
+            })
             .catch(error => {
                 dispatch(failure(error))
                 dispatch(alertActions.error(`Failed to Approved!`));
             });
     };
- 
     function request() { return { type: onboardConstants.ONBRD_APPROVE_PARTICIPANT_REQUEST} }
     function success(participant) { return { type: onboardConstants.ONBRD_APPROVE_PARTICIPANT_SUCCESS, participant } }
     function failure(error) { return { type: onboardConstants.ONBRD_APPROVE_PARTICIPANT_FAILURE, error } }
+}
+
+function editParticipant(participant){
+    return dispatch => {
+        dispatch(request());
+        dispatch(success(participant));
+    };
+    function request() { return { type: onboardConstants.ONBRD_APPROVE_PARTICIPANT_REQUEST} }
+    function success(participant) { return { type: onboardConstants.ONBRD_APPROVE_PARTICIPANT_SUCCESS, participant } }
 }

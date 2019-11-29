@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'React';
+import React, { Fragment, Component } from 'react';
 import './register.css';
 import OrganizationInformation from './TabData/OrganizationInformation';
 import ContactDetails from './TabData/ContactDetails';
