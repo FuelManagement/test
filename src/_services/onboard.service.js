@@ -140,7 +140,7 @@ function uploadFile(collection,participantId) {
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": config.apiUrl + '/product/uploadFile',
+            "url": config.apiUrl + '/product/uploadFileForParticipant',
             "method": "POST",
             "headers": {
                 "Content-Type": undefined,
