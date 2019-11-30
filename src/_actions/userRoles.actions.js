@@ -17,7 +17,7 @@ function getUserRolesByParticipant(participantId) {
             .then(
                 userRoles => { 
                     if(userRoles.statusCode===200){
-                    dispatch(success(userRoles));
+                    dispatch(success(userRoles.response.data));
                    
                     }
                     else{

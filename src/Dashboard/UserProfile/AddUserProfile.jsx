@@ -56,7 +56,7 @@ class AddUserProfile extends React.Component {
 
         if (this.props.userRole.userRole != undefined) {
             console.log("this.props.userRole enter",this.props.userRole);
-            this.setState({ userRoleData: this.props.userRole.userRole.data.userRoles },e => {
+            this.setState({ userRoleData: this.props.userRole.userRoles },e => {
                 console.log("updated State",this.state.userRoleData)
             })
         }

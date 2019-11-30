@@ -15,7 +15,7 @@ import {
   InputLabel
 } from "@material-ui/core";
 import { Common_JsonData } from "../../_helpers";
-import { userPriviegesActions } from "../../_actions";
+import { userPriviegesActions,userRolesActions } from "../../_actions";
 
 class AssignPrivileges extends React.Component {
   constructor(props) {
@@ -44,6 +44,7 @@ class AssignPrivileges extends React.Component {
 
     }
   }
+  
   initialState(mode, props) {
     let state = {};
     state = {
@@ -201,6 +202,7 @@ class AssignPrivileges extends React.Component {
   }
   componentDidMount() {
     this.props.dispatch(userPriviegesActions.getUserPrivilegesByParticipant());
+    this.props.dispatch(userRolesActions.getUserRolesByParticipant());
 }
   onPrivilageHandleChange(event) {
     let key = event.target.value;
@@ -306,9 +308,9 @@ class AssignPrivileges extends React.Component {
                   }
                   margin="dense"
                 >
-                  {Common_JsonData.userRole.map(option => (
-                    <MenuItem key={option._id} value={option.role}>
-                      {option.role}
+                  {(this.props.userRole.userRoles || []).map(option => (
+                    <MenuItem key={option._id} value={option.roleType}>
+                      {option.roleType}
                     </MenuItem>
                   ))}
                 </TextField>
@@ -470,9 +472,10 @@ class AssignPrivileges extends React.Component {
   }
 }
 function mapStateToProps(state) {
-  const { userPrivilege } = state; 
+  const { userPrivilege,userRole } = state; 
   return {
-    userPrivilege
+    userPrivilege,
+    userRole
 
   };
 }

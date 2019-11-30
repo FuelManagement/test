@@ -22,7 +22,7 @@ export function userRole(state = {}, action) {
         return {
             ...state,
             loading: false,
-            userRole: action.userRoles
+            userRoles: action.userRoles
               };
         case userRolesConstants.USER_ROLES_CREATE_SUCCESS:
           return{
