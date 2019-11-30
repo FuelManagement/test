@@ -15,11 +15,12 @@ import {
   InputLabel
 } from "@material-ui/core";
 import { Common_JsonData } from "../../_helpers";
-import { userPriviegesActions } from "../../_actions";
+import { userPriviegesActions,userRolesActions } from "../../_actions";
 
 class AssignPrivileges extends React.Component {
   constructor(props) {
     super(props);
+
     if(this.props.userPrivilege === defined )
     {
       this.state = this.initialState(null, this.props.userPrivilege.userPrivilege);
@@ -28,7 +29,13 @@ class AssignPrivileges extends React.Component {
       this.handleChange = this.handleChange.bind(this);
       this.onSubmitSetup = this.onSubmitSetup.bind(this);
       this.onPrivilageHandleChange = this.onPrivilageHandleChange.bind(this);
-    
+
+    this.state = this.initialState(null, this.props.userPrivilege.userPrivilege );
+    this.openSetupProfile = this.openSetupProfile.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.onSubmitSetup = this.onSubmitSetup.bind(this);
+    this.onPrivilageHandleChange = this.onPrivilageHandleChange.bind(this);
+
   }
   UNSAFE_componentWillReceiveProps(nextprops) {
     if (JSON.stringify(this.props.userPrivilege.userPrivilege) !== JSON.stringify(nextprops.userPrivilege.userPrivilege)) {
@@ -48,6 +55,7 @@ class AssignPrivileges extends React.Component {
 
     }
   }
+  
   initialState(mode, props) {
     let state = {};
     state = {
@@ -80,7 +88,8 @@ class AssignPrivileges extends React.Component {
       addAssignPrivileges: false,
       updateItem: false,
       updateItemId: "",
-      data: []
+      data: [],
+      searchVal:''
     };
     return state;
   }
@@ -204,6 +213,7 @@ class AssignPrivileges extends React.Component {
   }
   componentDidMount() {
     this.props.dispatch(userPriviegesActions.getUserPrivilegesByParticipant());
+    this.props.dispatch(userRolesActions.getUserRolesByParticipant());
 }
   onPrivilageHandleChange(event) {
     let key = event.target.value;
@@ -274,6 +284,7 @@ class AssignPrivileges extends React.Component {
           <TextField
             label="Search"
             id="outlined-start-adornment"
+            onChange={(e)=>this.setState({searchVal:e.target.value})}
             className="form-control setup-search"
             InputProps={{
               endAdornment: (
@@ -308,9 +319,9 @@ class AssignPrivileges extends React.Component {
                   }
                   margin="dense"
                 >
-                  {Common_JsonData.userRole.map(option => (
-                    <MenuItem key={option._id} value={option.role}>
-                      {option.role}
+                  {(this.props.userRole.userRoles || []).map(option => (
+                    <MenuItem key={option._id} value={option.roleType}>
+                      {option.roleType}
                     </MenuItem>
                   ))}
                 </TextField>
@@ -450,9 +461,18 @@ class AssignPrivileges extends React.Component {
         <div className="clearDiv"></div>
         <br />
         <ReactTable
-          data={this.props.userPrivilege.userPrivileges
-            
-          }
+          data={this.state.searchVal.trim() !== "" ? (this.props.userPrivilege.userPrivileges || []).filter(
+            f => (f.userRole !== undefined &&
+            f.userRole
+                    .toLowerCase()
+                    .includes(
+                      this.state.searchVal.toLowerCase()
+                    )) || (f.screenName !== undefined &&
+                      f.screenName
+                              .toLowerCase()
+                              .includes(
+                                this.state.searchVal.toLowerCase()
+                              ))) : (this.props.userPrivilege.userPrivileges || [])}
           columns={Table_Config.AssignPrivileges.AssignPrivilege.columns({
             assignPrivileges: this.assignPrivileges.bind(this)
           })}
@@ -463,9 +483,10 @@ class AssignPrivileges extends React.Component {
   }
 }
 function mapStateToProps(state) {
-  const { userPrivilege } = state; 
+  const { userPrivilege,userRole } = state; 
   return {
-    userPrivilege
+    userPrivilege,
+    userRole
 
   };
 }
