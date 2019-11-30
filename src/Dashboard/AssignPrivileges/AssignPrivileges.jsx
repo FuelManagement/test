@@ -20,11 +20,15 @@ import { userPriviegesActions } from "../../_actions";
 class AssignPrivileges extends React.Component {
   constructor(props) {
     super(props);
-    this.state = this.initialState(null, this.props.userPrivilege.userPrivilege);
-    this.openSetupProfile = this.openSetupProfile.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.onSubmitSetup = this.onSubmitSetup.bind(this);
-    this.onPrivilageHandleChange = this.onPrivilageHandleChange.bind(this);
+    if(this.props.userPrivilege === defined )
+    {
+      this.state = this.initialState(null, this.props.userPrivilege.userPrivilege);
+    }
+      this.openSetupProfile = this.openSetupProfile.bind(this);
+      this.handleChange = this.handleChange.bind(this);
+      this.onSubmitSetup = this.onSubmitSetup.bind(this);
+      this.onPrivilageHandleChange = this.onPrivilageHandleChange.bind(this);
+    
   }
   UNSAFE_componentWillReceiveProps(nextprops) {
     if (JSON.stringify(this.props.userPrivilege.userPrivilege) !== JSON.stringify(nextprops.userPrivilege.userPrivilege)) {

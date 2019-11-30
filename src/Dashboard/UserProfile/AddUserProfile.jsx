@@ -37,7 +37,7 @@ class AddUserProfile extends React.Component {
     }
     UNSAFE_componentWillReceiveProps(nextprops) {
         if (JSON.stringify(this.props.userProfile.userProfile) !== JSON.stringify(nextprops.userProfile.userProfile)) {
-            ["participantID", "role", "designation", "first_Name", "middle_Name", "last_Name", "firstContactNo", "firstContactNoType", "secondContactNo", "secondContactNoType", "email","password", "address1", "address2", "city", "state", "zip", "country"].forEach(name => {
+            ["participantID", "roleId", "designation", "first_Name", "middle_Name", "last_Name", "firstContactNo", "firstContactNoType", "secondContactNo", "secondContactNoType", "email","password", "address1", "address2", "city", "state", "zip", "country"].forEach(name => {
                 this.setState(prevState => {
                     return {
                         controls: {
@@ -84,8 +84,8 @@ class AddUserProfile extends React.Component {
                     visible: true,
                     disable: false
                 },
-                role: {
-                    value: props !== undefined && props.role !== undefined ? props.role : '',
+                roleId: {
+                    value: props !== undefined && props.roleId !== undefined ? props.roleId : '',
 
                     valid: true,
                     validationRules: {
@@ -347,9 +347,9 @@ class AddUserProfile extends React.Component {
                     }
                 };
             });
-            // this.props.dispatch(userProfileActions.changeUserProfile('role', role));
-            // this.props.dispatch(userProfileActions.changeUserProfile('participantName', participantName));
-            // this.props.dispatch(userProfileActions.changeUserProfile('participantType', participantType));
+           // this.props.dispatch(userProfileActions.changeUserProfile('role', role));
+            this.props.dispatch(userProfileActions.changeUserProfile('participantName', participantName));
+            this.props.dispatch(userProfileActions.changeUserProfile('participantType', role));
         }
 
         let connectedValue = {
@@ -362,19 +362,19 @@ class AddUserProfile extends React.Component {
                     [key]: {
                         ...prevState.controls[key],
                         value: value,
-                        // valid: validate(
-                        //     value,
-                        //     prevState.controls[key].validationRules,
-                        //     connectedValue,
-                        //     key
-                        // ),
+                        valid: validate(
+                            value,
+                            prevState.controls[key].validationRules,
+                            connectedValue,
+                            key
+                        ),
                         valid:true,
                         touched: true
                     }
                 }
             };
         });
-        // this.props.dispatch(userProfileActions.changeUserProfile(key, value));
+         this.props.dispatch(userProfileActions.changeUserProfile(key, value));
     }
     handleOnChange(value,key) {
         let connectedValue = {};
@@ -385,25 +385,25 @@ class AddUserProfile extends React.Component {
               [key]: {
                 ...prevState.controls[key],
                 value: value,
-                // valid: validate(
-                //   value,
-                //   prevState.controls[key].validationRules,
-                //   connectedValue,
-                //   key
-                // ),
+                valid: validate(
+                  value,
+                  prevState.controls[key].validationRules,
+                  connectedValue,
+                  key
+                ),
                 valid:true,
                 touched: true
               }
             }
           };
         }); 
-        // this.props.dispatch(userProfileActions.changeUserProfile(key, value));
+         this.props.dispatch(userProfileActions.changeUserProfile(key, value));
       }
 
     handleSubmit() {
         let isFormVaild = true;
         if (this.state.controls !== undefined) {
-            ["participantID", "designation", "first_Name", "middle_Name", "last_Name", "firstContactNo", "firstContactNoType", "secondContactNo","role", "password", "secondContactNoType", "email", "address1", "address2", "city", "state", "zip", "country"].forEach(name => {
+            ["participantID", "designation", "first_Name", "middle_Name", "last_Name", "firstContactNo", "firstContactNoType", "secondContactNo","roleId", "password", "secondContactNoType", "email", "address1", "address2", "city", "state", "zip", "country"].forEach(name => {
                 let value = this.state.controls[name].valid, touched = this.state.controls[name].touched;
                 
                 if (!value && this.props.userProfile.mode === 'create') {
@@ -492,11 +492,11 @@ class AddUserProfile extends React.Component {
                                     <TextField
                                         select
                                         // error={!this.state.controls.role.valid && this.state.controls.role.touched} 
-                                        id='role'
+                                        id='roleId'
                                         variant="outlined"
-                                        name='role'
+                                        name='roleId'
                                         label="User Role"
-                                        value={this.state.controls.role.value}
+                                        value={this.state.controls.roleId.value}
                                         className="form-control"
                                         onChange={this.handleChange}
                                         margin="dense" 

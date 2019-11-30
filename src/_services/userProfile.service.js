@@ -18,8 +18,9 @@ function getAllUserProfile() {
     .then(handleResponse)
 }
 function createUserProfile(collection) {
-    let user = JSON.parse(localStorage.getItem('user'));
-    collection.userID= user.email;
+    let user = JSON.parse(localStorage.getItem('user'));    
+    let emailId = user.participantID === undefined ? user.registerId : user.email;
+    collection.userID= emailId;
    const requestOptions = {
         method: 'POST',
         headers: authHeader(),
