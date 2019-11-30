@@ -182,9 +182,9 @@ class UserRole extends React.Component {
 
     UNSAFE_componentWillReceiveProps() {
         console.log("this.props.userRole",this.props.userRole);
-        if (this.props.userRole.userRole != undefined) {
+        if (this.props.userRole.userRoles != undefined) {
             console.log("this.props.userRole enter",this.props.userRole);
-            this.setState({ data: this.props.userRole.userRole.data.userRoles },e => {
+            this.setState({ data: this.props.userRole.userRoles },e => {
                 console.log("updated State",this.state.data)
             })
         }
